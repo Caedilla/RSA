@@ -1,0 +1,52 @@
+package-as: RSA
+
+
+externals:
+ Libs/LibStub:
+  url: svn://svn.wowace.com/wow/libstub/mainline/trunk
+  tag: latest
+ Libs/CallbackHandler-1.0:
+  url: svn://svn.wowace.com/wow/callbackhandler/mainline/trunk/CallbackHandler-1.0
+  tag: latest
+ Libs/AceAddon-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceAddon-3.0
+ Libs/AceConfig-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
+ Libs/AceConsole-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
+ Libs/AceDB-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDB-3.0
+ Libs/AceDBOptions-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
+ Libs/AceEvent-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0  
+ Libs/AceGUI-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
+ Libs/AceLocale-3.0:
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceLocale-3.0
+ Libs/LibSink-2.0:
+  url: svn://svn.wowace.com/wow/libsink-2-0/mainline/trunk/LibSink-2.0
+ Libs/LibDualSpec-1.0:
+  url: git://git.wowace.com/wow/libdualspec-1-0/mainline.git
+ Libs/LibResInfo-1.0: 
+  url: git://github.com/phanx-wow/LibResInfo.git
+  
+move-folders:
+	RSA/RSA: RSA
+    RSA/RSA_Options: RSA_Options
+    RSA/RSA_Reminders: RSA_Reminders
+    RSA/RSA_DeathKnight: RSA_DeathKnight
+	RSA/RSA_DemonHunter: RSA_DemonHunter
+    RSA/RSA_Druid: RSA_Druid
+    RSA/RSA_Hunter: RSA_Hunter
+    RSA/RSA_Mage: RSA_Mage
+	RSA/RSA_Monk: RSA_Monk
+    RSA/RSA_Paladin: RSA_Paladin
+    RSA/RSA_Priest: RSA_Priest
+    RSA/RSA_Rogue: RSA_Rogue
+    RSA/RSA_Shaman: RSA_Shaman
+    RSA/RSA_Warlock: RSA_Warlock
+    RSA/RSA_Warrior: RSA_Warrior
+
+ignore:
+ - .pkgmeta
