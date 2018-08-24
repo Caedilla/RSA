@@ -21,6 +21,7 @@ end
 function RSA.Resurrect(_, _, target, _, caster)
 	if caster ~= "player" then return end
 	local dest = UnitName(target)
+	local pName = UnitName("player")
 	local spell = 2008
 	local messagemax = #RSA.db.profile.Shaman.Spells.AncestralSpirit.Messages.Start
 	if messagemax == 0 then return end
@@ -51,7 +52,7 @@ function RSA.Resurrect(_, _, target, _, caster)
 			RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 		end
 		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Party == true then
-			if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+			if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 				RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 		end
 		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Raid == true then
@@ -344,7 +345,7 @@ function RSA_Shaman:OnEnable()
 						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.Cloudburst.Party == true then
-						if RSA.db.profile.Shaman.Spells.Cloudburst.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+						if RSA.db.profile.Shaman.Spells.Cloudburst.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.Cloudburst.Raid == true then
@@ -353,7 +354,7 @@ function RSA_Shaman:OnEnable()
 					end
 				end
 			end
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, ex2, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER		
 		if event == "SPELL_CAST_SUCCESS" and Protection_Cast == true and spellID == 207553 then -- Ancestral Protection Totem
 			for i=1,4 do
@@ -386,7 +387,7 @@ function RSA_Shaman:OnEnable()
 					RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Shaman.Spells.AncestralProtection.Party == true then
-					if RSA.db.profile.Shaman.Spells.AncestralProtection.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+					if RSA.db.profile.Shaman.Spells.AncestralProtection.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 						RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Shaman.Spells.AncestralProtection.Raid == true then
@@ -419,7 +420,7 @@ function RSA_Shaman:OnEnable()
 					RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Shaman.Spells.LightningSurge.Party == true then
-					if RSA.db.profile.Shaman.Spells.LightningSurge.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+					if RSA.db.profile.Shaman.Spells.LightningSurge.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 						RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Shaman.Spells.LightningSurge.Raid == true then
@@ -460,7 +461,7 @@ function RSA_Shaman:OnEnable()
 					RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Shaman.Spells.LightningSurge.Party == true then
-					if RSA.db.profile.Shaman.Spells.LightningSurge.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+					if RSA.db.profile.Shaman.Spells.LightningSurge.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 						RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Shaman.Spells.LightningSurge.Raid == true then
@@ -494,7 +495,7 @@ function RSA_Shaman:OnEnable()
 						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.SpiritLink.Party == true then
-						if RSA.db.profile.Shaman.Spells.SpiritLink.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+						if RSA.db.profile.Shaman.Spells.SpiritLink.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.SpiritLink.Raid == true then
@@ -527,7 +528,7 @@ function RSA_Shaman:OnEnable()
 						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.TremorTotem.Party == true then
-						if RSA.db.profile.Shaman.Spells.TremorTotem.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+						if RSA.db.profile.Shaman.Spells.TremorTotem.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.TremorTotem.Raid == true then
@@ -560,7 +561,7 @@ function RSA_Shaman:OnEnable()
 						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.WindRushTotem.Party == true then
-						if RSA.db.profile.Shaman.Spells.WindRushTotem.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+						if RSA.db.profile.Shaman.Spells.WindRushTotem.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.WindRushTotem.Raid == true then
@@ -600,7 +601,7 @@ function RSA_Shaman:OnEnable()
 						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.AncestralProtection.Party == true then
-						if RSA.db.profile.Shaman.Spells.AncestralProtection.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+						if RSA.db.profile.Shaman.Spells.AncestralProtection.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.AncestralProtection.Raid == true then
@@ -633,7 +634,7 @@ function RSA_Shaman:OnEnable()
 						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.EarthenShieldTotem.Party == true then
-						if RSA.db.profile.Shaman.Spells.EarthenShieldTotem.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+						if RSA.db.profile.Shaman.Spells.EarthenShieldTotem.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 					if RSA.db.profile.Shaman.Spells.EarthenShieldTotem.Raid == true then

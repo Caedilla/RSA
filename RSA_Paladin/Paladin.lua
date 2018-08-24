@@ -22,6 +22,7 @@ end
 function RSA.Resurrect(_, _, target, _, caster)
 	if caster ~= "player" then return end
 	local dest = UnitName(target)
+	local pName = UnitName("player")
 	local spell = 7328
 	local messagemax = #RSA.db.profile.Paladin.Spells.Redemption.Messages.Start
 	if messagemax == 0 then return end
@@ -52,7 +53,7 @@ function RSA.Resurrect(_, _, target, _, caster)
 			RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 		end
 		if RSA.db.profile.Paladin.Spells.Redemption.Party == true then
-			if RSA.db.profile.Paladin.Spells.Redemption.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+			if RSA.db.profile.Paladin.Spells.Redemption.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 				RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 		end
 		if RSA.db.profile.Paladin.Spells.Redemption.Raid == true then
@@ -416,7 +417,7 @@ function RSA_Paladin:OnEnable()
 					end
 				end
 			end -- BUFF REMINDER
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Paladin_Spells)

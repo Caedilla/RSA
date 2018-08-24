@@ -12,6 +12,8 @@ function RSA_Mage:OnInitialize()
 	end
 end -- End OnInitialize
 function RSA_Mage:OnEnable()
+	RSA.db.profile.Modules.Mage = true -- Set state to loaded, to know if we should announce when a spell is refreshed.
+	local pName = UnitName("player")
 	local Config_Polymorph = { -- POLYMORPH
 		profile = 'Polymorph',
 		replacements = { TARGET = 1 }
@@ -158,9 +160,7 @@ function RSA_Mage:OnEnable()
 	}
 	RSA.MonitorConfig(MonitorConfig_Mage, UnitGUID("player"))
 	local MonitorAndAnnounce = RSA.MonitorAndAnnounce
-	RSA.db.profile.Modules.Mage = true -- Set state to loaded, to know if we should announce when a spell is refreshed.
 	local spellinfo,spelllinkinfo,extraspellinfo,extraspellinfolink,missinfo
-	local pName = UnitName("player")
 	local function Mage_Spells()
 		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
@@ -195,7 +195,7 @@ function RSA_Mage:OnEnable()
 					end
 				end -- TELEPORT
 			end
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, ex2, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Mage_Spells)

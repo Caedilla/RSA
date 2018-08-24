@@ -5,7 +5,7 @@ local RSA = LibStub("AceAddon-3.0"):GetAddon("RSA")
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local RSA_R = RSA:NewModule("Reminders")
 function RSA_R:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("RSADB", defaults) -- Setup Saved Variables
+	self.db = RSA.db
 	-- Check what class we are and save it. Used to determine what options to show.
 	local pClass = select(2, UnitClass("player"))
 	self.db.profile.General.Class = pClass

@@ -19,6 +19,7 @@ end
 function RSA.Resurrect(_, _, target, _, caster)
 	if caster ~= "player" then return end
 	local dest = UnitName(target)
+	local pName = UnitName("player")
 	local spell = 115178
 	local messagemax = #RSA.db.profile.Monk.Spells.Resuscitate.Messages.Start
 	if messagemax == 0 then return end
@@ -49,7 +50,7 @@ function RSA.Resurrect(_, _, target, _, caster)
 			RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 		end
 		if RSA.db.profile.Monk.Spells.Resuscitate.Party == true then
-			if RSA.db.profile.Monk.Spells.Resuscitate.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+			if RSA.db.profile.Monk.Spells.Resuscitate.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 				RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 		end
 		if RSA.db.profile.Monk.Spells.Resuscitate.Raid == true then
@@ -237,7 +238,7 @@ function RSA_Monk:OnEnable()
 				if spellName == ReminderSpell and (dest == pName or dest == nil) then
 					RSA.Reminder:SetScript("OnUpdate", nil)
 					if RSA.db.profile.Reminders.RemindChannels.Chat == true then
-						RSA.Print_Self(ReminderSpell .. L[mob_" Refreshed!"])
+						RSA.Print_Self(ReminderSpell .. L[" Refreshed!"])
 					end
 					if RSA.db.profile.Reminders.RemindChannels.RaidWarn == true then
 						RSA.Print_Self_RW(ReminderSpell .. L[" Refreshed!"])
@@ -261,11 +262,6 @@ function RSA_Monk:OnEnable()
 							if RSA.db.profile.Monk.Spells.Provoke.Yell == true then
 								RSA.Print_Yell(string.gsub(message, ".%a+.", RSA.String_Replace))
 							end
-							if RSA.db.profile.Monk.Spells.Provoke.Whisper == true and dest ~= pName then
-								RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
-								RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
-								RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
-							end
 							if RSA.db.profile.Monk.Spells.Provoke.CustomChannel.Enabled == true then
 								RSA.Print_Channel(string.gsub(message, ".%a+.", RSA.String_Replace), RSA.db.profile.Monk.Spells.Provoke.CustomChannel.Channel)
 							end
@@ -276,7 +272,7 @@ function RSA_Monk:OnEnable()
 								RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 							end
 							if RSA.db.profile.Monk.Spells.Provoke.Party == true then
-								if RSA.db.profile.Monk.Spells.Provoke.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+								if RSA.db.profile.Monk.Spells.Provoke.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 									RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 							end
 							if RSA.db.profile.Monk.Spells.Provoke.Raid == true then
@@ -287,7 +283,7 @@ function RSA_Monk:OnEnable()
 					end
 				end -- PROVOKE
 			end -- IF EVENT IS SPELL_CAST_SUCCESS
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, ex2, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Monk_Spells)

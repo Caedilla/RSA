@@ -217,7 +217,7 @@ function RSA_Warrior:OnEnable()
 					RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Warrior.Spells.SpellReflect.Party == true then
-					if RSA.db.profile.Warrior.Spells.SpellReflect.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+					if RSA.db.profile.Warrior.Spells.SpellReflect.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 						RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 				end
 				if RSA.db.profile.Warrior.Spells.SpellReflect.Raid == true then
@@ -244,7 +244,7 @@ function RSA_Warrior:OnEnable()
 					end
 				end
 			end -- BUFF REMINDER
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, ex2, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Warrior_Spells)

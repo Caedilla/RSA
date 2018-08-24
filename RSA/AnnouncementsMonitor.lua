@@ -22,7 +22,7 @@ local function WipeCache()
 	wipe(cache_SpellLink)
 end
 
-local function MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4)
+local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4)
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 	local missType = ex1
 	local full_destName = destName
@@ -197,7 +197,7 @@ local function MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceG
 			RSA.Print_SmartGroup(gsub(message, ".%a+.", replacements))
 		end
 		if spell_profile.Party == true then
-			if spell_profile.SmartGroup == true and GetNumGroupMembers() > 0 and InstanceType ~= "arena" then return end
+			if spell_profile.SmartGroup == true and GetNumGroupMembers() > 0 then return end
 			RSA.Print_Party(gsub(message, ".%a+.", replacements))
 		end
 		if spell_profile.Raid == true then

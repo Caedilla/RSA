@@ -2057,7 +2057,7 @@ local function Warlock()
 					Channel = "",
 				},
 			},
-		}, Spells
+		},
 	}
 	return Warlock
 end

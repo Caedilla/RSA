@@ -268,7 +268,7 @@ function RSA_Druid:OnEnable()
 					end
 				end
 			end -- BUFF REMINDER
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, ex2, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Druid_Spells)
@@ -328,7 +328,7 @@ function RSA_Druid:OnEnable()
 							RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Druid.Spells.Revive.Party == true then
-							if RSA.db.profile.Druid.Spells.Revive.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+							if RSA.db.profile.Druid.Spells.Revive.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 								RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Druid.Spells.Revive.Raid == true then
@@ -387,7 +387,7 @@ function RSA_Druid:OnEnable()
 							RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Druid.Spells.Rebirth.Party == true then
-							if RSA.db.profile.Druid.Spells.Rebirth.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+							if RSA.db.profile.Druid.Spells.Rebirth.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 								RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Druid.Spells.Rebirth.Raid == true then

@@ -197,14 +197,14 @@ function RSA_Warlock:OnEnable()
 					end
 				end
 			end -- BUFF REMINDER
-			MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, ex2, ex3, ex4)
+			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Warlock_Spells)
 	------------------------------
 	---- Resurrection Monitor ----
 	------------------------------
-	local function Resurrection(testc, event, source, dest, testa, spell, testb)
+	local function Resurrection(_, event, source, dest, _, spell, _)
 		if UnitName(source) == pName then
 			if spell == 20707 and RSA.db.profile.Warlock.Spells.Soulstone.Messages.Start ~= "" then
 				if event == "UNIT_SPELLCAST_SENT" then
@@ -249,7 +249,7 @@ function RSA_Warlock:OnEnable()
 							RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Warlock.Spells.Soulstone.Party == true then
-							if RSA.db.profile.Warlock.Spells.Soulstone.SmartGroup == true and GetNumGroupMembers() == 0 and InstanceType ~= "arena" then return end
+							if RSA.db.profile.Warlock.Spells.Soulstone.SmartGroup == true and GetNumGroupMembers() == 0 then return end
 								RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Warlock.Spells.Soulstone.Raid == true then
