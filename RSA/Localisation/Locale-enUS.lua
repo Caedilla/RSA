@@ -29,10 +29,12 @@ L["General"] = true
 L["Module Settings"] = true
 L["Enable Buff Reminder Module"] = true
 L["Smart Channel Options"] = true
+L["Smart Emote"] = true
+L["Only announce in /emote while you are in a group."] = true
 L["Smart Say"] = true
-L["Only announce in /yell while you are in a manually formed group."] = true
+L["Only announce in /say while you are in a group."] = true
 L["Smart Yell"] = true
-L["Only announce in /say while you are in a manually formed group."] = true
+L["Only announce in /yell while you are in a group."] = true
 L["Smart Custom Channel"] = true
 L["Announce to custom channels only while you are in a manually formed group."] = true
 

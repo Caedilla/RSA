@@ -190,6 +190,9 @@ local function MonitorAndAnnounce(self, _, timestamp, event, hideCaster, sourceG
 		if spell_profile.Say == true then
 				RSA.Print_Say(gsub(message, ".%a+.", replacements))			
 		end
+		if spell_profile.Emote == true then
+			RSA.Print_Emote(gsub(message, ".%a+.", replacements))			
+	end
 		if spell_profile.SmartGroup == true then
 			RSA.Print_SmartGroup(gsub(message, ".%a+.", replacements))
 		end

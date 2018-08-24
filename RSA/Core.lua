@@ -277,6 +277,19 @@ function RSA.Print_Say(message) -- Send a message to Say.
 	end
 end
 
+function RSA.Print_Emote(message) -- Send a message to Say.
+	if message == "" or message == " " then return end
+	if RSA.AnnouncementCheck() == true then
+		if RSA.db.profile.General.GlobalAnnouncements.SmartEmote == true then
+			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
+				SendChatMessage(format(message), "EMOTE", nil)
+			end
+		elseif RSA.db.profile.General.GlobalAnnouncements.SmartEmote == false then
+			SendChatMessage(format(message), "EMOTE", nil)
+		end
+	end
+end
+
 function RSA.Print_Yell(message) -- Send a message to Yell.
 	if message == "" or message == " " then return end
 	if RSA.AnnouncementCheck() == true then

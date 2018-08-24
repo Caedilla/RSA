@@ -10,6 +10,7 @@ local DefaultOptions = {
 			GlobalAnnouncements = {				
 				SmartSay = true,
 				SmartYell = true,
+				SmartEmote = true,
 				SmartCustomChannel = true,
 				Arena = true,
 				Battlegrounds = false,
