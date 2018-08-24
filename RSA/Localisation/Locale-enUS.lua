@@ -1,7 +1,5 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "enUS", true)
 if not L then return end
-L = L or {}
-
 ---- Base Localisation
 L["Corpse of "] = true -- Tooltip mouseover of a released corpse.
 L["Couldn't find target for Soulstone."] = true -- Invalid Target warning for Soulstone
