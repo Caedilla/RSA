@@ -31,6 +31,7 @@ function RSA_Druid:OnEnable()
 	}
 	local Config_RemoveCorruption = { -- REMOVE CORRUPTION
 		profile = 'RemoveCorruption',
+		section = "Cast",
 		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 	}
 	local MonitorConfig_Druid = {
