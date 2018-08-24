@@ -683,6 +683,14 @@ local function Druid()
 					Channel = "",
 				},
 			},
+			Soothe = {
+				Messages = {
+					Cast = {"Removed [TARGET]'s [AURALINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		}
 	}
 	return Druid

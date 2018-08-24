@@ -901,6 +901,14 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
+		[24] = {
+			Profile = "Soothe",
+			Name = GetSpellInfo(2908),
+			Desc = GetSpellDescription(2908),
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
+		},
 	}
 	return Spells
 end

@@ -51,6 +51,11 @@ function RSA_Druid:OnEnable()
 		SPELL_DISPEL = {
 			[2782] = Config_RemoveCorruption, -- REMOVE CORRUPTION
 			[88423] = Config_RemoveCorruption, -- NATURE'S CURE
+			[2908] = { -- SOOTHE
+				profile = 'Soothe',
+				section = "Cast",
+				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
+			},
 		},
 		SPELL_AURA_APPLIED = {
 			[106898] = Config_StampedingRoar,
