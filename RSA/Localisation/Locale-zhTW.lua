@@ -1,5 +1,5 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "zhTW")
-L = L or {}
+if not L then return end
 L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = "如果你想要為此階段新增訊息，在|cffFFD100增加新訊息|r框中輸入。由於沒有訊息存在，此階段將不會有任何通告。"
 L[" is disabled. If you want to configure RSA, you need to enable it."] = "是停用的，如果您想要設置RSA，您需要啟用它。"
 L[" is Missing!"] = " 失效！"

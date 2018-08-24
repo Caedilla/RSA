@@ -1,6 +1,5 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "deDE")
 if not L then return end
-L = L or {}
 --[[Translation missing --]]
 L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = " If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."
 L[" is Missing!"] = " fehlt!"
