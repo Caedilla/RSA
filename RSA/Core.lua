@@ -16,7 +16,7 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 	
 	-- project-revision
 	self.db.global.version = 4.0
-	self.db.global.revision = GetAddOnMetadata("RSA","Version")
+	self.db.global.revision = string.match(GetAddOnMetadata("RSA","Version"),"%d+")
 
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")
