@@ -691,6 +691,15 @@ local function Druid()
 					Channel = "",
 				},
 			},
+			MassEntanglement = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		}
 	}
 	return Druid

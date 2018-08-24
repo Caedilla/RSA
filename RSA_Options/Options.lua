@@ -909,6 +909,15 @@ local function Druid_Options()
 			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
+		[25] = {
+			Profile = "MassEntanglement",
+			Name = GetSpellInfo(102359),
+			Desc = GetSpellDescription(102359),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
 	}
 	return Spells
 end

@@ -109,6 +109,10 @@ function RSA_Druid:OnEnable()
 				profile = 'DemoralizingRoar',
 				tracker = 2
 			},
+			[102359] = { -- Mass Entanglement
+				profile = 'MassEntanglement',
+				tracker = 2
+			},
 		},
 		SPELL_CAST_START = {
 			[212040] = { -- REVITALIZE
@@ -207,7 +211,12 @@ function RSA_Druid:OnEnable()
 			[201664] = { -- Demoralizing Roar
 				profile = 'DemoralizingRoar',
 				section = "End",
-				tracker = 2
+				tracker = 1
+			},
+			[102359] = { -- Mass Entanglement
+				profile = 'MassEntanglement',
+				section = "End",
+				tracker = 1
 			},
 		},
 		SPELL_INTERRUPT = {
