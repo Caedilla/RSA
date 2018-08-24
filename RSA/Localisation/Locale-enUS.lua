@@ -144,6 +144,7 @@ L["In Game"] = true
 L["I have a Battle.net community for my addons. If you have any issues, now you can easily report them to me in game. Just copy the invite link below and throw me a message."] = true
 L["Invite Link"] = true
 
+L["Pet Dispels"] = true
 
 
 

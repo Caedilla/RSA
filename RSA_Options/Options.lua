@@ -1004,6 +1004,14 @@ local function Hunter_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
+		[11] = {
+			Profile = "Tranq",
+			Name = L["Pet Dispels"],
+			Desc = GetSpellDescription(264263),
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
+		},
 	}
 	return Spells
 end

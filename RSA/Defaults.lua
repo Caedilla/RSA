@@ -800,6 +800,14 @@ local function Hunter()
 					Channel = "",
 				},
 			},
+			Tranq = {
+				Messages = {
+					Cast = {"Removed [TARGET]'s [AURALINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Hunter

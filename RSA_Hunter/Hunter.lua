@@ -17,8 +17,23 @@ function RSA_Hunter:OnEnable()
 		replacements = { TARGET = 1 },
 		section = 'Placed'
 	}
+	local Config_Tranq = { -- Enrage Dispels
+		profile = 'Tranq',
+		section = "Cast",
+		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
+	}
 	local MonitorConfig_Hunter = {
 		player_profile = RSA.db.profile.Hunter,
+		SPELL_DISPEL = {
+			[264263] = Config_Tranq, -- Bat Sonic Blast
+			[264264] = Config_Tranq, -- Nether Ray Nether Shock
+			[264028] = Config_Tranq, -- Crane Chi-Ji's Tranquility
+			[264266] = Config_Tranq, -- Stag Nature's Grace 
+			[264265] = Config_Tranq, -- Spirit Beast Spirit Shock
+			[264055] = Config_Tranq, -- Moth Serenity Dust
+			[264056] = Config_Tranq, -- Sporebat Spore Cloud
+			[264262] = Config_Tranq, -- Water Strider Soothing Water
+		},
 		SPELL_AURA_APPLIED = {
 			[3355] = { -- FREEZING TRAP
 				profile = 'FreezingTrap',
