@@ -287,18 +287,12 @@ function RSA_Priest:OnEnable()
 					if messagemax == 0 then return end
 					local messagerandom = math.random(messagemax)
 					local message = RSA.db.profile.Priest.Spells.Silence.Messages.Cast[messagerandom]
-					local full_destName,dest = RSA.RemoveServerNames(dest)
 					if message ~= "" then
 						if RSA.db.profile.Priest.Spells.Silence.Local == true then
 							RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
 						end
 						if RSA.db.profile.Priest.Spells.Silence.Yell == true then
 							RSA.Print_Yell(string.gsub(message, ".%a+.", RSA.String_Replace))
-						end
-						if RSA.db.profile.Priest.Spells.Silence.Whisper == true and dest ~= pName then
-							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
-							RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
-							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 						end
 						if RSA.db.profile.Priest.Spells.Silence.CustomChannel.Enabled == true then
 							RSA.Print_Channel(string.gsub(message, ".%a+.", RSA.String_Replace), RSA.db.profile.Priest.Spells.Silence.CustomChannel.Channel)
@@ -340,18 +334,12 @@ function RSA_Priest:OnEnable()
 							if messagemax == 0 then return end
 							local messagerandom = math.random(messagemax)
 							local message = RSA.db.profile.Priest.Spells.PowerWordBarrier.Messages.End[messagerandom]
-							local full_destName,dest = RSA.RemoveServerNames(dest)
 							if message ~= "" then
 								if RSA.db.profile.Priest.Spells.PowerWordBarrier.Local == true then
 									RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
 								end
 								if RSA.db.profile.Priest.Spells.PowerWordBarrier.Yell == true then
 									RSA.Print_Yell(string.gsub(message, ".%a+.", RSA.String_Replace))
-								end
-								if RSA.db.profile.Priest.Spells.PowerWordBarrier.Whisper == true and dest ~= pName then
-									RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
-									RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
-									RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 								end
 								if RSA.db.profile.Priest.Spells.PowerWordBarrier.CustomChannel.Enabled == true then
 									RSA.Print_Channel(string.gsub(message, ".%a+.", RSA.String_Replace), RSA.db.profile.Priest.Spells.PowerWordBarrier.CustomChannel.Channel)
