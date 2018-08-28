@@ -48,6 +48,10 @@ function RSA_Rogue:OnEnable()
 				profile = 'Shroud',
 				tracker = 2,
 			},
+			[199804] = { -- Between The Eyes
+				profile = 'BetweenTheEyes',
+				replacements = { TARGET = 1 }
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[6770] = { -- SAP
@@ -76,6 +80,11 @@ function RSA_Rogue:OnEnable()
 			[115834] = { -- Shroud of Concealment
 				profile = 'Shroud',
 				tracker = 1,
+				section = 'End',
+			},
+			[199804] = { -- Between The Eyes
+				profile = 'BetweenTheEyes',
+				replacements = { TARGET = 1 },
 				section = 'End',
 			},
 		},

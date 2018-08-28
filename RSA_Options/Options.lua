@@ -1813,6 +1813,15 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
+		[7] = {
+			Profile = "BetweenTheEyes",
+			Name = GetSpellInfo(199804),
+			Desc = GetSpellDescription(199804),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
 		
 	}
 	return Spells
