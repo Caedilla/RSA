@@ -28,9 +28,6 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 	local full_destName = destName
 
 	if RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames == true then
-		--if destName then
-		--	destName = gsub(destName, "-.*", "")
-		--end
 		if destName and destGUID then
 			local realmName = select(7,GetPlayerInfoByGUID(destGUID))
 			if realmName then
@@ -174,6 +171,9 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 	
 	if message ~= "" then
 		if spell_profile.Local == true then
+			if spell_data.groupRequired == true then
+				if not (GetNumSubgroupMembers() > 0 or GetNumGroupMembers() > 0) then return end				
+			end
 			RSA.Print_LibSink(gsub(message, ".%a+.", replacements))
 		end
 		if spell_profile.Yell == true then
