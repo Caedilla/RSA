@@ -1601,6 +1601,43 @@ local function Priest()
 				},
 				SmartGroup = true,
 			},
+			DarkAngel = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			Archangel = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			HolyWard = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			RayOfHope = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					Heal = {"[LINK] healed [TARGET] for [AMOUNT]!"},
+					End = {},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Priest

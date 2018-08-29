@@ -76,6 +76,13 @@ function RSA_Priest:OnEnable()
 		targetNotMe = 1,
 		replacements = { TARGET = 1 }
 	}
+	local Config_Fade = { -- Fade and Greater Fade
+		profile = 'Fade',
+	}
+	local Config_Fade_End = { -- Fade and Greater Fade
+		profile = 'Fade',
+		section = 'End'
+	}
 	local MonitorConfig_Priest = {
 		player_profile = RSA.db.profile.Priest,
 		SPELL_RESURRECT = {
@@ -83,6 +90,14 @@ function RSA_Priest:OnEnable()
 				profile = 'Resurrection',
 				section = 'End',
 				replacements = { TARGET = 1 },
+			},
+		},
+		SPELL_HEAL = {
+			[197336] = { -- Ray Of Hope
+				profile = 'RayOfHope',
+				section = "Heal",
+				linkID = 197268,
+				replacements = { TARGET = 1, AMOUNT = 1 }
 			},
 		},
 		SPELL_AURA_APPLIED = {
@@ -101,6 +116,20 @@ function RSA_Priest:OnEnable()
 				section = "Cast",
 				replacements = { TARGET = 1 }
 			},
+			[197871] = { -- Dark Archangel
+				profile = 'DarkAngel',
+			},
+			[197862] = { -- Archangel
+				profile = 'Archangel',
+			},	
+			[213610] = { -- Holy Ward
+				profile = 'HolyWard',
+				replacements = { TARGET = 1 },
+			},
+			[197268] = { -- Ray Of Hope
+				profile = 'RayOfHope',
+				replacements = { TARGET = 1 },
+			},		
 		},
 		SPELL_CAST_START = {
 			[212036] = { -- MASS RESURRECTION
@@ -112,6 +141,8 @@ function RSA_Priest:OnEnable()
 			},
 		},
 		SPELL_CAST_SUCCESS = {
+			[586] = Config_Fade, -- Fade
+			[213602] = Config_Fade, -- Greater Fade
 			[212036] = { -- MASS RESURRECTION
 				profile = 'MassRess',
 				section = 'End'
@@ -143,9 +174,6 @@ function RSA_Priest:OnEnable()
 			[33206] = { -- PAIN SUPPRESSION
 				profile = 'PainSuppression',
 				replacements = { TARGET = 1 }
-			},
-			[586] = { -- FADE
-				profile = 'Fade'
 			},
 			[64044] = { -- PSYCHIC HORROR
 				profile = 'PsychicHorror',
@@ -179,6 +207,8 @@ function RSA_Priest:OnEnable()
 			},
 		},
 		SPELL_AURA_REMOVED = {
+			[586] = Config_Fade_End, -- Fade
+			[213602] = Config_Fade_End, -- Greater Fade
 			[605] = Config_MC_End, -- Mind Control
 			[205364] = Config_MC_End, -- Mind Control
 			[15286] = { -- VAMPIRIC EMBRACE
@@ -204,10 +234,6 @@ function RSA_Priest:OnEnable()
 				section = 'End',
 				replacements = { TARGET = 1 }
 			},
-			[586] = { -- FADE
-				profile = 'Fade',
-				section = 'End'
-			},
 			[15487] = { -- SILENCE
 				profile = 'Silence',
 				section = 'End',
@@ -228,6 +254,26 @@ function RSA_Priest:OnEnable()
 				section = 'End',
 				targetIsMe = 1
 			},
+			[197871] = { -- Dark Archangel
+				profile = 'DarkAngel',
+				section = 'End',
+				targetIsMe = 1
+			},
+			[197862] = { -- Archangel
+				profile = 'Archangel',
+				section = 'End',
+				
+			},	
+			[213610] = { -- Holy Ward
+				profile = 'HolyWard',
+				replacements = { TARGET = 1 },
+				section = 'End',
+			},
+			[197268] = { -- Ray Of Hope
+				profile = 'RayOfHope',
+				section = 'End',
+				replacements = { TARGET = 1 },
+			},	
 		},
 		SPELL_DISPEL = {
 			[528] = { -- DISPEL MAGIC

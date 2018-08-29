@@ -1745,6 +1745,40 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
+		[23] = {
+			Profile = "DarkAngel",
+			Name = GetSpellInfo(197871),
+			Desc = GetSpellDescription(197871),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		[24] = {
+			Profile = "Archangel",
+			Name = GetSpellInfo(197862),
+			Desc = GetSpellDescription(197862),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		[25] = {
+			Profile = "HolyWard",
+			Name = GetSpellInfo(213610),
+			Desc = GetSpellDescription(213610),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
+		[26] = {
+			Profile = "RayOfHope",
+			Name = GetSpellInfo(197268),
+			Desc = GetSpellDescription(197268),
+			Message_Amount = 3,
+			Message_Areas = {"Start", "Heal", "End"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AMOUNT]"},
+		},
 	}
 	return Spells
 end
