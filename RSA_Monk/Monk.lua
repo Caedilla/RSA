@@ -64,6 +64,11 @@ function RSA_Monk:OnEnable()
 	if LRI then LRI.RegisterCallback(RSA, "LibResInfo_ResCastStarted", "Resurrect") end
 	RSA.db.profile.Modules.Monk = true -- Set state to loaded, to know if we should announce when a spell is refreshed.
 	local pName = UnitName("player")
+	local Config_Detox = {
+		profile = 'Detox',
+		section = 'Dispel',
+		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
+	}
 	local MonitorConfig_Monk = {
 		player_profile = RSA.db.profile.Monk,
 		SPELL_RESURRECT = {
@@ -214,11 +219,8 @@ function RSA_Monk:OnEnable()
 			},
 		},
 		SPELL_DISPEL = {
-			[115450] = {-- DETOX
-				profile = 'Detox',
-				section = "Cast",
-				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
-			},
+			[115450] = Config_Detox, -- Misweaver
+			[218164] = Config_Detox, -- Brewmaster & Windwalker
 		},
 		SPELL_INTERRUPT = {
 			[116705] = {-- SPEAR HAND STRIKE

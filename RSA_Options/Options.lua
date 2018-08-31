@@ -1266,7 +1266,7 @@ local function Monk_Options()
 			Name = GetSpellInfo(115450),
 			Desc = GetSpellDescription(115450),
 			Message_Amount = 1,
-			Message_Areas = {"Cast"},
+			Message_Areas = {"Dispel"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
@@ -1356,15 +1356,15 @@ local function Paladin_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[6] = {
+		["BoP&BoS"] = {
 			Profile = "HandOfProtection",
-			Name = GetSpellInfo(204018) .. " / " .. GetSpellInfo(74234), -- Too long to fit in game, 74234 is a spell called Protection. Should translate well enough.
+			Name = GetSpellInfo(1022) .. " / " .. GetSpellInfo(204018), -- Too long to fit in game, 74234 is a spell called Protection. Should translate well enough.
 			Desc = GetSpellDescription(1022),
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[7] = {
+		["BoSac"] = {
 			Profile = "HandOfSacrifice",
 			Name = GetSpellInfo(6940),
 			Desc = GetSpellDescription(6940),
@@ -1372,7 +1372,7 @@ local function Paladin_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[8] = {
+		["BoSanc"] = {
 			Profile = "BlessingOfSanctuary",
 			Name = GetSpellInfo(210256),
 			Desc = GetSpellDescription(210256),
@@ -1380,7 +1380,7 @@ local function Paladin_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[9] = {
+		["ForgottenQueen"] = {
 			Profile = "ForgottenQueen",
 			Name = GetSpellInfo(228049),
 			Desc = GetSpellDescription(228049),
@@ -1388,7 +1388,7 @@ local function Paladin_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[10] = {
+		["LoH"] = {
 			Profile = "LayOnHands",
 			Name = GetSpellInfo(633),
 			Desc = GetSpellDescription(633),
@@ -1396,7 +1396,7 @@ local function Paladin_Options()
 			Message_Areas = {"Heal"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AMOUNT]"},
 		},
-		[11] = {
+		["GoAK"] = {
 			Profile = "GoAK",
 			Name = GetSpellInfo(86659),
 			Desc = GetSpellDescription(86659),
@@ -1481,7 +1481,7 @@ local function Paladin_Options()
 			Name = GetSpellInfo(4987) .. " / " .. GetSpellInfo(213644),
 			Desc = GetSpellDescription(4987),
 			Message_Amount = 1,
-			Message_Areas = {"Cast"},
+			Message_Areas = {"Dispel"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
 		[21] = {
@@ -1553,7 +1553,7 @@ end
 
 local function Priest_Options()
 	local Spells = {
-		[1] = {
+		["MassDispel"] = {
 			Profile = "MassDispel",
 			Name = GetSpellInfo(32375),
 			Desc = GetSpellDescription(32375),
@@ -1562,7 +1562,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[2] = {
+		["VampiricEmbrace"] = {
 			Profile = "VampiricEmbrace",
 			Name = GetSpellInfo(15286),
 			Desc = GetSpellDescription(15286),
@@ -1571,7 +1571,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[3] = {
+		["LeapOfFaith"] = {
 			Profile = "LeapOfFaith",
 			Name = GetSpellInfo(73325),
 			Desc = GetSpellDescription(73325),
@@ -1579,7 +1579,7 @@ local function Priest_Options()
 			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[4] = {
+		["DivineHymn"] = {
 			Profile = "DivineHymn",
 			Name = GetSpellInfo(64843),
 			Desc = GetSpellDescription(64843),
@@ -1588,7 +1588,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[5] = {
+		["Levitate"] = {
 			Profile = "Levitate",
 			Name = GetSpellInfo(1706),
 			Desc = GetSpellDescription(1706),
@@ -1596,7 +1596,7 @@ local function Priest_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[6] = {
+		["ShackleUndead"] = {
 			Profile = "ShackleUndead",
 			Name = GetSpellInfo(9484),
 			Desc = GetSpellDescription(9484),
@@ -1605,24 +1605,16 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[7] = {
+		["DispelMagic"] = {
 			Profile = "DispelMagic",
 			Name = GetSpellInfo(528),
 			Desc = GetSpellDescription(528),
 			Message_Amount = 2,
-			Message_Areas = {"Cast", "Resist"},
+			Message_Areas = {"Dispel", "Resist"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
-		[8] = {
-			Profile = "Purify",
-			Name = GetSpellInfo(527),
-			Desc = GetSpellDescription(527),
-			Message_Amount = 1,
-			Message_Areas = {"Cast"},
-			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
-		},
-		[9] = {
+		["GuardianSpirit"] = {
 			Profile = "GuardianSpirit",
 			Name = GetSpellInfo(47788),
 			Desc = GetSpellDescription(47788),
@@ -1630,7 +1622,7 @@ local function Priest_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[10] = {
+		["PainSuppression"] = {
 			Profile = "PainSuppression",
 			Name = GetSpellInfo(33206),
 			Desc = GetSpellDescription(33206),
@@ -1638,7 +1630,7 @@ local function Priest_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[11] = {
+		["PowerWordBarrier"] = {
 			Profile = "PowerWordBarrier",
 			Name = GetSpellInfo(62618),
 			Desc = GetSpellDescription(62618),
@@ -1647,7 +1639,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[12] = {
+		["Resurrection"] = {
 			Profile = "Resurrection",
 			Name = GetSpellInfo(2006),
 			Desc = GetSpellDescription(2006),
@@ -1656,7 +1648,7 @@ local function Priest_Options()
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 			Requirements = {"LRI"},
 		},
-		[13] = {
+		["MassRess"] = {
 			Profile = "MassRess",
 			Name = GetSpellInfo(212036),
 			Desc = GetSpellDescription(212036),
@@ -1665,7 +1657,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[14] = {
+		["Fade"] = {
 			Profile = "Fade",
 			Name = GetSpellInfo(586),
 			Desc = GetSpellDescription(586),
@@ -1674,7 +1666,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[15] = {
+		["PsychicScream"] = {
 			Profile = "PsychicScream",
 			Name = GetSpellInfo(8122),
 			Desc = GetSpellDescription(8122),
@@ -1683,7 +1675,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[16] = {
+		["MindBomb"] = {
 			Profile = "MindBomb",
 			Name = GetSpellInfo(205369),
 			Desc = GetSpellDescription(205369),
@@ -1692,7 +1684,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[17] = {
+		["MindControl"] = {
 			Profile = "MindControl",
 			Name = GetSpellInfo(605),
 			Desc = GetSpellDescription(605),
@@ -1701,7 +1693,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[18] = {
+		["Silence"] = {
 			Profile = "Silence",
 			Name = GetSpellInfo(15487),
 			Desc = GetSpellDescription(15487),
@@ -1710,7 +1702,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[TARSPELL]", "[TARLINK]"},
 		},
-		[19] = {
+		["BodyAndSoul"] = {
 			Profile = "BodyAndSoul",
 			Name = GetSpellInfo(65081),
 			Desc = GetSpellDescription(65081),
@@ -1718,7 +1710,7 @@ local function Priest_Options()
 			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[20] = {
+		["Shadowfiend"] = {
 			Profile = "Shadowfiend",
 			Name = GetSpellInfo(34433),
 			Desc = GetSpellDescription(34433),
@@ -1727,7 +1719,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[21] = {
+		["SymbolOfHope"] = {
 			Profile = "SymbolOfHope",
 			Name = GetSpellInfo(64901),
 			Desc = GetSpellDescription(64901),
@@ -1736,7 +1728,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[22] = {
+		["PsychicHorror"] = {
 			Profile = "PsychicHorror",
 			Name = GetSpellInfo(64044),
 			Desc = GetSpellDescription(64044),
@@ -1745,7 +1737,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[23] = {
+		["DarkAngel"] = {
 			Profile = "DarkAngel",
 			Name = GetSpellInfo(197871),
 			Desc = GetSpellDescription(197871),
@@ -1754,7 +1746,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[24] = {
+		["Archangel"] = {
 			Profile = "Archangel",
 			Name = GetSpellInfo(197862),
 			Desc = GetSpellDescription(197862),
@@ -1763,7 +1755,7 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[25] = {
+		["HolyWard"] = {
 			Profile = "HolyWard",
 			Name = GetSpellInfo(213610),
 			Desc = GetSpellDescription(213610),
@@ -1771,13 +1763,22 @@ local function Priest_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[26] = {
+		["RayOfHope"] = {
 			Profile = "RayOfHope",
 			Name = GetSpellInfo(197268),
 			Desc = GetSpellDescription(197268),
 			Message_Amount = 3,
 			Message_Areas = {"Start", "Heal", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AMOUNT]"},
+		},
+		["Purify"] = {
+			Profile = "Purify",
+			Name = GetSpellInfo(527) .. " / " .. GetSpellInfo(213634),
+			Desc = GetSpellDescription(527),
+			Message_Amount = 1,
+			--Hidden = GetSpecialization() == 3,
+			Message_Areas = {"Dispel"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
 	}
 	return Spells
@@ -1901,7 +1902,7 @@ local function Shaman_Options()
 		},
 		[5] = {
 			Profile = "CleanseSpirit",
-			Name = GetSpellInfo(4987) .. " / " .. GetSpellInfo(77130),
+			Name = GetSpellInfo(51886) .. " / " .. GetSpellInfo(77130),
 			Desc = GetSpellDescription(77130),
 			Message_Amount = 1,
 			Message_Areas = {"Dispel"},
@@ -2107,7 +2108,7 @@ local function Warlock_Options()
 			Name = GetSpellInfo(89808),
 			Desc = GetSpellDescription(89808),
 			Message_Amount = 1,
-			Message_Areas = {"Cast"},
+			Message_Areas = {"Dispel"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
@@ -2199,6 +2200,15 @@ local function Warlock_Options()
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		[15] = {
+			Profile = "DevourMagic",
+			Name = GetSpellInfo(19505),
+			Desc = GetSpellDescription(19505),
+			Message_Amount = 1,
+			Message_Areas = {"Dispel"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
 	}
 	return Spells
@@ -2595,8 +2605,9 @@ local function Spell_Options(NonClass)
 		[9] = "Interrupt",
 		[10] = "Resist",
 		[11] = "Immune",
-		[12] = "End",
-		[13] = "StatueOfTheBlackOx",
+		[12] = "Failed",
+		[13] = "End",
+		[14] = "StatueOfTheBlackOx",
 	}
 	local Options = {
 		name = OptionName,
@@ -2606,11 +2617,24 @@ local function Spell_Options(NonClass)
 		args = {
 		},
 	}
-	for i = 1,#Spells do
+	for i,v in pairs(Spells) do
+	--for i = 1,#Spells do
 		if Spells[i] then
-			Options.args[Spells[i].Profile] = {
-				name = Spells[i].Name,
+			Options.args[Spells[i].Name] = {
+				name = function() 
+					if string.len(Spells[i].Name) > 35 then
+						local name = Spells[i].Name
+						name = name:gsub("(%w)%S+%s*","%1")
+						name = name:gsub("/ "," / ")
+						return name
+					else
+						return Spells[i].Name
+					end
+				end,
 				desc = Spells[i].Desc,
+				hidden = Spells[i].Hidden or false,
+				disabled = Spells[i].Hidden or false,
+				order = Spells[i].Order or 5,
 				type = "group",
 				childGroups = "tab",
 				args = {
@@ -2788,7 +2812,7 @@ local function Spell_Options(NonClass)
 		for j = 1,#Spells[i].Valid_Tags do
 			TagList = TagList .."\n".. "|c5500DBBD" .. Spells[i].Valid_Tags[j] .. "|r"
 		end
-		Options.args[Spells[i].Profile].args.Message_Description.name = L["The following tags are available for use with this spell:"] .. TagList
+		Options.args[Spells[i].Name].args.Message_Description.name = L["The following tags are available for use with this spell:"] .. TagList
 
 		-- Iterate Messages
 		for k=1,Spells[i].Message_Amount do -- Order message areas logically (i.e Start message is displayed before End message)
@@ -2804,7 +2828,7 @@ local function Spell_Options(NonClass)
 					table.insert(Messages,v)
 				end
 			end
-			Options.args[Spells[i].Profile].args[Spells[i].Message_Areas[k]] = {
+			Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]] = {
 				name = L[Spells[i].Message_Areas[k]],
 				type = "group",
 				order = 110 + OrderVal,
@@ -2829,11 +2853,11 @@ local function Spell_Options(NonClass)
 				},
 			}
 			if #Messages == 0 then
-				Options.args[Spells[i].Profile].args[Spells[i].Message_Areas[k]].args.List_Description.name = "\n".. L["You have no messages for this section."]..L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."]
+				Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args.List_Description.name = "\n".. L["You have no messages for this section."]..L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."]
 			elseif #Messages == 1 then
-				Options.args[Spells[i].Profile].args[Spells[i].Message_Areas[k]].args.List_Description.name = "\n".. L["You have "].. #Messages ..L[" message for this section."]..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
+				Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args.List_Description.name = "\n".. L["You have "].. #Messages ..L[" message for this section."]..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
 			else
-				Options.args[Spells[i].Profile].args[Spells[i].Message_Areas[k]].args.List_Description.name = "\n".. L["You have "].. #Messages ..L[" messages for this section."]..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
+				Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args.List_Description.name = "\n".. L["You have "].. #Messages ..L[" messages for this section."]..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
 			end
 
 
@@ -2842,7 +2866,7 @@ local function Spell_Options(NonClass)
 					if Spells[i].Requirements[r] == "LRI" and k == 2 then -- k == 2 means it's the second message. The second message for resses in RSA is always the end message.
 					local LRI = LibStub("LibResInfo-1.0",true)
 					if not LRI then
-						Options.args[Spells[i].Profile].args[Spells[i].Message_Areas[k]].args.List_Description.name = L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."]
+						Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args.List_Description.name = L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."]
 					end
 					end
 				end
@@ -2851,7 +2875,7 @@ local function Spell_Options(NonClass)
 
 
 			for l=1,#Messages do
-				Options.args[Spells[i].Profile].args[Spells[i].Message_Areas[k]].args[tostring(l)] = {
+				Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args[tostring(l)] = {
 					type = "input",
 					width = "full",
 					name = tostring(l),

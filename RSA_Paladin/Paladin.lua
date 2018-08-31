@@ -123,7 +123,7 @@ function RSA_Paladin:OnEnable()
 	}
 	local Config_Cleanse = {-- CLEANSE & CLEANSE TOXINS
 		profile = 'Cleanse',
-		section = 'Cast',
+		section = 'Dispel',
 		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 	}
 	local Config_BoS = { -- Blessing of Sacrifice & Ultimate Sacrifice honour talent

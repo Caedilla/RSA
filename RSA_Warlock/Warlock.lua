@@ -51,7 +51,7 @@ function RSA_Warlock:OnEnable()
 	}
 	local Config_SingeMagic = { -- Singe Magic
 		profile = 'SingeMagic',
-		section = 'Cast',
+		section = 'Dispel',
 		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 	}
 	local MonitorConfig_Warlock = {
@@ -143,11 +143,9 @@ function RSA_Warlock:OnEnable()
 		SPELL_DISPEL = {
 			[89808] = Config_SingeMagic, -- SINGE MAGIC - Normal Imp
 			[115276] = Config_SingeMagic, -- SEAR MAGIC - Fel Imp Glyph
-		},
-		SPELL_DISPEL_FAILED = {
 			[19505] = { -- DEVOUR MAGIC
 				profile = 'Devour',
-				section = 'End',
+				section = 'Dispel',
 				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" },
 			}
 		},
@@ -155,11 +153,14 @@ function RSA_Warlock:OnEnable()
 			[19647] = Config_SpellLock, -- Felhunter Spell Lock
 			[115781] = Config_SpellLock, -- Observer Optical Blast
 			[171138] = Config_SpellLock, -- Terrorguard Shadow Lock
+			[132409] = Config_SpellLock, -- Grimoire of Sacrifice Command Demon Spell Lock
+
 		},
 		SPELL_MISSED = {
 			[19647] = Config_SpellLock_Missed, -- Felhunter Spell Lock
 			[115781] = Config_SpellLock_Missed, -- Observer Optical Blast
 			[171138] = Config_SpellLock_Missed, -- Terrorguard Shadow Lock
+			[132409] = Config_SpellLock_Missed, -- Grimoire of Sacrifice Command Demon Spell Lock
 			[17735] = {-- SUFFERING
 				profile = 'Suffering',
 				section = 'Resist',

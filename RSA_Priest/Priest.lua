@@ -83,6 +83,11 @@ function RSA_Priest:OnEnable()
 		profile = 'Fade',
 		section = 'End'
 	}
+	local Config_Purify = { -- Purify & Purify Disease
+		profile = 'Purify',
+		section = "Dispel",
+		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
+	}
 	local MonitorConfig_Priest = {
 		player_profile = RSA.db.profile.Priest,
 		SPELL_RESURRECT = {
@@ -278,14 +283,11 @@ function RSA_Priest:OnEnable()
 		SPELL_DISPEL = {
 			[528] = { -- DISPEL MAGIC
 				profile = 'DispelMagic',
-				section = "Cast",
+				section = "Dispel",
 				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 			},
-			[527] = { -- PURIFY
-				profile = 'Purify',
-				section = "Cast",
-				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
-			}
+			[527] = Config_Purify,
+			[213634] = Config_Purify,
 		},
 		SPELL_DISPEL_FAILED = {
 			[528] = { -- DISPEL MAGIC

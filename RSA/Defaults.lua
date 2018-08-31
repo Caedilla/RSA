@@ -442,7 +442,7 @@ local function DemonHunter()
 			},
 			Consume = { -- Consume Magic
 				Messages = {
-					Dispel = {"Purged [TARGET]'s [AURALINK]!"},
+					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},
 					Resist = {"[TARGET] resisted [LINK]!"},
 				},
 				CustomChannel = {
@@ -1068,7 +1068,7 @@ local function Monk()
 			},
 			Detox = {
 				Messages = {
-					Cast = {"Removed [TARGET]'s [AURALINK]!"},
+					Dispel = {"Removed [TARGET]'s [AURALINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1312,7 +1312,7 @@ local function Paladin()
 			},
 			Cleanse = {
 				Messages = {
-					Cast = {"Cleansed [TARGET]'s [AURALINK]!"},
+					Dispel = {"Cleansed [TARGET]'s [AURALINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1452,7 +1452,7 @@ local function Priest()
 			},
 			DispelMagic = {
 				Messages = {
-					Cast = {"Dispelled [AURALINK] on [TARGET]!"},
+					Dispel = {"Dispelled [AURALINK] on [TARGET]!"},
 					Resist = {"[TARGET] resisted [LINK]!"},
 				},
 				CustomChannel = {
@@ -1461,7 +1461,7 @@ local function Priest()
 			},
 			Purify = {
 				Messages = {
-					Cast = {"Removed [TARGET]'s [AURALINK]!"},
+					Dispel = {"Removed [TARGET]'s [AURALINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1998,7 +1998,7 @@ local function Warlock()
 			},
 			SingeMagic = {
 				Messages = {
-					Cast = {"[LINK] on [TARGET] removed [AURALINK]!"},
+					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2098,6 +2098,14 @@ local function Warlock()
 				Messages = {
 					Start = {"[LINK] activated!"},
 					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			DevourMagic = {
+				Messages = {
+					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",

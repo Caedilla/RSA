@@ -117,6 +117,7 @@ L["Success"] = true
 L["Damage"] = true
 L["Debuff"] = true
 L["Dispel"] = true
+L["Failed"] = true
 L["Interrupt"] = true
 L["Resist"] = true
 L["Immune"] = true
