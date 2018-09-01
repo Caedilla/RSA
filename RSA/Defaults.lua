@@ -1695,7 +1695,7 @@ local function Rogue()
 			},
 			Tricks = {
 				Messages = {
-					Start = {"[LINK] cast on [TARGET]!"},
+					Cast = {"[LINK] cast on [TARGET]!"},
 					End = {},
 				},
 				CustomChannel = {

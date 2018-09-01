@@ -1827,7 +1827,7 @@ local function Rogue_Options()
 			Name = GetSpellInfo(57934),
 			Desc = GetSpellDescription(57934),
 			Message_Amount = 2,
-			Message_Areas = {"Start", "End"},
+			Message_Areas = {"Cast", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
 		[5] = {
