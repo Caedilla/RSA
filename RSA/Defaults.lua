@@ -449,6 +449,16 @@ local function DemonHunter()
 					Channel = "",
 				},
 			},
+			FelEruption = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				Local = true,
+			},
 		},
 	}
 	return DemonHunter

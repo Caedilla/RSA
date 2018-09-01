@@ -95,6 +95,10 @@ function RSA_DemonHunter:OnEnable()
 				--replacements = { TARGET = 1 },
 				tracker = 2
 			},
+			[211881] = { -- Fel Eruption Havoc DPS Talent
+				profile = 'FelEruption',
+				replacements = { TARGET = 1 }
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[188501] = { -- SPECTRAL SIGHT
@@ -157,6 +161,11 @@ function RSA_DemonHunter:OnEnable()
 				--replacements = { TARGET = 1 },
 				section = 'End',
 				tracker = 1
+			},
+			[211881] = { -- Fel Eruption Havoc DPS Talent
+				profile = 'FelEruption',
+				section = 'End',
+				replacements = { TARGET = 1 }
 			},
 		},
 		SPELL_INTERRUPT = {

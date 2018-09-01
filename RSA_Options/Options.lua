@@ -702,6 +702,15 @@ local function DemonHunter_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
+		["FelEruption"] = {
+			Profile = "FelEruption",
+			Name = GetSpellInfo(211881),
+			Desc = GetSpellDescription(211881),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
 	}
 	return Spells
 end
