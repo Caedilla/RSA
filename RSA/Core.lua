@@ -173,10 +173,7 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 	end
 
 
-	C_ChatInfo.RegisterAddonMessagePrefix("RSA")
-	--RSA:RegisterComm("RSA", "OnCommReceived")
-	C_ChatInfo.RegisterAddonMessagePrefix("RSA_Status")
-	RSA:RegisterComm("RSA_Status","OnStatusReceived")
+	RSA.Comm.Registry()
 end -- End OnInitialize
 
 function RSA.AnnouncementCheck() -- Checks against user settings to see if we are allowed to announce.
@@ -400,6 +397,16 @@ function RSA.CanAnnounce() -- If we are the Raid or Party Leader, or If we have 
 	if UnitIsGroupLeader(pName) then return true end
 	if UnitIsGroupAssistant(pName) then return true end
 	return false
+end
+
+function RSA.GetMyRandomNumber()
+	local random = math.random(1,time())
+	local namebytes = 0
+	for i = 1,string.len(UnitName("player")) do
+		namebytes = namebytes + string.byte(UnitName("player"),i)
+    end
+    local random = tostring(random) .. tostring(namebytes)
+	return random
 end
 
 function RSA.SetBonus(Name) -- Returns the number of items we are wearing of a set passed in the first argument. This would be a table in the class module.

@@ -72,15 +72,17 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 
 	if false --[[detect player/pet]] then return end
 
+	local CommCanAnnounce = true
 	if spell_data.comm then
 		if RSA.Comm.GroupAnnouncer then
-			if RSA.Comm.GroupAnnouncer == tonumber(RSA.db.global.ID) then
-				-- This is us, continue as normal.
-			else
-				return -- Someone else is announcing.
+			CommCanAnnounce = true
+			if RSA.Comm.GroupAnnouncer == tonumber(RSA.db.global.ID) then -- This is us, continue as normal.
+				CommCanAnnounce = true
+			else-- Someone else is announcing.
+				CommCanAnnounce = false
 			end
-		else
-			-- No Group, continue as normal.
+		else -- No Group, continue as normal.
+			CommCanAnnounce = true
 		end
 	end
 
@@ -203,6 +205,7 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 			end
 			RSA.Print_LibSink(gsub(message, ".%a+.", replacements))
 		end
+		if CommCanAnnounce == false then return end
 		if spell_profile.Yell == true then
 			RSA.Print_Yell(gsub(message, ".%a+.", replacements))
 		end

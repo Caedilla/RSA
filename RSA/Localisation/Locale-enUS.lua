@@ -149,6 +149,8 @@ L["Pet Dispels"] = true
 
 L["Utilities"] = true
 
+L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = true
+
 
 
 

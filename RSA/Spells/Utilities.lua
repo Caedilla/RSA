@@ -32,7 +32,14 @@ function RSA_Utilities:OnEnable()
             [67826] = Config_RepairBots, -- Jeeves
             [157066] = Config_RepairBots, -- Walter (WoD Engineer Workshop)            
             [199109] = Config_RepairBots, -- Auto-Hammer
-            [200205] = Config_RepairBots, -- Reaves Auto-Hammer mode
+
+        },
+        SPELL_CAST_SUCCESS = {
+            [200205] = { -- Reaves Auto-Hammer mode
+                profile = 'Jeeves',
+                comm = true,
+                replacements = { SOURCE = 1 }
+            },
         },
     }
 

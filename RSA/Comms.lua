@@ -9,24 +9,57 @@ local GroupAssistants = {}
 
 RSA.Comm = {}
 RSA.Comm.GroupStatus = {}
---RSA.Comm.GroupAnnouncer
 
 
-function RSA.GetMyRandomNumber()
-	local random = math.random(1,time())
-	local namebytes = 0
-	for i = 1,string.len(UnitName("player")) do
-		namebytes = namebytes + string.byte(UnitName("player"),i)
-    end
-    local random = tostring(random) .. tostring(namebytes)
-	return random
+
+function RSA.Comm.Registry()
+	C_ChatInfo.RegisterAddonMessagePrefix("RSA")
+    --RSA:RegisterComm("RSA", "OnCommReceived")    
+
+	C_ChatInfo.RegisterAddonMessagePrefix("RSA_Status")
+    RSA:RegisterComm("RSA_Status","OnStatusReceived")
+    
+    C_ChatInfo.RegisterAddonMessagePrefix("RSA_Version")
+	RSA:RegisterComm("RSA_Version","OnVersionCheckReceived")
 end
 
-function RSA.CheckGroupStatus(Status)
+function RSA.VersionCheck(Guild)
+    if IsInRaid() then
+        RSA.SendCommMessage("RSA","RSA_Version",RSA.db.global.revision, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "RAID")
+    elseif IsInGroup() then
+        RSA.SendCommMessage("RSA","RSA_Version",RSA.db.global.revision, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "PARTY")
+    elseif IsInGuild() and Guild == true then
+        RSA.SendCommMessage("RSA","RSA_Version",RSA.db.global.revision, "GUILD")
+	end 
+end
+
+function RSA.OnVersionCheckReceived(addon, prefix, message, channel, sender)
+    local revision = tonumber(message)
+    if sender == UnitName("player") then return end -- Don't compare with self.
+    if (tonumber(RSA.db.global.revision) < revision) and not RSA.Comm.OutOfDateMessage then -- Someone else has a newer version
+        RSA.Comm.OutOfDateMessage = true
+        RSA.Print_Self(L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"])
+    elseif tonumber(RSA.db.global.revision) > revision then -- We're on a newer version, but they should know this because we sent a comm message
+    else -- their version is our version
+    end
+end
+
+function RSA.CheckGroupStatus(self,Status,event)
     if not RSA.db.global.ID then
         RSA.db.global.ID = RSA.GetMyRandomNumber()
     end
-    RSA.SendCommMessage("RSA","RSA_Status",RSA.db.global.ID,"GUILD")
+    if IsInRaid() then
+        RSA.SendCommMessage("RSA","RSA_Status",RSA.db.global.ID, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "RAID")
+    elseif IsInGroup() then
+        RSA.SendCommMessage("RSA","RSA_Status",RSA.db.global.ID, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "PARTY")
+    else
+        RSA.Comm.GroupAnnouncer = nil
+        wipe(GroupMembers)
+        wipe(GroupAssistants)
+    end
+    if Status == "Joined" then
+        RSA.VersionCheck()
+    end
 end
 
 function RSA.OnStatusReceived(addon, prefix, message, channel, sender)
@@ -60,10 +93,12 @@ function RSA.GroupLeft()
 end
 
 
-RSA:RegisterEvent("PLAYER_TARGET_CHANGED","CheckGroupStatus") -- TESTING ONLY
-RSA:RegisterEvent("PLAYER_STARTED_MOVING","GroupLeft") -- TESTING ONLY
+--RSA:RegisterEvent("PLAYER_TARGET_CHANGED","CheckGroupStatus") -- TESTING ONLY
+--RSA:RegisterEvent("PLAYER_STARTED_MOVING","GroupLeft") -- TESTING ONLY
 
---RSA:RegisterEvent("GROUP_ROSTER_UPDATE","CheckGroupStatus","Update")
---RSA:RegisterEvent("GROUP_FORMED","CheckGroupStatus","Join")
---RSA:RegisterEvent("GROUP_JOINED","CheckGroupStatus","Join")
---RSA:RegisterEvent("GROUP_LEFT","GroupLeft")
+RSA:RegisterEvent("GROUP_ROSTER_UPDATE","CheckGroupStatus")
+RSA:RegisterEvent("GROUP_FORMED","CheckGroupStatus","Joined")
+RSA:RegisterEvent("GROUP_JOINED","CheckGroupStatus","Joined")
+RSA:RegisterEvent("GROUP_LEFT","GroupLeft")
+
+
