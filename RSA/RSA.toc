@@ -22,5 +22,7 @@ Localisation\Locale-zhCN.lua
 Localisation\Locale-zhTW.lua
 Init.lua
 Defaults.lua
+Comms.lua
 Core.lua
 AnnouncementsMonitor.lua
+Spells\Utilities.lua

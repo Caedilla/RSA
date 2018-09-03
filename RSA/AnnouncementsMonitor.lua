@@ -3,7 +3,8 @@ local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 
 local gsub = string.gsub
 
-local config, playerGUID
+local utilityConfig, config, playerGUID
+
 
 local cache_SpellInfo = {}
 local cache_SpellLink = {}
@@ -11,6 +12,10 @@ local cache_SpellLink = {}
 local function MonitorConfig(new_config, new_playerGUID)
 	config = new_config
 	playerGUID = new_playerGUID
+end
+
+local function UtilityMonitorConfig(new_config)
+	utilityConfig = new_config
 end
 
 local empty = {}
@@ -22,7 +27,7 @@ local function WipeCache()
 	wipe(cache_SpellLink)
 end
 
-local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4)
+local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4,configType)
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 	local missType = ex1
 	local full_destName = destName
@@ -37,8 +42,16 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 	end
 
 	local event_data = config[event]
-
+	if configType then
+		if configType == "player" then
+			event_data = config[event]
+		elseif configType == "utilities" then
+			event_data = utilityConfig[event]
+		end
+	end
+	
 	if not event_data then return end
+
 
 	local spell_data = event_data[spellID]
 
@@ -55,32 +68,41 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 
 	if spell_data.targetIsMe and not RSA.IsMe(destFlags) then return end
 	if spell_data.targetNotMe and RSA.IsMe(destFlags) then return end
+	if spell_data.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
 	if false --[[detect player/pet]] then return end
-	
+
+	if spell_data.comm then
+		if RSA.Comm.GroupAnnouncer then
+			if RSA.Comm.GroupAnnouncer == tonumber(RSA.db.global.ID) then
+				-- This is us, continue as normal.
+			else
+				return -- Someone else is announcing.
+			end
+		else
+			-- No Group, continue as normal.
+		end
+	end
+
 	local spell_tracker = spell_data.profile
 	local tracker = spell_data.tracker or -1	-- Tracks spells like AoE Taunts to prevent multiple messages playing.
 	if tracker == 1 and running[spell_tracker] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
 	if tracker == 1 and running[spell_tracker] >= 500 then return end -- Prevent second announcement of buff/debuff removal.
 
-	if tracker == 2 then -- [31850].tracker = 2
+	if tracker == 2 then
 		if running[spell_tracker] ~= nil then
 			if running[spell_tracker] >= 0 and running[spell_tracker] < 500 then -- Prevent second announcement of buff/debuff application.				
 				running[spell_tracker] = running[spell_tracker] + 1
-				--print(spell_tracker .. "+1:" .. running[spell_tracker])
 				return 
 			end
 		end		
-		running[spell_tracker] = 0 -- running[ArdentDefender] = 1
-		--print(spell_tracker .. " SET:" .. running[spell_tracker])
+		running[spell_tracker] = 0
 	end	
 	if tracker == 1 and running[spell_tracker] == 0 then
 		running[spell_tracker] = running[spell_tracker] + 500
-		--print(spell_tracker .. "+500:" .. running[spell_tracker])
 	end
 	if tracker == 1 and running[spell_tracker] > 0 and running[spell_tracker] < 500 then
 		running[spell_tracker] = running[spell_tracker] - 1
-		--print(spell_tracker .. "-1:" .. running[spell_tracker])
 		return 
 	end		
 
@@ -135,7 +157,12 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 		replacements[extraSpellLinkTarget] = spelllink
 	end
 
-	local spell_profile = config.player_profile.Spells[spell_data.profile]
+	local spell_profile
+	if (not configType) or (configType == "player") then
+		spell_profile = config.player_profile.Spells[spell_data.profile]
+	elseif configType == "utilities" then
+		spell_profile = utilityConfig.player_profile.Spells[spell_data.profile]
+	end
 	local TotalMessages = #spell_profile.Messages[spell_data.section or 'Start']
 	if TotalMessages == 0 then return end
 	local RandomMessageNumber = math.random(TotalMessages)
@@ -168,7 +195,7 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 	if spell_replacements.AMOUNT then
 		replacements["[AMOUNT]"] = ex1 -- ex1 is also missType
 	end
-	
+
 	if message ~= "" then
 		if spell_profile.Local == true then
 			if spell_data.groupRequired == true then
@@ -192,7 +219,7 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 		end
 		if spell_profile.Emote == true then
 			RSA.Print_Emote(gsub(message, ".%a+.", replacements))			
-	end
+		end
 		if spell_profile.SmartGroup == true then
 			RSA.Print_SmartGroup(gsub(message, ".%a+.", replacements))
 		end
@@ -208,9 +235,9 @@ local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID
 			RSA.BossBars(gsub(message, ".%a+.", replacements))
 		end
 	end
-
 end
 
 RSA.MonitorConfig = MonitorConfig
+RSA.UtilityMonitorConfig = UtilityMonitorConfig
 RSA.MonitorAndAnnounce = MonitorAndAnnounce
 RSA.WipeCache = WipeCache

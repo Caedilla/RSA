@@ -2444,4 +2444,24 @@ local function Racials()
 	return Racials
 end
 DefaultOptions.profile.Racials = Racials()
+
+local function Utilities()
+	local Utilities = {
+		Spells = {
+			Jeeves = {
+				Messages = {
+					Start = {"[TARGET] has placed a [LINK]!"},
+					End = {"[TARGET]'s [LINK] faded."},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
+		},
+	}
+	return Utilities
+end
+DefaultOptions.profile.Utilities = Utilities()
+
 RSA.DefaultOptions = DefaultOptions

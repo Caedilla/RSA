@@ -818,7 +818,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[13] = {
+		["MightyBash"] = {
 			Profile = "MightyBash",
 			Name = GetSpellInfo(5211),
 			Desc = GetSpellDescription(5211),
@@ -2512,6 +2512,21 @@ local function Racial_Options()
 	return Spells
 end
 
+local function Utilities_Options()
+	local Spells = {
+		[1] = {
+			Profile = "Jeeves",
+			Name = "Repair Bots",
+			Desc = GetSpellDescription(44389),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
+		},
+	}
+	return Spells
+end
+
 function RSA:FixDB()
 	local Profiles = {
 		[1] = "DeathKnight",
@@ -2564,6 +2579,11 @@ local function Spell_Options(NonClass)
 			Spells = Racial_Options()
 			ProfileName = "Racials"
 			OptionName = L["Racials"]
+		end
+		if NonClass == "Utilities" then
+			Spells = Utilities_Options()
+			ProfileName = "Utilities"
+			OptionName = L["Utilities"]
 		end
 	elseif PlayerClass == "DEATHKNIGHT" then
 		Spells = DeathKnight_Options()
@@ -2924,7 +2944,7 @@ local function AddOptions()
 	Options.args.Spells.args.Class = Spell_Options()
 	--Options.args.Spells.args.Racials = Spell_Options("Racials")
 	--Options.args.Spells.args.Consumables = Consumable_Options()
-	--Options.args.Spells.args.Utilities = Utility_Options()
+	Options.args.Spells.args.Utilities = Spell_Options("Utilities")
 end
 
 -----------------------

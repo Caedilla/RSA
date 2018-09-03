@@ -143,6 +143,7 @@ function RSA_Warlock:OnEnable()
 		SPELL_DISPEL = {
 			[89808] = Config_SingeMagic, -- SINGE MAGIC - Normal Imp
 			[115276] = Config_SingeMagic, -- SEAR MAGIC - Fel Imp Glyph
+			[132411] = Config_SingeMagic, -- Singe Magic - Grimoire of Sacrifice
 			[19505] = { -- DEVOUR MAGIC
 				profile = 'Devour',
 				section = 'Dispel',

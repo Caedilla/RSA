@@ -8,6 +8,7 @@ local spellinfo,spelllinkinfo
 local botguids = {}
 local blingtronguids = {}
 local molleguids = {}
+
 function RSA:OnInitialize() -- Do all this when the addon loads.
 	local _, PlayerClass = UnitClass('player')
 	self.db = LibStub("AceDB-3.0"):New("RSADB", RSA.DefaultOptions, PlayerClass) -- Setup Saved Variables
@@ -17,6 +18,11 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 	-- project-revision
 	self.db.global.version = 4.0
 	self.db.global.revision = string.match(GetAddOnMetadata("RSA","Version"),"%d+")
+
+    if not RSA.db.global.ID then
+        RSA.db.global.ID = RSA.GetMyRandomNumber()
+    end
+
 
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")
@@ -165,6 +171,12 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 			end
 		end
 	end
+
+
+	C_ChatInfo.RegisterAddonMessagePrefix("RSA")
+	--RSA:RegisterComm("RSA", "OnCommReceived")
+	C_ChatInfo.RegisterAddonMessagePrefix("RSA_Status")
+	RSA:RegisterComm("RSA_Status","OnStatusReceived")
 end -- End OnInitialize
 
 function RSA.AnnouncementCheck() -- Checks against user settings to see if we are allowed to announce.
@@ -336,6 +348,19 @@ if not sourceFlags then return end
 	if band(COMBATLOG_OBJECT_AFFILIATION_MINE,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_MINE then
 		return true
 	end
+end
+
+function RSA.AffiliationGroup(sourceFlags)
+	if not sourceFlags then return end
+	if band(COMBATLOG_OBJECT_AFFILIATION_MINE,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_MINE then
+		return true
+	end
+	if band(COMBATLOG_OBJECT_AFFILIATION_PARTY,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_PARTY then
+		return true
+	end
+	if band(COMBATLOG_OBJECT_AFFILIATION_PARTY,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_PARTY then
+		return true
+	end	
 end
 
 local CL_OBJECT_PLAYER_MINE = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_AFFILIATION_MINE) -- construct a bitmask for a player controlled by me
