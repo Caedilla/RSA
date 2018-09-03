@@ -2532,6 +2532,15 @@ local function Utilities_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
 		},
+		["Drums"] = {
+			Profile = "Drums",
+			Name = "Drums",
+			Desc = GetSpellDescription(256740),
+			Message_Amount = 1,
+			Message_Areas = {"Start"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
+		},
 	}
 	return Spells
 end

@@ -96,6 +96,7 @@ end
 --RSA:RegisterEvent("PLAYER_TARGET_CHANGED","CheckGroupStatus") -- TESTING ONLY
 --RSA:RegisterEvent("PLAYER_STARTED_MOVING","GroupLeft") -- TESTING ONLY
 
+RSA:RegisterEvent("PLAYER_ENTERING_WORLD","CheckGroupStatus")
 RSA:RegisterEvent("GROUP_ROSTER_UPDATE","CheckGroupStatus")
 RSA:RegisterEvent("GROUP_FORMED","CheckGroupStatus","Joined")
 RSA:RegisterEvent("GROUP_JOINED","CheckGroupStatus","Joined")

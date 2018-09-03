@@ -2468,6 +2468,16 @@ local function Utilities()
 				},
 				SmartGroup = true,
 			},
+			Drums = {
+				Messages = {
+					Start = {"[LINK] used by [TARGET]!"},
+					End = {"[LINK] faded."},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
 		},
 	}
 	return Utilities

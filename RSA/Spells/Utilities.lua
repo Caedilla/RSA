@@ -38,6 +38,11 @@ function RSA_Utilities:OnEnable()
         comm = true,
         replacements = { SOURCE = 1 }
     }
+    local Config_Drums = { -- Drums
+        profile = 'Drums',
+        comm = true,
+        replacements = { SOURCE = 1 }
+    }
 	MonitorConfig_Utilities = {
 		player_profile = RSA.db.profile.Utilities,
 		SPELL_SUMMON = {
@@ -71,7 +76,10 @@ function RSA_Utilities:OnEnable()
             [126501] = Config_Feasts, -- Banquet of the Oven
             [126502] = Config_Feasts, -- Great Banquet of the Oven
             [126503] = Config_Feasts, -- Banquet of the Brew
-            [126504] = Config_Feasts, -- Great Banquet of the Brew          
+            [126504] = Config_Feasts, -- Great Banquet of the Brew
+            [145166] = Config_Feasts, -- Noodle Cart
+            [145169] = Config_Feasts, -- Deluxe Noodle Cart
+            [145196] = Config_Feasts, -- Pandaren Treasure Noodle Cart
             [160914] = Config_Feasts, -- Feast of the Waters (WoD)
             [160740] = Config_Feasts, -- Feast of Blood (WoD)
             [175215] = Config_Feasts, -- Savage Feast (WoD)
@@ -82,6 +90,9 @@ function RSA_Utilities:OnEnable()
             [251254] = Config_Feasts, -- Feast of the Fishes (Legion)
             [259409] = Config_Feasts, -- Gallery Banquet (BfA)
             [259410] = Config_Feasts, -- Bountiful Captain's Feast (BfA)
+            [178207] = Config_Drums, -- Drums of Fury (WoD)
+            [230935] = Config_Drums, -- Drums of the Mountain (Legion)
+            [256740] = Config_Drums, -- Drums of the Maelstrom (BfA)
         },
     }
 
