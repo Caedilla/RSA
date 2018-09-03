@@ -5,9 +5,6 @@ local RSA = LibStub("AceAddon-3.0"):GetAddon("RSA")
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local RSA_Utilities = RSA:NewModule("Utilities")
 
-local spellinfo,spelllinkinfo,extraspellinfo,extraspellinfolink,missinfo
-local Config_DivineShield
-local Config_DivineShield_End
 local MonitorConfig_Utilities
 
 function RSA_Utilities:OnInitialize()
