@@ -2478,6 +2478,16 @@ local function Utilities()
 				},
 				SmartGroup = true,
 			},
+			Cauldrons = {
+				Messages = {
+					Start = {"[TARGET] placing a [LINK]!"},
+					End = {"[LINK] ended."},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
 		},
 	}
 	return Utilities

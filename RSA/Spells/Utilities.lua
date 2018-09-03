@@ -26,20 +26,25 @@ function RSA_Utilities:OnEnable()
         replacements = { SOURCE = 1 }
     }   
     ]]--
-    local Config_RepairBots = { -- Repair Bots
+    local Config_RepairBots = {
         profile = 'Jeeves',
         section = "Placed",
         comm = true,
         replacements = { SOURCE = 1 }
     }
-    local Config_Feasts = { -- Feasts
+    local Config_Feasts = {
         profile = 'Feasts',
         section = "Placed",
         comm = true,
         replacements = { SOURCE = 1 }
     }
-    local Config_Drums = { -- Drums
+    local Config_Drums = {
         profile = 'Drums',
+        comm = true,
+        replacements = { SOURCE = 1 }
+    }
+    local Config_Cauldrons = {
+        profile = 'Cauldrons',
         comm = true,
         replacements = { SOURCE = 1 }
     }
@@ -53,6 +58,12 @@ function RSA_Utilities:OnEnable()
             [157066] = Config_RepairBots, -- Walter (WoD Engineer Workshop)            
             [199109] = Config_RepairBots, -- Auto-Hammer
 
+        },
+        SPELL_CAST_START = {
+            [92649] = Config_Cauldrons, -- Cauldron of Battle (Cata)
+            [92712] = Config_Cauldrons, -- Big Cauldron of Battle (Cata)
+            [188036] = Config_Cauldrons, -- Spirit Cauldron (Legion)
+            [276972] = Config_Cauldrons, -- Mystical Cauldron (BfA)
         },
         SPELL_CAST_SUCCESS = {
             [200205] = Config_RepairBots, -- Reaves Auto-Hammer mode
