@@ -2450,7 +2450,17 @@ local function Utilities()
 		Spells = {
 			Jeeves = {
 				Messages = {
-					Start = {"[LINK] cast by [TARGET]!"},
+					Placed = {"[LINK] cast by [TARGET]!"},
+					End = {"[TARGET]'s [LINK] ended."},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
+			Feasts = {
+				Messages = {
+					Placed = {"[LINK] placed by [TARGET]!"},
 					End = {"[TARGET]'s [LINK] ended."},
 				},
 				CustomChannel = {

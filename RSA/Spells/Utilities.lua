@@ -17,10 +17,25 @@ end
 
 function RSA_Utilities:OnEnable()
     RSA.db.profile.Modules.Utilities = true -- Set state to loaded, to know if we should announce when a spell is refreshed.
-    local Config_RepairBots = { -- Blessing of Sacrifice & Ultimate Sacrifice honour talent
+    --[[
+    -- Template
+    local Config_RepairBots = { -- Repair Bots
         profile = 'Jeeves',
+        comm = true, -- If we only want one person in the group to announce this.
+        sourceIsMe = true, -- For personal utility spells like Rocket Boots, Trinkets etc.
+        replacements = { SOURCE = 1 }
+    }   
+    ]]--
+    local Config_RepairBots = { -- Repair Bots
+        profile = 'Jeeves',
+        section = "Placed",
         comm = true,
-        --sourceIsMe = true,
+        replacements = { SOURCE = 1 }
+    }
+    local Config_Feasts = { -- Feasts
+        profile = 'Feasts',
+        section = "Placed",
+        comm = true,
         replacements = { SOURCE = 1 }
     }
 	MonitorConfig_Utilities = {
@@ -35,11 +50,38 @@ function RSA_Utilities:OnEnable()
 
         },
         SPELL_CAST_SUCCESS = {
-            [200205] = { -- Reaves Auto-Hammer mode
-                profile = 'Jeeves',
-                comm = true,
-                replacements = { SOURCE = 1 }
-            },
+            [200205] = Config_RepairBots, -- Reaves Auto-Hammer mode
+            [57301] = Config_Feasts, -- Great Feast (WotLK)
+            [57426] = Config_Feasts, -- Fish Feast (WotLK)
+            [58465] = Config_Feasts, -- Gigantic Feast (WotLK)
+            [58474] = Config_Feasts, -- Small Feast (WotLK)
+            [87643] = Config_Feasts, -- Broiled Dragon Feast (Cata)
+            [87915] = Config_Feasts, -- Goblin Barbecue Feast (Cata)
+            [87644] = Config_Feasts, -- Seafood Magnifique Feast (Cata)
+            [104958] = Config_Feasts, -- Pandaren Banquet
+            [105193] = Config_Feasts, -- Great Pandaren Banquet Feast
+            [126492] = Config_Feasts, -- Banquet of the Grill
+            [126494] = Config_Feasts, -- Great Banquet of the Grill
+            [126495] = Config_Feasts, -- Banquet of the Wok
+            [126496] = Config_Feasts, -- Great Banquet of the Wok
+            [126497] = Config_Feasts, -- Banquet of the Pot
+            [126498] = Config_Feasts, -- Great Banquet of the Pot
+            [126499] = Config_Feasts, -- Banquet of the Steamer
+            [126500] = Config_Feasts, -- Great Banquet of the Steamer
+            [126501] = Config_Feasts, -- Banquet of the Oven
+            [126502] = Config_Feasts, -- Great Banquet of the Oven
+            [126503] = Config_Feasts, -- Banquet of the Brew
+            [126504] = Config_Feasts, -- Great Banquet of the Brew          
+            [160914] = Config_Feasts, -- Feast of the Waters (WoD)
+            [160740] = Config_Feasts, -- Feast of Blood (WoD)
+            [175215] = Config_Feasts, -- Savage Feast (WoD)
+            [185706] = Config_Feasts, -- Fancy Darkmoon Feast (Darkmoon Faire)
+            [185709] = Config_Feasts, -- Sugar-Crusted Fish Feast (Darkmoon Faire)
+            [201351] = Config_Feasts, -- Hearty Feast (Legion)
+            [201352] = Config_Feasts, -- Lavish Suramar Feast (Legion)
+            [251254] = Config_Feasts, -- Feast of the Fishes (Legion)
+            [259409] = Config_Feasts, -- Gallery Banquet (BfA)
+            [259410] = Config_Feasts, -- Bountiful Captain's Feast (BfA)
         },
     }
 

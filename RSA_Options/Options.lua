@@ -2514,12 +2514,21 @@ end
 
 local function Utilities_Options()
 	local Spells = {
-		[1] = {
+		["Jeeves"] = {
 			Profile = "Jeeves",
 			Name = "Repair Bots",
 			Desc = GetSpellDescription(44389),
-			Message_Amount = 2,
-			Message_Areas = {"Start", "End"},
+			Message_Amount = 1,
+			Message_Areas = {"Placed"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
+		},
+		["Feasts"] = {
+			Profile = "Feasts",
+			Name = "Feasts",
+			Desc = GetSpellDescription(259410),
+			Message_Amount = 1,
+			Message_Areas = {"Placed"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
 		},
