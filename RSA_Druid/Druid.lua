@@ -278,9 +278,9 @@ function RSA_Druid:OnEnable()
 	local ResTarget = L["Unknown"]
 	local Ressed
 	local spellinfo,spelllinkinfo,extraspellinfo,extraspellinfolink,missinfo
-	local function Druid_Resurrections(_, event, source, spell, rank, dest, _)
+	local function Druid_Resurrections(self, event, source, dest, _, spellid)
 		if UnitName(source) == pName then
-			if spell == GetSpellInfo(50769) and RSA.db.profile.Druid.Spells.Revive.Messages.Start ~= "" then -- REVIVE
+			if spellid == 50769 and RSA.db.profile.Druid.Spells.Revive.Messages.Start ~= "" then -- REVIVE
 				if event == "UNIT_SPELLCAST_SENT" then
 					local messagemax = #RSA.db.profile.Druid.Spells.Revive.Messages.Start
 					if messagemax == 0 then return end
@@ -304,7 +304,7 @@ function RSA_Druid:OnEnable()
 						ResTarget = dest
 					end
 					local full_destName,dest = RSA.RemoveServerNames(dest)
-					spellinfo = GetSpellInfo(spell) spelllinkinfo = GetSpellLink(spell)
+					spellinfo = GetSpellInfo(spellid) spelllinkinfo = GetSpellLink(spellid)
 					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 					if message ~= "" then
 						if RSA.db.profile.Druid.Spells.Revive.Local == true then
@@ -338,8 +338,7 @@ function RSA_Druid:OnEnable()
 					end
 				end
 			end
-
-			if spell == GetSpellInfo(20484) and RSA.db.profile.Druid.Spells.Rebirth.Messages.Start ~= "" then -- REBIRTH
+			if spellid == 20484 and RSA.db.profile.Druid.Spells.Rebirth.Messages.Start ~= "" then -- REBIRTH
 				if event == "UNIT_SPELLCAST_SENT" then
 					local messagemax = #RSA.db.profile.Druid.Spells.Rebirth.Messages.Start
 					if messagemax == 0 then return end
@@ -363,7 +362,7 @@ function RSA_Druid:OnEnable()
 						ResTarget = dest
 					end
 					local full_destName,dest = RSA.RemoveServerNames(dest)
-					spellinfo = GetSpellInfo(spell) spelllinkinfo = GetSpellLink(spell)
+					spellinfo = GetSpellInfo(spellid) spelllinkinfo = GetSpellLink(spellid)
 					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 					if message ~= "" then
 						if RSA.db.profile.Druid.Spells.Rebirth.Local == true then

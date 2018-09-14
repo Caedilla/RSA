@@ -2974,9 +2974,6 @@ local function AddOptions()
 	Options.args.Spells.args.Utilities = Spell_Options("Utilities")
 end
 
------------------------
----- Ace functions ----
------------------------
 function RSA_O:OnInitialize()
 	self.db = RSA.db
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink

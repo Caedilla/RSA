@@ -25,4 +25,4 @@ Defaults.lua
 Comms.lua
 Core.lua
 AnnouncementsMonitor.lua
-Spells\Utilities.lua
+Modules\Utilities.lua
