@@ -1754,6 +1754,7 @@ local function Shaman()
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] ended!"},
+					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
 					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
 				},
 				CustomChannel = {
