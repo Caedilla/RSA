@@ -1738,6 +1738,15 @@ local function Rogue()
 					Channel = "",
 				},
 			},
+			KidneyShot = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Rogue

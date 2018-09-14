@@ -52,6 +52,10 @@ function RSA_Rogue:OnEnable()
 				profile = 'BetweenTheEyes',
 				replacements = { TARGET = 1 }
 			},
+			[408] = { -- Kidney Shot
+				profile = 'KidneyShot',
+				replacements = { TARGET = 1 },
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[6770] = { -- SAP
@@ -84,6 +88,11 @@ function RSA_Rogue:OnEnable()
 			},
 			[199804] = { -- Between The Eyes
 				profile = 'BetweenTheEyes',
+				replacements = { TARGET = 1 },
+				section = 'End',
+			},
+			[408] = { -- Kidney Shot
+				profile = 'KidneyShot',
 				replacements = { TARGET = 1 },
 				section = 'End',
 			},
@@ -121,6 +130,7 @@ function RSA_Rogue:OnEnable()
 	local function Rogue_Spells()
 		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
+
 			if (event == "SPELL_CAST_SUCCESS" and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed
 				local ReminderSpell = RSA.db.profile.Rogue.Reminders.SpellName
 				if spellName == ReminderSpell and (dest == pName or dest == nil) then

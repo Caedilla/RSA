@@ -1848,7 +1848,7 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[7] = {
+		["CloakOfShadows"] = {
 			Profile = "CloakOfShadows",
 			Name = GetSpellInfo(31224),
 			Desc = GetSpellDescription(31224),
@@ -1857,10 +1857,19 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[7] = {
+		["BetweenTheEyes"] = {
 			Profile = "BetweenTheEyes",
 			Name = GetSpellInfo(199804),
 			Desc = GetSpellDescription(199804),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
+		["KidneyShot"] = {
+			Profile = "KidneyShot",
+			Name = GetSpellInfo(408),
+			Desc = GetSpellDescription(408),
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
