@@ -6,7 +6,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local LRI = LibStub("LibResInfo-1.0",true)
 local RSA_Shaman = RSA:NewModule("Shaman")
 
-local SpiritLink_GUID,TremorTotem_GUID,WindRush_GUID,Protection_GUID,LightningSurge_GUID,Cloudburst_GUID,EarthenShield_GUID,Grounding_GUID
+local SpiritLink_GUID,TremorTotem_GUID,WindRush_GUID,Protection_GUID,LightningSurge_GUID,Cloudburst_GUID,EarthenShield_GUID,Grounding_GUID,EarthGrab_GUID
 local Protection_Cast,LightningCounter,Cloudburst_Announced,GroundingCounter
 
 function RSA_Shaman:OnInitialize()
@@ -92,6 +92,10 @@ function RSA_Shaman:OnEnable()
 				profile = 'AncestralVision',
 				section = 'End',
 			},
+			[108280] = { -- HEALING TIDE TOTEM
+				profile = 'HealingTide',
+				section = "Placed",
+			},
 			[2008] = { -- ANCESTRAL VISION
 				profile = 'AncestralSpirit',
 				section = 'End',
@@ -104,13 +108,20 @@ function RSA_Shaman:OnEnable()
 				profile = 'FireElemental',
 			},
 			[98008] = { -- SPIRIT LINK TOTEM
-				profile = 'SpiritLink'
+				profile = 'SpiritLink',
+				section = "Placed",
 			},
 			[8143] = { -- Tremor Totem
-				profile = 'TremorTotem'
+				profile = 'TremorTotem',
+				section = "Placed",
 			},
 			[192077] = { -- WINDRUSH TOTEM
-				profile = 'WindRushTotem'
+				profile = 'WindRushTotem',
+				section = "Placed",
+			},
+			[51485] = { -- Earth Grab Totem
+				profile = 'EarthGrabTotem',
+				section = "Placed",
 			},
 			[2825] = { -- BLOODLUST
 				profile = 'Heroism'
@@ -138,14 +149,15 @@ function RSA_Shaman:OnEnable()
 			},
 			[207399] = { -- Ancestral Protection Totem
 				profile = 'AncestralProtection',
-				section = "Cast",
+				section = "Placed",
 			},
 			[192058] = { -- Lightning Surge Totem
 				profile = 'LightningSurge',
-				section = "Cast",
+				section = "Placed",
 			},
 			[157153] = { -- Cloudburst Totem
-				profile = 'Cloudburst'
+				profile = 'Cloudburst',
+				section = "Placed",
 			},
 			[201764] = { -- Cloudburst Totem
 				profile = 'Cloudburst',
@@ -153,7 +165,8 @@ function RSA_Shaman:OnEnable()
 				section = "End"
 			},
 			[198838] = { -- Earthen Shield Totem
-				profile = 'EarthenShieldTotem'
+				profile = 'EarthenShieldTotem',
+				section = "Placed",
 			},
 			[204336] = { -- Grounding Totem
 				profile = 'GroundingTotem',
@@ -164,9 +177,6 @@ function RSA_Shaman:OnEnable()
 			[51514] = { -- HEX
 				profile = 'Hex',
 				replacements = { TARGET = 1 }
-			},
-			[108280] = { -- HEALING TIDE TOTEM
-				profile = 'HealingTide'
 			},
 			[114050] = Config_Ascendance, -- ASCENDANCE
 			[114051] = Config_Ascendance, -- ASCENDANCE
@@ -293,6 +303,9 @@ function RSA_Shaman:OnEnable()
 				if spellID == 192077 then -- WINDRUSH TOTEM
 					WindRush_GUID = destGUID return
 				end
+				if spellID == 51485 then -- Earth Grab Totem
+					EarthGrab_GUID = destGUID return
+				end
 				if spellID == 207399 then -- Ancestral Protection Totem
 					Protection_Cast = true
 					Protection_GUID = destGUID return
@@ -369,10 +382,10 @@ function RSA_Shaman:OnEnable()
 			local spellinfo = GetSpellInfo(207399)
 			local spelllinkinfo = GetSpellLink(207399)
 			RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = source,}
-			local messagemax = #RSA.db.profile.Shaman.Spells.AncestralProtection.Messages.Start
+			local messagemax = #RSA.db.profile.Shaman.Spells.AncestralProtection.Messages.Cast
 			if messagemax == 0 then return end
 			local messagerandom = math.random(messagemax)
-			local message = RSA.db.profile.Shaman.Spells.AncestralProtection.Messages.Start[messagerandom]
+			local message = RSA.db.profile.Shaman.Spells.AncestralProtection.Messages.Cast[messagerandom]
 			if message ~= "" then
 				if RSA.db.profile.Shaman.Spells.AncestralProtection.Local == true then
 					RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
@@ -403,10 +416,10 @@ function RSA_Shaman:OnEnable()
 			local spellinfo = GetSpellInfo(118905)
 			local spelllinkinfo = GetSpellLink(118905)
 			RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo,}
-			local messagemax = #RSA.db.profile.Shaman.Spells.LightningSurge.Messages.Start
+			local messagemax = #RSA.db.profile.Shaman.Spells.LightningSurge.Messages.Cast
 			if messagemax == 0 then return end
 			local messagerandom = math.random(messagemax)
-			local message = RSA.db.profile.Shaman.Spells.LightningSurge.Messages.Start[messagerandom]
+			local message = RSA.db.profile.Shaman.Spells.LightningSurge.Messages.Cast[messagerandom]
 			if message ~= "" and LightningCounter == 0 then
 				if RSA.db.profile.Shaman.Spells.LightningSurge.Local == true then
 					RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
@@ -645,6 +658,40 @@ function RSA_Shaman:OnEnable()
 					end
 					if RSA.db.profile.Shaman.Spells.WindRushTotem.Raid == true then
 						if RSA.db.profile.Shaman.Spells.WindRushTotem.SmartGroup == true and GetNumGroupMembers() > 0 then return end
+						RSA.Print_Raid(string.gsub(message, ".%a+.", RSA.String_Replace))
+					end
+				end
+			end
+			if destGUID == EarthGrab_GUID then -- Earth Grab Totem UNIT_DIED
+				local spellinfo = GetSpellInfo(51485)
+				local spelllinkinfo = GetSpellLink(51485)
+				RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo,}
+				local messagemax = #RSA.db.profile.Shaman.Spells.EarthGrabTotem.Messages.End
+				if messagemax == 0 then return end
+				local messagerandom = math.random(messagemax)
+				local message = RSA.db.profile.Shaman.Spells.EarthGrabTotem.Messages.End[messagerandom]
+				if message ~= "" then
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.Local == true then
+						RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.Yell == true then
+						RSA.Print_Yell(string.gsub(message, ".%a+.", RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.CustomChannel.Enabled == true then
+						RSA.Print_Channel(string.gsub(message, ".%a+.", RSA.String_Replace), RSA.db.profile.Shaman.Spells.EarthGrabTotem.CustomChannel.Channel)
+					end
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.Say == true then
+						RSA.Print_Say(string.gsub(message, ".%a+.", RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.SmartGroup == true then
+						RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.Party == true then
+						if RSA.db.profile.Shaman.Spells.EarthGrabTotem.SmartGroup == true and GetNumGroupMembers() == 0 then return end
+							RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.EarthGrabTotem.Raid == true then
+						if RSA.db.profile.Shaman.Spells.EarthGrabTotem.SmartGroup == true and GetNumGroupMembers() > 0 then return end
 						RSA.Print_Raid(string.gsub(message, ".%a+.", RSA.String_Replace))
 					end
 				end

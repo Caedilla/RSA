@@ -126,6 +126,22 @@ L["StatueOfTheBlackOx"] = "Black Ox AoE Taunt"
 L["DamageAbsorb"] = "Absorbed Damage"
 L["EffectAbsorb"] = "Absorbed Debuff"
 
+["When you start casting this spell or when this spell effect starts."] = true
+["When you have placed the effect of this spell in the world."] = true
+["When you cast this spell."] = true
+["When you dispel a buff or debuff."] = true
+["When you deal damage."] = true
+["When you heal."] = true
+["When you debuff a unit."] = true
+["When you absorb damage."] = true
+["When you absorb a debuff."] = true
+["When you interrupt a spell cast."] = true
+["When your spell is resisted."] = true
+["When the target is immune to your spell."] = true
+["When the spell failed."] = true
+["When the spell effect ends."] = true
+["When you cast Provoke on your Statue of the Black Ox."] = true
+
 L["Add New Message"] = true
 L["You have no messages for this section."] = true
 L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = true

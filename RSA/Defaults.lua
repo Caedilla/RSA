@@ -1811,7 +1811,7 @@ local function Shaman()
 			},
 			HealingTide = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					End = {"[LINK] faded!"},
 				},
 				CustomChannel = {
@@ -1849,7 +1849,7 @@ local function Shaman()
 			},
 			SpiritLink = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					End = {"[LINK] faded!"},
 				},
 				CustomChannel = {
@@ -1859,7 +1859,7 @@ local function Shaman()
 			},
 			TremorTotem = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					End = {"[LINK] faded!"},
 				},
 				CustomChannel = {
@@ -1910,7 +1910,7 @@ local function Shaman()
 			},
 			WindRushTotem = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					End = {"[LINK] faded!"},
 				},
 				CustomChannel = {
@@ -1938,7 +1938,7 @@ local function Shaman()
 			},
 			AncestralProtection = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					Cast = {"[LINK] resurrected [TARGET]!"},
 					End = {"[LINK] ended!"},
 				},
@@ -1949,8 +1949,8 @@ local function Shaman()
 			},
 			LightningSurge = {
 				Messages = {
-					Start = {"[LINK] activated!"},
-					Cast = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
+					Cast = {"[LINK] activated!"},
 					End = {"[LINK] ended!"},
 				},
 				CustomChannel = {
@@ -1959,7 +1959,7 @@ local function Shaman()
 			},
 			Cloudburst = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					Heal = {"[LINK] healed for [AMOUNT]!"},
 					End = {"[LINK] ended!"},
 				},
@@ -1969,7 +1969,7 @@ local function Shaman()
 			},
 			EarthenShieldTotem = {
 				Messages = {
-					Start = {"[LINK] placed!"},
+					Placed = {"[LINK] placed!"},
 					End = {"[LINK] ended!"},
 				},
 				CustomChannel = {
@@ -1981,12 +1981,21 @@ local function Shaman()
 					Placed = {"[LINK] placed!"},
 					DamageAbsorb = {"[LINK] absorbed [AMOUNT] from [TARGET]'s [TARLINK]!"},
 					EffectAbsorb = {"[LINK] absorbed [TARGET]'s [TARLINK]!"},
-					End = {"[LINK] ended and absorbed [AMOUNT] enemy spells!"},
+					End = {"[LINK] ended and absorbed [AMOUNT] enemy!"},
 				},
 				CustomChannel = {
 					Channel = "",
 				},
-			}, -- End
+			},
+			EarthGrabTotem = {
+				Messages = {
+					Placed = {"[LINK] placed!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Shaman
