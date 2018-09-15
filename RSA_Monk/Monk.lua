@@ -233,7 +233,7 @@ function RSA_Monk:OnEnable()
 	RSA.MonitorConfig(MonitorConfig_Monk, UnitGUID("player"))
 	local MonitorAndAnnounce = RSA.MonitorAndAnnounce
 	local function Monk_Spells()
-		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
 			if (event == "SPELL_CAST_SUCCESS" and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed
 				local ReminderSpell = RSA.db.profile.Monk.Reminders.SpellName
@@ -285,7 +285,7 @@ function RSA_Monk:OnEnable()
 					end
 				end -- PROVOKE
 			end -- IF EVENT IS SPELL_CAST_SUCCESS
-			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
+			MonitorAndAnnounce(self, "player", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Monk_Spells)

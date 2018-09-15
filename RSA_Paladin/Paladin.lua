@@ -403,7 +403,7 @@ function RSA_Paladin:OnEnable()
 	local ResTarget = L["Unknown"]
 	local Ressed
 	local function Paladin_Spells()
-		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
 			if (event == "SPELL_CAST_SUCCESS" and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed				
 				local ReminderSpell = RSA.db.profile.Paladin.Reminders.SpellName
@@ -417,7 +417,7 @@ function RSA_Paladin:OnEnable()
 					end
 				end
 			end -- BUFF REMINDER
-			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
+			MonitorAndAnnounce(self, "player", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Paladin_Spells)

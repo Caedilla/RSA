@@ -1976,6 +1976,16 @@ local function Shaman()
 					Channel = "",
 				},
 			},
+			GroundingTotem = {
+				Messages = {
+					Placed = {"[LINK] placed!"},
+					DamageAbsorb = {"[LINK] absorbed [AMOUNT] from [TARGET]'s [TARLINK]!"},
+					EffectAbsorb = {"[LINK] absorbed [TARGET]'s [TARLINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			}, -- End
 		},
 	}
 	return Shaman

@@ -27,7 +27,7 @@ local function WipeCache()
 	wipe(cache_SpellLink)
 end
 
-local function MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4,configType)
+local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 	local missType = ex1
 	local full_destName = destName

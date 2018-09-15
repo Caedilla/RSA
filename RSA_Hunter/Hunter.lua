@@ -154,7 +154,7 @@ function RSA_Hunter:OnEnable()
 	local MDPTimeElapsed = 0.0
 	local RSA_MisdirectionTracker = CreateFrame("Frame", "RSA:MDT")
 	local function Hunter_Spells()
-		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
 			if (event == "SPELL_CAST_SUCCESS" and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed
 				local ReminderSpell = RSA.db.profile.Hunter.Reminders.SpellName
@@ -173,7 +173,7 @@ function RSA_Hunter:OnEnable()
 					---- START MISDIRECTION TRACKING ----
 					RSA_MisdirectionTracker:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 					local function MisdirectionTracker()
-						local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+						local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 						local amount, overkill = spellID, spellName
 						if source == pName then
 							if event == "SPELL_DAMAGE" or event == "SPELL_PERIODIC_DAMAGE" or event == "RANGE_DAMAGE" then
@@ -209,12 +209,12 @@ function RSA_Hunter:OnEnable()
 					spellinfo = GetSpellInfo(spellID)
 					spelllinkinfo = GetSpellLink(spellID)
 					RSA_MisdirectionTracker:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+					local full_destName,dest = RSA.RemoveServerNames(dest)
 					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest, ["[AMOUNT]"] = RSA_Misdirection_Damage,}
 					local messagemax = #RSA.db.profile.Hunter.Spells.Misdirection.Messages.End
 					if messagemax == 0 then return end
 					local messagerandom = math.random(messagemax)
 					local message = RSA.db.profile.Hunter.Spells.Misdirection.Messages.End[messagerandom]
-					local full_destName,dest = RSA.RemoveServerNames(dest)
 					if message ~= "" then
 						if RSA.db.profile.Hunter.Spells.Misdirection.Local == true then
 							RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
@@ -249,7 +249,7 @@ function RSA_Hunter:OnEnable()
 					RSA_Misdirection_Damage = 0.0
 				end -- MISDIRECTION
 			end -- IF EVENT IS SPELL_AURA_REMOVED
-			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
+			MonitorAndAnnounce(self, "player", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Hunter_Spells)

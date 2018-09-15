@@ -311,7 +311,7 @@ function RSA_Priest:OnEnable()
 	local PWBTimeElapsed = 0.0
 	local RSA_PsychicScream = false
 	local function Priest_Spells()
-		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
 			if (event == "SPELL_CAST_SUCCESS" and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed
 				local ReminderSpell = RSA.db.profile.Priest.Reminders.SpellName
@@ -419,12 +419,12 @@ function RSA_Priest:OnEnable()
 				if spellID == 47788 and GSTarget == destGUID then -- Guardian Spirit, temporary until I figure out a better method. Should prevent announcement due to artifact trait on the player, but still announce on the player if they cast it on themselves
 					spellinfo = GetSpellInfo(spellID)
 					spelllinkinfo = GetSpellLink(spellID)
+					local full_destName,dest = RSA.RemoveServerNames(dest)
 					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 					local messagemax = #RSA.db.profile.Priest.Spells.GuardianSpirit.Messages.End
 					if messagemax == 0 then return end
 					local messagerandom = math.random(messagemax)
 					local message = RSA.db.profile.Priest.Spells.GuardianSpirit.Messages.End[messagerandom]
-					local full_destName,dest = RSA.RemoveServerNames(dest)
 					if message ~= "" then
 						if RSA.db.profile.Priest.Spells.GuardianSpirit.Local == true then
 							RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
@@ -535,7 +535,7 @@ function RSA_Priest:OnEnable()
 					RSA_Silenced = true -- announcement done in unified core
 				end -- SILENCE
 			end -- IF EVENT IS SPELL_INTERRUPT
-			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
+			MonitorAndAnnounce(self, "player", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Priest_Spells)

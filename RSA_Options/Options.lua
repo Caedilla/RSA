@@ -1795,7 +1795,7 @@ end
 
 local function Rogue_Options()
 	local Spells = {
-		[1] = {
+		["Sap"] = {
 			Profile = "Sap",
 			Name = GetSpellInfo(6770),
 			Desc = GetSpellDescription(6770),
@@ -1804,7 +1804,7 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[2] = {
+		["Blind"] = {
 			Profile = "Blind",
 			Name = GetSpellInfo(2094) .. " / " .. GetSpellInfo(199743),
 			Desc = GetSpellDescription(2094),
@@ -1813,7 +1813,7 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[3] = {
+		["Kick"] = {
 			Profile = "Kick",
 			Name = GetSpellInfo(1766),
 			Desc = GetSpellDescription(1766),
@@ -1822,7 +1822,7 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[TARSPELL]", "[TARLINK]", "[MISSTYPE]"},
 		},
-		[4] = {
+		["Tricks"] = {
 			Profile = "Tricks",
 			Name = GetSpellInfo(57934),
 			Desc = GetSpellDescription(57934),
@@ -1830,7 +1830,7 @@ local function Rogue_Options()
 			Message_Areas = {"Cast", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[5] = {
+		["SmokeBomb"] = {
 			Profile = "SmokeBomb",
 			Name = GetSpellInfo(76577),
 			Desc = GetSpellDescription(76577),
@@ -1839,7 +1839,7 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[6] = {
+		["Shroud"] = {
 			Profile = "Shroud",
 			Name = GetSpellInfo(115834),
 			Desc = GetSpellDescription(115834),
@@ -1882,7 +1882,7 @@ end
 
 local function Shaman_Options()
 	local Spells = {
-		[1] = {
+		["Hex"] = {
 			Profile = "Hex",
 			Name = GetSpellInfo(51514),
 			Desc = GetSpellDescription(51514),
@@ -1891,7 +1891,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[2] = {
+		["Heroism"] = {
 			Profile = "Heroism",
 			Name = GetSpellInfo(2825),
 			Desc = GetSpellDescription(2825),
@@ -1900,7 +1900,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[3] = {
+		["WindShear"] = {
 			Profile = "WindShear",
 			Name = GetSpellInfo(57994),
 			Desc = GetSpellDescription(57994),
@@ -1909,7 +1909,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[TARSPELL]", "[TARLINK]", "[MISSTYPE]"},
 		},
-		[4] = {
+		["Purge"] = {
 			Profile = "Purge",
 			Name = GetSpellInfo(370),
 			Desc = GetSpellDescription(370),
@@ -1918,7 +1918,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
-		[5] = {
+		["CleanseSpirit"] = {
 			Profile = "CleanseSpirit",
 			Name = GetSpellInfo(51886) .. " / " .. GetSpellInfo(77130),
 			Desc = GetSpellDescription(77130),
@@ -1926,7 +1926,7 @@ local function Shaman_Options()
 			Message_Areas = {"Dispel"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
-		[6] = {
+		["HealingTide"] = {
 			Profile = "HealingTide",
 			Name = GetSpellInfo(108280),
 			Desc = GetSpellDescription(108280),
@@ -1935,7 +1935,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[7] = {
+		["EarthElemental"] = {
 			Profile = "EarthElemental",
 			Name = GetSpellInfo(198103),
 			Desc = GetSpellDescription(198103),
@@ -1944,7 +1944,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[8] = {
+		["FireElemental"] = {
 			Profile = "FireElemental",
 			Name = GetSpellInfo(198067),
 			Desc = GetSpellDescription(198067),
@@ -1953,7 +1953,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[9] = {
+		["AncestralSpirit"] = {
 			Profile = "AncestralSpirit",
 			Name = GetSpellInfo(2008),
 			Desc = GetSpellDescription(2008),
@@ -1962,7 +1962,7 @@ local function Shaman_Options()
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 			Requirements = {"LRI"},
 		},
-		[10] = {
+		["SpiritLink"] = {
 			Profile = "SpiritLink",
 			Name = GetSpellInfo(98008),
 			Desc = GetSpellDescription(98008),
@@ -1971,7 +1971,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[11] = {
+		["TremorTotem"] = {
 			Profile = "TremorTotem",
 			Name = GetSpellInfo(8143),
 			Desc = GetSpellDescription(8143),
@@ -1980,7 +1980,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[12] = {
+		["Thunderstorm"] = {
 			Profile = "Thunderstorm",
 			Name = GetSpellInfo(51490),
 			Desc = GetSpellDescription(51490),
@@ -1989,7 +1989,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[13] = {
+		["FeralSpirit"] = {
 			Profile = "FeralSpirit",
 			Name = GetSpellInfo(51533),
 			Desc = GetSpellDescription(51533),
@@ -1998,7 +1998,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[14] = {
+		["Reincarnation"] = {
 			Profile = "Reincarnation",
 			Name = GetSpellInfo(21169),
 			Desc = GetSpellDescription(21169),
@@ -2007,7 +2007,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[15] = {
+		["AncestralGuidance"] = {
 			Profile = "AncestralGuidance",
 			Name = GetSpellInfo(108281),
 			Desc = GetSpellDescription(108281),
@@ -2016,7 +2016,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[16] = {
+		["AstralShift"] = {
 			Profile = "AstralShift",
 			Name = GetSpellInfo(108271),
 			Desc = GetSpellDescription(108271),
@@ -2025,7 +2025,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[17] = {
+		["WindRushTotem"] = {
 			Profile = "WindRushTotem",
 			Name = GetSpellInfo(192077),
 			Desc = GetSpellDescription(192077),
@@ -2034,7 +2034,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[18] = {
+		["Ascendance"] = {
 			Profile = "Ascendance",
 			Name = GetSpellInfo(114050),
 			Desc = GetSpellDescription(114050),
@@ -2043,7 +2043,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[19] = {
+		["AncestralVision"] = {
 			Profile = "AncestralVision",
 			Name = GetSpellInfo(212048),
 			Desc = GetSpellDescription(212048),
@@ -2052,7 +2052,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[20] = {
+		["AncestralProtection"] = {
 			Profile = "AncestralProtection",
 			Name = GetSpellInfo(207399),
 			Desc = GetSpellDescription(207399),
@@ -2061,7 +2061,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[21] = {
+		["LightningSurge"] = {
 			Profile = "LightningSurge", -- Capacitor Totem
 			Name = GetSpellInfo(192058),
 			Desc = GetSpellDescription(192058),
@@ -2070,7 +2070,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[22] = {
+		["Cloudburst"] = {
 			Profile = "Cloudburst",
 			Name = GetSpellInfo(157153),
 			Desc = GetSpellDescription(157153),
@@ -2079,7 +2079,7 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[AMOUNT]"},
 		},
-		[23] = {
+		["EarthenShieldTotem"] = {
 			Profile = "EarthenShieldTotem",
 			Name = GetSpellInfo(198838),
 			Desc = GetSpellDescription(198838),
@@ -2087,6 +2087,15 @@ local function Shaman_Options()
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		["GroundingTotem"] = {
+			Profile = "GroundingTotem",
+			Name = GetSpellInfo(204336),
+			Desc = GetSpellDescription(204336),
+			Message_Amount = 3,
+			Message_Areas = {"Placed", "DamageAbsorb", "EffectAbsorb"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AMOUNT]", "[TARLINK]", "[TARSPELL]"},
 		},
 	}
 	return Spells
@@ -2667,12 +2676,14 @@ local function Spell_Options(NonClass)
 		[6] = "Damage",
 		[7] = "Heal",
 		[8] = "Debuff",
-		[9] = "Interrupt",
-		[10] = "Resist",
-		[11] = "Immune",
-		[12] = "Failed",
-		[13] = "End",
-		[14] = "StatueOfTheBlackOx",
+		[9] = "DamageAbsorb",
+		[10] = "EffectAbsorb",
+		[11] = "Interrupt",
+		[12] = "Resist",
+		[13] = "Immune",
+		[14] = "Failed",
+		[15] = "End",
+		[16] = "StatueOfTheBlackOx",
 	}
 	local Options = {
 		name = OptionName,

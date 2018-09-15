@@ -173,7 +173,7 @@ function RSA_Warrior:OnEnable()
 	local RSA_ReflectSource = "RSADummy"
 	local RSA_ReflectAmount = 0
 	local function Warrior_Spells()
-		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 		if source == RSA_ReflectSource and dest == RSA_ReflectSource then -- It damaged itself.
 			RSA_ReflectAmount = missType
 			spellinfo = GetSpellInfo(spellID)
@@ -244,7 +244,7 @@ function RSA_Warrior:OnEnable()
 					end
 				end
 			end -- BUFF REMINDER
-			MonitorAndAnnounce(self, timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4)
+			MonitorAndAnnounce(self, "player", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript("OnEvent", Warrior_Spells)

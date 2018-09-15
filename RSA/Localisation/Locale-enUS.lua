@@ -123,6 +123,8 @@ L["Resist"] = true
 L["Immune"] = true
 L["End"] = true
 L["StatueOfTheBlackOx"] = "Black Ox AoE Taunt"
+L["DamageAbsorb"] = "Absorbed Damage"
+L["EffectAbsorb"] = "Absorbed Debuff"
 
 L["Add New Message"] = true
 L["You have no messages for this section."] = true
