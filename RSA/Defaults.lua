@@ -1981,6 +1981,7 @@ local function Shaman()
 					Placed = {"[LINK] placed!"},
 					DamageAbsorb = {"[LINK] absorbed [AMOUNT] from [TARGET]'s [TARLINK]!"},
 					EffectAbsorb = {"[LINK] absorbed [TARGET]'s [TARLINK]!"},
+					End = {"[LINK] ended and absorbed [AMOUNT] enemy spells!"},
 				},
 				CustomChannel = {
 					Channel = "",
