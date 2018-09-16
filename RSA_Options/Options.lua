@@ -1274,7 +1274,8 @@ local function Monk_Options()
 		[14] = {
 			Profile = "Detox",
 			Name = GetSpellInfo(115450),
-			Desc = GetSpellInfo(115450) .. ": " .. GetSpellDescription(115450) .. "\n\n" .. GetSpellInfo(218164) .. ": " .. GetSpellDescription(218164),
+			longDesc = true,
+			Desc = "|cffFFCC00"..GetSpellInfo(115450) .. ":|r |cffd1d1d1" .. GetSpellDescription(115450) .. "|r\n\n|cffFFCC00" .. GetSpellInfo(218164) .. ":|r |cffd1d1d1" .. GetSpellDescription(218164) .. "|r",
 			Message_Amount = 1,
 			Message_Areas = {"Dispel"},
 			Message_Channels_Disabled = {["Whisper"] = true},
