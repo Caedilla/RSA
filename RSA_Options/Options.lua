@@ -2,6 +2,7 @@ local RSA =  RSA or LibStub("AceAddon-3.0"):GetAddon("RSA")
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local RSA_O = RSA:NewModule("RSA_Options", "LibSink-2.0")
 local _, PlayerClass = UnitClass('player')
+local _,_,RaceID = UnitRace("player")
 
 --[[
 local function CommunityLists()
@@ -2392,153 +2393,170 @@ end
 
 local function Racial_Options()
 	local Spells = {
-		[1] = {
+		["EMFH"] = {
 			Profile = "EMFH",
 			Name = GetSpellInfo(59752),
 			Desc = GetSpellDescription(59752),
+			Race = 1,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[2] = {
+		["Stoneform"] = {
 			Profile = "Stoneform",
 			Name = GetSpellInfo(20594),
 			Desc = GetSpellDescription(20594),
+			Race = 3,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[3] = {
+		["Shadowmeld"] = {
 			Profile = "Shadowmeld",
 			Name = GetSpellInfo(58984),
 			Desc = GetSpellDescription(58984),
+			Race = 4,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[4] = {
+		["EscapeArtist"] = {
 			Profile = "EscapeArtist",
 			Name = GetSpellInfo(20589),
 			Desc = GetSpellDescription(20589),
+			Race = 7,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[5] = {
+		["GOTN"] = {
 			Profile = "GOTN",
 			Name = GetSpellInfo(28880),
 			Desc = GetSpellDescription(28880),
+			Race = 11,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[6] = {
+		["Darkflight"] = {
 			Profile = "Darkflight",
 			Name = GetSpellInfo(68992),
 			Desc = GetSpellDescription(68992),
+			Race = 22,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]",},
 		},
-		[7] = {
+		["BloodFury"] = {
 			Profile = "BloodFury",
 			Name = GetSpellInfo(33697),
 			Desc = GetSpellDescription(33697),
+			Race = 2,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[8] = {
+		["WOTF"] = {
 			Profile = "WOTF",
 			Name = GetSpellInfo(7744),
 			Desc = GetSpellDescription(7744),
+			Race = 5,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[9] = {
+		["WarStomp"] = {
 			Profile = "WarStomp",
 			Name = GetSpellInfo(20549),
 			Desc = GetSpellDescription(20549),
+			Race = 6,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[10] = {
+		["Berserking"] = {
 			Profile = "Berserking",
 			Name = GetSpellInfo(26297),
 			Desc = GetSpellDescription(26297),
+			Race = 8,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[11] = {
+		["ArcaneTorrent"] = {
 			Profile = "ArcaneTorrent",
-			Name = GetSpellInfo(155145),
-			Desc = GetSpellDescription(155145),
+			Name = GetSpellInfo(28730),
+			Desc = GetSpellDescription(28730),
+			Race = 10,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[12] = {
+		["RocketJump"] = {
 			Profile = "RocketJump",
 			Name = GetSpellInfo(69070),
 			Desc = GetSpellDescription(69070),
+			Race = 9,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[13] = {
-			Profile = "SpacialRift",
+		["SpatialRift"] = {
+			Profile = "SpatialRift",
 			Name = GetSpellInfo(256948),
 			Desc = GetSpellDescription(256948),
-			Message_Amount = 1,
-			Message_Areas = {"Cast"},
+			Race = 29,
+			Message_Amount = 2,
+			Message_Areas = {"Placed","Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[14] = {
-			Profile = "FireBlood",
+		["Fireblood"] = {
+			Profile = "Fireblood",
 			Name = GetSpellInfo(265221),
 			Desc = GetSpellDescription(265221),
+			Race = 34,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[15] = {
+		["ArcanePulse"] = {
 			Profile = "ArcanePulse",
 			Name = GetSpellInfo(260364),
 			Desc = GetSpellDescription(260364),
+			Race = 27,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
-			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[16] = {
+		["BullRush"] = {
 			Profile = "BullRush",
 			Name = GetSpellInfo(255654),
 			Desc = GetSpellDescription(255654),
+			Race = 28,
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[17] = {
+		["AncestralCall"] = {
 			Profile = "AncestralCall",
 			Name = GetSpellInfo(274738),
 			Desc = GetSpellDescription(274738),
+			Race = 36,
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
@@ -2728,10 +2746,18 @@ local function Spell_Options(NonClass)
 		},
 	}
 	for i,v in pairs(Spells) do
-	--for i = 1,#Spells do
 		if Spells[i] then
 			Options.args[Spells[i].Name] = {
 				name = function() 
+					if Spells[i].Race then 
+						if RaceID ~= Spells[i].Race then
+							local name = "|cffFFCC00" .. Spells[i].Name .. "|r"
+							return name
+						else
+							local name = "|c5500DBBD" .. Spells[i].Name .. "|r"
+							return name
+						end
+					end
 					if string.len(Spells[i].Name) > 35 then
 						local name = Spells[i].Name
 						name = name:gsub("(%w)%S+%s*","%1")
@@ -3037,8 +3063,8 @@ end
 local function AddOptions()
 	Options.args.General.args.LibSink = LibSink_Options()
 	Options.args.Spells.args.Class = Spell_Options()
-	--Options.args.Spells.args.Racials = Spell_Options("Racials")
-	--Options.args.Spells.args.Consumables = Consumable_Options()
+	--Options.args.Spells.args.Consumables = Spell_Options("Consumables")
+	Options.args.Spells.args.Racials = Spell_Options("Racials")
 	Options.args.Spells.args.Utilities = Spell_Options("Utilities")
 end
 

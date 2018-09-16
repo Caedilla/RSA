@@ -25,4 +25,5 @@ Defaults.lua
 Comms.lua
 Core.lua
 AnnouncementsMonitor.lua
+Modules\Racials.lua
 Modules\Utilities.lua

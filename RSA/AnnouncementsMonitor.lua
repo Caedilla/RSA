@@ -3,7 +3,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 
 local gsub = string.gsub
 
-local utilityConfig, config, playerGUID
+local racialConfig, utilityConfig, config, playerGUID
 
 
 local cache_SpellInfo = {}
@@ -16,6 +16,10 @@ end
 
 local function UtilityMonitorConfig(new_config)
 	utilityConfig = new_config
+end
+
+local function RacialMonitorConfig(new_config)
+	racialConfig = new_config
 end
 
 local empty = {}
@@ -47,6 +51,8 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 			event_data = config[event]
 		elseif configType == "utilities" then
 			event_data = utilityConfig[event]
+		elseif configType == "racials" then
+			event_data = racialConfig[event]
 		end
 	end
 	
@@ -164,6 +170,8 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 		spell_profile = config.player_profile.Spells[spell_data.profile]
 	elseif configType == "utilities" then
 		spell_profile = utilityConfig.player_profile.Spells[spell_data.profile]
+	elseif configType == "racials" then
+		spell_profile = racialConfig.player_profile.Spells[spell_data.profile]
 	end
 	local TotalMessages = #spell_profile.Messages[spell_data.section or 'Start']
 	if TotalMessages == 0 then return end
@@ -242,5 +250,6 @@ end
 
 RSA.MonitorConfig = MonitorConfig
 RSA.UtilityMonitorConfig = UtilityMonitorConfig
+RSA.RacialMonitorConfig = RacialMonitorConfig
 RSA.MonitorAndAnnounce = MonitorAndAnnounce
 RSA.WipeCache = WipeCache

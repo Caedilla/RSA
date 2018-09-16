@@ -2425,15 +2425,16 @@ local function Racials()
 					Channel = "",
 				},
 			},
-			SpacialRift = {
+			SpatialRift = {
 				Messages = {
-					Cast = {"[LINK] activated!"},
+					Placed = {"[LINK] activated!"},
+					Cast = {"Teleported to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
 				},
 			},
-			FireBlood = {
+			Fireblood = {
 				Messages = {
 					Start = {"[LINK] activated!"},
 					End = {},
@@ -2444,7 +2445,7 @@ local function Racials()
 			},
 			ArcanePulse = {
 				Messages = {
-					Start = {"[LINK] cast on [TARGET]!"},
+					Start = {"[LINK] activated!"},
 					End = {},
 				},
 				CustomChannel = {
@@ -2461,7 +2462,7 @@ local function Racials()
 			},
 			AncestralCall = {
 				Messages = {
-					Start = {"[LINK] cast on [TARGET]!"},
+					Start = {"[LINK] activated!"},
 					End = {},
 				},
 				CustomChannel = {
