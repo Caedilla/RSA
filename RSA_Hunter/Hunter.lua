@@ -97,8 +97,7 @@ function RSA_Hunter:OnEnable()
 			},
 		},
 		SPELL_CAST_SUCCESS = {
-			[1499] = Config_FreezingTrap,
-			[60202] = Config_FreezingTrap,
+			[187650] = Config_FreezingTrap,
 			[5116] = { -- CONCUSSIVE SHOT
 				profile = 'ConcussiveShot',
 				replacements = { TARGET = 1 }

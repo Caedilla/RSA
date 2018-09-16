@@ -857,7 +857,7 @@ local function Druid_Options()
 		[16] = {
 			Profile = "RemoveCorruption",
 			Name = GetSpellInfo(2782) .. " / " .. GetSpellInfo(88423),
-			Desc = GetSpellDescription(2782),
+			Desc = GetSpellInfo(2782) .. ": " .. GetSpellDescription(2782) .. "\n\n" .. GetSpellInfo(88423) .. ": " .. GetSpellDescription(88423),
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
@@ -1367,8 +1367,8 @@ local function Paladin_Options()
 		},
 		["BoP&BoS"] = {
 			Profile = "HandOfProtection",
-			Name = GetSpellInfo(1022) .. " / " .. GetSpellInfo(204018), -- Too long to fit in game, 74234 is a spell called Protection. Should translate well enough.
-			Desc = GetSpellDescription(1022),
+			Name = GetSpellInfo(1022) .. " / " .. GetSpellInfo(204018),
+			Desc = GetSpellInfo(1022) .. ": " .. GetSpellDescription(1022) .. "\n\n" .. GetSpellInfo(204018) .. ": " .. GetSpellDescription(204018),
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
@@ -1488,7 +1488,7 @@ local function Paladin_Options()
 		[20] = {
 			Profile = "Cleanse",
 			Name = GetSpellInfo(4987) .. " / " .. GetSpellInfo(213644),
-			Desc = GetSpellDescription(4987),
+			Desc = GetSpellInfo(4987) .. ": " .. GetSpellDescription(4987) .. "\n\n" .. GetSpellInfo(213644) .. ": " .. GetSpellDescription(213644),
 			Message_Amount = 1,
 			Message_Areas = {"Dispel"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
@@ -1783,7 +1783,7 @@ local function Priest_Options()
 		["Purify"] = {
 			Profile = "Purify",
 			Name = GetSpellInfo(527) .. " / " .. GetSpellInfo(213634),
-			Desc = GetSpellDescription(527),
+			Desc = GetSpellInfo(527) .. ": " .. GetSpellDescription(527) .. "\n\n" .. GetSpellInfo(213634) .. ": " .. GetSpellDescription(213634),
 			Message_Amount = 1,
 			--Hidden = GetSpecialization() == 3,
 			Message_Areas = {"Dispel"},
@@ -1807,7 +1807,7 @@ local function Rogue_Options()
 		["Blind"] = {
 			Profile = "Blind",
 			Name = GetSpellInfo(2094) .. " / " .. GetSpellInfo(199743),
-			Desc = GetSpellDescription(2094),
+			Desc = GetSpellInfo(2094) .. ": " .. GetSpellDescription(2094) .. "\n\n" .. GetSpellInfo(199743) .. ": " .. GetSpellDescription(199743),
 			Message_Amount = 4,
 			Message_Areas = {"Start", "End", "Resist", "Immune"},
 			Message_Channels_Disabled = {["Whisper"] = true},
@@ -1921,7 +1921,7 @@ local function Shaman_Options()
 		["CleanseSpirit"] = {
 			Profile = "CleanseSpirit",
 			Name = GetSpellInfo(51886) .. " / " .. GetSpellInfo(77130),
-			Desc = GetSpellDescription(77130),
+			Desc = GetSpellInfo(51886) .. ": " .. GetSpellDescription(51886) .. "\n\n" .. GetSpellInfo(77130) .. ": " .. GetSpellDescription(77130),
 			Message_Amount = 1,
 			Message_Areas = {"Dispel"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
@@ -2694,8 +2694,8 @@ local function Spell_Options(NonClass)
 		[15] = "StatueOfTheBlackOx",
 	}
 	local Area_Descriptions = {
-		[1] = "When you start casting this spell or when this spell effect starts.",
-		[2] = "When you have placed the effect of this spell in the world.",
+		[1] = "When you start casting this spell or when this spell starts.",
+		[2] = "When you have placed this in the world.",
 		[3] = "When you cast this spell.",
 		[4] = "When you dispel a buff or debuff.",
 		[5] = "When you deal damage.",
@@ -2707,7 +2707,7 @@ local function Spell_Options(NonClass)
 		[11] = "When your spell is resisted.",
 		[12] = "When the target is immune to your spell.",
 		[13] = "When the spell failed.",
-		[14] = "When the spell effect ends.",
+		[14] = "When the spell ends.",
 		[15] = "When you cast Provoke on your Statue of the Black Ox.",
 	}
 	local Options = {
@@ -2932,11 +2932,11 @@ local function Spell_Options(NonClass)
 			Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]] = {
 				name = L[Spells[i].Message_Areas[k]],
 				type = "group",
-				desc = "test",
+				desc = L[Area_Descriptions[OrderVal]],
 				order = 110 + OrderVal,
 				args = {
 					Description = {
-						name = L[Area_Descriptions[OrderVal]],
+						name = L[Spells[i].Message_Areas[k]].. ": |cffFFCC00".. L[Area_Descriptions[OrderVal]].."|r\n",
 						type = "description",
 						order = 0,
 						fontSize = "medium",
