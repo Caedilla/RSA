@@ -1,5 +1,6 @@
 package-as: RSA
 
+manual-changelog: CHANGELOG.md
 
 externals:
  Libs/LibStub:
