@@ -169,11 +169,9 @@ function RSA_Mage:OnEnable()
 		},
 		SPELL_INTERRUPT = {
 			[2139] = Config_Counterspell, -- COUNTERSPELL
-			[119308] = Config_Counterspell, -- IMPROVED COUNTERSPELL
 		},
 		SPELL_MISSED = {
 			[2139] = Config_Counterspell_Missed, -- COUNTERSPELL
-			[119308] = Config_Counterspell_Missed, -- IMPROVED COUNTERSPELL
 			[118] = Config_Polymorph_Missed, -- SHEEP
 			[28271] = Config_Polymorph_Missed, -- TURTLE
 			[28272] = Config_Polymorph_Missed, -- PIG

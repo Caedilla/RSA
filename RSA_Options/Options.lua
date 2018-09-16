@@ -1273,7 +1273,7 @@ local function Monk_Options()
 		[14] = {
 			Profile = "Detox",
 			Name = GetSpellInfo(115450),
-			Desc = GetSpellDescription(115450),
+			Desc = GetSpellInfo(115450) .. ": " .. GetSpellDescription(115450) .. "\n\n" .. GetSpellInfo(218164) .. ": " .. GetSpellDescription(218164),
 			Message_Amount = 1,
 			Message_Areas = {"Dispel"},
 			Message_Channels_Disabled = {["Whisper"] = true},
@@ -1368,7 +1368,8 @@ local function Paladin_Options()
 		["BoP&BoS"] = {
 			Profile = "HandOfProtection",
 			Name = GetSpellInfo(1022) .. " / " .. GetSpellInfo(204018),
-			Desc = GetSpellInfo(1022) .. ": " .. GetSpellDescription(1022) .. "\n\n" .. GetSpellInfo(204018) .. ": " .. GetSpellDescription(204018),
+			longDesc = true,
+			Desc = "|cffFFCC00"..GetSpellInfo(1022) .. ":|r |cffbdbdbd" .. GetSpellDescription(1022) .. "|r\n\n|cffFFCC00" .. GetSpellInfo(204018) .. ":|r |cffbdbdbd" .. GetSpellDescription(204018) .. "|r",
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
@@ -1488,7 +1489,8 @@ local function Paladin_Options()
 		[20] = {
 			Profile = "Cleanse",
 			Name = GetSpellInfo(4987) .. " / " .. GetSpellInfo(213644),
-			Desc = GetSpellInfo(4987) .. ": " .. GetSpellDescription(4987) .. "\n\n" .. GetSpellInfo(213644) .. ": " .. GetSpellDescription(213644),
+			longDesc = true,
+			Desc = "|cffFFCC00"..GetSpellInfo(4987) .. ":|r |cffbdbdbd" .. GetSpellDescription(4987) .. "|r\n\n|cffFFCC00" .. GetSpellInfo(213644) .. ":|r |cffbdbdbd" .. GetSpellDescription(213644) .. "|r",
 			Message_Amount = 1,
 			Message_Areas = {"Dispel"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
@@ -1504,8 +1506,9 @@ local function Paladin_Options()
 		},
 		[22] = {
 			Profile = "AvengingWrath",
-			Name = GetSpellInfo(31884),
-			Desc = GetSpellDescription(31884),
+			Name = GetSpellInfo(31884) .. " / " .. GetSpellInfo(216331) .. " / " .. GetSpellInfo(231895),
+			longDesc = true,
+			Desc = "|cffFFCC00"..GetSpellInfo(31884) .. ":|r |cffbdbdbd" .. GetSpellDescription(31884) .. "|r\n\n|cffFFCC00" .. GetSpellInfo(216331) .. ":|r |cffbdbdbd" .. GetSpellDescription(216331) .. "|r\n\n|cffFFCC00" .. GetSpellInfo(231895) .. ":|r |cffbdbdbd" .. GetSpellDescription(231895) .. "|r",
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
@@ -2732,7 +2735,7 @@ local function Spell_Options(NonClass)
 						return Spells[i].Name
 					end
 				end,
-				desc = Spells[i].Desc,
+				desc = function() if Spells[i].longDesc then return Spells[i].Desc else return "|cffbdbdbd"..Spells[i].Desc.."|r" end end,
 				hidden = Spells[i].Hidden or false,
 				disabled = Spells[i].Hidden or false,
 				order = Spells[i].Order or 5,
@@ -2746,8 +2749,15 @@ local function Spell_Options(NonClass)
 						fontSize = "large",
 					},
 					Spell_Desc = {
-						name = "|cffFFCC00"..Spells[i].Desc.."|r",
+						name = "|cffbdbdbd"..Spells[i].Desc.."|r",
 						type = "description",
+						hidden = Spells[i].longDesc or false,
+						order = 0.02,
+					},
+					Spell_LongDesc = {
+						name = Spells[i].Desc,
+						type = "description",
+						hidden = function() if Spells[i].longDesc then return false else return true end end,
 						order = 0.02,
 					},
 					Channel_Header = {

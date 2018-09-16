@@ -168,10 +168,9 @@ function RSA_Paladin:OnEnable()
 			},
 		},
 		SPELL_CAST_SUCCESS = {
-			[31842] = Config_AvengingWrath, -- AVENGING WRATH
 			[31884] = Config_AvengingWrath, -- AVENGING WRATH
-			[224668] = Config_AvengingWrath, -- CRUSADE
-			[216331] = Config_AvengingWrath, -- Avenging Crusader - Holy PvP Talent		
+			[231895] = Config_AvengingWrath, -- Crusade - Ret Talent
+			[216331] = Config_AvengingWrath, -- Avenging Crusader - Holy Talent		
 			[6940] = Config_BoS, -- Blessing of Sacrifice
 			[199448] = Config_BoS, -- Ultimate Sacrifice honour talent		
 			[212056] = { -- ABSOLUTION
@@ -262,10 +261,9 @@ function RSA_Paladin:OnEnable()
 			},
 		},
 		SPELL_AURA_REMOVED = {
-			[31842] = Config_AvengingWrath_End, -- AVENGING WRATH
 			[31884] = Config_AvengingWrath_End, -- AVENGING WRATH
-			[224668] = Config_AvengingWrath_End, -- CRUSADE
-			[216331] = Config_AvengingWrath_End, -- Avenging Crusader - Holy PvP Talent
+			[231895] = Config_AvengingWrath_End, -- Crusade - Ret Talent
+			[216331] = Config_AvengingWrath_End, -- Avenging Crusader - Holy Talent
 			[1022] = Config_BoP_End, -- BLESSING OF PROTECTION
 			[204018] = Config_BoP_End, -- BLESSING OF SPELLWARDING			
 			[642] = Config_DivineShield_End, -- DIVINE SHIELD
