@@ -1673,8 +1673,9 @@ local function Priest_Options()
 		},
 		["Fade"] = {
 			Profile = "Fade",
-			Name = GetSpellInfo(586),
-			Desc = GetSpellDescription(586),
+			Name = GetSpellInfo(586) .. " / " .. GetSpellInfo(213602),
+			longDesc = true,
+			Desc = "|cffFFCC00"..GetSpellInfo(586) .. ":|r |cffd1d1d1" .. GetSpellDescription(586) .. "|r\n\n|cffFFCC00" .. GetSpellInfo(213602) .. ":|r |cffd1d1d1" .. GetSpellDescription(213602) .. "|r",
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
