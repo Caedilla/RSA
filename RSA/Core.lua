@@ -14,7 +14,7 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 	self.db = LibStub("AceDB-3.0"):New("RSADB", RSA.DefaultOptions, PlayerClass) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 	self.db.profile.General.Class = PlayerClass
-	
+
 	-- project-revision
 	self.db.global.version = 4.0
 	self.db.global.revision = string.match(GetAddOnMetadata("RSA","Version"),"%d+")

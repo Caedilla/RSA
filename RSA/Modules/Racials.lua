@@ -39,12 +39,25 @@ function RSA_Racials:OnEnable()
         profile = 'BloodFury',
         section = "End",
     } 
+    local Config_AncestralCall = { -- Mag'har Orc Ancestral Call Start
+        profile = 'AncestralCall',
+        linkID = 274738,
+    }
+    local Config_AncestralCall_End = { -- Mag'har Orc Ancestral Call End
+        profile = 'AncestralCall',
+        linkID = 274738,
+        section = "End",
+    } 
 	MonitorConfig_Racials = {
         player_profile = RSA.db.profile.Racials,
         SPELL_AURA_APPLIED = {
             [20572] = Config_BloodFury, -- Attack Power
             [33697] = Config_BloodFury, -- Intellect
             [33702] = Config_BloodFury, -- Both
+            [274741] = Config_AncestralCall, -- Mastery
+            [274742] = Config_AncestralCall, -- Versatility
+            [274740] = Config_AncestralCall, -- Haste
+            [274739] = Config_AncestralCall, -- Crit            
             [20594] = { -- Dwarf
                 profile = 'Stoneform',
             },
@@ -64,14 +77,15 @@ function RSA_Racials:OnEnable()
                 profile = 'ArcanePulse',
                 tracker = 2,
             },
-            [274738] = { -- Mag'har Orc
-                profile = 'AncestralCall',
-            },
         },
         SPELL_AURA_REMOVED = {
             [20572] = Config_BloodFury_End, -- Attack Power
             [33697] = Config_BloodFury_End, -- Intellect
             [33702] = Config_BloodFury_End, -- Both
+            [274741] = Config_AncestralCall_End, -- Mastery
+            [274742] = Config_AncestralCall_End, -- Versatility
+            [274740] = Config_AncestralCall_End, -- Haste
+            [274739] = Config_AncestralCall_End, -- Crit   
             [20594] = { -- Dwarf
                 profile = 'Stoneform',
                 section = "End",
@@ -155,11 +169,11 @@ function RSA_Racials:OnEnable()
         },
     }
 
-    RSA.RacialMonitorConfig(MonitorConfig_Racials)
+    RSA.RacialMonitorConfig(MonitorConfig_Racials, UnitGUID("player"))
 
     local function Spells()
         if RSA.db.profile.Modules.Racials == false then return end
-        local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+        local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
         if RSA.AffiliationMine(sourceFlags) then
             RSA.MonitorAndAnnounce(self, "racials", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
         end

@@ -2608,7 +2608,7 @@ local function Utilities_Options()
 	return Spells
 end
 
-function RSA:FixDB()
+local function FixDB()
 	local Profiles = {
 		[1] = "DeathKnight",
 		[2] = "DemonHunter",
@@ -2622,6 +2622,8 @@ function RSA:FixDB()
 		[10] = "Shaman",
 		[11] = "Warlock",
 		[12] = "Warrior",
+		[13] = "Racials",
+		[14] = "Utilities",
 	}
 	local Functions = {
 		[1] = DeathKnight_Options(),
@@ -2636,15 +2638,17 @@ function RSA:FixDB()
 		[10] = Shaman_Options(),
 		[11] = Warlock_Options(),
 		[12] = Warrior_Options(),
+		[13] = Racial_Options(),
+		[14] = Utilities_Options(),
 	}
 	for c = 1,#Profiles do
 		local Spells = Functions[c]
 		local ProfileName = Profiles[c]
-		for i = 1,#Spells do
-			for k=1,Spells[i].Message_Amount do 
-				if type(RSA.db.profile[ProfileName].Spells [Spells[i].Profile].Messages[Spells[i].Message_Areas[k]]) == "string" then
+		for i,v in pairs(Spells) do
+			for k=1,Spells[i].Message_Amount do
+				if type(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]]) == "string" then
 					if not RSA.db.profile.Fixed then RSA.Print_Self("Fixing Database") end
-					RSA.db.profile[ProfileName].Spells [Spells[i].Profile].Messages[Spells[i].Message_Areas[k]] = {RSA.db.profile[ProfileName].Spells [Spells[i].Profile].Messages[Spells[i].Message_Areas[k]]}
+					RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]] = {RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]]}
 				end
 			end
 		end
@@ -3076,8 +3080,9 @@ function RSA_O:OnInitialize()
 	self.db.RegisterCallback(RSA, "OnProfileChanged", "RefreshConfig")
 	self.db.RegisterCallback(RSA, "OnProfileCopied", "RefreshConfig")
 	self.db.RegisterCallback(RSA, "OnProfileReset", "RefreshConfig")
+
 	if not self.db.profile.Fixed then
-		RSA:FixDB()
+		FixDB()
 	end
 
 	-- Register Various Options
@@ -3091,7 +3096,7 @@ function RSA_O:OnInitialize()
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")
 	LibDualSpec:EnhanceOptions(Profiles, self.db)
-	InterfaceAddOnsList_Update()
+	InterfaceAddOnsList_Update()	
 end
 
 function RSA:UpdateOptions()

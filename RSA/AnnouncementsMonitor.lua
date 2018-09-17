@@ -14,12 +14,14 @@ local function MonitorConfig(new_config, new_playerGUID)
 	playerGUID = new_playerGUID
 end
 
-local function UtilityMonitorConfig(new_config)
+local function UtilityMonitorConfig(new_config, new_playerGUID)
 	utilityConfig = new_config
+	playerGUID = new_playerGUID
 end
 
-local function RacialMonitorConfig(new_config)
+local function RacialMonitorConfig(new_config, new_playerGUID)
 	racialConfig = new_config
+	playerGUID = new_playerGUID
 end
 
 local empty = {}
@@ -45,7 +47,7 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 		end
 	end
 
-	local event_data = config[event]
+	local event_data
 	if configType then
 		if configType == "player" then
 			event_data = config[event]

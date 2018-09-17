@@ -104,11 +104,11 @@ function RSA_Utilities:OnEnable()
         },
     }
 
-    RSA.UtilityMonitorConfig(MonitorConfig_Utilities)
+    RSA.UtilityMonitorConfig(MonitorConfig_Utilities, UnitGUID("player"))
 
     local function Spells()
         if RSA.db.profile.Modules.Utilities == false then return end
-        local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4 = CombatLogGetCurrentEventInfo()
+        local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
         if RSA.AffiliationGroup(sourceFlags) then
             RSA.MonitorAndAnnounce(self, "utilities", timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
         end
