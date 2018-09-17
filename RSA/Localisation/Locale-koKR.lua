@@ -1,137 +1,126 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "koKR")
 if not L then return end
-L = L or {}
---[[Translation missing --]]
-L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = " If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."
+L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = "메세지를 추가하고 싶으면, 아래에 있는 |cffFFD100Add New Message|r 부분에 추가하세요. 만약 메세지가 하나도 없다면, 해당 주문의 알림이 표시되지 않습니다."
+L[" is disabled. If you want to configure RSA, you need to enable it."] = "이 비활성화 되어 있습니다. 만약 RSA를 설정하고 싶으면 이 것을 활성화 하세요."
 L[" is Missing!"] = " 사라짐!"
 --[[Translation missing --]]
 L[" message for this section."] = " message for this section."
 --[[Translation missing --]]
 L[" messages for this section."] = " messages for this section."
 L[" Refreshed!"] = " 재활성됨!"
+L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."] = "RSA는 아래에 있는 메세지 중 하나를 무작위로 선택합니다. 만약 메세지를 삭제하고 싶으면 문장을 지우고 엔터키를 입력하세요. 만약 메세지가 하나도 없다면, 해당 주문의 알림이 표시되지 않습니다."
 --[[Translation missing --]]
-L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."] = " RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."
+L["|cff91BE0F/instance|r if you're in a group finder group."] = "|cff91BE0F/instance|r if you're in a group finder group."
 --[[Translation missing --]]
-L["\\nYou have "] = "\\nYou have "
+L["|cff91BE0F/party|r if you're in a dungeon."] = "|cff91BE0F/party|r if you're in a dungeon."
 --[[Translation missing --]]
-L["\\nYou have no messages for this section."] = "\\nYou have no messages for this section."
+L["|cff91BE0F/party|r. Only for manually formed parties."] = "|cff91BE0F/party|r. Only for manually formed parties."
 --[[Translation missing --]]
-L["|cff91BE0F/party|r. Only for manually formed parties.\\nDoesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "|cff91BE0F/party|r. Only for manually formed parties.\\nDoesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."
+L["|cff91BE0F/raid|r if you're in a raid."] = "|cff91BE0F/raid|r if you're in a raid."
 --[[Translation missing --]]
-L["|cff91BE0F/raid|r if you're in a raid.\\n|cff91BE0F/party|r if you're in a dungeon.\\n|cff91BE0F/instance|r if you're in a group finder group."] = "|cff91BE0F/raid|r if you're in a raid.\\n|cff91BE0F/party|r if you're in a dungeon.\\n|cff91BE0F/instance|r if you're in a group finder group."
+L["|cff91BE0F/raid|r. Only for manually formed raid groups."] = "|cff91BE0F/raid|r. Only for manually formed raid groups."
 --[[Translation missing --]]
-L["|cff91BE0F/raid|r. Only for manually formed raid groups.\\nDoesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "|cff91BE0F/raid|r. Only for manually formed raid groups.\\nDoesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."
---[[Translation missing --]]
-L["|cffFFCC00Whispers|r the target of the spell.\\nThis setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "|cffFFCC00Whispers|r the target of the spell.\\nThis setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."
---[[Translation missing --]]
-L["Add New Message"] = "Add New Message"
+L["|cffFFCC00Whispers|r the target of the spell."] = "|cffFFCC00Whispers|r the target of the spell."
+L["Add New Message"] = "새 메시지 추가"
 --[[Translation missing --]]
 L["Announce to custom channels only while you are in a manually formed group."] = "Announce to custom channels only while you are in a manually formed group."
---[[Translation missing --]]
-L["Cast"] = "Cast"
+L["Cast"] = "시전"
 L["Channel Name"] = "채널 이름"
---[[Translation missing --]]
-L["Class Abilities"] = "Class Abilities"
---[[Translation missing --]]
-L["Configuring"] = "Configuring"
+L["Class Abilities"] = "직업 능력"
+L["Configuring"] = "구성 중"
 L["Corpse of "] = "의 시체"
---[[Translation missing --]]
-L["Couldn't find target for Soulstone."] = "Couldn't find target for Soulstone."
+L["Couldn't find target for Soulstone."] = "영혼석의 대상을 찾을 수 없음."
+L["Current Revision"] = "현재 개정판"
 L["Custom Channel"] = "사설 채널"
+L["Damage"] = "피해"
 --[[Translation missing --]]
-L["Emote"] = "Emote"
+L["DamageAbsorb"] = "Absorbed Damage"
+L["Debuff"] = "약화 효과"
+L["Dispel"] = "해제"
+--[[Translation missing --]]
+L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."
+--[[Translation missing --]]
+L["EffectAbsorb"] = "Absorbed Debuff"
+L["Emote"] = "감정 표현"
 L["Enable Buff Reminder Module"] = "버프 유지 확인 모듈 사용"
 L["Enable in Arenas"] = "투기장에서 알림"
 L["Enable in Battlegrounds"] = "전장에서 알림"
 L["Enable in Dungeons"] = "던전에서 알림"
---[[Translation missing --]]
-L["Enable in Group Finder Dungeons"] = "Enable in Group Finder Dungeons"
---[[Translation missing --]]
-L["Enable in Group Finder Raids"] = "Enable in Group Finder Raids"
---[[Translation missing --]]
-L["Enable in manually formed dungeon groups."] = "Enable in manually formed dungeon groups."
---[[Translation missing --]]
-L["Enable in manually formed raid groups."] = "Enable in manually formed raid groups."
+L["Enable in Group Finder Dungeons"] = "던전 찾기 그룹에서 활성화"
+L["Enable in Group Finder Raids"] = "공격대 찾기 그룹에서 활성화"
+L["Enable in manually formed dungeon groups."] = "사용자 구성 던전에서 활성화"
+L["Enable in manually formed raid groups."] = "사용자 구성 공격대에서 활성화"
 L["Enable in Raid Instances"] = "공격대 던전에서 알림"
---[[Translation missing --]]
-L["Enable in scenario instances."] = "Enable in scenario instances."
+L["Enable in scenario instances."] = "시나리오 인스턴스에서 활성화"
 L["Enable in Scenarios"] = "시나리오에서 알림"
 L["Enable in the World"] = "야외에서 알림"
+L["Enable in the world area if you have War Mode active."] = "전쟁 모드가 활성화 중이면 필드에서 사용합니다."
+L["Enable in the world area when playing with War Mode disabled."] = "전쟁 모드를 끈 상태로 플레이할 때 필드에서 사용합니다."
+L["Enable in War Mode"] = "전쟁 모드에서 사용"
+L["Enable Only in Combat"] = "전투 중에만 사용"
+L["End"] = "끝"
 --[[Translation missing --]]
-L["Enable in the world area if you have War Mode active."] = "Enable in the world area if you have War Mode active."
---[[Translation missing --]]
-L["Enable in the world area when playing with War Mode disabled."] = "Enable in the world area when playing with War Mode disabled."
---[[Translation missing --]]
-L["Enable in War Mode"] = "Enable in War Mode"
---[[Translation missing --]]
-L["Enable Only in Combat"] = "Enable Only in Combat"
-L["End"] = "종료"
---[[Translation missing --]]
-L["General"] = "General"
+L["Failed"] = "Failed"
+L["Feedback"] = "피드백"
+L["General"] = "일반"
 L["Heal"] = "치유"
+L["I have a Battle.net community for my addons. If you have any issues, now you can easily report them to me in game. Just copy the invite link below and throw me a message."] = "애드온용 Battle.net 커뮤니티가 있습니다. 문제가 있으면, 이제 게임 내에서 쉽게 보고할 수 있습니다. 아래 초대 링크를 복사해 메시지를 보내세요."
+L["If you encounter a bug, or have a feature request, please file a ticket on Curseforge using the link below."] = "버그를 만나거나 기능 요청이 있으면, 아래 링크를 사용하여 Curseforge에서 티켓을 신청하세요."
 L["Immune"] = "면역"
+L["In Game"] = "게임에서"
 L["Interrupt"] = "차단"
+L["Invite Link"] = "초대 링크"
 L["Local"] = "개인 알림"
 L["Local Message Output Area"] = "개인 메시지 출력"
---[[Translation missing --]]
-L["Message Announce Area"] = "Message Announce Area"
---[[Translation missing --]]
-L["Message Texts"] = "Message Texts"
+L["Message Announce Area"] = "메시지 알림 영역"
+L["Message Texts"] = "메시지 내용"
 L["missed"] = "빗나감"
 L["Module Settings"] = "모듈 설정"
+L["Online"] = "온라인"
+L["Only announce if you are in combat."] = "전투 중에만 알립니다."
 --[[Translation missing --]]
-L["Only announce if you are in combat."] = "Only announce if you are in combat."
+L["Only announce in /emote while you are in a group."] = "Only announce in /emote while you are in a group."
 --[[Translation missing --]]
-L["Only announce in /say while you are in a manually formed group."] = "Only announce in /say while you are in a manually formed group."
+L["Only announce in /say while you are in a group."] = "Only announce in /say while you are in a group."
 --[[Translation missing --]]
-L["Only announce in /yell while you are in a manually formed group."] = "Only announce in /yell while you are in a manually formed group."
---[[Translation missing --]]
-L["Only usable for player created channels, do not use for Blizzard channels such as |cff91BE0F/party|r."] = "Only usable for player created channels, do not use for Blizzard channels such as |cff91BE0F/party|r."
---[[Translation missing --]]
-L["OptionsClass"] = " If you want to use RSA with this class, please enable the module."
---[[Translation missing --]]
-L["OptionsDisabled"] = "Module disabled."
---[[Translation missing --]]
-L["OptionsMissing"] = "Module could not be found, please delete your RSA folders, download, and install again."
---[[Translation missing --]]
-L["Other Options"] = "Other Options"
+L["Only announce in /yell while you are in a group."] = "Only announce in /yell while you are in a group."
+L["Only usable for player created channels, do not use for Blizzard channels such as |cff91BE0F/party|r."] = "사설 채널에서만 사용 가능. |cff91BE0F/파티 (/party)|r와 같은 블리자드 채널에서는 사용 금지."
+L["OptionsClass"] = "이 직업에 RSA를 사용하려면, 모듈을 활성화하세요."
+L["OptionsDisabled"] = "모듈이 사용 중지되었습니다."
+L["OptionsMissing"] = "모듈을 찾을 수 없습니다. RSA 폴더를 삭제하고 다운로드하여 다시 설치하세요."
+L["Other Options"] = "기타 옵션"
 L["Party"] = "파티"
+L["Pet Dispels"] = "소환수 해제"
 --[[Translation missing --]]
 L["Placed"] = "Placed"
---[[Translation missing --]]
-L["PvE Options"] = "PvE Options"
---[[Translation missing --]]
-L["PvP Options"] = "PvP Options"
---[[Translation missing --]]
-L["Racials"] = "Racials"
+L["PvE Options"] = "PvE 옵션"
+L["PvP Options"] = "PvP 옵션"
+L["Racials"] = "종족"
 L["Raid"] = "공격대"
---[[Translation missing --]]
-L["Remove Server Names"] = "Remove Server Names"
---[[Translation missing --]]
-L["Resist"] = "Resist"
-L["Say"] = "일반대화"
---[[Translation missing --]]
-L["Send to player created channel."] = "Send to player created channel."
+L["Remove Server Names"] = "서버 이름 제거"
+L["Resist"] = "저항"
+L["RSA on Curseforge"] = "Curseforge 상 RSA"
+L["Say"] = "일반 대화"
+L["Send to player created channel."] = "플레이어가 만든 채널로 보냅니다."
 --[[Translation missing --]]
 L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."] = "Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."
---[[Translation missing --]]
-L["Smart Channel Options"] = "Smart Channel Options"
+L["Smart Channel Options"] = "스마트 채널 옵션"
 L["Smart Custom Channel"] = "스마트 사설 채널"
---[[Translation missing --]]
-L["Smart Group Channel"] = "Smart Group Channel"
-L["Smart Say"] = "스마트 대화"
---[[Translation missing --]]
-L["Smart Yell"] = "Smart Yell"
---[[Translation missing --]]
-L["Spells"] = "Spells"
+L["Smart Emote"] = "스마트 감정 표현"
+L["Smart Group Channel"] = "스마트 그룹 채널"
+L["Smart Say"] = "스마트 일반 대화"
+L["Smart Yell"] = "스마트 외침"
+L["Spells"] = "주문"
 L["Start"] = "시작"
+L["StatueOfTheBlackOx"] = "흑우 광역 조롱"
+L["Success"] = "성공"
+L["The following tags are available for use with this spell:"] = "다음 태그를 이 주문에 사용할 수 있습니다:"
 --[[Translation missing --]]
-L["StatueOfTheBlackOx"] = "Black Ox AoE Taunt"
+L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."
 --[[Translation missing --]]
-L["The following tags are available for use with this spell:"] = "The following tags are available for use with this spell:"
+L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."
 L["Unknown"] = "알 수 없음"
---[[Translation missing --]]
-L["Utilities"] = "Utilities"
+L["Utilities"] = "유틸기"
 --[[Translation missing --]]
 L["was absorbed by"] = "was absorbed by"
 --[[Translation missing --]]
@@ -145,7 +134,43 @@ L["was evaded by"] = "was evaded by"
 --[[Translation missing --]]
 L["was parried by"] = "was parried by"
 L["was resisted by"] = "저항함"
-L["Whisper"] = "귓속말"
+L["When reporting an issue, please also post the revision number above. Thanks!"] = "문제를 보고할 때, 위 개정판 번호도 올려주세요. 감사합니다!"
 --[[Translation missing --]]
-L["Yell"] = "Yell"
+L["When the spell ends."] = "When the spell ends."
+--[[Translation missing --]]
+L["When the spell failed."] = "When the spell failed."
+--[[Translation missing --]]
+L["When the target is immune to your spell."] = "When the target is immune to your spell."
+--[[Translation missing --]]
+L["When you absorb a debuff."] = "When you absorb a debuff."
+--[[Translation missing --]]
+L["When you absorb damage."] = "When you absorb damage."
+--[[Translation missing --]]
+L["When you cast Provoke on your Statue of the Black Ox."] = "When you cast Provoke on your Statue of the Black Ox."
+--[[Translation missing --]]
+L["When you cast this spell."] = "When you cast this spell."
+--[[Translation missing --]]
+L["When you deal damage."] = "When you deal damage."
+--[[Translation missing --]]
+L["When you debuff a unit."] = "When you debuff a unit."
+--[[Translation missing --]]
+L["When you dispel a buff or debuff."] = "When you dispel a buff or debuff."
+--[[Translation missing --]]
+L["When you have placed this in the world."] = "When you have placed this in the world."
+--[[Translation missing --]]
+L["When you heal."] = "When you heal."
+--[[Translation missing --]]
+L["When you interrupt a spell cast."] = "When you interrupt a spell cast."
+--[[Translation missing --]]
+L["When you start casting this spell or when this spell starts."] = "When you start casting this spell or when this spell starts."
+--[[Translation missing --]]
+L["When your spell is resisted."] = "When your spell is resisted."
+L["Whisper"] = "귓속말"
+L["Yell"] = "외침"
 L["You"] = "당신"
+--[[Translation missing --]]
+L["You have "] = "You have "
+--[[Translation missing --]]
+L["You have no messages for this section."] = "You have no messages for this section."
+--[[Translation missing --]]
+L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = "Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"

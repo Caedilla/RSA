@@ -24,9 +24,13 @@ L["Couldn't find target for Soulstone."] = "無法找到靈魂石的目標。"
 L["Current Revision"] = "當前的版本"
 L["Custom Channel"] = "自訂頻道"
 L["Damage"] = "傷害"
+--[[Translation missing --]]
+L["DamageAbsorb"] = "Absorbed Damage"
 L["Debuff"] = "減益"
 L["Dispel"] = "驅散"
 L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "利用地城搜尋器組成的隊伍不做任何通告，那些使用|cffFFCC00副本|r或|cffFFCC00智能團體頻道|r的。"
+--[[Translation missing --]]
+L["EffectAbsorb"] = "Absorbed Debuff"
 L["Emote"] = "表情"
 L["Enable Buff Reminder Module"] = "啟用增益提醒模組"
 L["Enable in Arenas"] = "啟用於競技場"
@@ -45,6 +49,8 @@ L["Enable in the world area when playing with War Mode disabled."] = "啟用在�
 L["Enable in War Mode"] = "啟用在戰爭模式"
 L["Enable Only in Combat"] = "只有戰鬥中啟用"
 L["End"] = "結束"
+--[[Translation missing --]]
+L["Failed"] = "Failed"
 L["Feedback"] = "反饋"
 L["General"] = "一般"
 L["Heal"] = "治療"
@@ -106,8 +112,40 @@ L["was evaded by"] = "被迴避於"
 L["was parried by"] = "被招架在"
 L["was resisted by"] = "抵抗了"
 L["When reporting an issue, please also post the revision number above. Thanks!"] = "當回報一個問題，請同時報告上方的版本號。感謝！"
+--[[Translation missing --]]
+L["When the spell ends."] = "When the spell ends."
+--[[Translation missing --]]
+L["When the spell failed."] = "When the spell failed."
+--[[Translation missing --]]
+L["When the target is immune to your spell."] = "When the target is immune to your spell."
+--[[Translation missing --]]
+L["When you absorb a debuff."] = "When you absorb a debuff."
+--[[Translation missing --]]
+L["When you absorb damage."] = "When you absorb damage."
+--[[Translation missing --]]
+L["When you cast Provoke on your Statue of the Black Ox."] = "When you cast Provoke on your Statue of the Black Ox."
+--[[Translation missing --]]
+L["When you cast this spell."] = "When you cast this spell."
+--[[Translation missing --]]
+L["When you deal damage."] = "When you deal damage."
+--[[Translation missing --]]
+L["When you debuff a unit."] = "When you debuff a unit."
+--[[Translation missing --]]
+L["When you dispel a buff or debuff."] = "When you dispel a buff or debuff."
+--[[Translation missing --]]
+L["When you have placed this in the world."] = "When you have placed this in the world."
+--[[Translation missing --]]
+L["When you heal."] = "When you heal."
+--[[Translation missing --]]
+L["When you interrupt a spell cast."] = "When you interrupt a spell cast."
+--[[Translation missing --]]
+L["When you start casting this spell or when this spell starts."] = "When you start casting this spell or when this spell starts."
+--[[Translation missing --]]
+L["When your spell is resisted."] = "When your spell is resisted."
 L["Whisper"] = "悄悄話"
 L["Yell"] = "大喊"
 L["You"] = "你"
 L["You have "] = "您有"
 L["You have no messages for this section."] = "您在此階段沒有訊息。"
+--[[Translation missing --]]
+L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = "Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"
