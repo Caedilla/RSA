@@ -2,10 +2,7 @@ local RSA =  RSA or LibStub("AceAddon-3.0"):GetAddon("RSA")
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 
 local gsub = string.gsub
-
 local racialConfig, utilityConfig, config, playerGUID
-
-
 local cache_SpellInfo = {}
 local cache_SpellLink = {}
 
@@ -38,16 +35,7 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 	local missType = ex1
 	local full_destName = destName
 
-	if RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames == true then
-		if destName and destGUID then
-			local realmName = select(7,GetPlayerInfoByGUID(destGUID))
-			if realmName then
-					destName = gsub(destName, "-"..realmName, "")
-			end
-		end
-	end
-
-	local event_data
+	local event_data = nil
 	if configType then
 		if configType == "player" then
 			event_data = config[event]
@@ -55,11 +43,11 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 			event_data = utilityConfig[event]
 		elseif configType == "racials" then
 			event_data = racialConfig[event]
+		else return
 		end
 	end
-	
-	if not event_data then return end
 
+	if event_data == nil then return end
 
 	local spell_data = event_data[spellID]
 
@@ -79,6 +67,27 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 	if spell_data.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
 	if false --[[detect player/pet]] then return end
+
+	local spell_profile = nil
+	if (not configType) or (configType == "player") then
+		spell_profile = config.player_profile.Spells[spell_data.profile]
+	elseif configType == "utilities" then
+		spell_profile = utilityConfig.player_profile.Spells[spell_data.profile]
+	elseif configType == "racials" then
+		spell_profile = racialConfig.player_profile.Spells[spell_data.profile]
+	end
+	if spell_profile == nil then return end	
+	local TotalMessages = #spell_profile.Messages[spell_data.section or 'Start']
+	if TotalMessages == 0 then return end
+
+	if RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames == true then
+		if destName and destGUID then
+			local realmName = select(7,GetPlayerInfoByGUID(destGUID))
+			if realmName then
+					destName = gsub(destName, "-"..realmName, "")
+			end
+		end
+	end
 
 	local CommCanAnnounce = true
 	if spell_data.comm then
@@ -167,16 +176,6 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 		replacements[extraSpellLinkTarget] = spelllink
 	end
 
-	local spell_profile
-	if (not configType) or (configType == "player") then
-		spell_profile = config.player_profile.Spells[spell_data.profile]
-	elseif configType == "utilities" then
-		spell_profile = utilityConfig.player_profile.Spells[spell_data.profile]
-	elseif configType == "racials" then
-		spell_profile = racialConfig.player_profile.Spells[spell_data.profile]
-	end
-	local TotalMessages = #spell_profile.Messages[spell_data.section or 'Start']
-	if TotalMessages == 0 then return end
 	local RandomMessageNumber = math.random(TotalMessages)
 	local message = spell_profile.Messages[spell_data.section or 'Start'][RandomMessageNumber]
 	if spell_replacements.MISSTYPE then
