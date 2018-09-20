@@ -2471,8 +2471,8 @@ local function Racial_Options()
 			Name = GetSpellInfo(28880),
 			Desc = GetSpellDescription(28880),
 			Race = 11,
-			Message_Amount = 2,
-			Message_Areas = {"Start", "End"},
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
 		["Darkflight"] = {

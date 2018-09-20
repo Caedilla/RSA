@@ -2396,8 +2396,7 @@ local function Racials()
 			},
 			GOTN = {
 				Messages = {
-					Start = {"[LINK] cast on [TARGET]!"},
-					End = {},
+					Cast = {"[LINK] cast on [TARGET]!"},
 				},
 				CustomChannel = {
 					Channel = "",
