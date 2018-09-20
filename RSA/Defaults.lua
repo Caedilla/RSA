@@ -828,6 +828,34 @@ local function Hunter()
 					Channel = "",
 				},
 			},
+			AncientHysteria = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
+			SpiritMend = {
+				Messages = {
+					Cast = {"[LINK] cast on [TARGET]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			BattleRess = {
+				Messages = {
+					Cast = {"[LINK] cast on [TARGET]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				Whisper = true,
+				SmartGroup = true,
+			},
 		},
 	}
 	return Hunter
@@ -1739,6 +1767,15 @@ local function Rogue()
 				},
 			},
 			KidneyShot = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			CheapShot = {
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},

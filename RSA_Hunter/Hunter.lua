@@ -24,8 +24,26 @@ function RSA_Hunter:OnEnable()
 		section = "Cast",
 		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 	}
+	local Config_Lust = { -- Heroism spells
+		profile = 'AncientHysteria',
+		targetIsMe = 1
+	}
+	local Config_Lust_End = {
+		profile = 'AncientHysteria',
+		section = 'End',
+		targetIsMe = 1
+	}
+	local Config_Ress = { -- Battle Resses
+		profile = 'BattleRess',
+		section = 'Cast',
+		replacements = { TARGET = 1 },
+	}
 	local MonitorConfig_Hunter = {
 		player_profile = RSA.db.profile.Hunter,
+		SPELL_RESURRECT = {
+			[159956] = Config_Ress, -- Moth Dust of Life
+			[159931] = Config_Ress, -- Crane Gift of Chi-Ji
+		},
 		SPELL_DISPEL = {
 			[264263] = Config_Tranq, -- Bat Sonic Blast
 			[264264] = Config_Tranq, -- Nether Ray Nether Shock
@@ -37,6 +55,8 @@ function RSA_Hunter:OnEnable()
 			[264262] = Config_Tranq, -- Water Strider Soothing Water
 		},
 		SPELL_AURA_APPLIED = {
+			[90355] = Config_Lust, -- Core Hound Ancient Hysteria 
+			[160452] = Config_Lust, -- Nether Ray Netherwinds
 			[3355] = { -- FREEZING TRAP
 				profile = 'FreezingTrap',
 				replacements = { TARGET = 1 }
@@ -60,6 +80,8 @@ function RSA_Hunter:OnEnable()
 			},
 		},
 		SPELL_AURA_REMOVED = {
+			[90355] = Config_Lust_End, -- Core Hound Ancient Hysteria 
+			[160452] = Config_Lust_End, -- Nether Ray Netherwinds
 			[5116] = { -- CONCUSSIVE SHOT
 				profile = 'ConcussiveShot',
 				section = 'End',
@@ -116,6 +138,10 @@ function RSA_Hunter:OnEnable()
 			[53480] = { -- ROAR OF SACRIFICE
 				profile = 'RoarOfSacrifice',
 				replacements = { TARGET = 1 }
+			},
+			[90361] = {
+				profile = 'SpiritMend',
+				section = 'Cast'
 			},
 		},
 		SPELL_INTERRUPT = {

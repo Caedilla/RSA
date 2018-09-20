@@ -56,6 +56,10 @@ function RSA_Rogue:OnEnable()
 				profile = 'KidneyShot',
 				replacements = { TARGET = 1 },
 			},
+			[1833] = { -- Cheap Shot
+				profile = 'CheapShot',
+				replacements = { TARGET = 1 },
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[6770] = { -- SAP
@@ -93,6 +97,11 @@ function RSA_Rogue:OnEnable()
 			},
 			[408] = { -- Kidney Shot
 				profile = 'KidneyShot',
+				replacements = { TARGET = 1 },
+				section = 'End',
+			},
+			[1833] = { -- Cheap Shot
+				profile = 'CheapShot',
 				replacements = { TARGET = 1 },
 				section = 'End',
 			},

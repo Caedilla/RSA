@@ -1046,6 +1046,31 @@ local function Hunter_Options()
 			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
+		["AncientHysteria"] = {
+			Profile = "AncientHysteria",
+			Name = GetSpellInfo(90355),
+			Desc = GetSpellDescription(90355),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		["SpiritMend"] = {
+			Profile = "SpiritMend",
+			Name = GetSpellInfo(90361),
+			Desc = GetSpellDescription(90361),
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]",},
+		},
+		["BattleRess"] = {
+			Profile = "BattleRess",
+			Name = GetSpellInfo(159956),
+			Desc = GetSpellDescription(159956),
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]",},
+		},
 	}
 	return Spells
 end
@@ -1884,7 +1909,15 @@ local function Rogue_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		
+		["CheapShot"] = {
+			Profile = "CheapShot",
+			Name = GetSpellInfo(1833),
+			Desc = GetSpellDescription(1833),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
 	}
 	return Spells
 end
