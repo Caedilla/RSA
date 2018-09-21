@@ -141,7 +141,8 @@ function RSA_Hunter:OnEnable()
 			},
 			[90361] = {
 				profile = 'SpiritMend',
-				section = 'Cast'
+				section = 'Cast',
+				replacements = { TARGET = 1 }
 			},
 		},
 		SPELL_INTERRUPT = {
