@@ -968,6 +968,14 @@ local function Mage()
 				},
 				Whisper = true,
 			},
+			RemoveCurse = { -- Remove Curse
+				Messages = {
+					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Mage

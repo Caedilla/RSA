@@ -130,6 +130,13 @@ function RSA_Mage:OnEnable()
 				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 			}
 		},
+		SPELL_DISPEL = {
+			[475] = { -- Remove Curse
+				profile = 'RemoveCurse',
+				section = "Dispel",
+				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
+			},
+		},
 		SPELL_HEAL = {
 			[87023] = { -- CAUTERIZE
 				profile = 'Cauterize',

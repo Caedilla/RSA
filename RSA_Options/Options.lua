@@ -1175,6 +1175,15 @@ local function Mage_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
+		["RemoveCurse"] = {
+			Profile = "RemoveCurse", -- Consume Magic
+			Name = GetSpellInfo(475),
+			Desc = GetSpellDescription(475),
+			Message_Amount = 1,
+			Message_Areas = {"Dispel"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
+		},
 	}
 	return Spells
 end
