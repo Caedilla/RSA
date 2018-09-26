@@ -2663,7 +2663,7 @@ local function Utilities_Options()
 	return Spells
 end
 
-local function FixDB()
+function RSA:FixDB()
 	local Profiles = {
 		[1] = "DeathKnight",
 		[2] = "DemonHunter",
@@ -3137,7 +3137,7 @@ function RSA_O:OnInitialize()
 	self.db.RegisterCallback(RSA, "OnProfileReset", "RefreshConfig")
 
 	if not self.db.profile.Fixed then
-		FixDB()
+		RSA:FixDB()
 	end
 
 	-- Register Various Options
