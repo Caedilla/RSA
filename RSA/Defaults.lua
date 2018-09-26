@@ -23,6 +23,7 @@ local DefaultOptions = {
 				InWorld = false,
 				OnlyInCombat = false,
 				RemoveServerNames = true,
+				AlwaysAllowWhispers = true,
 			},
 			Local = {
 				['*'] = true,

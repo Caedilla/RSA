@@ -327,9 +327,10 @@ end
 
 function RSA.Print_Whisper(message, target) -- Send a whisper to the target.
 	if message == "" or message == " " then return end
-	if RSA.AnnouncementCheck() == true then
-		SendChatMessage(format(message), "WHISPER", nil, target)
+	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then 
+		if RSA.AnnouncementCheck() == false then return end
 	end
+		SendChatMessage(format(message), "WHISPER", nil, target)
 end
 
 local bor,band = bit.bor, bit.band -- get a local reference to some bitlib functions for faster lookups

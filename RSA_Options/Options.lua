@@ -311,7 +311,20 @@ local Options = {
 								RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames = value
 							end,
 						},
-
+						AlwaysAllowWhispers = {
+							name = "|cffFFCC00"..L["Always allow Whispers"].."|r",
+							type = "toggle",
+							order = 110,
+							desc = L["Always allow whispers to be sent regardless of the rest of the settings on this page."],
+							descStyle = "inline",
+							width = "double",
+							get = function(info)
+								return RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers = value
+							end,
+						},
 					},					
 				},
 			},

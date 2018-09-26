@@ -130,3 +130,5 @@ L["You"] = true
 L["You have "] = true
 L["You have no messages for this section."] = true
 L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = true
+L["Always allow Whispers"] = true
+L["Always allow whispers to be sent regardless of the rest of the settings on this page."] = true
