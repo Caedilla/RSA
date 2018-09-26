@@ -14,6 +14,10 @@ L["|cff91BE0F/raid|r if you're in a raid."] = "|cff91BE0F/團隊|r 如果你在�
 L["|cff91BE0F/raid|r. Only for manually formed raid groups."] = "|cff91BE0F/團隊|r。只有手動組建的團隊。"
 L["|cffFFCC00Whispers|r the target of the spell."] = "|cffFFCC00密語|r法術的目標。"
 L["Add New Message"] = "增加新訊息"
+--[[Translation missing --]]
+L["Always allow Whispers"] = "Always allow Whispers"
+--[[Translation missing --]]
+L["Always allow whispers to be sent regardless of the rest of the settings on this page."] = "Always allow whispers to be sent regardless of the rest of the settings on this page."
 L["Announce to custom channels only while you are in a manually formed group."] = "僅在你處於手動組建的隊伍時才通告到自訂頻道。"
 L["Cast"] = "施放"
 L["Channel Name"] = "頻道名稱"
@@ -41,9 +45,10 @@ L["Enable in manually formed raid groups."] = "啟用在手動組建的團隊。
 L["Enable in Raid Instances"] = "啟用於團隊副本"
 L["Enable in scenario instances."] = "啟用在事件副本。"
 L["Enable in Scenarios"] = "啟用於事件中"
+--[[Translation missing --]]
+L["Enable in the non-instanced world area when playing with War Mode disabled."] = "Enable in the non-instanced world area when playing with War Mode disabled."
 L["Enable in the World"] = "啟用於世界環境"
 L["Enable in the world area if you have War Mode active."] = "啟用在世界區域如果你有開啟戰爭模式。"
-L["Enable in the world area when playing with War Mode disabled."] = "啟用在世界區域當戰爭模式關閉。"
 L["Enable in War Mode"] = "啟用在戰爭模式"
 L["Enable Only in Combat"] = "只有戰鬥中啟用"
 L["End"] = "結束"

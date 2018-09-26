@@ -23,6 +23,10 @@ L["|cff91BE0F/raid|r. Only for manually formed raid groups."] = "|cff91BE0F/raid
 L["|cffFFCC00Whispers|r the target of the spell."] = "|cffFFCC00Whispers|r the target of the spell."
 L["Add New Message"] = "새 메시지 추가"
 --[[Translation missing --]]
+L["Always allow Whispers"] = "Always allow Whispers"
+--[[Translation missing --]]
+L["Always allow whispers to be sent regardless of the rest of the settings on this page."] = "Always allow whispers to be sent regardless of the rest of the settings on this page."
+--[[Translation missing --]]
 L["Announce to custom channels only while you are in a manually formed group."] = "Announce to custom channels only while you are in a manually formed group."
 L["Cast"] = "시전"
 L["Channel Name"] = "채널 이름"
@@ -33,34 +37,32 @@ L["Couldn't find target for Soulstone."] = "영혼석의 대상을 찾을 수 �
 L["Current Revision"] = "현재 개정판"
 L["Custom Channel"] = "사설 채널"
 L["Damage"] = "피해"
---[[Translation missing --]]
-L["DamageAbsorb"] = "Absorbed Damage"
+L["DamageAbsorb"] = "흡수한 피해"
 L["Debuff"] = "약화 효과"
 L["Dispel"] = "해제"
 --[[Translation missing --]]
 L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."
---[[Translation missing --]]
-L["EffectAbsorb"] = "Absorbed Debuff"
+L["EffectAbsorb"] = "흡수한 약화 효과"
 L["Emote"] = "감정 표현"
 L["Enable Buff Reminder Module"] = "버프 유지 확인 모듈 사용"
-L["Enable in Arenas"] = "투기장에서 알림"
-L["Enable in Battlegrounds"] = "전장에서 알림"
-L["Enable in Dungeons"] = "던전에서 알림"
-L["Enable in Group Finder Dungeons"] = "던전 찾기 그룹에서 활성화"
-L["Enable in Group Finder Raids"] = "공격대 찾기 그룹에서 활성화"
-L["Enable in manually formed dungeon groups."] = "사용자 구성 던전에서 활성화"
-L["Enable in manually formed raid groups."] = "사용자 구성 공격대에서 활성화"
-L["Enable in Raid Instances"] = "공격대 던전에서 알림"
-L["Enable in scenario instances."] = "시나리오 인스턴스에서 활성화"
-L["Enable in Scenarios"] = "시나리오에서 알림"
-L["Enable in the World"] = "야외에서 알림"
+L["Enable in Arenas"] = "투기장에서 사용"
+L["Enable in Battlegrounds"] = "전장에서 사용"
+L["Enable in Dungeons"] = "던전에서 사용"
+L["Enable in Group Finder Dungeons"] = "던전 찾기 그룹에서 사용"
+L["Enable in Group Finder Raids"] = "공격대 찾기 그룹에서 사용"
+L["Enable in manually formed dungeon groups."] = "사용자 구성 던전에서 사용합니다."
+L["Enable in manually formed raid groups."] = "사용자 구성 공격대에서 사용합니다."
+L["Enable in Raid Instances"] = "공격대 인스턴스에서 사용"
+L["Enable in scenario instances."] = "시나리오 인스턴스에서 사용합니다."
+L["Enable in Scenarios"] = "시나리오에서 사용"
+--[[Translation missing --]]
+L["Enable in the non-instanced world area when playing with War Mode disabled."] = "Enable in the non-instanced world area when playing with War Mode disabled."
+L["Enable in the World"] = "필드에서 사용"
 L["Enable in the world area if you have War Mode active."] = "전쟁 모드가 활성화 중이면 필드에서 사용합니다."
-L["Enable in the world area when playing with War Mode disabled."] = "전쟁 모드를 끈 상태로 플레이할 때 필드에서 사용합니다."
 L["Enable in War Mode"] = "전쟁 모드에서 사용"
 L["Enable Only in Combat"] = "전투 중에만 사용"
 L["End"] = "끝"
---[[Translation missing --]]
-L["Failed"] = "Failed"
+L["Failed"] = "실패"
 L["Feedback"] = "피드백"
 L["General"] = "일반"
 L["Heal"] = "치유"
@@ -91,8 +93,7 @@ L["OptionsMissing"] = "모듈을 찾을 수 없습니다. RSA 폴더를 삭제�
 L["Other Options"] = "기타 옵션"
 L["Party"] = "파티"
 L["Pet Dispels"] = "소환수 해제"
---[[Translation missing --]]
-L["Placed"] = "Placed"
+L["Placed"] = "놓임"
 L["PvE Options"] = "PvE 옵션"
 L["PvP Options"] = "PvP 옵션"
 L["Racials"] = "종족"
@@ -135,36 +136,23 @@ L["was evaded by"] = "was evaded by"
 L["was parried by"] = "was parried by"
 L["was resisted by"] = "저항함"
 L["When reporting an issue, please also post the revision number above. Thanks!"] = "문제를 보고할 때, 위 개정판 번호도 올려주세요. 감사합니다!"
---[[Translation missing --]]
-L["When the spell ends."] = "When the spell ends."
---[[Translation missing --]]
-L["When the spell failed."] = "When the spell failed."
---[[Translation missing --]]
-L["When the target is immune to your spell."] = "When the target is immune to your spell."
---[[Translation missing --]]
-L["When you absorb a debuff."] = "When you absorb a debuff."
---[[Translation missing --]]
-L["When you absorb damage."] = "When you absorb damage."
+L["When the spell ends."] = "주문이 끝났을 때입니다."
+L["When the spell failed."] = "주문이 실패했을 때입니다."
+L["When the target is immune to your spell."] = "대상이 주문에 면역인 경우입니다."
+L["When you absorb a debuff."] = "약화 효과를 흡수할 때입니다."
+L["When you absorb damage."] = "피해를 흡수할 때입니다."
 --[[Translation missing --]]
 L["When you cast Provoke on your Statue of the Black Ox."] = "When you cast Provoke on your Statue of the Black Ox."
---[[Translation missing --]]
-L["When you cast this spell."] = "When you cast this spell."
---[[Translation missing --]]
-L["When you deal damage."] = "When you deal damage."
+L["When you cast this spell."] = "이 주문을 시전할 때입니다."
+L["When you deal damage."] = "피해를 입힐 때입니다."
 --[[Translation missing --]]
 L["When you debuff a unit."] = "When you debuff a unit."
---[[Translation missing --]]
-L["When you dispel a buff or debuff."] = "When you dispel a buff or debuff."
---[[Translation missing --]]
-L["When you have placed this in the world."] = "When you have placed this in the world."
---[[Translation missing --]]
-L["When you heal."] = "When you heal."
---[[Translation missing --]]
-L["When you interrupt a spell cast."] = "When you interrupt a spell cast."
---[[Translation missing --]]
-L["When you start casting this spell or when this spell starts."] = "When you start casting this spell or when this spell starts."
---[[Translation missing --]]
-L["When your spell is resisted."] = "When your spell is resisted."
+L["When you dispel a buff or debuff."] = "강화 효과나 약화 효과를 해제할 때입니다."
+L["When you have placed this in the world."] = "이것을 필드에 놓았을 때입니다."
+L["When you heal."] = "치유할 때입니다."
+L["When you interrupt a spell cast."] = "주문 시전을 차단했을 때입니다."
+L["When you start casting this spell or when this spell starts."] = "이 주문을 시전하기 시작하거나 이 주문이 시작될 때입니다."
+L["When your spell is resisted."] = "주문이 저항당했을 때입니다."
 L["Whisper"] = "귓속말"
 L["Yell"] = "외침"
 L["You"] = "당신"
