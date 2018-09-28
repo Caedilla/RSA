@@ -303,6 +303,8 @@ local Options = {
 							name = "|cffFFCC00"..L["Remove Server Names"].."|r",
 							type = "toggle",
 							order = 110,
+							desc = L["Removes server name from |c5500DBBD[TARGET]|r tags."],
+							descStyle = "inline",
 							width = "double",
 							get = function(info)
 								return RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames
@@ -315,7 +317,7 @@ local Options = {
 							name = "|cffFFCC00"..L["Always allow Whispers"].."|r",
 							type = "toggle",
 							order = 110,
-							desc = L["Always allow whispers to be sent regardless of the rest of the settings on this page."],
+							desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
 							descStyle = "inline",
 							width = "double",
 							get = function(info)
@@ -2929,11 +2931,24 @@ local function Spell_Options(NonClass)
 							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Channel = value
 						end,
 					},
+					Instance = {
+						name = "|cff91BE0F"..L["Instance"].."|r",
+						type = "toggle",
+						order = 4,
+						desc = L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Instance"] then return true end end end,
+						get = function(info)
+							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Instance
+						end,
+						set = function (info, value)
+							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Instance = value
+						end,
+					},
 					Raid = {
 						name = "|cff91BE0F"..L["Raid"].."|r",
 						type = "toggle",
 						order = 4,
-						desc = L["|cff91BE0F/raid|r. Only for manually formed raid groups."] .. "\n" .. L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."],
+						desc = L["Sends a message to one of the following channels in order of priority:"] .. "\n" .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. "\n" .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
 						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Raid"] then return true end end end,
 						get = function(info)
 							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Raid
@@ -2946,7 +2961,7 @@ local function Spell_Options(NonClass)
 						name = "|cff91BE0F"..L["Party"].."|r",
 						type = "toggle",
 						order = 4,
-						desc = L["|cff91BE0F/party|r. Only for manually formed parties."] .. "\n" .. L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."],
+						desc = L["Sends a message to one of the following channels in order of priority:"] .. "\n" .. L["|cff91BE0F/party|r if you're in a manually formed group."] .. "\n" .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
 						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Party"] then return true end end end,
 						get = function(info)
 							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Party
@@ -2985,7 +3000,7 @@ local function Spell_Options(NonClass)
 						name = "|cffFFCC00"..L["Smart Group Channel"].."|r",
 						type = "toggle",
 						order = 7,
-						desc = L["|cff91BE0F/raid|r if you're in a raid."] .. "\n" .. L["|cff91BE0F/party|r if you're in a dungeon."] .. "\n" .. L["|cff91BE0F/instance|r if you're in a group finder group."],
+						desc = L["Sends a message to one of the following channels in order of priority:"] .. "\n" .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] .. "\n" .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. "\n" .. L["|cff91BE0F/party|r if you're in a manually formed group."],
 						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["SmartGroup"] then return true end end end,
 						get = function(info)
 							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].SmartGroup
@@ -3017,17 +3032,19 @@ local function Spell_Options(NonClass)
 		Options.args[Spells[i].Name].args.Message_Description.name = L["The following tags are available for use with this spell:"] .. TagList
 
 		-- Iterate Messages
-		for k=1,Spells[i].Message_Amount do -- Order message areas logically (i.e Start message is displayed before End message)
+		for k=1,Spells[i].Message_Amount do
 			local OrderVal
-			for n = 1,#Area_Orders do
+			for n = 1,#Area_Orders do -- Order message areas logically (i.e Start message is displayed before End message)
 				if Spells[i].Message_Areas[k] == Area_Orders[n] then
 					OrderVal = n
 				end
 			end
 			local Messages = {}
-			for _,v in pairs(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]]) do
-				if v ~= "" then
-					table.insert(Messages,v)
+			for _,v in pairs(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]]) do -- Add valid messages to list.
+				if string.match(v,"%w") then
+					if v ~= "" then
+						table.insert(Messages,v)
+					end
 				end
 			end
 			Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]] = {
@@ -3047,10 +3064,19 @@ local function Spell_Options(NonClass)
 						type = "input",
 						order = 10,
 						width = "full",
+						validate = function(info, value)
+							if value == "" then return true end -- Pressed enter without entering anything, we don't need to warn about this.
+							if not string.match(value,"%w") then
+								RSA.Print_Self(L["Your message must contain at least one number or letter!"])
+								return L["Your message must contain at least one number or letter!"]
+							else
+								return true
+							end
+						end,
 						set = function(info, value)
-							if value == " " then return end
 							table.insert(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]],value)
 							RSA:UpdateOptions()
+							RSA.WipeMessageCache()
 						end,
 					},
 					List_Description = {
@@ -3089,6 +3115,15 @@ local function Spell_Options(NonClass)
 					width = "full",
 					name = tostring(l),
 					order = 20,
+					validate = function(info, value)
+						if value == "" then return true end
+						if not string.match(value,"%w") then
+							RSA.Print_Self(L["Your message must contain at least one number or letter!"])
+							return L["Your message must contain at least one number or letter!"]
+						else
+							return true
+						end
+					end,
 					get = function(info)
 						if RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] == "" then
 							table.remove(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]],l)
@@ -3103,6 +3138,7 @@ local function Spell_Options(NonClass)
 							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] = value
 						end
 						RSA:UpdateOptions()
+						RSA.WipeMessageCache()
 					end,
 				}
 			end

@@ -172,7 +172,6 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 		end
 	end
 
-
 	RSA.Comm.Registry()
 end -- End OnInitialize
 
@@ -198,70 +197,69 @@ function RSA.String_Replace(str) -- Used for custom messages to replace text.
 end
 
 function RSA.Print_Self(message) -- Send a message to your default chat window.
-	if message == "" or message == " " then return end
 	ChatFrame1:AddMessage("|cFFFF75B3RSA:|r " .. format(message))
 end
 
 function RSA.Print_LibSink(message)
-	if message == "" or message == " " then return end
 	RSA:Pour("|cFFFF75B3RSA:|r " .. message, 1, 1, 1)
 end
 
-function RSA.Print_SmartGroup(message) -- Send a message to /instance, /raid, /party, or nothing, depending on group size or location.
-	if message == "" or message == " " then return end
-	local InInstance, InstanceType = IsInInstance()
-	local Announced = false
-	if RSA.AnnouncementCheck() == true then
-		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) or IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then -- If player is in an instance group
-			if RSA.db.profile.General.GlobalAnnouncements.InLFG_Party == true or RSA.db.profile.General.GlobalAnnouncements.InLFG_Raid == true then
-				SendChatMessage(format(message), "INSTANCE_CHAT", nil)
-				Announced = true
-			else
-				Announced = true -- Don't announce if LFG Announcements disabled by user.
-			end
-		return end
-		if InstanceType == "pvp" or InstanceType == "arena" and Announced == false then -- PVP and arenas
-			SendChatMessage(format(message), "INSTANCE_CHAT", nil)
-			Announced = true
-		return end
-		if GetNumGroupMembers() > 0 and Announced == false then -- Any other situation of RAID or GROUP
-			if IsInRaid(LE_PARTY_CATEGORY_HOME) then
-				SendChatMessage(format(message), "RAID", nil)
-				Announced = true
-			elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-				SendChatMessage(format(message), "PARTY", nil)
-				Announced = true
-			end
-		return end
+function RSA.Print_Instance(message) -- Send a message to /instance.
+	if RSA.AnnouncementCheck() == false then return end
+	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) or IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then
+		SendChatMessage(format(message), "INSTANCE_CHAT", nil)
+		return true
 	end
 end
 
-function RSA.Print_Raid(message) -- Send a message to raid or an LFR instance. Additionally, will not try to send a message if in a Battleground or Arena.
-	if message == "" or message == " " then return end
-	local InInstance, InstanceType = IsInInstance()
-	if RSA.AnnouncementCheck() == true and InstanceType ~= "pvp" and InstanceType ~= "arena" then
-		if IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then
-			SendChatMessage(format(message), "INSTANCE_CHAT", nil)
-		elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
+function RSA.Print_SmartGroup(message) -- Send a message to /instance, /raid, or /party in that order of priority.
+	if RSA.AnnouncementCheck() == false then return end
+	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) or IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then
+		SendChatMessage(format(message), "INSTANCE_CHAT", nil)
+	elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
+		SendChatMessage(format(message), "RAID", nil)
+	elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
+		SendChatMessage(format(message), "PARTY", nil)
+	end
+end
+
+function RSA.Print_Raid(message) -- Send a message to /raid or /instance. Prefers /raid if you are in an instance raid group and a home raid group.
+	if RSA.AnnouncementCheck() == false then return end
+	if IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then
+		if IsInRaid(LE_PARTY_CATEGORY_HOME) then
 			SendChatMessage(format(message), "RAID", nil)
+			return true
+		else
+			SendChatMessage(format(message), "INSTANCE_CHAT", nil)
+			return true
 		end
+	elseif IsInRaid(LE_PARTY_CATEGORY_HOME) then
+		SendChatMessage(format(message), "RAID", nil)
+		return true
 	end
 end
 
-function RSA.Print_Party(message) -- Send a message to 5-man instance or a party. Additionally, will not try to send a message if in a Battleground.
-	if message == "" or message == " " then return end
-	local InInstance, InstanceType = IsInInstance()
-	if RSA.AnnouncementCheck() == true and InstanceType ~= "pvp" then
-		if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
-			SendChatMessage(format(message), "INSTANCE_CHAT", nil)
-		elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-			SendChatMessage(format(message), "PARTY", nil)
-		end
+function RSA.Print_Party(message) -- Send a message to /party or /instance. Prefers /party if you are in an instance raid group and a home raid group.
+	if RSA.AnnouncementCheck() == false then return end
+	if IsInRaid(LE_PARTY_CATEGORY_INSTANCE) and IsInGroup(LE_PARTY_CATEGORY_HOME) then -- In LFR, and Home Party
+		SendChatMessage(format(message), "PARTY", nil)
+		return true
+	elseif IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then -- In LFR
+		SendChatMessage(format(message), "INSTANCE_CHAT", nil)
+		return true
+	elseif IsInGroup(LE_PARTY_CATEGORY_INSTANCE) and IsInGroup(LE_PARTY_CATEGORY_HOME) then -- In LFG, and Home Party
+		SendChatMessage(format(message), "PARTY", nil)
+		return true
+	elseif IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then -- In LFG
+		SendChatMessage(format(message), "INSTANCE_CHAT", nil)
+		return true
+	elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
+		SendChatMessage(format(message), "PARTY", nil)
+		return true
 	end
 end
 
 function RSA.Print_Channel(message, channel) -- Send a message to the custom channel that the user defines.
-	if message == "" or message == " " then return end
 	if RSA.AnnouncementCheck() == true then
 		if RSA.db.profile.General.GlobalAnnouncements.SmartCustomChannel == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
@@ -274,7 +272,6 @@ function RSA.Print_Channel(message, channel) -- Send a message to the custom cha
 end
 
 function RSA.Print_Say(message) -- Send a message to Say.
-	if message == "" or message == " " then return end
 	if RSA.AnnouncementCheck() == true then
 		if RSA.db.profile.General.GlobalAnnouncements.SmartSay == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
@@ -287,7 +284,6 @@ function RSA.Print_Say(message) -- Send a message to Say.
 end
 
 function RSA.Print_Emote(message) -- Send a message to Say.
-	if message == "" or message == " " then return end
 	if RSA.AnnouncementCheck() == true then
 		if RSA.db.profile.General.GlobalAnnouncements.SmartEmote == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
@@ -300,7 +296,6 @@ function RSA.Print_Emote(message) -- Send a message to Say.
 end
 
 function RSA.Print_Yell(message) -- Send a message to Yell.
-	if message == "" or message == " " then return end
 	if RSA.AnnouncementCheck() == true then
 		if RSA.db.profile.General.GlobalAnnouncements.SmartYell == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
@@ -313,20 +308,17 @@ function RSA.Print_Yell(message) -- Send a message to Yell.
 end
 
 function RSA.Print_Self_RW(message) -- Send a message locally to the raid warning frame. Only visible to the user.
-	if message == "" or message == " " then return end
 	local RWColor = {r=1, g=1, b=1}
 	RaidNotice_AddMessage(RaidWarningFrame, "|cFFFF75B3RSA:|r " .. format(message), RWColor)
 end
 
 function RSA.Print_RW(message) -- Send a proper message to the raid warning frame.
-	if message == "" or message == " " then return end
 	if RSA.AnnouncementCheck() == true then
 		SendChatMessage(format(message), "RAID_WARNING", nil)
 	end
 end
 
 function RSA.Print_Whisper(message, target) -- Send a whisper to the target.
-	if message == "" or message == " " then return end
 	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then 
 		if RSA.AnnouncementCheck() == false then return end
 	end
