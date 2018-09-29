@@ -1209,7 +1209,7 @@ local function Mage_Options()
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
 		["RemoveCurse"] = {
-			Profile = "RemoveCurse", -- Consume Magic
+			Profile = "RemoveCurse",
 			Name = GetSpellInfo(475),
 			Desc = GetSpellDescription(475),
 			Message_Amount = 1,
@@ -1959,6 +1959,15 @@ local function Rogue_Options()
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
+		["Shiv"] = {
+			Profile = "Shiv",
+			Name = GetSpellInfo(248744),
+			Desc = GetSpellDescription(248744),
+			Message_Amount = 1,
+			Message_Areas = {"Dispel"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
 	}
 	return Spells
@@ -3164,8 +3173,6 @@ local function Spell_Options(NonClass)
 	end
 	return Options
 end
-
-
 
 local function LibSink_Options()
 	Options.args.General.args.Output = RSA_O:GetSinkAce3OptionsDataTable() -- Add LibSink Options.

@@ -17,6 +17,13 @@ function RSA_Rogue:OnEnable()
 	local pName = UnitName("player")
 	local MonitorConfig_Rogue = {
 		player_profile = RSA.db.profile.Rogue,
+		SPELL_DISPEL = {
+			[248744] = { -- Shiv
+				profile = 'Shiv',
+				section = "Dispel",
+				replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
+			},
+		},
 		SPELL_CAST_SUCCESS = {
 			[76577] = { -- SMOKE BOMB
 				profile = 'SmokeBomb'
@@ -26,7 +33,6 @@ function RSA_Rogue:OnEnable()
 				section = 'Cast',
 				replacements = { TARGET = 1 }
 			},
-			
 		},
 		SPELL_AURA_APPLIED = {
 			[6770] = { -- SAP

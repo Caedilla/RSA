@@ -1815,6 +1815,14 @@ local function Rogue()
 					Channel = "",
 				},
 			},
+			Shiv = {
+				Messages = {
+					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Rogue
