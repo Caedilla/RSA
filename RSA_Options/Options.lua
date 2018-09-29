@@ -727,6 +727,15 @@ local function DemonHunter_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
+		["Imprison"] = {
+			Profile = "Imprison",
+			Name = GetSpellInfo(217832),
+			Desc = GetSpellDescription(217832),
+			Message_Amount = 4,
+			Message_Areas = {"Start", "End", "Resist", "Immune"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
+		},
 	}
 	return Spells
 end
@@ -3184,7 +3193,6 @@ function RSA_O:OnInitialize()
 	Options.args.profiles = Profiles
 	Options.args.profiles.order = 99
 	AddOptions()
-	--self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("RSA", "RSA")
 	LibStub("AceConfigDialog-3.0"):SetDefaultSize("RSA",1000,725)
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")

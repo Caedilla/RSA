@@ -460,6 +460,17 @@ local function DemonHunter()
 				},
 				Local = true,
 			},
+			Imprison = {
+				Messages = {
+					Start = {"Casting [LINK] on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
+					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return DemonHunter
@@ -891,7 +902,7 @@ local function Mage()
 			},
 			Polymorph = {
 				Messages = {
-					Start = {"Castint [LINK] on [TARGET]!"},
+					Start = {"Casting [LINK] on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
 					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},

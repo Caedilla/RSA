@@ -99,6 +99,10 @@ function RSA_DemonHunter:OnEnable()
 				profile = 'FelEruption',
 				replacements = { TARGET = 1 }
 			},
+			[217832] = { -- Imprison
+				profile = 'Imprison',
+				replacements = { TARGET = 1 }
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[188501] = { -- SPECTRAL SIGHT
@@ -167,6 +171,11 @@ function RSA_DemonHunter:OnEnable()
 				section = 'End',
 				replacements = { TARGET = 1 }
 			},
+			[217832] = { -- Imprison
+				profile = 'Imprison',
+				section = 'End',
+				replacements = { TARGET = 1 }
+			},
 		},
 		SPELL_INTERRUPT = {
 			[183752] = { -- CONSUME MAGIC
@@ -201,6 +210,12 @@ function RSA_DemonHunter:OnEnable()
 				section = 'Resist',
 				immuneSection = "Immune",
 				replacements = { TARGET = 1, MISSTYPE = 1 },
+			},
+			[217832] = { -- Imprison
+				profile = 'Imprison',
+				section = 'Resist',
+				immuneSection = "Immune",
+				replacements = { TARGET = 1 }
 			},
 		},
 	}
