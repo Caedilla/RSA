@@ -17,6 +17,7 @@ function RSA_Mage:OnEnable()
 	local pName = UnitName("player")
 	local Config_Polymorph = { -- POLYMORPH
 		profile = 'Polymorph',
+		section = "Cast",
 		replacements = { TARGET = 1 }
 	}
 	local Config_Polymorph_End = { -- POLYMORPH

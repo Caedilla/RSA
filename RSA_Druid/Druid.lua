@@ -113,6 +113,11 @@ function RSA_Druid:OnEnable()
 				profile = 'MassEntanglement',
 				tracker = 2
 			},
+			[2637] = { -- Hibernate
+				profile = 'Hibernate',
+				replacements = { TARGET = 1 },
+				section = "Cast",
+			},
 		},
 		SPELL_CAST_START = {
 			[212040] = { -- REVITALIZE
@@ -218,6 +223,11 @@ function RSA_Druid:OnEnable()
 				section = "End",
 				tracker = 1
 			},
+			[2637] = { -- Hibernate
+				profile = 'Hibernate',
+				replacements = { TARGET = 1 },
+				section = "End",
+			},
 		},
 		SPELL_INTERRUPT = {
 			--[[[32747] = { -- FAE SILENCE (spell id is general interrupt)
@@ -248,6 +258,12 @@ function RSA_Druid:OnEnable()
 				section = 'Resist',
 				immuneSection = "Immune",
 				replacements = { TARGET = 1, MISSTYPE = 1 },
+			},
+			[2637] = { -- Hibernate
+				profile = 'Hibernate',
+				replacements = { TARGET = 1 },
+				section = 'Resist',
+				immuneSection = "Immune",
 			},
 		},
 	}

@@ -462,7 +462,7 @@ local function DemonHunter()
 			},
 			Imprison = {
 				Messages = {
-					Start = {"Casting [LINK] on [TARGET]!"},
+					Cast = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
 					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
@@ -723,6 +723,17 @@ local function Druid()
 					Channel = "",
 				},
 			},
+			Hibernate = {
+				Messages = {
+					Cast = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
+					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		}
 	}
 	return Druid
@@ -902,7 +913,7 @@ local function Mage()
 			},
 			Polymorph = {
 				Messages = {
-					Start = {"Casting [LINK] on [TARGET]!"},
+					Cast = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
 					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},

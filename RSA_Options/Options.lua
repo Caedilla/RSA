@@ -732,7 +732,7 @@ local function DemonHunter_Options()
 			Name = GetSpellInfo(217832),
 			Desc = GetSpellDescription(217832),
 			Message_Amount = 4,
-			Message_Areas = {"Start", "End", "Resist", "Immune"},
+			Message_Areas = {"Cast", "End", "Resist", "Immune"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
@@ -967,6 +967,15 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
+		["Hibernate"] = {
+			Profile = "Hibernate",
+			Name = GetSpellInfo(2637),
+			Desc = GetSpellDescription(2637),
+			Message_Amount = 4,
+			Message_Areas = {"Cast", "End", "Resist", "Immune"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
+		},
 	}
 	return Spells
 end
@@ -1124,7 +1133,7 @@ local function Mage_Options()
 			Name = GetSpellInfo(118),
 			Desc = GetSpellDescription(118),
 			Message_Amount = 4,
-			Message_Areas = {"Start", "End", "Resist", "Immune"},
+			Message_Areas = {"Cast", "End", "Resist", "Immune"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},

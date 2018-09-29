@@ -101,6 +101,7 @@ function RSA_DemonHunter:OnEnable()
 			},
 			[217832] = { -- Imprison
 				profile = 'Imprison',
+				section = "Cast",
 				replacements = { TARGET = 1 }
 			},
 		},
