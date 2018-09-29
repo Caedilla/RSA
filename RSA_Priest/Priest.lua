@@ -152,11 +152,6 @@ function RSA_Priest:OnEnable()
 				profile = 'MassRess',
 				section = 'End'
 			},
-			[2006] = { -- Resurrection
-				profile = 'Resurrection',
-				section = 'End',
-				replacements = { TARGET = 1 },
-			},
 			[73325] = { -- LEAP OF FAITH
 				profile = 'LeapOfFaith',
 				section = "Cast",
