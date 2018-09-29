@@ -3147,6 +3147,8 @@ local function Spell_Options(NonClass)
 	return Options
 end
 
+
+
 local function LibSink_Options()
 	Options.args.General.args.Output = RSA_O:GetSinkAce3OptionsDataTable() -- Add LibSink Options.
 	Options.args.General.args.Output.args.Channel = nil -- Hide Channel options, we don't want those.
@@ -3182,7 +3184,7 @@ function RSA_O:OnInitialize()
 	Options.args.profiles = Profiles
 	Options.args.profiles.order = 99
 	AddOptions()
-	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("RSA", "RSA")
+	--self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("RSA", "RSA")
 	LibStub("AceConfigDialog-3.0"):SetDefaultSize("RSA",1000,725)
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")

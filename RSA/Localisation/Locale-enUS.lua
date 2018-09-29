@@ -133,3 +133,4 @@ L["Sends a message to one of the following channels in order of priority:"] = tr
 L["|cff91BE0F/raid|r if you're in a manually formed raid."] = true
 L["|cff91BE0F/party|r if you're in a manually formed group."] = true
 L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] = true
+L["Open Configuration Panel"] = true

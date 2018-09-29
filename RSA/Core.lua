@@ -28,6 +28,7 @@ function RSA:OnInitialize() -- Do all this when the addon loads.
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")
 
 	self:RegisterChatCommand("RSA", "ChatCommand")
+	RSA:TempOptions()
 
 	-- Profile Management
 	self.db.RegisterCallback(self, "OnProfileChanged", "RefreshConfig")
@@ -283,7 +284,7 @@ function RSA.Print_Say(message) -- Send a message to Say.
 	end
 end
 
-function RSA.Print_Emote(message) -- Send a message to Say.
+function RSA.Print_Emote(message) -- Send a message to Emote.
 	if RSA.AnnouncementCheck() == true then
 		if RSA.db.profile.General.GlobalAnnouncements.SmartEmote == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
@@ -322,7 +323,7 @@ function RSA.Print_Whisper(message, target) -- Send a whisper to the target.
 	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then 
 		if RSA.AnnouncementCheck() == false then return end
 	end
-		SendChatMessage(format(message), "WHISPER", nil, target)
+	SendChatMessage(format(message), "WHISPER", nil, target)
 end
 
 local bor,band = bit.bor, bit.band -- get a local reference to some bitlib functions for faster lookups
@@ -348,7 +349,7 @@ function RSA.AffiliationGroup(sourceFlags)
 	if band(COMBATLOG_OBJECT_AFFILIATION_PARTY,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_PARTY then
 		return true
 	end
-	if band(COMBATLOG_OBJECT_AFFILIATION_PARTY,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_PARTY then
+	if band(COMBATLOG_OBJECT_AFFILIATION_RAID,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_RAID then
 		return true
 	end	
 end
@@ -386,12 +387,6 @@ function RSA.Talents() -- Detects which talent tree a user has primarily.
 	end
 end
 
-function RSA.CanAnnounce() -- If we are the Raid or Party Leader, or If we have assist in a raid, used for Leader section of General Announcements. TODO: Improve upon this vastly so we can never potentially have multiple raid assistants announcing.
-	if UnitIsGroupLeader(pName) then return true end
-	if UnitIsGroupAssistant(pName) then return true end
-	return false
-end
-
 function RSA.GetMyRandomNumber()
 	local random = math.random(1,time())
 	local namebytes = 0
@@ -400,19 +395,6 @@ function RSA.GetMyRandomNumber()
     end
     local random = tostring(random) .. tostring(namebytes)
 	return random
-end
-
-function RSA.SetBonus(Name) -- Returns the number of items we are wearing of a set passed in the first argument. This would be a table in the class module.
-	local Equipped = 0
-	local items = RSA.ItemSets[Name]
-	if items then
-		for i = 1,#items do
-			if IsEquippedItem(items[i]) then
-				Equipped = Equipped + 1
-			end
-		end
-	end
-	return Equipped
 end
 
 function RSA.GetMobID(mobGUID) -- extracts the mob ID from the GUID
