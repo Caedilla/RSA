@@ -5,20 +5,22 @@ Easy spell announcements
 <https://www.curseforge.com/wow/addons/rsa>
 
 ## About
-RSA is an addon that can announce spell casts to various chat channels. It supports all classes, and abilities such as interrupts, defensive cooldowns, and utility spells e.g Soulstone.
+RSA is an addon that can announce spell casts to various chat channels. There is a large selection of abilities for each class that RSA can announce, such  as interrupts, defensive cooldowns, and utility spells e.g Soulstone.
 
 ## Options
+You can open RSA's configuration window by typing **/rsa** in chat. You can alternatively go to the addon settings tab in the Interface options, and find RSA in your list of addons, which has a button to open RSA's configuration panel.
 ### Announcement Conditions
 You can configure RSA to only send messages when you are doing certain content or under certain conditions:
 * **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode (BFA).
 * **PvE:** Choose whether to enable in manually formed Dungeons, Raids, LFG Dungeons, LFG Raids, or out in the world when War Mode is off.
 * Choose whether to only announce in Combat
+* Whispers can be set to ignore the PvP & PvE settings to allow them to always whisper targets. Useful if you always want to let someone know when you're resurrecting them for example.
 
 ### Messages
-The messages sent by RSA are completely customisable, you can add several messages (as of BFA) for each announcement, and RSA will choose a random one to use each time.
-    You can remove messages by simply clearing the box containing your message and pressing enter, this will remove it from the list of potential messages.
-    If you have no messages for a given spell or section, then it will not announce.
-    You can use the Tags below in your messages to make your messages more informative.
+* The messages sent by RSA are completely customisable, you can add several messages (as of BFA) for each announcement, and RSA will choose a random one to use each time.
+* You can remove messages by simply clearing the box containing your message and pressing enter, this will remove it from the list of potential messages.
+* If you have no messages for a given spell or section, then it will not announce.
+* You can use the Tags below in your messages to make your messages more informative.
     
 ### Tags
 Every spell uses the first two tags, other tags are usable only on spells where they would return anything useful.
@@ -37,9 +39,10 @@ Every spell uses the first two tags, other tags are usable only on spells where 
 Each spell can be announced in a variety of different channels:
 
 * **Local** - Sends a message locally only visible to you. You can choose which part of your UI this is sent to in the Local Message Output Area in the General Options.
-* **Raid** - Sends to /raid if you're in a raid group.
-* **Party** -Sends to /party if you're in a party or raid group.
-* **Smart Group Channel** - /raid if you're in a manually formed raid group, /party if you're in a manually formed party, or /instance if you're in a group finder dungeon/raid/battleground/arena.
+* **Instance** - Sends to /instance if you're in an instance group.
+* **Raid** - Sends to /raid or /instance depending on what is most appropriate.
+* **Party** -Sends to /party or /instance depending on what is most appropriate.
+* **Smart Group Channel** - Sends to /instance, /raid, or /party depending on what is most appropriate.
 * **Say**
 * **Emote**
 * **Yell**
