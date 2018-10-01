@@ -11,6 +11,7 @@ RSA is an addon that can announce spell casts to various chat channels. There is
 You can open RSA's configuration window by typing **/rsa** in chat. You can alternatively go to the addon settings tab in the Interface options, and find RSA in your list of addons, which has a button to open RSA's configuration panel.
 ### Announcement Conditions
 You can configure RSA to only send messages when you are doing certain content or under certain conditions:
+
 * **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode (BFA).
 * **PvE:** Choose whether to enable in manually formed Dungeons, Raids, LFG Dungeons, LFG Raids, or out in the world when War Mode is off.
 * Choose whether to only announce in Combat
