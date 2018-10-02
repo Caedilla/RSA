@@ -13,18 +13,18 @@ L[" Refreshed!"] = " 刷新！"
 --[[Translation missing --]]
 L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."] = " RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."
 --[[Translation missing --]]
-L["|cff91BE0F/instance|r if you're in a group finder group."] = "|cff91BE0F/instance|r if you're in a group finder group."
+L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] = "|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."
 --[[Translation missing --]]
-L["|cff91BE0F/party|r if you're in a dungeon."] = "|cff91BE0F/party|r if you're in a dungeon."
+L["|cff91BE0F/party|r if you're in a manually formed group."] = "|cff91BE0F/party|r if you're in a manually formed group."
 --[[Translation missing --]]
-L["|cff91BE0F/party|r. Only for manually formed parties."] = "|cff91BE0F/party|r. Only for manually formed parties."
---[[Translation missing --]]
-L["|cff91BE0F/raid|r if you're in a raid."] = "|cff91BE0F/raid|r if you're in a raid."
---[[Translation missing --]]
-L["|cff91BE0F/raid|r. Only for manually formed raid groups."] = "|cff91BE0F/raid|r. Only for manually formed raid groups."
+L["|cff91BE0F/raid|r if you're in a manually formed raid."] = "|cff91BE0F/raid|r if you're in a manually formed raid."
 --[[Translation missing --]]
 L["|cffFFCC00Whispers|r the target of the spell."] = "|cffFFCC00Whispers|r the target of the spell."
 L["Add New Message"] = "添加新信息"
+--[[Translation missing --]]
+L["Always allow Whispers"] = "Always allow Whispers"
+--[[Translation missing --]]
+L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."] = "Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."
 --[[Translation missing --]]
 L["Announce to custom channels only while you are in a manually formed group."] = "Announce to custom channels only while you are in a manually formed group."
 --[[Translation missing --]]
@@ -49,8 +49,6 @@ L["Debuff"] = "Debuff"
 --[[Translation missing --]]
 L["Dispel"] = "Dispel"
 --[[Translation missing --]]
-L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."
---[[Translation missing --]]
 L["EffectAbsorb"] = "Absorbed Debuff"
 L["Emote"] = "表情"
 L["Enable Buff Reminder Module"] = "启用增益提醒模组"
@@ -69,11 +67,11 @@ L["Enable in Raid Instances"] = "启用于团队副本"
 --[[Translation missing --]]
 L["Enable in scenario instances."] = "Enable in scenario instances."
 L["Enable in Scenarios"] = "启用于事件中"
+--[[Translation missing --]]
+L["Enable in the non-instanced world area when playing with War Mode disabled."] = "Enable in the non-instanced world area when playing with War Mode disabled."
 L["Enable in the World"] = "启用于世界环境"
 --[[Translation missing --]]
 L["Enable in the world area if you have War Mode active."] = "Enable in the world area if you have War Mode active."
---[[Translation missing --]]
-L["Enable in the world area when playing with War Mode disabled."] = "Enable in the world area when playing with War Mode disabled."
 L["Enable in War Mode"] = "在战争模式中开启"
 L["Enable Only in Combat"] = "仅战斗中开启"
 L["End"] = "结束"
@@ -90,6 +88,8 @@ L["If you encounter a bug, or have a feature request, please file a ticket on Cu
 L["Immune"] = "免疫"
 --[[Translation missing --]]
 L["In Game"] = "In Game"
+--[[Translation missing --]]
+L["Instance"] = "Instance"
 L["Interrupt"] = "中断"
 --[[Translation missing --]]
 L["Invite Link"] = "Invite Link"
@@ -131,6 +131,8 @@ L["PvP Options"] = "PVP 选项"
 L["Racials"] = "Racials"
 L["Raid"] = "团队"
 L["Remove Server Names"] = "移除服务器名称"
+--[[Translation missing --]]
+L["Removes server name from |c5500DBBD[TARGET]|r tags."] = "Removes server name from |c5500DBBD[TARGET]|r tags."
 L["Resist"] = "抵抗"
 --[[Translation missing --]]
 L["RSA on Curseforge"] = "RSA on Curseforge"
@@ -138,6 +140,8 @@ L["Say"] = "说"
 L["Send to player created channel."] = "发送到玩家创建频道"
 --[[Translation missing --]]
 L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."] = "Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."
+--[[Translation missing --]]
+L["Sends a message to one of the following channels in order of priority:"] = "Sends a message to one of the following channels in order of priority:"
 L["Smart Channel Options"] = "智能频道选项"
 L["Smart Custom Channel"] = "智能自订频道"
 --[[Translation missing --]]
@@ -212,5 +216,7 @@ L["You"] = "你"
 L["You have "] = "You have "
 --[[Translation missing --]]
 L["You have no messages for this section."] = "You have no messages for this section."
+--[[Translation missing --]]
+L["Your message must contain at least one number or letter!"] = "Your message must contain at least one number or letter!"
 --[[Translation missing --]]
 L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = "Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"

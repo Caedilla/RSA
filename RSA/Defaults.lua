@@ -527,6 +527,14 @@ local function Druid()
 					Channel = "",
 				},
 			},
+			Treants = {
+				Messages = {
+					Cast = {"[LINK] activated!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 			Ironbark = {
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},
@@ -1492,6 +1500,15 @@ local function Priest()
 				Whisper = true,
 			},
 			DivineHymn = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			Apotheosis = {
 				Messages = {
 					Start = {"[LINK] activated!"},
 					End = {"[LINK] ended!"},

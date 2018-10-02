@@ -137,6 +137,10 @@ function RSA_Druid:OnEnable()
 				profile = 'UrsolsVortex',
 				section = "Cast"
 			},
+			[205636] = { -- Force of Nature
+				profile = 'Treants',
+				section = "Cast"
+			},
 			[740] = { -- TRANQUILITY
 				profile = 'Tranquility'
 			},

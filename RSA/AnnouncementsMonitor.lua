@@ -136,6 +136,7 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 	if #ValidMessages == 0 then return end
 	local message = ValidMessages[math.random(#ValidMessages)]
 	if not message then return end
+	message = gsub(message,"%%","%%%%")
 
 	-- Build Spell Name and Link Cache
 	if spell_data.linkID ~= nil then

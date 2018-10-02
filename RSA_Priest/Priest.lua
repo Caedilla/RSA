@@ -167,6 +167,9 @@ function RSA_Priest:OnEnable()
 			[64843] = { -- DIVINE HYMN
 				profile = 'DivineHymn'
 			},
+			[200183] = {
+				profile = 'Apotheosis'
+			},
 			[1706] = { -- LEVITATE
 				profile = 'Levitate',
 				replacements = { TARGET = 1 }
@@ -217,6 +220,10 @@ function RSA_Priest:OnEnable()
 			},
 			[64843] = { -- DIVINE HYMN
 				profile = 'DivineHymn',
+				section = 'End'
+			},
+			[200183] = {
+				profile = 'Apotheosis',
 				section = 'End'
 			},
 			[111759] = { -- LEVITATE

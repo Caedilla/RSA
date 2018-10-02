@@ -2,8 +2,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "deDE")
 if not L then return end
 --[[Translation missing --]]
 L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = " If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."
---[[Translation missing --]]
-L[" is disabled. If you want to configure RSA, you need to enable it."] = " is disabled. If you want to configure RSA, you need to enable it."
+L[" is disabled. If you want to configure RSA, you need to enable it."] = "ist abgeschaltet. Falls du RSA konfigurieren möchtest, musst du dies aktivieren. "
 L[" is Missing!"] = " fehlt!"
 --[[Translation missing --]]
 L[" message for this section."] = " message for this section."
@@ -13,26 +12,22 @@ L[" Refreshed!"] = " erneuert!"
 --[[Translation missing --]]
 L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."] = " RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."
 --[[Translation missing --]]
-L["|cff91BE0F/instance|r if you're in a group finder group."] = "|cff91BE0F/instance|r if you're in a group finder group."
+L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] = "|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."
 --[[Translation missing --]]
-L["|cff91BE0F/party|r if you're in a dungeon."] = "|cff91BE0F/party|r if you're in a dungeon."
+L["|cff91BE0F/party|r if you're in a manually formed group."] = "|cff91BE0F/party|r if you're in a manually formed group."
 --[[Translation missing --]]
-L["|cff91BE0F/party|r. Only for manually formed parties."] = "|cff91BE0F/party|r. Only for manually formed parties."
---[[Translation missing --]]
-L["|cff91BE0F/raid|r if you're in a raid."] = "|cff91BE0F/raid|r if you're in a raid."
---[[Translation missing --]]
-L["|cff91BE0F/raid|r. Only for manually formed raid groups."] = "|cff91BE0F/raid|r. Only for manually formed raid groups."
+L["|cff91BE0F/raid|r if you're in a manually formed raid."] = "|cff91BE0F/raid|r if you're in a manually formed raid."
 --[[Translation missing --]]
 L["|cffFFCC00Whispers|r the target of the spell."] = "|cffFFCC00Whispers|r the target of the spell."
---[[Translation missing --]]
-L["Add New Message"] = "Add New Message"
+L["Add New Message"] = "Neue Nachricht hinzufügen."
+L["Always allow Whispers"] = "Flüstern immer erlauben"
+L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."] = "Immer erlauben, Flüster zu senden. Hierbei werden die PvP- und PvE-Optionen auf dieser Seite ignoriert. "
 --[[Translation missing --]]
 L["Announce to custom channels only while you are in a manually formed group."] = "Announce to custom channels only while you are in a manually formed group."
 --[[Translation missing --]]
 L["Cast"] = "Cast"
 L["Channel Name"] = "Channelname"
---[[Translation missing --]]
-L["Class Abilities"] = "Class Abilities"
+L["Class Abilities"] = "Klassenfähigkeiten"
 --[[Translation missing --]]
 L["Configuring"] = "Configuring"
 L["Corpse of "] = "Leichnam von "
@@ -50,19 +45,14 @@ L["Debuff"] = "Debuff"
 --[[Translation missing --]]
 L["Dispel"] = "Dispel"
 --[[Translation missing --]]
-L["Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."] = "Doesn't do anything in group finder parties, use |cffFFCC00Instance|r or |cffFFCC00Smart Group Channel|r for that."
---[[Translation missing --]]
 L["EffectAbsorb"] = "Absorbed Debuff"
 --[[Translation missing --]]
 L["Emote"] = "Emote"
 --[[Translation missing --]]
 L["Enable Buff Reminder Module"] = "Enable Buff Reminder Module"
---[[Translation missing --]]
-L["Enable in Arenas"] = "Enable in Arenas"
---[[Translation missing --]]
-L["Enable in Battlegrounds"] = "Enable in Battlegrounds"
---[[Translation missing --]]
-L["Enable in Dungeons"] = "Enable in Dungeons"
+L["Enable in Arenas"] = "In Arenen aktivieren"
+L["Enable in Battlegrounds"] = "Auf Schlachtfeldern aktivieren"
+L["Enable in Dungeons"] = "In Instanzen aktivieren"
 --[[Translation missing --]]
 L["Enable in Group Finder Dungeons"] = "Enable in Group Finder Dungeons"
 --[[Translation missing --]]
@@ -71,37 +61,27 @@ L["Enable in Group Finder Raids"] = "Enable in Group Finder Raids"
 L["Enable in manually formed dungeon groups."] = "Enable in manually formed dungeon groups."
 --[[Translation missing --]]
 L["Enable in manually formed raid groups."] = "Enable in manually formed raid groups."
---[[Translation missing --]]
-L["Enable in Raid Instances"] = "Enable in Raid Instances"
+L["Enable in Raid Instances"] = "In Raidinstanzen aktivieren"
 --[[Translation missing --]]
 L["Enable in scenario instances."] = "Enable in scenario instances."
---[[Translation missing --]]
-L["Enable in Scenarios"] = "Enable in Scenarios"
+L["Enable in Scenarios"] = "In Szenarien aktivieren"
+L["Enable in the non-instanced world area when playing with War Mode disabled."] = "In nicht-instanzierten Weltgebieten aktivieren, wenn der Kriegsmodus abgeschaltet ist. "
 --[[Translation missing --]]
 L["Enable in the World"] = "Enable in the World"
---[[Translation missing --]]
-L["Enable in the world area if you have War Mode active."] = "Enable in the world area if you have War Mode active."
---[[Translation missing --]]
-L["Enable in the world area when playing with War Mode disabled."] = "Enable in the world area when playing with War Mode disabled."
---[[Translation missing --]]
-L["Enable in War Mode"] = "Enable in War Mode"
---[[Translation missing --]]
-L["Enable Only in Combat"] = "Enable Only in Combat"
+L["Enable in the world area if you have War Mode active."] = "In den Weltgebieten aktivieren, wenn du den Kriegsmodus angeschaltet hast. "
+L["Enable in War Mode"] = "Im Kriegsmodus aktivieren"
+L["Enable Only in Combat"] = "Nur im Kampf aktivieren"
 L["End"] = "Ende"
---[[Translation missing --]]
-L["Failed"] = "Failed"
+L["Failed"] = "Fehlgeschlagen"
 --[[Translation missing --]]
 L["Feedback"] = "Feedback"
---[[Translation missing --]]
-L["General"] = "General"
+L["General"] = "Allgemeines"
 L["Heal"] = "Heilung"
---[[Translation missing --]]
-L["I have a Battle.net community for my addons. If you have any issues, now you can easily report them to me in game. Just copy the invite link below and throw me a message."] = "I have a Battle.net community for my addons. If you have any issues, now you can easily report them to me in game. Just copy the invite link below and throw me a message."
---[[Translation missing --]]
-L["If you encounter a bug, or have a feature request, please file a ticket on Curseforge using the link below."] = "If you encounter a bug, or have a feature request, please file a ticket on Curseforge using the link below."
+L["I have a Battle.net community for my addons. If you have any issues, now you can easily report them to me in game. Just copy the invite link below and throw me a message."] = "Ich habe eine Battle.net Community für meine Addons. Falls du irgendwelche Probleme hast, kannst du sie mir jetzt einfach im Spiel mitteilen. Kopiere dafür den Einladungs-Link unten und schicke mir eine Nachricht. "
+L["If you encounter a bug, or have a feature request, please file a ticket on Curseforge using the link below."] = "Falls du auf Fehler stößt oder einen Verbesserungsvorschlag hast, erstelle bitte über den Link unten ein Ticket auf Curseforge."
 L["Immune"] = "Immun"
---[[Translation missing --]]
-L["In Game"] = "In Game"
+L["In Game"] = "Im Spiel"
+L["Instance"] = "Instanz"
 --[[Translation missing --]]
 L["Interrupt"] = "Interrupt"
 --[[Translation missing --]]
@@ -145,11 +125,12 @@ L["Placed"] = "Placed"
 L["PvE Options"] = "PvE Options"
 --[[Translation missing --]]
 L["PvP Options"] = "PvP Options"
---[[Translation missing --]]
-L["Racials"] = "Racials"
+L["Racials"] = "Rassenfähigkeiten"
 L["Raid"] = true
 --[[Translation missing --]]
 L["Remove Server Names"] = "Remove Server Names"
+--[[Translation missing --]]
+L["Removes server name from |c5500DBBD[TARGET]|r tags."] = "Removes server name from |c5500DBBD[TARGET]|r tags."
 --[[Translation missing --]]
 L["Resist"] = "Resist"
 --[[Translation missing --]]
@@ -159,6 +140,8 @@ L["Say"] = "Sagen"
 L["Send to player created channel."] = "Send to player created channel."
 --[[Translation missing --]]
 L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."] = "Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."
+--[[Translation missing --]]
+L["Sends a message to one of the following channels in order of priority:"] = "Sends a message to one of the following channels in order of priority:"
 --[[Translation missing --]]
 L["Smart Channel Options"] = "Smart Channel Options"
 --[[Translation missing --]]
@@ -185,62 +168,42 @@ L["The following tags are available for use with this spell:"] = "The following 
 L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."
 --[[Translation missing --]]
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."
---[[Translation missing --]]
-L["Unknown"] = "Unknown"
---[[Translation missing --]]
-L["Utilities"] = "Utilities"
---[[Translation missing --]]
-L["was absorbed by"] = "was absorbed by"
---[[Translation missing --]]
-L["was blocked by"] = "was blocked by"
---[[Translation missing --]]
-L["was deflected by"] = "was deflected by"
---[[Translation missing --]]
-L["was dodged by"] = "was dodged by"
+L["Unknown"] = "Unbekannt"
+L["Utilities"] = "Nützliches"
+L["was absorbed by"] = "wurde absorbiert von"
+L["was blocked by"] = "wurde geblockt von"
+L["was deflected by"] = "wurde reflektiert von"
+L["was dodged by"] = "wurde ausgewichen von"
 --[[Translation missing --]]
 L["was evaded by"] = "was evaded by"
---[[Translation missing --]]
-L["was parried by"] = "was parried by"
-L["was resisted by"] = "wurde wiederstanden von"
---[[Translation missing --]]
-L["When reporting an issue, please also post the revision number above. Thanks!"] = "When reporting an issue, please also post the revision number above. Thanks!"
---[[Translation missing --]]
-L["When the spell ends."] = "When the spell ends."
---[[Translation missing --]]
-L["When the spell failed."] = "When the spell failed."
---[[Translation missing --]]
-L["When the target is immune to your spell."] = "When the target is immune to your spell."
---[[Translation missing --]]
-L["When you absorb a debuff."] = "When you absorb a debuff."
---[[Translation missing --]]
-L["When you absorb damage."] = "When you absorb damage."
+L["was parried by"] = "wurde pariert von"
+L["was resisted by"] = "wurde widerstanden von"
+L["When reporting an issue, please also post the revision number above. Thanks!"] = "Beim Melden eines Fehlers bitte auch die obige Revisionsnummer dazuschreiben. Danke!"
+L["When the spell ends."] = "Wenn die Fähigkeit endet."
+L["When the spell failed."] = "Wenn die Fähigkeit fehlschlug."
+L["When the target is immune to your spell."] = "Wenn das Ziel gegen deine Fähigkeit immun ist. "
+L["When you absorb a debuff."] = "Wenn du einen Debuff absorbiert hast. "
+L["When you absorb damage."] = "Wenn du Schaden absorbierst."
 --[[Translation missing --]]
 L["When you cast Provoke on your Statue of the Black Ox."] = "When you cast Provoke on your Statue of the Black Ox."
---[[Translation missing --]]
-L["When you cast this spell."] = "When you cast this spell."
+L["When you cast this spell."] = "Wenn du diese Fähigkeit anwendest. "
 --[[Translation missing --]]
 L["When you deal damage."] = "When you deal damage."
 --[[Translation missing --]]
 L["When you debuff a unit."] = "When you debuff a unit."
---[[Translation missing --]]
-L["When you dispel a buff or debuff."] = "When you dispel a buff or debuff."
+L["When you dispel a buff or debuff."] = "Wenn du einen Buff oder Debuff reinigst."
 --[[Translation missing --]]
 L["When you have placed this in the world."] = "When you have placed this in the world."
---[[Translation missing --]]
-L["When you heal."] = "When you heal."
---[[Translation missing --]]
-L["When you interrupt a spell cast."] = "When you interrupt a spell cast."
+L["When you heal."] = "Wenn du heilst."
+L["When you interrupt a spell cast."] = "Wenn du einen Zauber unterbrichst. "
 --[[Translation missing --]]
 L["When you start casting this spell or when this spell starts."] = "When you start casting this spell or when this spell starts."
---[[Translation missing --]]
-L["When your spell is resisted."] = "When your spell is resisted."
+L["When your spell is resisted."] = "Wenn deiner Fähigkeit widerstanden wurde."
 L["Whisper"] = "Flüstern"
---[[Translation missing --]]
-L["Yell"] = "Yell"
+L["Yell"] = "Schreien"
 L["You"] = "Du"
---[[Translation missing --]]
-L["You have "] = "You have "
+L["You have "] = "Du hast"
 --[[Translation missing --]]
 L["You have no messages for this section."] = "You have no messages for this section."
---[[Translation missing --]]
-L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = "Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"
+L["Your message must contain at least one number or letter!"] = "Deine Nachricht muss mindestens eine Zahl oder einen Buchstaben beinhalten!"
+L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = "Deine Version von RSA ist nicht mehr aktuell. Du kannst die neuste Version hier bekommen: https://www.curseforge.com/wow/addons/rsa"

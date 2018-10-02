@@ -742,15 +742,16 @@ end
 
 local function Druid_Options()
 	local Spells = {
-		[1] = {
+		["SurvivalInstincts"] = {
 			Profile = "SurvivalInstincts",
 			Name = GetSpellInfo(61336),
 			Desc = GetSpellDescription(61336),
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[2] = {
+		["Cyclone"] = {
 			Profile = "Cyclone",
 			Name = GetSpellInfo(33786),
 			Desc = GetSpellDescription(33786),
@@ -759,31 +760,43 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[3] = {
+		["IncapacitatingRoar"] = {
 			Profile = "IncapacitatingRoar",
 			Name = GetSpellInfo(99),
 			Desc = GetSpellDescription(99),
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[4] = {
+		["FrenziedRegeneration"] = {
 			Profile = "FrenziedRegeneration",
 			Name = GetSpellInfo(22842),
 			Desc = GetSpellDescription(22842),
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[5] = {
+		["UrsolsVortex"] = {
 			Profile = "UrsolsVortex",
 			Name = GetSpellInfo(102793),
 			Desc = GetSpellDescription(102793),
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[6] = {
+		["Treants"] = {
+			Profile = "Treants",
+			Name = GetSpellInfo(205636),
+			Desc = GetSpellDescription(205636),
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		["Ironbark"] = {
 			Profile = "Ironbark",
 			Name = GetSpellInfo(102342),
 			Desc = GetSpellDescription(102342),
@@ -791,7 +804,7 @@ local function Druid_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[7] = {
+		["SkullBash"] = {
 			Profile = "SkullBash",
 			Name = GetSpellInfo(93985),
 			Desc = GetSpellDescription(93985),
@@ -800,7 +813,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[TARSPELL]", "[TARLINK]", "[MISSTYPE]"},
 		},
-		[8] = {
+		["Growl"] = {
 			Profile = "Growl",
 			Name = GetSpellInfo(6795),
 			Desc = GetSpellDescription(6795),
@@ -809,7 +822,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[9] = {
+		["Revive"] = {
 			Profile = "Revive",
 			Name = GetSpellInfo(50769),
 			Desc = GetSpellDescription(50769),
@@ -817,7 +830,7 @@ local function Druid_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[10] = {
+		["Rebirth"] = {
 			Profile = "Rebirth",
 			Name = GetSpellInfo(20484),
 			Desc = GetSpellDescription(20484),
@@ -825,7 +838,7 @@ local function Druid_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[11] = {
+		["TreeOfLife"] = {
 			Profile = "TreeOfLife",
 			Name = GetSpellInfo(33891),
 			Desc = GetSpellDescription(33891),
@@ -834,7 +847,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[12] = {
+		["Barkskin"] = {
 			Profile = "Barkskin",
 			Name = GetSpellInfo(22812),
 			Desc = GetSpellDescription(22812),
@@ -852,7 +865,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[13] = {
+		["Tranquility"] = {
 			Profile = "Tranquility",
 			Name = GetSpellInfo(740),
 			Desc = GetSpellDescription(740),
@@ -861,7 +874,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[14] = {
+		["NaturesVigil"] = {
 			Profile = "NaturesVigil",
 			Name = GetSpellInfo(124974),
 			Desc = GetSpellDescription(124974),
@@ -870,7 +883,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[15] = {
+		["Berserk"] = {
 			Profile = "Berserk",
 			Name = GetSpellInfo(106951),
 			Desc = GetSpellDescription(106951),
@@ -879,7 +892,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[16] = {
+		["RemoveCorruption"] = {
 			Profile = "RemoveCorruption",
 			Name = GetSpellInfo(2782) .. " / " .. GetSpellInfo(88423),
 			longDesc = true,
@@ -888,7 +901,7 @@ local function Druid_Options()
 			Message_Areas = {"Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
-		[17] = {
+		["Roots"] = {
 			Profile = "Roots",
 			Name = GetSpellInfo(339),
 			Desc = GetSpellDescription(339),
@@ -897,7 +910,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[18] = {
+		["StampedingRoar"] = {
 			Profile = "StampedingRoar",
 			Name = GetSpellInfo(106898),
 			Desc = GetSpellDescription(106898),
@@ -906,7 +919,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[19] = {
+		["SolarBeam"] = {
 			Profile = "SolarBeam",
 			Name = GetSpellInfo(97547),
 			Desc = GetSpellDescription(97547),
@@ -915,7 +928,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[TARSPELL]", "[TARLINK]"},
 		},
-		[20] = {
+		["Revitalize"] = {
 			Profile = "Revitalize",
 			Name = GetSpellInfo(212040),
 			Desc = GetSpellDescription(212040),
@@ -924,7 +937,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[21] = {
+		["Innervate"] = {
 			Profile = "Innervate",
 			Name = GetSpellInfo(29166),
 			Desc = GetSpellDescription(29166),
@@ -932,7 +945,7 @@ local function Druid_Options()
 			Message_Areas = {"Start", "End"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[22] = {
+		["Ironfur"] = {
 			Profile = "Ironfur",
 			Name = GetSpellInfo(192081),
 			Desc = GetSpellDescription(192081),
@@ -941,7 +954,7 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[23] = {
+		["DemoralizingRoar"] = {
 			Profile = "DemoralizingRoar",
 			Name = GetSpellInfo(201664),
 			Desc = GetSpellDescription(201664),
@@ -950,15 +963,16 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[24] = {
+		["Soothe"] = {
 			Profile = "Soothe",
 			Name = GetSpellInfo(2908),
 			Desc = GetSpellDescription(2908),
 			Message_Amount = 1,
 			Message_Areas = {"Cast"},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
-		[25] = {
+		["MassEntanglement"] = {
 			Profile = "MassEntanglement",
 			Name = GetSpellInfo(102359),
 			Desc = GetSpellDescription(102359),
@@ -1665,6 +1679,15 @@ local function Priest_Options()
 			Profile = "DivineHymn",
 			Name = GetSpellInfo(64843),
 			Desc = GetSpellDescription(64843),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
+		["Apotheosis"] = {
+			Profile = "Apotheosis",
+			Name = GetSpellInfo(200183),
+			Desc = GetSpellDescription(200183),
 			Message_Amount = 2,
 			Message_Areas = {"Start", "End"},
 			Message_Channels_Disabled = {["Whisper"] = true},
