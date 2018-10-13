@@ -1,7 +1,3 @@
-# RSA r457-Beta
+# RSA r458-Release
 ### Priest
-* Added Apotheosis
-### Druid
-* Added Force of Nature
-### Fixed
-* Adding % symbols to a message should no longer cause Lua errors.
+* Added Holy Word: Salvation
