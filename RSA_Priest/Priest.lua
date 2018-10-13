@@ -208,6 +208,10 @@ function RSA_Priest:OnEnable()
 			[64901] = { -- SYMBOL OF HOPE
 				profile = 'SymbolOfHope'
 			},
+			[265202] = { -- Holy Word: Salvation
+				profile = 'Salvation',
+				section = "Cast"
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[586] = Config_Fade_End, -- Fade

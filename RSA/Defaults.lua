@@ -1724,6 +1724,14 @@ local function Priest()
 					Channel = "",
 				},
 			},
+			Salvation = {
+				Messages = {
+					Cast = {"[LINK] activated!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Priest

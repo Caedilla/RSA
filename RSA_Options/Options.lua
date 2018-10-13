@@ -1887,6 +1887,15 @@ local function Priest_Options()
 			Message_Areas = {"Dispel"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
+		["Salvation"] = {
+			Profile = "Salvation",
+			Name = GetSpellInfo(265202),
+			Desc = GetSpellDescription(265202),
+			Message_Amount = 1,
+			Message_Areas = {"Cast"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]"},
+		},
 	}
 	return Spells
 end
