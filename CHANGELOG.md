@@ -1,6 +1,8 @@
-# RSA r508-Release
-No idea what happened with versioning, how I skipped back a bunch, but version numbering is back on track again now.
+# RSA r509-Release
 
 ### Priest
-* Added Holy Word: Salvation
+* Added Holy Word: Chastise
 
+### Warlock
+* Added Axe Toss
+* Devour Magic should now correctly announce again
