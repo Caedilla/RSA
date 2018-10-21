@@ -1536,6 +1536,16 @@ local function Priest()
 				},
 				SmartGroup = true,
 			},
+			Chastise = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
 			DispelMagic = {
 				Messages = {
 					Dispel = {"Dispelled [AURALINK] on [TARGET]!"},
@@ -2247,6 +2257,15 @@ local function Warlock()
 			DevourMagic = {
 				Messages = {
 					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			AxeToss = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
 				},
 				CustomChannel = {
 					Channel = "",

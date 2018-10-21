@@ -1710,6 +1710,15 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
+		["Chastise"] = {
+			Profile = "Chastise",
+			Name = GetSpellInfo(88625),
+			Desc = GetSpellDescription(88625),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
+		},
 		["DispelMagic"] = {
 			Profile = "DispelMagic",
 			Name = GetSpellInfo(528),
@@ -2238,7 +2247,7 @@ end
 
 local function Warlock_Options()
 	local Spells = {
-		[1] = {
+		["SoulWell"] = {
 			Profile = "SoulWell",
 			Name = GetSpellInfo(29893),
 			Desc = GetSpellDescription(29893),
@@ -2247,7 +2256,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[2] = {
+		["SummonStone"] = {
 			Profile = "SummonStone",
 			Name = GetSpellInfo(698),
 			Desc = GetSpellDescription(698),
@@ -2256,7 +2265,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[3] = {
+		["Suffering"] = {
 			Profile = "Suffering",
 			Name = GetSpellInfo(17735),
 			Desc = GetSpellDescription(17735),
@@ -2265,7 +2274,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[4] = {
+		["SingeMagic"] = {
 			Profile = "SingeMagic",
 			Name = GetSpellInfo(89808),
 			Desc = GetSpellDescription(89808),
@@ -2274,7 +2283,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
 		},
-		[5] = {
+		["Banish"] = {
 			Profile = "Banish",
 			Name = GetSpellInfo(710),
 			Desc = GetSpellDescription(710),
@@ -2283,7 +2292,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[6] = {
+		["Fear"] = {
 			Profile = "Fear",
 			Name = GetSpellInfo(5782),
 			Desc = GetSpellDescription(5782),
@@ -2292,7 +2301,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[7] = {
+		["Seduce"] = {
 			Profile = "Seduce",
 			Name = GetSpellInfo(6358),
 			Desc = GetSpellDescription(6358),
@@ -2301,7 +2310,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[MISSTYPE]"},
 		},
-		[8] = {
+		["SpellLock"] = {
 			Profile = "SpellLock",
 			Name = GetSpellInfo(19647),
 			Desc = GetSpellDescription(19647),
@@ -2310,7 +2319,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[TARSPELL]", "[TARLINK]", "[MISSTYPE]"},
 		},
-		[9] = {
+		["Soulstone"] = {
 			Profile = "Soulstone",
 			Name = GetSpellInfo(20707),
 			Desc = GetSpellDescription(20707),
@@ -2318,7 +2327,7 @@ local function Warlock_Options()
 			Message_Areas = {"Start", "Cast"},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[10] = {
+		["DeathCoil"] = {
 			Profile = "DeathCoil",
 			Name = GetSpellInfo(6789),
 			Desc = GetSpellDescription(6789),
@@ -2327,7 +2336,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
-		[11] = {
+		["Shadowfury"] = {
 			Profile = "Shadowfury",
 			Name = GetSpellInfo(30283),
 			Desc = GetSpellDescription(30283),
@@ -2336,7 +2345,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[12] = {
+		["UnendingResolve"] = {
 			Profile = "UnendingResolve",
 			Name = GetSpellInfo(104773),
 			Desc = GetSpellDescription(104773),
@@ -2345,7 +2354,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[13] = {
+		["Gateway"] = {
 			Profile = "Gateway",
 			Name = GetSpellInfo(111771),
 			Desc = GetSpellDescription(111771),
@@ -2354,7 +2363,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[14] = {
+		["DarkPact"] = {
 			Profile = "DarkPact",
 			Name = GetSpellInfo(108416),
 			Desc = GetSpellDescription(108416),
@@ -2363,7 +2372,7 @@ local function Warlock_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]"},
 		},
-		[15] = {
+		["DevourMagic"] = {
 			Profile = "DevourMagic",
 			Name = GetSpellInfo(19505),
 			Desc = GetSpellDescription(19505),
@@ -2371,6 +2380,15 @@ local function Warlock_Options()
 			Message_Areas = {"Dispel"},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]", "[AURA]", "[AURALINK]"},
+		},
+		["AxeToss"] = {
+			Profile = "AxeToss",
+			Name = GetSpellInfo(89766),
+			Desc = GetSpellDescription(89766),
+			Message_Amount = 2,
+			Message_Areas = {"Start", "End"},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {"[SPELL]", "[LINK]", "[TARGET]"},
 		},
 	}
 	return Spells
@@ -3241,7 +3259,7 @@ function RSA_O:OnInitialize()
 	Options.args.profiles = Profiles
 	Options.args.profiles.order = 99
 	AddOptions()
-	LibStub("AceConfigDialog-3.0"):SetDefaultSize("RSA",1000,725)
+	LibStub("AceConfigDialog-3.0"):SetDefaultSize("RSA",975,700)
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")
 	LibDualSpec:EnhanceOptions(Profiles, self.db)

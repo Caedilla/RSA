@@ -134,6 +134,10 @@ function RSA_Priest:OnEnable()
 			[197268] = { -- Ray Of Hope
 				profile = 'RayOfHope',
 				replacements = { TARGET = 1 },
+			},
+			[88625] = { -- Holy Word: Chastise
+				profile = 'Chastise',
+				replacements = { TARGET = 1 }
 			},		
 		},
 		SPELL_CAST_START = {
@@ -284,6 +288,11 @@ function RSA_Priest:OnEnable()
 				profile = 'RayOfHope',
 				section = 'End',
 				replacements = { TARGET = 1 },
+			},
+			[88625] = { -- Holy Word: Chastise
+				profile = 'Chastise',
+				section = 'End',
+				replacements = { TARGET = 1 }
 			},	
 		},
 		SPELL_DISPEL = {
