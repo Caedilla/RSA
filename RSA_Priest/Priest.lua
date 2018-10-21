@@ -88,6 +88,15 @@ function RSA_Priest:OnEnable()
 		section = "Dispel",
 		replacements = { TARGET = 1, extraSpellName = "[AURA]", extraSpellLink = "[AURALINK]" }
 	}
+	local Config_Chastise = { -- Holy Word: Chastise
+		profile = 'Chastise',
+		replacements = { TARGET = 1 },
+	}
+	local Config_Chastise_End = { -- Holy Word: Chastise
+		profile = 'Chastise',
+		replacements = { TARGET = 1 },
+		section = 'End'
+	}
 	local MonitorConfig_Priest = {
 		player_profile = RSA.db.profile.Priest,
 		SPELL_RESURRECT = {
@@ -108,6 +117,8 @@ function RSA_Priest:OnEnable()
 		SPELL_AURA_APPLIED = {
 			[605] = Config_MC, -- Mind Control
 			[205364] = Config_MC, -- Mind Control
+			[200196] = Config_Chastise, -- Holy Word: Chastise
+			[200200] = Config_Chastise, -- Holy Word: Chastise with Censure talent
 			[9484] = { -- SHACKLE UNDEAD
 				profile = 'ShackleUndead',
 				replacements = { TARGET = 1 }
@@ -134,10 +145,6 @@ function RSA_Priest:OnEnable()
 			[197268] = { -- Ray Of Hope
 				profile = 'RayOfHope',
 				replacements = { TARGET = 1 },
-			},
-			[88625] = { -- Holy Word: Chastise
-				profile = 'Chastise',
-				replacements = { TARGET = 1 }
 			},		
 		},
 		SPELL_CAST_START = {
@@ -222,6 +229,8 @@ function RSA_Priest:OnEnable()
 			[213602] = Config_Fade_End, -- Greater Fade
 			[605] = Config_MC_End, -- Mind Control
 			[205364] = Config_MC_End, -- Mind Control
+			[200196] = Config_Chastise_End, -- Holy Word: Chastise
+			[200200] = Config_Chastise_End, -- Holy Word: Chastise with Censure talent
 			[15286] = { -- VAMPIRIC EMBRACE
 				profile = 'VampiricEmbrace',
 				section = 'End'
@@ -288,11 +297,6 @@ function RSA_Priest:OnEnable()
 				profile = 'RayOfHope',
 				section = 'End',
 				replacements = { TARGET = 1 },
-			},
-			[88625] = { -- Holy Word: Chastise
-				profile = 'Chastise',
-				section = 'End',
-				replacements = { TARGET = 1 }
 			},	
 		},
 		SPELL_DISPEL = {
