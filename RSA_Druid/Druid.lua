@@ -395,7 +395,6 @@ function RSA_Druid:OnEnable()
 						if RSA.db.profile.Druid.Spells.Rebirth.Whisper == true and dest ~= pName then
 							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
 							RSA.Print_Whisper(message, full_destName, RSA.Replacements, dest)
-							--RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
 							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 						end
 						if RSA.db.profile.Druid.Spells.Rebirth.CustomChannel.Enabled == true then
