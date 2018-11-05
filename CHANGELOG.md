@@ -1,4 +1,11 @@
 
+# RSA r513-Alpha
+
+### Fixed
+* Several classes had duplicate end messages for resurrects when the SPELL_RESURRECT and SPELL_CAST_SUCCESS events fired. They now only trigger from SPELL_RESURRECT, so only one end message should trigger now.
+
+
+
 # RSA r512-Alpha
 
 ### New
