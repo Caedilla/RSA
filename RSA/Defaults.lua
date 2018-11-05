@@ -3,7 +3,7 @@ RSA.DefaultOptions = {}
 local DefaultOptions = {
 	profile = {
 		Modules = {
-			['*'] = false, -- By default, don't load any modules. This will be set and saved once a user has logged in once. Possibly should be under class section, but seems fine here for now.
+			['*'] = false,
 		},
 		General = {
 			['*'] = true,
@@ -29,99 +29,24 @@ local DefaultOptions = {
 				['*'] = true,
 			},
 			GlobalCustomChannel = "MyCustomChannel",
-			Spells = {
-				-- LEADER --
-				Jeeves = {
-					Messages = {
-						Start = "[TARGET] has placed a [LINK]!",
-						End = "[TARGET]'s [LINK] faded.",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-					SmartGroup = true,
+			Replacements = {
+				Target = {
+					AlwaysUseName = false,
+					Replacement = "You",
 				},
-				Cauldron = {
-					Messages = {
-						Start = "[TARGET] has placed a [LINK]!",
-						End = "[TARGET]'s [LINK] faded.",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-					SmartGroup = true,
-				},
-				Feasts = {
-					Messages = {
-						Start = "[TARGET] has placed a [LINK]!"
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-					SmartGroup = true,
-				},
-				MobileBank = {
-					Messages = {
-						Start = "[TARGET] has placed a [LINK]!",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-				},
-				Etheralus = {
-					Messages = {
-						Start = "[TARGET] has activated [LINK]!",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-					Local = true,
-				},
-				Sanctus = {
-					Messages = {
-						Start = "[TARGET] has activated [LINK]!",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-					Local = true,
-				},
-				Nithramus = {
-					Messages = {
-						Start = "[TARGET] has activated [LINK]!",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-					Local = true,
-					SmartGroup = true,
-				},
-				-- PERSONAL --
-				PotionOfConcentration = {
-					Messages = {
-						Start = {"[LINK] activated!"},
-						End = {"[LINK] ended!"},
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-				},
-				Blingtron = {
-					Messages = {
-						Start = "[LINK] is up!",
-						End = "[LINK] is about to fade.",
-					},
-					CustomChannel = {
-						Channel = "",
-					},
-				},
-				Molle = {
-					Messages = {
-						Start = "[LINK] is up!"
-					},
-					CustomChannel = {
-						Channel = "",
-					},
+				MissType = {
+					UseGeneralReplacement = false,
+					GeneralReplacement = "missed",
+					Miss = "missed",
+					Resist = "was resisted by",
+					Absorb = "was absorbed by",
+					Block = "was blocked by",
+					Deflect = "was deflected by",
+					Dodge = "was dodged by",
+					Evade = "was evaded by",
+					Parry = "was parried by",
+					Immune = "immune",
+					Reflect = "was reflected by",
 				},
 			},
 		},
@@ -174,7 +99,7 @@ local function DeathKnight()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -195,7 +120,7 @@ local function DeathKnight()
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -206,7 +131,7 @@ local function DeathKnight()
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -216,7 +141,7 @@ local function DeathKnight()
 				Messages = {
 					Interrupt = {"Mind Freezed [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -227,7 +152,7 @@ local function DeathKnight()
 				Messages = {
 					Cast = {"Death Gripped [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -323,7 +248,7 @@ local function DemonHunter()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -417,7 +342,7 @@ local function DemonHunter()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -465,7 +390,7 @@ local function DemonHunter()
 					Cast = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -548,7 +473,7 @@ local function Druid()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -559,7 +484,7 @@ local function Druid()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -736,7 +661,7 @@ local function Druid()
 					Cast = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -796,7 +721,7 @@ local function Hunter()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -834,7 +759,7 @@ local function Hunter()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -913,7 +838,7 @@ local function Mage()
 				Messages = {
 					Cast = {"Stole [TARGET]'s [AURALINK]!"},
 					Resist = {"[TARGET] resisted [LINK]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -924,7 +849,7 @@ local function Mage()
 					Cast = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -934,7 +859,7 @@ local function Mage()
 				Messages = {
 					Interrupt = {"Counterspelled [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1032,7 +957,7 @@ local function Monk()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 					StatueOfTheBlackOx = {"Taunted everything around [TARGET]"},
 				},
 				CustomChannel = {
@@ -1053,7 +978,7 @@ local function Monk()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1064,7 +989,7 @@ local function Monk()
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
 				},
 				CustomChannel = {
@@ -1317,7 +1242,7 @@ local function Paladin()
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1328,7 +1253,7 @@ local function Paladin()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1339,7 +1264,7 @@ local function Paladin()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1769,7 +1694,7 @@ local function Rogue()
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1780,7 +1705,7 @@ local function Rogue()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1875,7 +1800,7 @@ local function Shaman()
 					Start = {"[LINK] cast on [TARGET]!"},
 					End = {"[LINK] on [TARGET] ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -1896,7 +1821,7 @@ local function Shaman()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2141,7 +2066,7 @@ local function Warlock()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2160,7 +2085,7 @@ local function Warlock()
 					Cast = {"Banished [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2171,7 +2096,7 @@ local function Warlock()
 					Cast = {"Fearing [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2182,7 +2107,7 @@ local function Warlock()
 					Cast = {"Seducing [TARGET]!"},
 					End = {"[LINK] on [TARGET] has ended!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2192,7 +2117,7 @@ local function Warlock()
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2297,7 +2222,7 @@ local function Warrior()
 				Messages = {
 					Interrupt = {"Pummeled [TARGET]'s [TARLINK]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",
@@ -2317,7 +2242,7 @@ local function Warrior()
 				Messages = {
 					Cast = {"Taunted [TARGET]!"},
 					Resist = {"My [LINK] [MISSTYPE] [TARGET]!"},
-					Immune = {"[TARGET] is [MISSTYPE] to my [LINK]!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
 				},
 				CustomChannel = {
 					Channel = "",

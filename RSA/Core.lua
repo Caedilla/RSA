@@ -319,11 +319,21 @@ function RSA.Print_RW(message) -- Send a proper message to the raid warning fram
 	end
 end
 
-function RSA.Print_Whisper(message, target) -- Send a whisper to the target.
+function RSA.Print_Whisper(message, target, replacements, destName)
 	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then 
 		if RSA.AnnouncementCheck() == false then return end
 	end
-	SendChatMessage(format(message), "WHISPER", nil, target)
+	if replacements and destName then -- Until we replace all instances where this function is used, check if we have all args before trying to create new format message.
+		if RSA.db.profile.General.Replacements.Target.AlwaysUseName == true then
+			replacements["[TARGET]"] = destName
+		else
+			replacements["[TARGET]"] = RSA.db.profile.General.Replacements.Target.Replacement
+		end
+		local tosend = gsub(message, ".%a+.", replacements)
+		SendChatMessage(format(tosend), "WHISPER", nil, target)
+	else
+		SendChatMessage(format(message), "WHISPER", nil, target)
+	end
 end
 
 local bor,band = bit.bor, bit.band -- get a local reference to some bitlib functions for faster lookups

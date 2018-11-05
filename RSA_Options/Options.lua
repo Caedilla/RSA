@@ -299,20 +299,6 @@ local Options = {
 								RSA.db.profile.General.GlobalAnnouncements.OnlyInCombat = value
 							end,
 						},
-						Remove_Server_Names = {
-							name = "|cffFFCC00"..L["Remove Server Names"].."|r",
-							type = "toggle",
-							order = 110,
-							desc = L["Removes server name from |c5500DBBD[TARGET]|r tags."],
-							descStyle = "inline",
-							width = "double",
-							get = function(info)
-								return RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames
-							end,
-							set = function(info, value)
-								RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames = value
-							end,
-						},
 						AlwaysAllowWhispers = {
 							name = "|cffFFCC00"..L["Always allow Whispers"].."|r",
 							type = "toggle",
@@ -358,6 +344,309 @@ local Options = {
 							type = "description",
 							order = 0.03,
 							fontSize = "large",
+						},
+					},
+				},
+			},
+		},
+		Tags = {
+			name = L["Tag Options"],
+			type = "group",
+			order = 10,
+			args = {
+				Target = {
+					name = "|c5500DBBD[TARGET]|r "..L["Tag Options"],
+					type = "group",
+					order = 10,
+					inline = true,
+					args = {
+						Remove_Server_Names = {
+							name = "|cffFFCC00"..L["Remove Server Names"].."|r",
+							type = "toggle",
+							order = 0,
+							desc = L["Removes server name from |c5500DBBD[TARGET]|r tags."],
+							descStyle = "inline",
+							width = "double",
+							get = function(info)
+								return RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames = value
+							end,
+						},
+						AlwaysUseName = {
+							name = "|cffFFCC00"..L["Always uses spell target's name"].."|r",
+							type = "toggle",
+							order = 10,
+							desc = L["If selected, |c5500DBBD[TARGET]|r will always use the spell target's name, rather than using the input below for whispers."],
+							descStyle = "inline",
+							width = "full",
+							get = function(info)
+								return RSA.db.profile.General.Replacements.Target.AlwaysUseName
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.Target.AlwaysUseName = value
+							end,
+						},					
+						Replacement = {
+							name = L["Replacement"],
+							desc = L["|c5500DBBD[TARGET]|r will be replaced with this when whispering someone."],
+							type = "input",
+							order = 10.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.Target.AlwaysUseName == true then
+									return true 
+								else 
+									return false
+								end
+							end,							
+							get = function(info)
+								return RSA.db.profile.General.Replacements.Target.Replacement
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.Target.Replacement = value
+							end,
+						},					
+					},
+				},
+				MissType = {
+					name = "|c5500DBBD[MISSTYPE]|r ".. L["Tag Options"],
+					type = "group",
+					order = 20,
+					inline = true,
+					args = {
+						UseGeneralReplacement = {
+							name = "|cffFFCC00" .. L["Use Single Replacement"] .. "|r",
+							type = "toggle",
+							order = 10,
+							desc = L["If selected, |c5500DBBD[MISSTYPE]|r will always use the General Replacement set below."].."\n"..L[" Does not affect Immune, Immune will always use its own replacement."],
+							descStyle = "inline",
+							width = "full",
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement = value
+							end,
+						},					
+						GeneralReplacement = {
+							name = L["General Replacement"],
+							desc = L["Whether the target blocks, dodges, absorbs etc. your attack, |c5500DBBD[MISSTYPE]|r will be replaced to this."],
+							type = "input",
+							order = 10.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == false then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.GeneralReplacement
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.GeneralReplacement = value
+							end,
+						},
+						GeneralReplacement_Spacer = {
+							name = " ",
+							type = "description",
+							order = 10.2,
+						},
+						Miss = {
+							name = MISS,
+							desc = L["When your spell misses the target |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Miss
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Miss = value
+							end,
+						},	
+						Resist = {
+							name = RESIST,
+							desc = L["When the target resists your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Resist
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Resist = value
+							end,
+						},
+						Absorb = {
+							name = ABSORB,
+							desc = L["When the target absorbs your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Absorb
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Absorb = value
+							end,
+						},
+						Block = {
+							name = BLOCK,
+							desc = L["When the target blocks your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Block
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Block = value
+							end,
+						},
+						Deflect = {
+							name = DEFLECT,
+							desc = L["When the target deflects your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Deflect
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Deflect = value
+							end,
+						},
+						Dodge = {
+							name = DODGE,
+							desc = L["When the target dodges your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Dodge
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Dodge = value
+							end,
+						},
+						Evade = {
+							name = EVADE,
+							desc = L["When the target evades your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Evade
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Evade = value
+							end,
+						},
+						Parry = {
+							name = PARRY,
+							desc = L["When the target parries your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Parry
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Parry = value
+							end,
+						},
+						Immune = {
+							name = IMMUNE,
+							desc = L["When the target is immune to your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Immune
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Immune = value
+							end,
+						},
+						Reflect = {
+							name = REFLECT,
+							desc = L["When the target reflects your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."],
+							type = "input",
+							order = 20.1,
+							width = "double",
+							disabled = function() 
+								if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+									return true 
+								else 
+									return false
+								end
+							end,
+							get = function(info)
+								return RSA.db.profile.General.Replacements.MissType.Reflect
+							end,
+							set = function(info, value)
+								RSA.db.profile.General.Replacements.MissType.Reflect = value
+							end,
 						},
 					},
 				},

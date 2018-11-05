@@ -6,6 +6,18 @@ local racialConfig, utilityConfig, config, playerGUID
 local cache_SpellInfo = {}
 local cache_SpellLink = {}
 local message_cache = {}
+local missTypes = {
+    "ABSORB",
+    "BLOCK",
+    "DEFLECT",
+    "DODGE",
+    "EVADE",
+    "IMMUNE",
+    "MISS",
+    "PARRY",
+    "REFLECT",
+    "RESIST",
+}
 
 local function MonitorConfig(new_config, new_playerGUID)
 	config = new_config
@@ -197,39 +209,47 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 		replacements[extraSpellLinkTarget] = spelllink
 	end
 	if spell_replacements.MISSTYPE then
-		if missType == "IMMUNE" then
-			replacements["[MISSTYPE]"] = L["Immune"]
-			if spell_profile.Messages[spell_data.immuneSection] then
-				local ValidMessages = message_cache_profile[spell_data.immuneSection]
-				if not ValidMessages then
-					ValidMessages = {}
-					for i = 1,#spell_profile.Messages[spell_data.immuneSection] do
-						if spell_profile.Messages[spell_data.immuneSection][i] ~= "" then
-							ValidMessages[i] = spell_profile.Messages[spell_data.immuneSection][i]
-						end
-					end
-					message_cache[spell_data.profile][spell_data.immuneSection] = ValidMessages
+		if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+			for i = 1,#missTypes do
+				if missType == missTypes[i] then
+					replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.GeneralReplacement
 				end
-				if #ValidMessages == 0 then return end
-				message = ValidMessages[math.random(#ValidMessages)]
-				if not message then return end
 			end
-		elseif missType == "MISS" then
-			replacements["[MISSTYPE]"] = L["missed"]
-		elseif missType == "RESIST" then
-			replacements["[MISSTYPE]"] = L["was resisted by"]
-		elseif missType == "ABSORB" then
-			replacements["[MISSTYPE]"] = L["was absorbed by"]
-		elseif missType == "BLOCK" then
-			replacements["[MISSTYPE]"] = L["was blocked by"]
-		elseif missType == "DEFLECT" then
-			replacements["[MISSTYPE]"] = L["was deflected by"]
-		elseif missType == "DODGE" then
-			replacements["[MISSTYPE]"] = L["was dodged by"]
-		elseif missType == "EVADE" then
-			replacements["[MISSTYPE]"] = L["was evaded by"]
-		elseif missType == "PARRY" then
-			replacements["[MISSTYPE]"] = L["was parried by"]
+		else
+			if missType == "IMMUNE" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Immune
+				if spell_profile.Messages[spell_data.immuneSection] then
+					local ValidMessages = message_cache_profile[spell_data.immuneSection]
+					if not ValidMessages then
+						ValidMessages = {}
+						for i = 1,#spell_profile.Messages[spell_data.immuneSection] do
+							if spell_profile.Messages[spell_data.immuneSection][i] ~= "" then
+								ValidMessages[i] = spell_profile.Messages[spell_data.immuneSection][i]
+							end
+						end
+						message_cache[spell_data.profile][spell_data.immuneSection] = ValidMessages
+					end
+					if #ValidMessages == 0 then return end
+					message = ValidMessages[math.random(#ValidMessages)]
+					if not message then return end
+				end
+			elseif missType == "MISS" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Miss
+			elseif missType == "RESIST" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Resist
+			elseif missType == "ABSORB" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Absorb
+			elseif missType == "BLOCK" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Block
+			elseif missType == "DEFLECT" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Deflect
+			elseif missType == "DODGE" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Dodge
+			elseif missType == "EVADE" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Evade
+			elseif missType == "PARRY" then
+				replacements["[MISSTYPE]"] = RSA.db.profile.General.Replacements.MissType.Parry
+			end
 		end
 	end
 
@@ -244,9 +264,7 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 		RSA.Print_Yell(gsub(message, ".%a+.", replacements))
 	end
 	if spell_profile.Whisper == true and UnitExists(full_destName) and RSA.Whisperable(destFlags) then
-		replacements["[TARGET]"] = L["You"]
-		RSA.Print_Whisper(gsub(message, ".%a+.", replacements), full_destName)
-		replacements["[TARGET]"] = destName
+		RSA.Print_Whisper(message, full_destName, replacements, destName)
 	end
 	if spell_profile.CustomChannel and spell_profile.CustomChannel.Enabled == true then
 		RSA.Print_Channel(gsub(message, ".%a+.", replacements), spell_profile.CustomChannel.Channel)
