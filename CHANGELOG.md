@@ -1,5 +1,5 @@
 
-# RSA r511-Alpha
+# RSA r512-Alpha
 
 ### New
 * Tag Options now available:
@@ -7,6 +7,3 @@
     * You can customise what the [TARGET] tag replaces to when whispering also. So if you use RSA in a language it doesn't have localisation for, you can change this to ensure grammatically correct messages.
     * You can set whether [MISSTYPE] will replace for each miss type (Absorb, Dodge, Parry, etc.) or just use one generic replacement.
     * You can also customise what each of the miss type replacements change to.
-    
-### Known Issues
-* Some spells that require unique code to fuction currently don't obey the rules set above.
