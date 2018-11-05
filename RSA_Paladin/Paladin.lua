@@ -40,7 +40,8 @@ function RSA.Resurrect(_, _, target, _, caster)
 		end
 		if RSA.db.profile.Paladin.Spells.Redemption.Whisper == true and dest ~= pName then
 			RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
-			RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
+			RSA.Print_Whisper(message, full_destName, RSA.Replacements, dest)
+			--RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
 			RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 		end
 		if RSA.db.profile.Paladin.Spells.Redemption.CustomChannel.Enabled == true then

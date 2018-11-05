@@ -247,7 +247,8 @@ function RSA_Warlock:OnEnable()
 						end
 						if RSA.db.profile.Warlock.Spells.Soulstone.Whisper == true and dest ~= pName then
 							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
-							RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
+							--RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
+							RSA.Print_Whisper(message, full_destName, RSA.Replacements, dest)
 							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 						end
 						if RSA.db.profile.Warlock.Spells.Soulstone.CustomChannel.Enabled == true then
