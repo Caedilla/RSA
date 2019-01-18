@@ -15,6 +15,17 @@ local spellinfo,spelllinkinfo,extraspellinfo,extraspellinfolink,missinfo
 function RSA_DemonHunter:OnEnable()
 	RSA.db.profile.Modules.DemonHunter = true -- Set state to loaded, to know if we should announce when a spell is refreshed.
 	local pName = UnitName("player")
+	local Config_Torment = { -- Torment
+		profile = 'Torment',
+		section = "Cast",
+		replacements = { TARGET = 1 }
+	}
+	local Config_Torment_Missed = { -- Torment
+		profile = 'Torment',
+		section = 'Resist',
+		immuneSection = "Immune",
+		replacements = { TARGET = 1, MISSTYPE = 1 },
+	}
 	local MonitorConfig_DemonHunter = {
 		player_profile = RSA.db.profile.DemonHunter,
 		SPELL_CAST_SUCCESS = {
@@ -39,6 +50,8 @@ function RSA_DemonHunter:OnEnable()
 			},
 		},
 		SPELL_AURA_APPLIED = {
+			[185245] = Config_Torment,
+			[281854] = Config_Torment,
 			[188501] = { -- SPECTRAL SIGHT
 				profile = 'SpectralSight'
 			},
@@ -84,11 +97,6 @@ function RSA_DemonHunter:OnEnable()
 				--replacements = { TARGET = 1 },
 				tracker = 2,
 				linkID = 202137
-			},
-			[185245] = { -- TORMENT
-				profile = 'Torment',
-				section = "Cast",
-				replacements = { TARGET = 1 }
 			},
 			[179057] = { -- CHAOS NOVA
 				profile = 'ChaosNova',
@@ -200,14 +208,10 @@ function RSA_DemonHunter:OnEnable()
 			},
 		},
 		SPELL_MISSED = {
+			[185245] = Config_Torment_Missed,
+			[281854] = Config_Torment_Missed,
 			[183752] = {-- CONSUME MAGIC
 				profile = 'Disrupt',
-				section = 'Resist',
-				immuneSection = "Immune",
-				replacements = { TARGET = 1, MISSTYPE = 1 },
-			},
-			[185245] = {-- TORMENT
-				profile = 'Torment',
 				section = 'Resist',
 				immuneSection = "Immune",
 				replacements = { TARGET = 1, MISSTYPE = 1 },
