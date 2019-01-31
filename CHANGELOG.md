@@ -7,6 +7,7 @@
 * Fixed a bug where [TARGET] could be incorrectly replaced to your default replacement in situations it should be replacing to the target's name. 
 
 
-#RSA r515-Beta
+
+# RSA r515-Beta
 ### Demon Hunter
 * Torment now also supports the Havoc spec version of the spell added with BFA. 
