@@ -128,7 +128,7 @@ function RSA_Utilities:OnEnable()
             local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
             if RSA.AffiliationGroup(sourceFlags) then
                 if event == "SPELL_RESURRECT" then
-                    if spellID == 7328 then
+                    if spellID == 265116 then
                         EngineerRessBFA_Target = dest
                         RSA_Utilities.CombatLogMonitor:RegisterEvent("UNIT_HEALTH")
 
