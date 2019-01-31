@@ -2565,8 +2565,8 @@ local function Utilities()
 			},
 			EngineerRessBFA = {
 				Messages = {
-					Cast = {"Used [LINK] on [TARGET]!"},
-					AcceptedRess = {"[TARGET] accepted my resurrect from [LINK]!"},
+					Cast = {"Used [LINK] on [TARGET]!", "Battle Ressed [TARGET]"},
+					AcceptedRess = {"[TARGET] accepted my resurrect from [LINK]!", "[TARGET] is back in the fight!"},
 				},
 				CustomChannel = {
 					Channel = "",
