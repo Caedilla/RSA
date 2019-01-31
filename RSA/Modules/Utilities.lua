@@ -53,6 +53,7 @@ function RSA_Utilities:OnEnable()
             [265116] = {    
                 profile = 'EngineerRessBFA',
                 section = "Cast",
+                sourceIsMe = true,
                 replacements = { TARGET = 1 }
             },       
         },
@@ -115,6 +116,7 @@ function RSA_Utilities:OnEnable()
             [265116] = {    
                 profile = 'EngineerRessBFA',
                 section = "AcceptedRess",
+                sourceIsMe = true,
                 replacements = { TARGET = 1 }
             },   
         },
@@ -128,7 +130,7 @@ function RSA_Utilities:OnEnable()
             local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
             if RSA.AffiliationGroup(sourceFlags) then
                 if event == "SPELL_RESURRECT" then
-                    if spellID == 265116 then
+                    if spellID == 265116 and RSA.AffiliationMine(sourceFlags) then
                         EngineerRessBFA_Target = dest
                         RSA_Utilities.CombatLogMonitor:RegisterEvent("UNIT_HEALTH")
 
@@ -158,7 +160,7 @@ function RSA_Utilities:OnEnable()
                     RSA_Utilities.CombatLogMonitor:UnregisterEvent("UNIT_HEALTH")
 
                     -- Send fake event to AnnouncementMonitor
-                    RSA.MonitorAndAnnounce(self, "utilities", nil, "UNIT_ACCEPTED_RESURRECT", false, UnitGUID("player"), UnitName("player"), false, nil, UnitGUID(arg1), UnitName(arg1), false, nil, 265116, GetSpellInfo(265116))
+                    RSA.MonitorAndAnnounce(self, "utilities", nil, "UNIT_ACCEPTED_RESURRECT", false, UnitGUID("player"), UnitName("player"), "Me", nil, UnitGUID(arg1), UnitName(arg1), false, nil, 265116, GetSpellInfo(265116))
                 end
             end
         end

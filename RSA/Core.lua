@@ -375,6 +375,9 @@ end
 
 local CL_OBJECT_PLAYER_MINE = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_AFFILIATION_MINE) -- construct a bitmask for a player controlled by me
 function RSA.IsMe(unitFlags)
+	if unitFlags == "Me" then return true end
+	if unitFlags == true then return true end
+	if unitFlags == false then return false end
 	if band(CL_OBJECT_PLAYER_MINE,unitFlags) == CL_OBJECT_PLAYER_MINE then
 		return true
 	end
