@@ -154,3 +154,5 @@ L["When the target evades your spell |c5500DBBD[MISSTYPE]|r will be replaced wit
 L["When the target parries your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."] = true
 L["When the target is immune to your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."] = true
 L["When the target reflects your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."] = true
+L["AcceptedRess"] = "Target Accepted"
+L["When someone accepts the resurrect you cast on them."] = true

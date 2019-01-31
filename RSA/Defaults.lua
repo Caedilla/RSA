@@ -2563,6 +2563,17 @@ local function Utilities()
 				},
 				SmartGroup = true,
 			},
+			EngineerRessBFA = {
+				Messages = {
+					Cast = {"Used [LINK] on [TARGET]!"},
+					AcceptedRess = {"[TARGET] accepted my resurrect from [LINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				Whisper = true,
+				SmartGroup = true,
+			},
 		},
 	}
 	return Utilities

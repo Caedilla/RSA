@@ -334,11 +334,20 @@ function RSA.Print_Whisper(message, target, replacements, destName)
 	else
 		SendChatMessage(format(message), "WHISPER", nil, target)
 	end
+
+	-- Return to original value after whispering, so any subsequent messages for the same event use the correct value.
+	replacements["[TARGET]"] = destName
 end
 
 local bor,band = bit.bor, bit.band -- get a local reference to some bitlib functions for faster lookups
 local CL_OBJECT_FRIENDLY_PLAYER = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_REACTION_FRIENDLY) -- construct a friendly player bitmask
 function RSA.Whisperable(destFlags) -- Checks if the unit is a player or not. Since RSA can announce casts for any unit, not just units that fall under UnitID.
+
+	--When we send a fake event through the announcement monitor, ingnore flags.
+	if destFlags == true then return true end
+	if destFlags == false then return false end
+
+
 	if band(CL_OBJECT_FRIENDLY_PLAYER,destFlags) == CL_OBJECT_FRIENDLY_PLAYER and not RSA.IsMe(destFlags) then -- check if players in vehicle need special handling
 		return true
 	end

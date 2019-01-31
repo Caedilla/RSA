@@ -3027,6 +3027,14 @@ local function Utilities_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
 		},
+		["EngineerRessBFA"] = {
+			Profile = "EngineerRessBFA",
+			Name = GetSpellInfo(265116),
+			Desc = GetSpellDescription(265116),
+			Message_Amount = 2,
+			Message_Areas = {"Cast","AcceptedRess"},
+			Valid_Tags = {"[SPELL]", "[LINK]","[TARGET]"},
+		},
 	}
 	return Spells
 end
@@ -3146,6 +3154,7 @@ local function Spell_Options(NonClass)
 		[13] = "Failed",
 		[14] = "End",
 		[15] = "StatueOfTheBlackOx",
+		[16] = "AcceptedRess",
 	}
 	local Area_Descriptions = {
 		[1] = "When you start casting this spell or when this spell starts.",
@@ -3163,6 +3172,7 @@ local function Spell_Options(NonClass)
 		[13] = "When the spell failed.",
 		[14] = "When the spell ends.",
 		[15] = "When you cast Provoke on your Statue of the Black Ox.",
+		[16] = "When someone accepts the resurrect you cast on them.",
 	}
 	local Options = {
 		name = OptionName,
