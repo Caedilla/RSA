@@ -138,7 +138,7 @@ L["When the target reflects your spell |c5500DBBD[MISSTYPE]|r will be replaced w
 L["When the target resists your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."] = "Quando il bersaglio resiste alla tua magia |c5500DBBD[MISSTYPE]|r sarà sostituito con questo."
 L["When you absorb a debuff."] = "Quando assorbi un debuff."
 L["When you absorb damage."] = "Quando assorbi il danno."
-L["When you cast Provoke on your Statue of the Black Ox."] = "Quando lanci Provoke sulla tua Statua del Bue nero."
+L["When you cast Provoke on your Statue of the Black Ox."] = "Quando lanci Provoke sulla tua Statua dello Yak Nero."
 L["When you cast this spell."] = "Quando lanci questa magia."
 L["When you deal damage."] = "Quando si infliggono danni."
 L["When you debuff a unit."] = "Quando applichi un debuff a un'unità."
