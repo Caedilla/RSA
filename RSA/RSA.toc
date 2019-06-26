@@ -17,6 +17,7 @@ Localisation\Locale-enUS.lua
 Localisation\Locale-esES.lua
 Localisation\Locale-deDE.lua
 Localisation\Locale-koKR.lua
+Localisation\Locale-itIT.lua
 Localisation\Locale-ruRU.lua
 Localisation\Locale-zhCN.lua
 Localisation\Locale-zhTW.lua
