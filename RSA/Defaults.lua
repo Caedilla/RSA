@@ -3,10 +3,10 @@ RSA.DefaultOptions = {}
 local DefaultOptions = {
 	profile = {
 		Modules = {
-			['*'] = false,
+			["*"] = false,
 		},
 		General = {
-			['*'] = true,
+			["*"] = true,
 			GlobalAnnouncements = {				
 				SmartSay = true,
 				SmartYell = true,
@@ -26,7 +26,7 @@ local DefaultOptions = {
 				AlwaysAllowWhispers = true,
 			},
 			Local = {
-				['*'] = true,
+				["*"] = true,
 			},
 			GlobalCustomChannel = "MyCustomChannel",
 			Replacements = {
@@ -57,7 +57,7 @@ local DefaultOptions = {
 			CheckInterval = 10,
 			RemindInterval = 15,
 			RemindChannels = {
-				['*'] = true,
+				["*"] = true,
 			},
 		},
 		sink20OutputSink = "ChatFrame", -- Default for LibSink-2.0

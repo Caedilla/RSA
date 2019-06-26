@@ -414,8 +414,8 @@ function RSA.GetMyRandomNumber()
 	local namebytes = 0
 	for i = 1,string.len(UnitName("player")) do
 		namebytes = namebytes + string.byte(UnitName("player"),i)
-    end
-    local random = tostring(random) .. tostring(namebytes)
+	end
+	local random = tostring(random) .. tostring(namebytes)
 	return random
 end
 

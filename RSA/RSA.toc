@@ -1,4 +1,4 @@
-## Interface: 80100
+## Interface: 80200
 ## Title: RSA [|c10FF75B3Core|r]
 ## Notes: Easy Spell Announcements! Amongst other things. This is required to run RSA.
 ## Author: Raeli

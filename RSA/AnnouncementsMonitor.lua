@@ -7,16 +7,16 @@ local cache_SpellInfo = {}
 local cache_SpellLink = {}
 local message_cache = {}
 local missTypes = {
-    "ABSORB",
-    "BLOCK",
-    "DEFLECT",
-    "DODGE",
-    "EVADE",
-    "IMMUNE",
-    "MISS",
-    "PARRY",
-    "REFLECT",
-    "RESIST",
+	"ABSORB",
+	"BLOCK",
+	"DEFLECT",
+	"DODGE",
+	"EVADE",
+	"IMMUNE",
+	"MISS",
+	"PARRY",
+	"REFLECT",
+	"RESIST",
 }
 
 local function MonitorConfig(new_config, new_playerGUID)
