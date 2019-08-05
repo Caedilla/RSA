@@ -156,3 +156,8 @@ L["When the target is immune to your spell |c5500DBBD[MISSTYPE]|r will be replac
 L["When the target reflects your spell |c5500DBBD[MISSTYPE]|r will be replaced with this."] = true
 L["AcceptedRess"] = "Target Accepted"
 L["When someone accepts the resurrect you cast on them."] = true
+L['Repair Bots'] = true
+L['Feasts'] = true
+L['Drums'] = true
+L['Cauldrons'] = true
+L['Sleeping Mana Potions'] = true
