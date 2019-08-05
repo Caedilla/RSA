@@ -3033,7 +3033,7 @@ local function Utilities_Options()
 			Desc = GetSpellDescription(265116),
 			Message_Amount = 2,
 			Message_Areas = {'Cast','AcceptedRess'},
-			VSalid_Tags = {'[SPELL]', '[LINK]','[TARGET]'},
+			Valid_Tags = {'[SPELL]', '[LINK]','[TARGET]'},
 		},
 		["SleepPotions"] = {
 			Profile = 'SleepPotions',
