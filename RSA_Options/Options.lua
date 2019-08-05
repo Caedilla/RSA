@@ -3033,7 +3033,7 @@ local function Utilities_Options()
 			Desc = GetSpellDescription(265116),
 			Message_Amount = 2,
 			Message_Areas = {'Cast','AcceptedRess'},
-			Valid_Tags = {'[SPELL]', '[LINK]','[TARGET]'},
+			VSalid_Tags = {'[SPELL]', '[LINK]','[TARGET]'},
 		},
 		["SleepPotions"] = {
 			Profile = 'SleepPotions',
@@ -3041,6 +3041,7 @@ local function Utilities_Options()
 			Desc = GetSpellDescription(298157),
 			Message_Amount = 2,
 			Message_Areas = {'Start','End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
 	}
