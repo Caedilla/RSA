@@ -161,3 +161,4 @@ L['Feasts'] = true
 L['Drums'] = true
 L['Cauldrons'] = true
 L['Sleeping Mana Potions'] = true
+L['Respec Codex'] = true

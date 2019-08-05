@@ -58,6 +58,11 @@ function RSA_Utilities:OnEnable()
 		comm = false,
 		sourceIsMe = true,
 	}
+	local configCodex = {
+		profile = 'Codex',
+		comm = true,
+		replacements = { SOURCE = 1 }
+	}
 	MonitorConfig_Utilities = {
 		player_profile = RSA.db.profile.Utilities,
 		SPELL_AURA_APPLIED = {
@@ -133,7 +138,7 @@ function RSA_Utilities:OnEnable()
 			[230935] = configDrums, -- Drums of the Mountain (Legion)
 			[256740] = configDrums, -- Drums of the Maelstrom (BfA)
 		},
-		UNIT_ACCEPTED_RESURRECT = { -- Fake event for resurrect tracking
+		UNIT_ACCEPTED_RESURRECT = { -- Fake event for resurrect tracking.
 			[265116] = {
 				profile = 'EngineerRessBFA',
 				section = 'AcceptedRess',
@@ -141,11 +146,16 @@ function RSA_Utilities:OnEnable()
 				replacements = { TARGET = 1 }
 			},
 		},
+		UNIT_SPELLCAST_SUCCEEDED = {
+			[256230] = configCodex,
+			[226241] = configCodex,
+			[227564] = configCodex,
+		},
 	}
 
 	RSA.UtilityMonitorConfig(MonitorConfig_Utilities, UnitGUID('player'))
 
-	local function Spells(_,event,arg1)
+	local function Spells(_,event,arg1,arg2,arg3)
 		if RSA.db.profile.Modules.Utilities == false then return end
 		if event == 'COMBAT_LOG_EVENT_UNFILTERED' then
 			local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
@@ -170,7 +180,6 @@ function RSA_Utilities:OnEnable()
 				end
 				RSA.MonitorAndAnnounce(self, 'utilities', timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8)
 			end
-
 		elseif event == 'UNIT_HEALTH' then
 			-- We can't track when another unit comes back to life, other than watching their health.
 			-- When their health changes, we stop tracking, reset everything and send a fake event to the Announcement Monitor for processing.
@@ -184,8 +193,13 @@ function RSA_Utilities:OnEnable()
 					RSA.MonitorAndAnnounce(self, 'utilities', nil, 'UNIT_ACCEPTED_RESURRECT', false, UnitGUID('player'), UnitName('player'), 'Me', nil, UnitGUID(arg1), UnitName(arg1), false, nil, 265116, GetSpellInfo(265116))
 				end
 			end
+		elseif event == 'UNIT_SPELLCAST_SUCCEEDED' then
+			-- Used for Codex since they don't give any combat log events.
+			RSA.MonitorAndAnnounce(self, 'utilities', nil, 'UNIT_SPELLCAST_SUCCEEDED', false, UnitGUID(arg1), UnitName(arg1), false, nil, UnitGUID(arg1), UnitName(arg1), false, nil, arg3, GetSpellInfo(arg3))
 		end
 	end
+
+	RSA_Utilities.CombatLogMonitor:RegisterEvent('UNIT_SPELLCAST_SUCCEEDED')
 	RSA_Utilities.CombatLogMonitor:SetScript('OnEvent', Spells)
 end
 

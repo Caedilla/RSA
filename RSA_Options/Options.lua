@@ -3041,6 +3041,16 @@ local function Utilities_Options()
 			Desc = GetSpellDescription(298157),
 			Message_Amount = 2,
 			Message_Areas = {'Start','End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
+		["Codex"] = {
+			Profile = 'Codex',
+			Name = L['Respec Codex'],
+			Desc = GetSpellDescription(256230),
+			Message_Amount = 1,
+			Message_Areas = {'Start'},
+			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
 	}

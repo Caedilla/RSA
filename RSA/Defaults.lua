@@ -2572,6 +2572,15 @@ local function Utilities()
 					Channel = "",
 				},
 			},
+			Codex = {
+				Messages = {
+					Start = {"[TARGET] placing a [LINK]!"},
+					End = {"[LINK] ended."},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 			EngineerRessBFA = {
 				Messages = {
 					Cast = {"Used [LINK] on [TARGET]!", "Battle Ressed [TARGET]"},
