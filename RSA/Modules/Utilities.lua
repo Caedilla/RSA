@@ -89,6 +89,7 @@ function RSA_Utilities:OnEnable()
 			[92712] = configCauldrons, -- Big Cauldron of Battle (Cata)
 			[188036] = configCauldrons, -- Spirit Cauldron (Legion)
 			[276972] = configCauldrons, -- Mystical Cauldron (BfA)
+			[298861] = configCauldrons, -- Greater Mystical Cauldron (8.2)
 		},
 		SPELL_CAST_SUCCESS = {
 			[200205] = configRepairBots, -- Reaves Auto-Hammer mode
@@ -127,6 +128,7 @@ function RSA_Utilities:OnEnable()
 			[259409] = configFeasts, -- Gallery Banquet (BfA)
 			[259410] = configFeasts, -- Bountiful Captain's Feast (BfA)
 			[286050] = configFeasts, -- Sanguinated Feast (BfA)
+			[297048] = configFeasts, -- Famine Evaluator And Snack Table (8.2)
 			[178207] = configDrums, -- Drums of Fury (WoD)
 			[230935] = configDrums, -- Drums of the Mountain (Legion)
 			[256740] = configDrums, -- Drums of the Maelstrom (BfA)
