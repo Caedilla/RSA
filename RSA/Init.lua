@@ -14,10 +14,14 @@ function RSA:TempOptions()
 					name = L["Open Configuration Panel"],
 					type = "execute",
 					order = 0,
-					func = function() 
-						HideUIPanel(InterfaceOptionsFrame) 
-						HideUIPanel(GameMenuFrame)
-						RSA:ChatCommand() end,
+					func = function()
+						if not InCombatLockdown() then
+							-- Ensure we don't taint the UI from 8.2 change when trying to call HideUIPanel in combat
+							HideUIPanel(InterfaceOptionsFrame)
+							HideUIPanel(GameMenuFrame)
+							RSA:ChatCommand()
+						end
+					end,
 				},
 			},
 		}
@@ -35,9 +39,9 @@ function RSA:ChatCommand(input)
 				LibStub("AceConfigDialog-3.0"):Open("RSA")
 			end
 		else
-			LibStub("AceConfigDialog-3.0"):Open("RSA")	
+			LibStub("AceConfigDialog-3.0"):Open("RSA")
 		end
-	end	
+	end
 end
 
 function RSA:RefreshConfig()
@@ -54,7 +58,7 @@ function RSA:RefreshConfig()
 		["SHAMAN"] = "Shaman",
 		["WARLOCK"] = "Warlock",
 		["WARRIOR"] = "Warrior",
-	}	
+	}
 	for k,v in pairs(Modules) do
 		if k == PlayerClass then
 			ModuleName = RSA:GetModule(v)
