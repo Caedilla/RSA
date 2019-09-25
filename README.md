@@ -7,18 +7,21 @@ Easy spell announcements
 ## About
 RSA is an addon that can announce spell casts to various chat channels. There is a large selection of abilities for each class that RSA can announce, such  as interrupts, defensive cooldowns, and utility spells e.g Soulstone.
 
+## Classic Support
+RSA Currently does not support classic. Support for classic may come in the upcoming weeks.
+
 ## Options
 You can open RSA's configuration window by typing **/rsa** in chat. You can alternatively go to the addon settings tab in the Interface options, and find RSA in your list of addons, which has a button to open RSA's configuration panel.
 ### Announcement Conditions
 You can configure RSA to only send messages when you are doing certain content or under certain conditions:
 
-* **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode (BFA).
+* **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode.
 * **PvE:** Choose whether to enable in manually formed Dungeons, Raids, LFG Dungeons, LFG Raids, or out in the world when War Mode is off.
 * Choose whether to only announce in Combat
 * Whispers can be set to ignore the PvP & PvE settings to allow them to always whisper targets. Useful if you always want to let someone know when you're resurrecting them for example.
 
 ### Messages
-* The messages sent by RSA are completely customisable, you can add several messages (as of BFA) for each announcement, and RSA will choose a random one to use each time.
+* The messages sent by RSA are completely customisable, you can add several messages for each announcement, and RSA will choose a random one to use each time.
 * You can remove messages by simply clearing the box containing your message and pressing enter, this will remove it from the list of potential messages.
 * If you have no messages for a given spell or section, then it will not announce.
 * You can use the Tags below in your messages to make your messages more informative.
@@ -50,9 +53,13 @@ Each spell can be announced in a variety of different channels:
 * **Whisper** - sends a whisper to the target. Only available if the target has the potential to be someone other than yourself.
 * **Custom Channel** - You can send it to a custom channel, like, say, your healing channel.
 
-## Feedback
+## Feedback & Support
 
-You can [report issues on Curseforge](https://wow.curseforge.com/projects/rsa/issues) or contact me directly through my [Battle.net community](https://blizzard.com/invite/WqRG7EUgOR).
+You can [report issues on Curseforge](https://wow.curseforge.com/projects/rsa/issues) or contact me directly on [Discord](https://discord.gg/99QZ6sd).
+
+I've setup a Patreon to go toward my WoW subscription. If you'd like to throw me a dollar to keep my addons working, check out the link below. Cheers.
+
+[![Support me on Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png "")](https://www.patreon.com/join/raeli "")
 
 ## Localisation
 
