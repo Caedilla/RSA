@@ -16,7 +16,7 @@ function RSA_Paladin:OnInitialize()
 		RSA_Paladin:SetEnabledState(true)
 	else
 		RSA_Paladin:SetEnabledState(false)
-	end	
+	end
 end
 
 function RSA.Resurrect(_, _, target, _, caster)
@@ -28,7 +28,8 @@ function RSA.Resurrect(_, _, target, _, caster)
 	if messagemax == 0 then return end
 	local messagerandom = math.random(messagemax)
 	local message = RSA.db.profile.Paladin.Spells.Redemption.Messages.Start[messagerandom]
-	local full_destName,dest = RSA.RemoveServerNames(dest)
+	local full_destName
+	full_destName,dest = RSA.RemoveServerNames(dest)
 	spellinfo = GetSpellInfo(spell) spelllinkinfo = GetSpellLink(spell)
 	RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
 	if message ~= '' then
@@ -61,7 +62,7 @@ function RSA.Resurrect(_, _, target, _, caster)
 			if RSA.db.profile.Paladin.Spells.Redemption.SmartGroup == true and GetNumGroupMembers() > 0 then return end
 			RSA.Print_Raid(string.gsub(message, '.%a+.', RSA.String_Replace))
 		end
-	end	
+	end
 end
 
 local function FinalStandCheck() -- Checks if we announce Divine Shield or Final Stand.
@@ -149,7 +150,7 @@ function RSA_Paladin:OnEnable()
 				section = 'Heal',
 				linkID = 213313,
 				replacements = { AMOUNT = 1 },
-			},	
+			},
 			[66235] = { -- ARDENT DEFENDER
 				profile = 'ArdentDefender',
 				section = 'Heal',
@@ -161,7 +162,7 @@ function RSA_Paladin:OnEnable()
 				profile = 'LayOnHands',
 				section = 'Heal',
 				replacements = { TARGET = 1, AMOUNT = 1 }
-			},	
+			},
 		},
 		SPELL_CAST_START = {
 			[212056] = { -- ABSOLUTION
@@ -171,9 +172,9 @@ function RSA_Paladin:OnEnable()
 		SPELL_CAST_SUCCESS = {
 			[31884] = Config_AvengingWrath, -- AVENGING WRATH
 			[231895] = Config_AvengingWrath, -- Crusade - Ret Talent
-			[216331] = Config_AvengingWrath, -- Avenging Crusader - Holy Talent		
+			[216331] = Config_AvengingWrath, -- Avenging Crusader - Holy Talent
 			[6940] = Config_BoS, -- Blessing of Sacrifice
-			[199448] = Config_BoS, -- Ultimate Sacrifice honour talent		
+			[199448] = Config_BoS, -- Ultimate Sacrifice honour talent
 			[212056] = { -- ABSOLUTION
 				profile = 'Absolution',
 				section = 'End'
@@ -206,9 +207,9 @@ function RSA_Paladin:OnEnable()
 			},
 		},
 		SPELL_AURA_APPLIED = {
-			[642] = Config_DivineShield, -- DIVINE SHIELD		
+			[642] = Config_DivineShield, -- DIVINE SHIELD
 			[1022] = Config_BoP, -- BLESSING OF PROTECTION
-			[204018] = Config_BoP, -- BLESSING OF SPELLWARDING	
+			[204018] = Config_BoP, -- BLESSING OF SPELLWARDING
 			[86659] = Config_GoAK, -- GUARDIAN OF ANCEINT KINGS
 			[212641] = Config_GoAK,   -- GUARDIAN OF ANCEINT KINGS
 			[853] = { -- HAMMER OF JUSTICE
@@ -266,12 +267,12 @@ function RSA_Paladin:OnEnable()
 			[231895] = Config_AvengingWrath_End, -- Crusade - Ret Talent
 			[216331] = Config_AvengingWrath_End, -- Avenging Crusader - Holy Talent
 			[1022] = Config_BoP_End, -- BLESSING OF PROTECTION
-			[204018] = Config_BoP_End, -- BLESSING OF SPELLWARDING			
+			[204018] = Config_BoP_End, -- BLESSING OF SPELLWARDING
 			[642] = Config_DivineShield_End, -- DIVINE SHIELD
 			[86659] = Config_GoAK_End, -- GUARDIAN OF ANCEINT KINGS
 			[212641] = Config_GoAK_End,   -- GUARDIAN OF ANCEINT KINGS
 			[6940] = Config_BoS_End, -- Blessing of Sacrifice
-			[199448] = Config_BoS_End, -- Ultimate Sacrifice honour talent	
+			[199448] = Config_BoS_End, -- Ultimate Sacrifice honour talent
 			[853] = { -- HAMMER OF JUSTICE
 				profile = 'HammerOfJustice',
 				section = 'End',
@@ -404,7 +405,7 @@ function RSA_Paladin:OnEnable()
 	local function Paladin_Spells()
 		local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 		if RSA.AffiliationMine(sourceFlags) then
-			if (event == 'SPELL_CAST_SUCCESS' and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed				
+			if (event == 'SPELL_CAST_SUCCESS' and RSA.db.profile.Modules.Reminders_Loaded == true) then -- Reminder Refreshed
 				local ReminderSpell = RSA.db.profile.Paladin.Reminders.SpellName
 				if spellName == ReminderSpell and (dest == pName or dest == nil) then
 					RSA.Reminder:SetScript('OnUpdate', nil)
@@ -420,7 +421,7 @@ function RSA_Paladin:OnEnable()
 		end -- IF SOURCE IS PLAYER
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript('OnEvent', Paladin_Spells)
-	
+
 	RSA.TalentMon = RSA.TalentMon or CreateFrame('Frame', 'RSA:TalentMonitor')
 	RSA.TalentMon:RegisterEvent('PLAYER_TALENT_UPDATE')
 	RSA.TalentMon:RegisterEvent('PLAYER_ENTERING_WORLD')

@@ -320,7 +320,7 @@ function RSA.Print_RW(message) -- Send a proper message to the raid warning fram
 end
 
 function RSA.Print_Whisper(message, target, replacements, destName)
-	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then 
+	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then
 		if RSA.AnnouncementCheck() == false then return end
 	end
 	if replacements and destName then -- Until we replace all instances where this function is used, check if we have all args before trying to create new format message.
@@ -370,7 +370,7 @@ function RSA.AffiliationGroup(sourceFlags)
 	end
 	if band(COMBATLOG_OBJECT_AFFILIATION_RAID,sourceFlags) == COMBATLOG_OBJECT_AFFILIATION_RAID then
 		return true
-	end	
+	end
 end
 
 local CL_OBJECT_PLAYER_MINE = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_AFFILIATION_MINE) -- construct a bitmask for a player controlled by me
@@ -386,7 +386,7 @@ end
 function RSA.RemoveServerNames(destName)
 	local full_destName
 	local a,b = UnitName(destName)
-	if b == nil or b == "" then 
+	if b == nil or b == "" then
 		full_destName = destName
 	else
 		full_destName = a .. "-" .. b
@@ -415,7 +415,7 @@ function RSA.GetMyRandomNumber()
 	for i = 1,string.len(UnitName("player")) do
 		namebytes = namebytes + string.byte(UnitName("player"),i)
 	end
-	local random = tostring(random) .. tostring(namebytes)
+	random = tostring(random) .. tostring(namebytes)
 	return random
 end
 

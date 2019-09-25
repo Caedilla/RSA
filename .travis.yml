@@ -1,0 +1,21 @@
+language: minimal
+
+addons:
+  apt:
+    packages:
+      - luarocks
+
+install: luarocks install --local luacheck
+
+script: /home/travis/.luarocks/bin/luacheck .
+
+git:
+  depth: 150
+
+
+
+deploy:
+  provider: script
+  script: bash Release/release.sh
+  on:
+    tags: true

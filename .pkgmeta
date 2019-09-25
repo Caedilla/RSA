@@ -24,7 +24,7 @@ externals:
  Libs/AceDBOptions-3.0:
   url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceDBOptions-3.0
  Libs/AceEvent-3.0:
-  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0  
+  url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceEvent-3.0
  Libs/AceGUI-3.0:
   url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceGUI-3.0
  Libs/AceLocale-3.0:
@@ -33,9 +33,9 @@ externals:
   url: svn://svn.wowace.com/wow/libsink-2-0/mainline/trunk/LibSink-2.0
  Libs/LibDualSpec-1.0:
   url: git://git.wowace.com/wow/libdualspec-1-0/mainline.git
- Libs/LibResInfo-1.0: 
+ Libs/LibResInfo-1.0:
   url: git://github.com/phanx-wow/LibResInfo.git
-  
+
 move-folders:
   RSA/RSA: RSA
   RSA/RSA_Options: RSA_Options
@@ -54,5 +54,6 @@ move-folders:
   RSA/RSA_Warrior: RSA_Warrior
 
 ignore:
+ - Release
  - .pkgmeta
  - README.md
