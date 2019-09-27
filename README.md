@@ -15,13 +15,13 @@ You can open RSA's configuration window by typing **/rsa** in chat. You can alte
 ### Announcement Conditions
 You can configure RSA to only send messages when you are doing certain content or under certain conditions:
 
-* **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode (BFA).
+* **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode.
 * **PvE:** Choose whether to enable in manually formed Dungeons, Raids, LFG Dungeons, LFG Raids, or out in the world when War Mode is off.
 * Choose whether to only announce in Combat
 * Whispers can be set to ignore the PvP & PvE settings to allow them to always whisper targets. Useful if you always want to let someone know when you're resurrecting them for example.
 
 ### Messages
-* The messages sent by RSA are completely customisable, you can add several messages (as of BFA) for each announcement, and RSA will choose a random one to use each time.
+* The messages sent by RSA are completely customisable, you can add several messages for each announcement, and RSA will choose a random one to use each time.
 * You can remove messages by simply clearing the box containing your message and pressing enter, this will remove it from the list of potential messages.
 * If you have no messages for a given spell or section, then it will not announce.
 * You can use the Tags below in your messages to make your messages more informative.
