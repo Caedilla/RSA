@@ -266,9 +266,9 @@ local function MonitorAndAnnounce(self, configType, timestamp, event, hideCaster
 	if spell_profile.Whisper == true and UnitExists(full_destName) and RSA.Whisperable(destFlags) then
 		RSA.Print_Whisper(message, full_destName, replacements, destName)
 	end
-	if spell_profile.CustomChannel and spell_profile.CustomChannel.Enabled == true then
-		RSA.Print_Channel(gsub(message, ".%a+.", replacements), spell_profile.CustomChannel.Channel)
-	end
+	--if spell_profile.CustomChannel and spell_profile.CustomChannel.Enabled == true then
+	--	RSA.Print_Channel(gsub(message, ".%a+.", replacements), spell_profile.CustomChannel.Channel)
+	--end
 	if spell_profile.Say == true then
 		RSA.Print_Say(gsub(message, ".%a+.", replacements))
 	end

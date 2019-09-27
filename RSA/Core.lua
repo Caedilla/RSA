@@ -261,6 +261,7 @@ function RSA.Print_Party(message) -- Send a message to /party or /instance. Pref
 end
 
 function RSA.Print_Channel(message, channel) -- Send a message to the custom channel that the user defines.
+	if 0 == 0 then return end -- 8.2.5 Broke Sending messages to custom channels and I'm too lazy to find every instance that this is called.
 	if RSA.AnnouncementCheck() == true then
 		if RSA.db.profile.General.GlobalAnnouncements.SmartCustomChannel == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
@@ -273,13 +274,15 @@ function RSA.Print_Channel(message, channel) -- Send a message to the custom cha
 end
 
 function RSA.Print_Say(message) -- Send a message to Say.
-	if RSA.AnnouncementCheck() == true then
-		if RSA.db.profile.General.GlobalAnnouncements.SmartSay == true then
-			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
+	if IsInInstance() then
+		if RSA.AnnouncementCheck() == true then
+			if RSA.db.profile.General.GlobalAnnouncements.SmartSay == true then
+				if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
+					SendChatMessage(format(message), "SAY", nil)
+				end
+			elseif RSA.db.profile.General.GlobalAnnouncements.SmartSay == false then
 				SendChatMessage(format(message), "SAY", nil)
 			end
-		elseif RSA.db.profile.General.GlobalAnnouncements.SmartSay == false then
-			SendChatMessage(format(message), "SAY", nil)
 		end
 	end
 end
@@ -297,13 +300,15 @@ function RSA.Print_Emote(message) -- Send a message to Emote.
 end
 
 function RSA.Print_Yell(message) -- Send a message to Yell.
-	if RSA.AnnouncementCheck() == true then
-		if RSA.db.profile.General.GlobalAnnouncements.SmartYell == true then
-			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
+	if IsInInstance() then
+		if RSA.AnnouncementCheck() == true then
+			if RSA.db.profile.General.GlobalAnnouncements.SmartYell == true then
+				if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
+					SendChatMessage(format(message), "YELL", nil)
+				end
+			elseif RSA.db.profile.General.GlobalAnnouncements.SmartYell == false then
 				SendChatMessage(format(message), "YELL", nil)
 			end
-		elseif RSA.db.profile.General.GlobalAnnouncements.SmartYell == false then
-			SendChatMessage(format(message), "YELL", nil)
 		end
 	end
 end

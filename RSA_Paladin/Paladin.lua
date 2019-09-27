@@ -114,6 +114,15 @@ function RSA_Paladin:OnEnable()
 		profile = 'GoAK',
 		section = 'End'
 	}
+	local Config_BoF = {
+		profile = 'HandOfFreedom',
+		replacements = { TARGET = 1 }
+	}
+	local Config_BoF_End = {
+		profile = 'HandOfFreedom',
+		section = 'End',
+		replacements = { TARGET = 1 }
+	}
 	local Config_BoP = { -- BLESSING OF PROTECTION & BLESSING OF SPELLWARDING
 		profile = 'HandOfProtection',
 		replacements = { TARGET = 1 }
@@ -190,10 +199,6 @@ function RSA_Paladin:OnEnable()
 			[31821] = { -- AURA MASTERY
 				profile = 'DevotionAura'
 			},
-			[1044] = { -- HAND OF FREEDOM
-				profile = 'HandOfFreedom',
-				replacements = { TARGET = 1 }
-			},
 			[210256] = { -- Blessing of Sanctuary
 				profile = 'BlessingOfSanctuary',
 				replacements = { TARGET = 1 }
@@ -211,7 +216,9 @@ function RSA_Paladin:OnEnable()
 			[1022] = Config_BoP, -- BLESSING OF PROTECTION
 			[204018] = Config_BoP, -- BLESSING OF SPELLWARDING
 			[86659] = Config_GoAK, -- GUARDIAN OF ANCEINT KINGS
-			[212641] = Config_GoAK,   -- GUARDIAN OF ANCEINT KINGS
+			[212641] = Config_GoAK, -- GUARDIAN OF ANCEINT KINGS
+			[1044] = Config_BoF, -- Normal Freedom
+			[305395] = Config_BoF, -- Unbound Freedom
 			[853] = { -- HAMMER OF JUSTICE
 				profile = 'HammerOfJustice',
 				replacements = { TARGET = 1 }
@@ -273,6 +280,8 @@ function RSA_Paladin:OnEnable()
 			[212641] = Config_GoAK_End,   -- GUARDIAN OF ANCEINT KINGS
 			[6940] = Config_BoS_End, -- Blessing of Sacrifice
 			[199448] = Config_BoS_End, -- Ultimate Sacrifice honour talent
+			[1044] = Config_BoF_End, -- Normal Freedom
+			[305395] = Config_BoF_End, -- Unbound Freedom
 			[853] = { -- HAMMER OF JUSTICE
 				profile = 'HammerOfJustice',
 				section = 'End',
@@ -304,11 +313,6 @@ function RSA_Paladin:OnEnable()
 			},
 			[25771] = { -- FORBEARANCE
 				profile = 'Forbearance',
-				section = 'End',
-				replacements = { TARGET = 1 }
-			},
-			[1044] = { -- HAND OF FREEDOM
-				profile = 'HandOfFreedom',
 				section = 'End',
 				replacements = { TARGET = 1 }
 			},

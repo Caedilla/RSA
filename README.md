@@ -5,9 +5,12 @@ Easy spell announcements
 <https://www.curseforge.com/wow/addons/rsa>
 
 ## About
-RSA is an addon that can announce spell casts to various chat channels. There is a large selection of abilities for each class that RSA can announce, such  as interrupts, defensive cooldowns, and utility spells e.g Soulstone.
+RSA is an addon that can announce spell casts to various chat channels. There is a large selection of abilities for each class that RSA can announce, such as interrupts, defensive cooldowns, and utility spells e.g Soulstone.
 
-## Options
+## Classic Support
+RSA Currently does not support classic. Support for classic may come in the upcoming weeks.
+
+## Options & Features
 You can open RSA's configuration window by typing **/rsa** in chat. You can alternatively go to the addon settings tab in the Interface options, and find RSA in your list of addons, which has a button to open RSA's configuration panel.
 ### Announcement Conditions
 You can configure RSA to only send messages when you are doing certain content or under certain conditions:
@@ -22,7 +25,7 @@ You can configure RSA to only send messages when you are doing certain content o
 * You can remove messages by simply clearing the box containing your message and pressing enter, this will remove it from the list of potential messages.
 * If you have no messages for a given spell or section, then it will not announce.
 * You can use the Tags below in your messages to make your messages more informative.
-    
+
 ### Tags
 Every spell uses the first two tags, other tags are usable only on spells where they would return anything useful.
 
@@ -44,15 +47,21 @@ Each spell can be announced in a variety of different channels:
 * **Raid** - Sends to /raid or /instance depending on what is most appropriate.
 * **Party** -Sends to /party or /instance depending on what is most appropriate.
 * **Smart Group Channel** - Sends to /instance, /raid, or /party depending on what is most appropriate.
-* **Say**
+* **Say** - Can only be used inside instances since 8.2.5.
+* **Yell** - Can only be used inside instances since 8.2.5.
 * **Emote**
-* **Yell**
 * **Whisper** - sends a whisper to the target. Only available if the target has the potential to be someone other than yourself.
-* **Custom Channel** - You can send it to a custom channel, like, say, your healing channel.
 
-## Feedback
+#### 8.2.5 API Changes
+Blizzard made an unannounced change to limit [ClassicLFG](https://www.curseforge.com/wow/addons/classiclfg)'s ability to post LFG messages. Why they decided to also make this change to the live client, I don't know. The end result though is that custom channel announcements are no longer possible, and sending to Say or Yell is no longer possible outside of instances as it requires a button press outside of instances.
 
-You can [report issues on Curseforge](https://wow.curseforge.com/projects/rsa/issues) or contact me directly through my [Battle.net community](https://blizzard.com/invite/WqRG7EUgOR).
+## Feedback & Support
+
+You can [report issues on Curseforge](https://wow.curseforge.com/projects/rsa/issues) or contact me directly on [Discord](https://discord.gg/99QZ6sd).
+
+I've setup a Patreon to go toward my WoW subscription. If you'd like to throw me a dollar to keep my addons working, check out the link below. Cheers.
+
+[![Support me on Patreon](https://c5.patreon.com/external/logo/become_a_patron_button.png "")](https://www.patreon.com/join/raeli "")
 
 ## Localisation
 
