@@ -1,3 +1,3 @@
-# RSA r526-Release
-### Changed
-* Updated interface version for 8.3.
+# RSA r527-Release
+### Hunters
+* Ancient Hysteria announcements now also work for Primal Rage.
