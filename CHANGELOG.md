@@ -1,3 +1,3 @@
-# RSA r527-Release
-### Hunters
-* Ancient Hysteria announcements now also work for Primal Rage.
+# RSA r528-Beta
+### Warrior
+* Updated Spell Reflect tracking method, should hopefully reduce false positives.
