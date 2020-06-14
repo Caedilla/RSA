@@ -33,10 +33,11 @@ end
 function RSA.VersionCheck(type)
 	if not type then return end
 	if type == 'joinedGroup' then
-	if IsInRaid() then
-		RSA.SendCommMessage('RSA', 'RSA_Version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
-	elseif IsInGroup() then
-		RSA.SendCommMessage('RSA', 'RSA_Version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
+		if IsInRaid() then
+			RSA.SendCommMessage('RSA', 'RSA_Version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
+		elseif IsInGroup() then
+			RSA.SendCommMessage('RSA', 'RSA_Version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
+		end
 	end
 	if type == 'guild' then
 		if IsInGuild() and type then
