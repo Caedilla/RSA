@@ -49,7 +49,7 @@ end
 function RSA.OnVersionCheckReceived(addon, prefix, message, channel, sender)
 	local revision = string.match(message,"%d+")
 	local releaseType = string.match(message,"%a+") or 0
-	local mine = releasePriority[self.db.global.releaseType]
+	local mine = releasePriority[RSA.db.global.releaseType]
 	local theirs = releasePriority[releaseType]
 
 	if mine < theirs then return end -- Don't warn on more recent development versions if we're on a more stable release type.
