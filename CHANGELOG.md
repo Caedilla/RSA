@@ -1,4 +1,4 @@
-# RSA r52-Alpha
+# RSA r529-Alpha
 
 ### Changes
 * RSA should now also run a version check with your guild members.
