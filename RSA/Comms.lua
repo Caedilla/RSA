@@ -117,10 +117,10 @@ function RSA.OnStatusReceived(addon, prefix, message, channel, sender)
 		local memberAnnouncer
 		for i = 1, #groupMembers do
 			if i == 1 then
-				memberAnnouncer = groupMembers[k].ID
+				memberAnnouncer = groupMembers[i].ID
 			elseif i > 1 then
-				if memberAnnouncer < groupMembers[k].ID then
-					memberAnnouncer = groupMembers[k].ID
+				if memberAnnouncer < groupMembers[i].ID then
+					memberAnnouncer = groupMembers[i].ID
 				end
 			end
 			RSA.Comm.GroupAnnouncer = memberAnnouncer
