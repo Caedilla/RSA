@@ -1,3 +1,4 @@
 local.sh
 release.sh
 .release
+.vscode

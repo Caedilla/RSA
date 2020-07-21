@@ -4,39 +4,6 @@ local RSA_O = RSA:NewModule('RSA_Options', 'LibSink-2.0')
 local _, PlayerClass = UnitClass('player')
 local _,_,RaceID = UnitRace('player')
 
---[[
-local function CommunityLists()
-	local Communities = C_Club.GetSubscribedClubs()
-	local CommunityNames = {}
-	for i = 1,#Communities do
-		CommunityNames[i] = Communities[i].name
-		print(CommunityNames[i])
-	end
-	return CommunityNames
-end
-
-local Communities = C_Club.GetSubscribedClubs()
-local CommunityData = {}
-
-local ListNames = {}
-local ListChannels = {}
-
-for i = 1,#Communities do
-	Communities[i].channels = C_Club.GetStreams(Communities[i].clubId)
-	ListNames[i] = Communities[i].name
-end
-
-for j = 1,#Communities[3].channels do
-	ListChannels[j] = Communities[3].channels[j].name
-end
-
-RSAC = Communities
-RSAL = ListNames
-RSAM = ListChannels
-]]--
-
-
-
 local Options = {
 	type = 'group',
 	name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision ..'|r',
@@ -735,7 +702,7 @@ local Options = {
 
 local function DeathKnight_Options()
 	local Spells = {
-		[1] = {
+		['Army'] = {
 			Profile = 'Army',
 			Name = GetSpellInfo(42650),
 			Desc = GetSpellDescription(42650),
@@ -744,7 +711,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[2] = {
+		['AMS'] = {
 			Profile = 'AMS',
 			Name = GetSpellInfo(48707),
 			Desc = GetSpellDescription(48707),
@@ -753,7 +720,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[3] = {
+		['AMZ'] = {
 			Profile = 'AMZ',
 			Name = GetSpellInfo(51052),
 			Desc = GetSpellDescription(51052),
@@ -762,7 +729,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[4] = {
+		['DarkCommand'] = {
 			Profile = 'DarkCommand',
 			Name = GetSpellInfo(56222),
 			Desc = GetSpellDescription(56222),
@@ -771,7 +738,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[MISSTYPE]'},
 		},
-		[5] = {
+		['IceboundFortitude'] = {
 			Profile = 'IceboundFortitude',
 			Name = GetSpellInfo(48792),
 			Desc = GetSpellDescription(48792),
@@ -780,7 +747,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[6] = {
+		['Strangulate'] = {
 			Profile = 'Strangulate',
 			Name = GetSpellInfo(47476),
 			Desc = GetSpellDescription(47476),
@@ -789,7 +756,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[MISSTYPE]'},
 		},
-		[7] = {
+		['Asphyxiate'] = {
 			Profile = 'Asphyxiate',
 			Name = GetSpellInfo(108194),
 			Desc = GetSpellDescription(108194),
@@ -798,7 +765,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[MISSTYPE]'},
 		},
-		[8] = {
+		['MindFreeze'] = {
 			Profile = 'MindFreeze',
 			Name = GetSpellInfo(47528),
 			Desc = GetSpellDescription(47528),
@@ -807,7 +774,16 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[TARSPELL]', '[TARLINK]', '[MISSTYPE]'},
 		},
-		[9] = {
+		['GorefiendsGrasp'] = {
+			Profile = 'GorefiendsGrasp',
+			Name = GetSpellInfo(108199),
+			Desc = GetSpellDescription(108199),
+			Message_Amount = 1,
+			Message_Areas = {'Cast'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
+		},
+		['DeathGrip'] = {
 			Profile = 'DeathGrip',
 			Name = GetSpellInfo(49576),
 			Desc = GetSpellDescription(49576),
@@ -816,7 +792,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[MISSTYPE]'},
 		},
-		[10] = {
+		['VampiricBlood'] = {
 			Profile = 'VampiricBlood',
 			Name = GetSpellInfo(55233),
 			Desc = GetSpellDescription(55233),
@@ -825,7 +801,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[11] = {
+		['RuneTap'] = {
 			Profile = 'RuneTap',
 			Name = GetSpellInfo(194679),
 			Desc = GetSpellDescription(194679),
@@ -834,7 +810,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[12] = {
+		['DancingRuneWeapon'] = {
 			Profile = 'DancingRuneWeapon',
 			Name = GetSpellInfo(81256),
 			Desc = GetSpellDescription(81256),
@@ -843,7 +819,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[13] = {
+		['RaiseAlly'] = {
 			Profile = 'RaiseAlly',
 			Name = GetSpellInfo(61999),
 			Desc = GetSpellDescription(61999),
@@ -851,7 +827,7 @@ local function DeathKnight_Options()
 			Message_Areas = {'Cast'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
 		},
-		[14] = {
+		['PillarOfFrost'] = {
 			Profile = 'PillarOfFrost',
 			Name = GetSpellInfo(51271),
 			Desc = GetSpellDescription(51271),
@@ -860,7 +836,7 @@ local function DeathKnight_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[15] = {
+		['Purgatory'] = {
 			Profile = 'Purgatory',
 			Name = GetSpellInfo(114556),
 			Desc = GetSpellDescription(114556),

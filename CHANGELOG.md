@@ -1,8 +1,4 @@
-# RSA r532-Release
+# RSA r533-Alpha
 
-### Changes
-* Updated localisations
-
-### Priest
-* Added Evangelism
-* Added Rapture
+### Death Knight
+* Added Gorefiend's Grasp

@@ -148,6 +148,14 @@ local function DeathKnight()
 				},
 				SmartGroup = true,
 			},
+			GorefiendsGrasp = {
+				Messages = {
+					Cast = {"[LINK] activated!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 			DeathGrip = {
 				Messages = {
 					Cast = {"Death Gripped [TARGET]!"},
