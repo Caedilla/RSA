@@ -189,19 +189,19 @@ function RSA_Warrior:OnEnable()
 				local full_destName,dest = RSA.RemoveServerNames(dest)
 				local message, messagemax, messagerandom
 				if event == 'SPELL_MISSED' then
-					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = source}
+					RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo, ['[TARGET]'] = source}
 					messagemax = #RSA.db.profile.Warrior.Spells.SpellReflect.Messages.Resist
 					if messagemax == 0 then return end
 					messagerandom = math.random(messagemax)
 					message = RSA.db.profile.Warrior.Spells.SpellReflect.Messages.Resist[messagerandom]
 				elseif missType == 'DEBUFF' then
-					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = source}
+					RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo, ['[TARGET]'] = source}
 					messagemax = #RSA.db.profile.Warrior.Spells.SpellReflect.Messages.Debuff
 					if messagemax == 0 then return end
 					messagerandom = math.random(messagemax)
 					message = RSA.db.profile.Warrior.Spells.SpellReflect.Messages.Debuff[messagerandom]
 				else
-					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = source, ["[AMOUNT]"] = reflectAmount}
+					RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo, ['[TARGET]'] = source, ['[AMOUNT]'] = reflectAmount}
 					messagemax = #RSA.db.profile.Warrior.Spells.SpellReflect.Messages.Damage
 					if messagemax == 0 then return end
 					messagerandom = math.random(messagemax)
