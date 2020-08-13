@@ -1341,10 +1341,18 @@ local function Hunter_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[11] = {
+		--[[[11] = {
 			Profile = 'Tranq',
 			Name = L["Pet Dispels"],
 			Desc = GetSpellDescription(264263),
+			Message_Amount = 1,
+			Message_Areas = {'Cast'},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[AURA]', '[AURALINK]'},
+		},]]--
+		[11] = {
+			Profile = 'Tranq',
+			Name = GetSpellInfo(19801),
+			Desc = GetSpellDescription(19801),
 			Message_Amount = 1,
 			Message_Areas = {'Cast'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[AURA]', '[AURALINK]'},
@@ -1881,7 +1889,7 @@ local function Paladin_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[26] = {
+		--[[[26] = {
 			Profile = 'AegisOfLight',
 			Name = GetSpellInfo(204150),
 			Desc = GetSpellDescription(204150),
@@ -1889,7 +1897,7 @@ local function Paladin_Options()
 			Message_Areas = {'Start', 'End'},
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
-		},
+		},]]--
 		[27] = {
 			Profile = 'EyeForAnEye',
 			Name = GetSpellInfo(205191),
@@ -3206,224 +3214,226 @@ local function Spell_Options(NonClass)
 	}
 	for i,v in pairs(Spells) do
 		if Spells[i] then
-			Options.args[Spells[i].Name] = {
-				name = function()
-					if Spells[i].Race then
-						if RaceID ~= Spells[i].Race then
-							local name = '|cffFFCC00' .. Spells[i].Name .. '|r'
+			if not Spells[i].Name then print(Spells[i].Profile) else
+				Options.args[Spells[i].Name] = {
+					name = function()
+						if Spells[i].Race then
+							if RaceID ~= Spells[i].Race then
+								local name = '|cffFFCC00' .. Spells[i].Name .. '|r'
+								return name
+							else
+								local name = '|c5500DBBD' .. Spells[i].Name .. '|r'
+								return name
+							end
+						end
+						if string.len(Spells[i].Name) > 35 then
+							local name = Spells[i].Name
+							name = name:gsub('(%w)%S+%s*','%1')
+							name = name:gsub('/ ',' / ')
 							return name
 						else
-							local name = '|c5500DBBD' .. Spells[i].Name .. '|r'
-							return name
+							return Spells[i].Name
 						end
-					end
-					if string.len(Spells[i].Name) > 35 then
-						local name = Spells[i].Name
-						name = name:gsub('(%w)%S+%s*','%1')
-						name = name:gsub('/ ',' / ')
-						return name
-					else
-						return Spells[i].Name
-					end
-				end,
-				desc = function() if Spells[i].longDesc then return Spells[i].Desc else return '|cffd1d1d1'..Spells[i].Desc..'|r' end end,
-				hidden = Spells[i].Hidden or false,
-				disabled = Spells[i].Hidden or false,
-				order = Spells[i].Order or 5,
-				type = 'group',
-				childGroups = 'tab',
-				args = {
-					Spell_Name = {
-						name = '|c5500DBBD'..L["Configuring"]..':|r '..Spells[i].Name,
-						type = 'description',
-						order = 0.01,
-						fontSize = 'large',
-					},
-					Spell_Desc = {
-						name = '|cffd1d1d1'..Spells[i].Desc..'|r',
-						type = 'description',
-						hidden = Spells[i].longDesc or false,
-						order = 0.02,
-					},
-					Spell_LongDesc = {
-						name = Spells[i].Desc,
-						type = 'description',
-						hidden = function() if Spells[i].longDesc then return false else return true end end,
-						order = 0.02,
-					},
-					Channel_Header = {
-						name = L["Message Announce Area"],
-						type = 'header',
-						order = 0.1,
-					},
-					Emote = {
-						name = '|cffCF374D'..L["Emote"]..'|r',
-						type = 'toggle',
-						order = 0.11,
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Emote"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Emote
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Emote = value
-						end,
-					},
-					Say = {
-						name = '|cffCF374D'..L["Say"]..'|r',
-						desc = L["%s can only function inside instances since 8.2.5."] :format(L["Say"]),
-						type = 'toggle',
-						order = 0.11,
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Say"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Say
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Say = value
-						end,
-					},
-					Yell = {
-						name = '|cffCF374D'..L["Yell"]..'|r',
-						desc = L["%s can only function inside instances since 8.2.5."] :format(L["Yell"]),
-						type = 'toggle',
-						order = 0.11,
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Yell"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Yell
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Yell = value
-						end,
-					},
-					Custom_Channel_Toggle = {
-						name = '|cffCF374D'..L["Custom Channel"]..'|r',
-						type = 'toggle',
-						order = 1,
-						desc = L["Send to player created channel."],
-						--hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Custom"] then return true end end end,
-						hidden = true,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled = value
-						end,
-					},
-					Custom_Channel_Name = {
-						name = '|cffCF374D'..L["Channel Name"]..'|r',
-						type = 'input',
-						order = 2,
-						desc = L["Only usable for player created channels, do not use for Blizzard channels such as |cff91BE0F/party|r."],
-						width = 'full',
-						hidden = true,
-						--[[hidden = function()
-							if Spells[i].Message_Channels_Disabled then
-								if Spells[i].Message_Channels_Disabled["Custom"] then
-									return true
+					end,
+					desc = function() if Spells[i].longDesc then return Spells[i].Desc else return '|cffd1d1d1'..Spells[i].Desc..'|r' end end,
+					hidden = Spells[i].Hidden or false,
+					disabled = Spells[i].Hidden or false,
+					order = Spells[i].Order or 5,
+					type = 'group',
+					childGroups = 'tab',
+					args = {
+						Spell_Name = {
+							name = '|c5500DBBD'..L["Configuring"]..':|r '..Spells[i].Name,
+							type = 'description',
+							order = 0.01,
+							fontSize = 'large',
+						},
+						Spell_Desc = {
+							name = '|cffd1d1d1'..Spells[i].Desc..'|r',
+							type = 'description',
+							hidden = Spells[i].longDesc or false,
+							order = 0.02,
+						},
+						Spell_LongDesc = {
+							name = Spells[i].Desc,
+							type = 'description',
+							hidden = function() if Spells[i].longDesc then return false else return true end end,
+							order = 0.02,
+						},
+						Channel_Header = {
+							name = L["Message Announce Area"],
+							type = 'header',
+							order = 0.1,
+						},
+						Emote = {
+							name = '|cffCF374D'..L["Emote"]..'|r',
+							type = 'toggle',
+							order = 0.11,
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Emote"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Emote
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Emote = value
+							end,
+						},
+						Say = {
+							name = '|cffCF374D'..L["Say"]..'|r',
+							desc = L["%s can only function inside instances since 8.2.5."] :format(L["Say"]),
+							type = 'toggle',
+							order = 0.11,
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Say"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Say
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Say = value
+							end,
+						},
+						Yell = {
+							name = '|cffCF374D'..L["Yell"]..'|r',
+							desc = L["%s can only function inside instances since 8.2.5."] :format(L["Yell"]),
+							type = 'toggle',
+							order = 0.11,
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Yell"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Yell
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Yell = value
+							end,
+						},
+						Custom_Channel_Toggle = {
+							name = '|cffCF374D'..L["Custom Channel"]..'|r',
+							type = 'toggle',
+							order = 1,
+							desc = L["Send to player created channel."],
+							--hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Custom"] then return true end end end,
+							hidden = true,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled = value
+							end,
+						},
+						Custom_Channel_Name = {
+							name = '|cffCF374D'..L["Channel Name"]..'|r',
+							type = 'input',
+							order = 2,
+							desc = L["Only usable for player created channels, do not use for Blizzard channels such as |cff91BE0F/party|r."],
+							width = 'full',
+							hidden = true,
+							--[[hidden = function()
+								if Spells[i].Message_Channels_Disabled then
+									if Spells[i].Message_Channels_Disabled["Custom"] then
+										return true
+									else
+										return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled ~= true
+									end
 								else
 									return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled ~= true
 								end
-							else
-								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Enabled ~= true
-							end
-						end,]]--
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Channel
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Channel = value
-						end,
+							end,]]--
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Channel
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].CustomChannel.Channel = value
+							end,
+						},
+						Instance = {
+							name = '|cff91BE0F'..L["Instance"]..'|r',
+							type = 'toggle',
+							order = 4,
+							desc = L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Instance"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Instance
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Instance = value
+							end,
+						},
+						Raid = {
+							name = '|cff91BE0F'..L["Raid"]..'|r',
+							type = 'toggle',
+							order = 4,
+							desc = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Raid"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Raid
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Raid = value
+							end,
+						},
+						Party = {
+							name = '|cff91BE0F'..L["Party"]..'|r',
+							type = 'toggle',
+							order = 4,
+							desc = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Party"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Party
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Party = value
+							end,
+						},
+						Local = {
+							name = '|cff00B2FA'..L["Local"]..'|r',
+							type = 'toggle',
+							order = 5,
+							desc = L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."],
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Local"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Local
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Local = value
+							end,
+						},
+						Whisper = {
+							name = '|cffFFCC00'..L["Whisper"]..'|r',
+							type = 'toggle',
+							desc = L["|cffFFCC00Whispers|r the target of the spell."] .. '\n' .. L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."],
+							order = 6,
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Whisper"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Whisper
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Whisper = value
+							end,
+						},
+						Smart_Group = {
+							name = '|cffFFCC00'..L["Smart Group Channel"]..'|r',
+							type = 'toggle',
+							order = 7,
+							desc = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."],
+							hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["SmartGroup"] then return true end end end,
+							get = function(info)
+								return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].SmartGroup
+							end,
+							set = function (info, value)
+								RSA.db.profile[ProfileName].Spells[Spells[i].Profile].SmartGroup = value
+							end,
+						},
+						Message_Header = {
+							name = L["Message Texts"],
+							type = 'header',
+							order = 100,
+						},
+						Message_Description = {
+							name = L["The following tags are available for use with this spell:"],
+							type = 'description',
+							order = 100.1,
+							fontSize = 'medium',
+						},
 					},
-					Instance = {
-						name = '|cff91BE0F'..L["Instance"]..'|r',
-						type = 'toggle',
-						order = 4,
-						desc = L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Instance"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Instance
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Instance = value
-						end,
-					},
-					Raid = {
-						name = '|cff91BE0F'..L["Raid"]..'|r',
-						type = 'toggle',
-						order = 4,
-						desc = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Raid"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Raid
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Raid = value
-						end,
-					},
-					Party = {
-						name = '|cff91BE0F'..L["Party"]..'|r',
-						type = 'toggle',
-						order = 4,
-						desc = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Party"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Party
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Party = value
-						end,
-					},
-					Local = {
-						name = '|cff00B2FA'..L["Local"]..'|r',
-						type = 'toggle',
-						order = 5,
-						desc = L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."],
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Local"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Local
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Local = value
-						end,
-					},
-					Whisper = {
-						name = '|cffFFCC00'..L["Whisper"]..'|r',
-						type = 'toggle',
-						desc = L["|cffFFCC00Whispers|r the target of the spell."] .. '\n' .. L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."],
-						order = 6,
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["Whisper"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Whisper
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Whisper = value
-						end,
-					},
-					Smart_Group = {
-						name = '|cffFFCC00'..L["Smart Group Channel"]..'|r',
-						type = 'toggle',
-						order = 7,
-						desc = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."],
-						hidden = function() if Spells[i].Message_Channels_Disabled then if Spells[i].Message_Channels_Disabled["SmartGroup"] then return true end end end,
-						get = function(info)
-							return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].SmartGroup
-						end,
-						set = function (info, value)
-							RSA.db.profile[ProfileName].Spells[Spells[i].Profile].SmartGroup = value
-						end,
-					},
-					Message_Header = {
-						name = L["Message Texts"],
-						type = 'header',
-						order = 100,
-					},
-					Message_Description = {
-						name = L["The following tags are available for use with this spell:"],
-						type = 'description',
-						order = 100.1,
-						fontSize = 'medium',
-					},
-				},
-			}
+				}
+			end
 		end
 
 		-- Add usable tags to description.
