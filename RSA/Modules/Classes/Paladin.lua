@@ -1,8 +1,4 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
-local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
-local LRI = LibStub('LibResInfo-1.0',true)
-local RSA_Paladin = RSA:NewModule('Paladin')
-
 
 local paladinData = {
 	['ardentDefender'] = {
@@ -45,27 +41,15 @@ local paladinData = {
 			SPELL_AURA_REMOVED = {
 				tracker = 1,
 				tags = {},
-				messages = {
-					"[LINK] faded!",
-				},
-				channels = {
-
-				},
+				messages = {"[LINK] faded!",},
+				channels = {},
 			},
-			[31850] = { -- ARDENT DEFENDER
-				profile = 'ArdentDefender',
-				section = 'End',
-				tracker = 1
-			},
-
-
-
-
-
-
 		},
 	},
 }
+
+-- RSA.db.profile.paladin.ardentDefender.events.SPELL_HEAL.messages -> Table return of messages as per ussual
+-- RSA.db.profile.paladin.ardentDefender.configDisplay.messageAreas[1] -> SPELL_HEAL
 
 local function PrepareDataTable(dataTable)
 	for i = 1, #dataTable do
@@ -96,6 +80,9 @@ local function PrepareDataTable(dataTable)
 				},
 			}
 		end
+		for k, v in pairs(dataTable[i].events) do
+			table.insert(dataTable[i].configDisplay.messageAreas, k)
+		end
 		for j = 1, #dataTable[i].events do
 			if not dataTable[i].events[j].channels then
 				dataTable[i].events[j].channels = {}
@@ -108,7 +95,5 @@ local function PrepareDataTable(dataTable)
 
 	return dataTable
 end
-
-
 
 RSA.SpellData.Paladin = PrepareDataTable(paladinData)
