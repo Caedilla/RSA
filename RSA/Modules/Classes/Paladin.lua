@@ -1,7 +1,8 @@
-local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 
 local paladinData = {
 	['ardentDefender'] = {
+		profile = 'ardentDefender',
 		spellID = 31850,
 		configDisplay = {
 			messageAreas = {},
@@ -48,11 +49,17 @@ local paladinData = {
 	},
 }
 
--- RSA.db.profile.paladin.ardentDefender.events.SPELL_HEAL.messages -> Table return of messages as per ussual
--- RSA.db.profile.paladin.ardentDefender.configDisplay.messageAreas[1] -> SPELL_HEAL
+local function PrepareDataTables(dataTable)
+	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
+	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
+	-- Why not store the profile in this manner by default? It's more human readable to have everything needed for a spell to function within
+	--one table, rather than having multiple references to the profile in separate event tables as RSA used to do.
 
-local function PrepareDataTable(dataTable)
+	-- TODO: Move to appropriate file space.
+	local spellToProfile = {}
+
 	for i = 1, #dataTable do
+		spellToProfile[dataTable[i].spellID] = dataTable[i].profile
 		if not dataTable[i].environments then
 			paladinData[i].environments = {
 				useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
@@ -84,6 +91,8 @@ local function PrepareDataTable(dataTable)
 			table.insert(dataTable[i].configDisplay.messageAreas, k)
 		end
 		for j = 1, #dataTable[i].events do
+			spellToProfile[dataTable[i].events[j].uniqueSpellID] = spellToProfile[i].profile
+
 			if not dataTable[i].events[j].channels then
 				dataTable[i].events[j].channels = {}
 			end
@@ -93,7 +102,7 @@ local function PrepareDataTable(dataTable)
 		end
 	end
 
-	return dataTable
+	return dataTable, spellToProfile
 end
 
-RSA.SpellData.Paladin = PrepareDataTable(paladinData)
+RSA.SpellData.Paladin, RSA.MonitorData.Paladin = PrepareDataTables(paladinData)
