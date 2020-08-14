@@ -21,6 +21,51 @@ local missTypes = {
 	'RESIST',
 }
 
+local function CommCheck(currentSpell)
+	-- Track group announced spells using RSA.Comm (AddonMessages)
+	local CommCanAnnounce = true
+	if currentSpell.comm then
+		if RSA.Comm.GroupAnnouncer then
+			CommCanAnnounce = true
+			if RSA.Comm.GroupAnnouncer == tonumber(RSA.db.global.ID) then -- This is us, continue as normal.
+				CommCanAnnounce = true
+			else -- Someone else is announcing.
+				CommCanAnnounce = false
+			end
+		else -- No Group, continue as normal.
+			CommCanAnnounce = true
+		end
+	end
+	return CommCanAnnounce
+end
+
+local function BuildMessageCache(currentSpell, currentSpellProfile, currentSpellData)
+	-- Build Cache of valid messages
+	-- We store empty strings when users blank a default message so we know not to use the default. An empty string can also be stored when a user deletes extra messages.
+	-- We need to validate the list of messages so when we pick a message at random, we don't accidentally pick the blanked message.
+	local messageCacheProfile = messageCache[currentSpellProfile]
+	if not messageCacheProfile then
+		messageCacheProfile = {}
+		messageCache[currentSpellProfile] = {}
+	end
+	local validMessages = messageCacheProfile[currentSpell.events]
+	if not validMessages then
+		validMessages = {}
+		for i = 1, #currentSpell.events do
+			if currentSpellData.messages[i] ~= '' then
+				validMessages[i] = currentSpellData.messages[i]
+			end
+		end
+		messageCache[currentSpellProfile][currentSpell.events] = validMessages
+	end
+	if #validMessages == 0 then return end
+	local message = validMessages[math.random(#validMessages)]
+	if not message then return end
+	message = gsub(message,'%%','%%%%')
+	return message
+end
+
+
 local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 
@@ -57,21 +102,6 @@ local function HandleEvents()
 	if currentSpellData.targetNotMe and RSA.IsMe(destFlags) then return end
 	if currentSpellData.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
-	-- Track group announced spells using RSA.Comm (AddonMessages)
-	local CommCanAnnounce = true
-	if currentSpell.comm then
-		if RSA.Comm.GroupAnnouncer then
-			CommCanAnnounce = true
-			if RSA.Comm.GroupAnnouncer == tonumber(RSA.db.global.ID) then -- This is us, continue as normal.
-				CommCanAnnounce = true
-			else -- Someone else is announcing.
-				CommCanAnnounce = false
-			end
-		else -- No Group, continue as normal.
-			CommCanAnnounce = true
-		end
-	end
-
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
 	local spell_tracker = currentSpellProfile
 	local tracker = currentSpellData.tracker or -1 -- Tracks spells like AoE Taunts to prevent multiple messages playing.
@@ -94,28 +124,9 @@ local function HandleEvents()
 		return
 	end
 
-	-- Build Cache of valid messages
-	-- We store empty strings when users blank a default message so we know not to use the default. An empty string can also be stored when a user deletes extra messages.
-	-- We need to validate the list of messages so when we pick a message at random, we don't accidentally pick the blanked message.
-	local messageCacheProfile = messageCache[currentSpellProfile]
-	if not messageCacheProfile then
-		messageCacheProfile = {}
-		messageCache[currentSpellProfile] = {}
-	end
-	local validMessages = messageCacheProfile[currentSpell.events]
-	if not validMessages then
-		validMessages = {}
-		for i = 1, #currentSpell.events do
-			if currentSpellData.messages[i] ~= '' then
-				validMessages[i] = currentSpellData.messages[i]
-			end
-		end
-		messageCache[currentSpellProfile][currentSpell.events] = validMessages
-	end
-	if #validMessages == 0 then return end
-	local message = validMessages[math.random(#validMessages)]
+	local message = BuildMessageCache(currentSpell, currentSpellProfile, currentSpellData)
 	if not message then return end
-	message = gsub(message,'%%','%%%%')
+
 
 	-- Build Spell Name and Link Cache
 	local tagSpellName = cacheTagSpellName[spellID]
@@ -183,7 +194,7 @@ local function HandleEvents()
 		else
 			if missType == 'IMMUNE' then
 				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Immune
-				validMessages = messageCache[currentSpellProfile][currentSpell.events].immuneMessages or nil
+				local validMessages = messageCache[currentSpellProfile][currentSpell.events].immuneMessages or nil
 				if not validMessages then
 					validMessages = {}
 					for i = 1, #currentSpell.events[event].immuneMessages do
@@ -197,22 +208,8 @@ local function HandleEvents()
 						message = gsub(message,'%%','%%%%')
 					end
 				end
-			elseif missType == 'MISS' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Miss
-			elseif missType == 'RESIST' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Resist
-			elseif missType == 'ABSORB' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Absorb
-			elseif missType == 'BLOCK' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Block
-			elseif missType == 'DEFLECT' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Deflect
-			elseif missType == 'DODGE' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Dodge
-			elseif missType == 'EVADE' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Evade
-			elseif missType == 'PARRY' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Parry
+			else
+				replacements['MISSTYPE'] = RSA.db.profile.General.Replacements.MissType[string.lower(missType)]
 			end
 		end
 	end
@@ -224,8 +221,10 @@ local function HandleEvents()
 		RSA.Print_LibSink(gsub(message, ".%a+.", replacements))
 	end
 
-	if not CommCanAnnounce then return end -- Local messages can always go through, so only check this after sending the local message.
-
+	if currentSpell.comm then -- Track group announced spells using RSA.Comm (AddonMessages)
+		if not CommCheck(currentSpell) then return end
+		--Local messages can always go through, so only check this after sending the local message.
+	end
 
 	if currentSpellData.channels.yell == true then
 		RSA.Print_Yell(gsub(message, ".%a+.", replacements))
@@ -255,7 +254,6 @@ local function HandleEvents()
 			RSA.Print_SmartGroup(gsub(message, ".%a+.", replacements))
 		end
 	end
-
 
 end
 
