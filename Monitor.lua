@@ -1,5 +1,5 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
-local uClass = select(2, UnitClass('player'))
+local uClass = string.lower(select(2, UnitClass('player')))
 
 
 
@@ -72,6 +72,9 @@ local function HandleEvents()
 	--local spellData = RSA.SpellData
 	local spellData = RSA.db.profile
 	local classData = spellData[uClass]
+					  -- RSA.db.profile.paladin
+
+
 	if not classData then print('NO CLASS DATA') end
 	local utilityData = spellData['utilities']
 	if not utilityData then print('NO UTILITY DATA') end
@@ -83,20 +86,28 @@ local function HandleEvents()
 	local missType = ex1
 
 
-	local currentSpellProfile = RSA.MonitorData[uClass][spellID]
+	local currentSpellProfile = RSA.monitorData[uClass][spellID].profile
+								-- RSA.monitorData.paladin.ardentDefender.ardentDefender = 'ardentDefender'
+
 	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
 		if not currentSpellProfile then
 			spellID, extraSpellID = extraSpellID, spellID
 			spellName, extraSpellName = extraSpellName, spellName
 			spellSchool, extraSchool = extraSchool, spellSchool
-			currentSpellProfile = RSA.MonitorData[uClass][spellID]
+			currentSpellProfile = RSA.monitorData[uClass][spellID]
 		end
 	end
 	if not currentSpellProfile then print('NO SPELL PROFILE') return end
 	local currentSpell = classData[currentSpellProfile]
+						 -- RSA.db.profile.paladin['ardentDefender']
+
+
+
 	if not currentSpell then print('NO SPELL DATA') return end
 	if not currentSpell.events[event] then print('NO EVENT DATA') return end
 	local currentSpellData = currentSpell.events[event]
+							 -- RSA.db.profile.paladin['ardentDefender'].events[SPELL_HEAL] where SPELL_HEAL is the currently triggered event.
+
 
 	if currentSpellData.targetIsMe and not RSA.IsMe(destFlags) then return end
 	if currentSpellData.targetNotMe and RSA.IsMe(destFlags) then return end
@@ -153,7 +164,7 @@ local function HandleEvents()
 
 	-- Trim Server Names
 	local longName = destName
-	if RSA.db.profile.General.GlobalAnnouncements.RemoveServerNames == true then
+	if RSA.db.profile.general.globalAnnouncements.removeServerNames == true then
 		if destName and destGUID then
 			local realmName = select(7,GetPlayerInfoByGUID(destGUID))
 			if realmName then
@@ -185,15 +196,15 @@ local function HandleEvents()
 		end
 	end
 	if tagReplacements.MISSTYPE then
-		if RSA.db.profile.General.Replacements.MissType.UseGeneralReplacement == true then
+		if RSA.db.profile.general.replacements.missType.useGenericReplacement == true then
 			for i = 1,#missTypes do
 				if missType == missTypes[i] then
-					replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.GeneralReplacement
+					replacements['[MISSTYPE]'] = RSA.db.profile.general.replacements.missType.genericReplacementString
 				end
 			end
 		else
 			if missType == 'IMMUNE' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.General.Replacements.MissType.Immune
+				replacements['[MISSTYPE]'] = RSA.db.profile.general.replacements.missType.immune
 				local validMessages = messageCache[currentSpellProfile][currentSpell.events].immuneMessages or nil
 				if not validMessages then
 					validMessages = {}
@@ -209,7 +220,7 @@ local function HandleEvents()
 					end
 				end
 			else
-				replacements['MISSTYPE'] = RSA.db.profile.General.Replacements.MissType[string.lower(missType)]
+				replacements['MISSTYPE'] = RSA.db.profile.general.replacements.missType[string.lower(missType)]
 			end
 		end
 	end

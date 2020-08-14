@@ -49,7 +49,6 @@ local paladinData = {
 				messages = {"[LINK] faded!",},
 				channels = {},
 			},
-
 			SPELL_MISSED = {
 				messages = {'blah'},
 				immuneMessages = {'blah'}, -- immuneMessages is required for SPELL_MISSED events.
@@ -114,4 +113,4 @@ local function PrepareDataTables(dataTable)
 	return dataTable, spellToProfile
 end
 
-RSA.SpellData.Paladin, RSA.MonitorData.Paladin = PrepareDataTables(paladinData)
+RSA.SpellData.paladin, RSA.monitorData.paladin = PrepareDataTables(paladinData)
