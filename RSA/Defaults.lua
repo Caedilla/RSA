@@ -2330,6 +2330,16 @@ local function Warrior()
 				},
 				Whisper = true,
 			},
+			Intervene = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				Whisper = true,
+			},
 			DieByTheSword = {
 				Messages = {
 					Start = {"[LINK] activated!"},

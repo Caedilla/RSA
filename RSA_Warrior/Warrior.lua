@@ -59,10 +59,14 @@ function RSA_Warrior:OnEnable()
 				tracker = 2,
 				linkID = 46968
 			},]]--
-			[147833] = { -- INTERCEPT
+			--[[[147833] = { -- INTERCEPT
 				profile = 'Intercept',
 				replacements = { TARGET = 1 },
 				linkID = 198758
+			},]]--
+			[3411] = {
+				profile = 'Intervene',
+				replacements = { TARGET = 1 },
 			},
 			[203524] = { -- Neltharion's Fury, Protection Artifact
 				profile = 'NeltharionsFury',
@@ -119,11 +123,16 @@ function RSA_Warrior:OnEnable()
 				tracker = 1,
 				linkID = 46968
 			},]]--
-			[147833] = { -- INTERCEPT
+			--[[[147833] = { -- INTERCEPT
 				profile = 'Intercept',
 				replacements = { TARGET = 1 },
 				section = 'End',
 				linkID = 198758
+			},]]--
+			[3411] = {
+				profile = 'Intervene',
+				replacements = { TARGET = 1 },
+				section = 'End',
 			},
 			[203524] = { -- Neltharion's Fury, Protection Artifact
 				profile = 'NeltharionsFury',

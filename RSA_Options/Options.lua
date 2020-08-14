@@ -2759,10 +2759,18 @@ local function Warrior_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[10] = {
+		--[[[10] = {
 			Profile = 'Intercept',
 			Name = GetSpellInfo(198758),
 			Desc = GetSpellDescription(198758),
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
+		},]]--
+		['Intervene'] = {
+			Profile = 'Intervene',
+			Name = GetSpellInfo(3411),
+			Desc = GetSpellDescription(3411),
 			Message_Amount = 2,
 			Message_Areas = {'Start', 'End'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
