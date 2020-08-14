@@ -1,9 +1,55 @@
-local RSA = LibStub("AceAddon-3.0"):NewAddon("RSA", "AceConsole-3.0", "LibSink-2.0", "AceEvent-3.0", "AceComm-3.0")
+local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
+local uClass = string.lower(select(2, UnitClass('player')))
 
--- Global Frames and Event Registers
-RSA.SpellData = {}
-RSA.monitorData = {}
 
-RSA.Monitor = CreateFrame("Frame", "RSA:CLM")
-RSA.Monitor:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+local function BuildDefaults()
+	local defaults = {
+		profile = {
+			deathknight = RSA.SpellData.deathknight,
+			demonhunter = RSA.SpellData.demonhunter,
+			druid = RSA.SpellData.druid,
+			hunter = RSA.SpellData.hunter,
+			mage = RSA.SpellData.mage,
+			monk = RSA.SpellData.monk,
+			paladin = RSA.SpellData.paladin,
+			priest = RSA.SpellData.priest,
+			rogue = RSA.SpellData.rogue,
+			shaman = RSA.SpellData.shaman,
+			warlock = RSA.SpellData.warlock,
+			warrior = RSA.SpellData.warrior,
+			racials = RSA.SpellData.racials,
+			utilities = RSA.SpellData.utilities,
+		},
+	}
+
+	return defaults
+end
+
+
+function RSA:OnInitialize()
+	self.db = LibStub("AceDB-3.0"):New("RSADB", BuildDefaults, uClass) -- Setup Saved Variables
+	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
+
+	-- project-revision
+	self.db.global.version = 5.0
+	self.db.global.revision = string.match(GetAddOnMetadata("RSA","Version"),"%d+") or 0
+	self.db.global.releaseType = string.match(GetAddOnMetadata('RSA','Version'),'%a+',2) or 'dev'
+
+	if not RSA.db.global.personalID then
+		RSA.db.global.personalID = RSA.GetPersonalID() --RSA.GetGetMyRandomNumber()
+	end
+
+	local LibDualSpec = LibStub('LibDualSpec-1.0')
+	LibDualSpec:EnhanceDatabase(self.db, "RSA")
+
+	self:RegisterChatCommand("RSA", "ChatCommand")
+	RSA:TempOptions()
+
+	-- Profile Management
+	self.db.RegisterCallback(self, "OnProfileChanged", "RefreshConfig")
+	self.db.RegisterCallback(self, "OnProfileCopied", "RefreshConfig")
+	self.db.RegisterCallback(self, "OnProfileReset", "RefreshConfig")
+
+	RSA.Comm.Registry()
+end
