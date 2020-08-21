@@ -1,8 +1,6 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local uClass = string.lower(select(2, UnitClass('player')))
 
-
-
 local running = {}
 local messageCache = {}
 local cacheTagSpellName = {}
@@ -64,7 +62,6 @@ local function BuildMessageCache(currentSpell, currentSpellProfile, currentSpell
 	message = gsub(message,'%%','%%%%')
 	return message
 end
-
 
 local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
@@ -195,6 +192,7 @@ local function HandleEvents()
 			replacements[tagReplacements.EXTRA] = link
 		end
 	end
+
 	if tagReplacements.MISSTYPE then
 		if RSA.db.profile.general.replacements.missType.useGenericReplacement == true then
 			for i = 1,#missTypes do
@@ -229,7 +227,7 @@ local function HandleEvents()
 		if currentSpellData.groupRequired then -- Used in Mage Teleports, only locally announces if you are in a group.
 			if not (GetNumSubgroupMembers() > 0 or GetNumGroupMembers() > 0) then return end
 		end
-		RSA.Print_LibSink(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.LibSink(gsub(message, ".%a+.", replacements))
 	end
 
 	if currentSpell.comm then -- Track group announced spells using RSA.Comm (AddonMessages)
@@ -238,31 +236,31 @@ local function HandleEvents()
 	end
 
 	if currentSpellData.channels.yell == true then
-		RSA.Print_Yell(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.Yell(gsub(message, ".%a+.", replacements))
 	end
 	if currentSpellData.channels.whisper == true and UnitExists(longName) and RSA.Whisperable(destFlags) then
-		RSA.Print_Whisper(message, longName, replacements, destName)
+		RSA.SendMessage.Whisper(message, longName, replacements, destName)
 	end
 	if currentSpellData.channels.say == true then
-		RSA.Print_Say(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.Say(gsub(message, ".%a+.", replacements))
 	end
 	if currentSpellData.channels.emote == true then
-		RSA.Print_Emote(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.Emote(gsub(message, ".%a+.", replacements))
 	end
 
 	local Announced = false
 	if currentSpellData.channels.party == true then
-		if RSA.Print_Party(gsub(message, ".%a+.", replacements)) == true then Announced = true end
+		if RSA.SendMessage.Party(gsub(message, ".%a+.", replacements)) == true then Announced = true end
 	end
 	if currentSpellData.channels.raid == true then
-		if RSA.Print_Raid(gsub(message, ".%a+.", replacements)) == true then Announced = true end
+		if RSA.SendMessage.Raid(gsub(message, ".%a+.", replacements)) == true then Announced = true end
 	end
 	if currentSpellData.channels.instance == true then
-		if RSA.Print_Instance(gsub(message, ".%a+.", replacements)) == true then Announced = true end
+		if RSA.SendMessage.Instance(gsub(message, ".%a+.", replacements)) == true then Announced = true end
 	end
 	if currentSpellData.channels.smartGroup == true then
 		if Announced == false then
-			RSA.Print_SmartGroup(gsub(message, ".%a+.", replacements))
+			RSA.SendMessage.SmartGroup(gsub(message, ".%a+.", replacements))
 		end
 	end
 

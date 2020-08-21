@@ -49,68 +49,12 @@ local paladinData = {
 				messages = {"[LINK] faded!",},
 				channels = {},
 			},
-			SPELL_MISSED = {
-				messages = {'blah'},
-				immuneMessages = {'blah'}, -- immuneMessages is required for SPELL_MISSED events.
-			}
+			--SPELL_MISSED = {
+			--	messages = {'blah'},
+			--	immuneMessages = {'blah'}, -- immuneMessages is required for SPELL_MISSED events.
+			--},
 		},
 	},
 }
 
-local function PrepareDataTables(dataTable)
-	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
-	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
-	-- Why not store the profile in this manner by default? It's more human readable to have everything needed for a spell to function within
-	--one table, rather than having multiple references to the profile in separate event tables as RSA used to do.
-
-	-- TODO: Move to appropriate file space.
-	local spellToProfile = {}
-
-	for i = 1, #dataTable do
-		spellToProfile[dataTable[i].spellID] = dataTable[i].profile
-		if not dataTable[i].environments then
-			paladinData[i].environments = {
-				useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
-				alwaysWhisper = false, -- Allows whispers to always be sent.
-				enableIn = {
-					arenas = false,
-					bgs = false,
-					warModeWorld = false, -- Enable in War Mode world zones.
-					nonWarWorld = false, -- Enable in world zones without war mode enabled.
-					dungeons = false,
-					raids = false,
-					lfg = false,
-					lfr = false,
-					scenarios = false,
-				},
-				groupToggles = { -- When true, only announce to these channels if you are in a group
-					emote = true,
-					say = true,
-					yell = true,
-					whisper = true,
-				},
-				combatState = {
-					inCombat = true, -- Announce only in Combat
-					noCombat = false, -- Announce not in Combat
-				},
-			}
-		end
-		for k, v in pairs(dataTable[i].events) do
-			table.insert(dataTable[i].configDisplay.messageAreas, k)
-		end
-		for j = 1, #dataTable[i].events do
-			spellToProfile[dataTable[i].events[j].uniqueSpellID] = spellToProfile[i].profile
-
-			if not dataTable[i].events[j].channels then
-				dataTable[i].events[j].channels = {}
-			end
-			if not dataTable[i].events[j].tags then
-				dataTable[i].events[j].tags = {}
-			end
-		end
-	end
-
-	return dataTable, spellToProfile
-end
-
-RSA.SpellData.paladin, RSA.monitorData.paladin = PrepareDataTables(paladinData)
+RSA.SpellData.paladin, RSA.monitorData.paladin = RSA.PrepareDataTables(paladinData)

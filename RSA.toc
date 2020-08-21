@@ -1,0 +1,34 @@
+## Interface: 90001
+## Title: RSA
+## Notes: Easy Spell Announcements!
+## Author: Raeli
+## Version: @project-version@
+## SavedVariables: RSADB
+## OptionalDeps: Ace3, LibDualSpec-1.0, LibSink-2.0, LibResInfo-1.0
+## X-Credits: Jenneth, Rowaasr13, Xadurk
+## X-Curse-Project-ID: 21464
+
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+
+Localisation\Locale-enUS.lua
+Localisation\Locale-esES.lua
+Localisation\Locale-deDE.lua
+Localisation\Locale-koKR.lua
+Localisation\Locale-itIT.lua
+Localisation\Locale-ruRU.lua
+Localisation\Locale-zhCN.lua
+Localisation\Locale-zhTW.lua
+
+Load.lua
+
+Modules\Classes\Paladin.lua
+
+Init.lua
+
+Tools\Helpers.lua
+Tools\SendMessage.lua
+Monitor.lua

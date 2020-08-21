@@ -2,7 +2,6 @@ local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local uClass = string.lower(select(2, UnitClass('player')))
 
-
 local function BuildDefaults()
 	local defaults = {
 		profile = {
@@ -25,7 +24,6 @@ local function BuildDefaults()
 
 	return defaults
 end
-
 
 function RSA:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("RSADB", BuildDefaults, uClass) -- Setup Saved Variables
