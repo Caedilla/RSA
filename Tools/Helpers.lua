@@ -1,6 +1,7 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 
 function RSA.AnnouncementCheck() -- Checks against user settings to see if we are allowed to announce.
+	if 1 == 1 then return true end
 	local InInstance, InstanceType = IsInInstance()
 	local LFParty = IsInGroup(LE_PARTY_CATEGORY_INSTANCE) -- party group found through group finder
 	local LFRaid = IsInRaid(LE_PARTY_CATEGORY_INSTANCE) -- raid grounp found through group finder
@@ -17,7 +18,7 @@ function RSA.AnnouncementCheck() -- Checks against user settings to see if we ar
 	return false
 end
 
-function RSA.GetMyRandomNumber()
+function RSA.GetPersonalID()
 	local random = math.random(1,time())
 	local namebytes = 0
 	for i = 1,string.len(UnitName("player")) do
@@ -81,13 +82,12 @@ function RSA.PrepareDataTables(dataTable)
 	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
 	-- Why not store the profile in this manner by default? It's more human readable to have everything needed for a spell to function within
 	--one table, rather than having multiple references to the profile in separate event tables as RSA used to do.
-
 	local spellToProfile = {}
 
-	for i = 1, #dataTable do
-		spellToProfile[dataTable[i].spellID] = dataTable[i].profile
-		if not dataTable[i].environments then
-			dataTable[i].environments = {
+	for k, v in pairs(dataTable) do
+		spellToProfile[dataTable[k].spellID] = dataTable[k].profile
+		if not dataTable[k].environments then
+			dataTable[k].environments = {
 				useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
 				alwaysWhisper = false, -- Allows whispers to always be sent.
 				enableIn = {
@@ -113,19 +113,23 @@ function RSA.PrepareDataTables(dataTable)
 				},
 			}
 		end
-		for k, v in pairs(dataTable[i].events) do
-			table.insert(dataTable[i].configDisplay.messageAreas, k)
-		end
-		for j = 1, #dataTable[i].events do
-			spellToProfile[dataTable[i].events[j].uniqueSpellID] = spellToProfile[i].profile
 
-			if not dataTable[i].events[j].channels then
-				dataTable[i].events[j].channels = {}
+		for k2, v2 in pairs(dataTable[k].events) do -- Generate list of events which have a message to allow us to know what config options to supply
+			table.insert(dataTable[k].configDisplay.messageAreas, k2)
+
+			if spellToProfile[dataTable[k].events[k2].uniqueSpellID] then
+				spellToProfile[dataTable[k].events[k2].uniqueSpellID] = spellToProfile[k].profile
 			end
-			if not dataTable[i].events[j].tags then
-				dataTable[i].events[j].tags = {}
+
+			if not dataTable[k].events[k2].channels then
+				dataTable[k].events[k2].channels = {}
+			end
+
+			if not dataTable[k].events[k2].tags then
+				dataTable[k].events[k2].tags = {}
 			end
 		end
+
 	end
 
 	return dataTable, spellToProfile

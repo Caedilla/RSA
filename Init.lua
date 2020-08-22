@@ -19,6 +19,51 @@ local function BuildDefaults()
 			warrior = RSA.SpellData.warrior,
 			racials = RSA.SpellData.racials,
 			utilities = RSA.SpellData.utilities,
+			general = {
+				["*"] = true,
+				globalAnnouncements = {
+					smartSay = true,
+					smartYell = true,
+					smartEmote = false,
+					smartCustomChannel = true,
+					arena = true,
+					battlegrounds = false,
+					inWarMode = false,
+					inDungeon = true,
+					inRaid = true,
+					InLFG_Party = false,
+					InLFG_Raid = false,
+					InScenario = false,
+					InWorld = false,
+					OnlyInCombat = false,
+					removeServerNames = true,
+					AlwaysAllowWhispers = true,
+				},
+				Local = {
+					["*"] = true,
+				},
+				globalCustomChannel = "MyCustomChannel",
+				replacements = {
+					target = {
+						alwaysUseName = false,
+						replacement = "You",
+					},
+					missType = {
+						useGeneralReplacement = false,
+						generalReplacement = "missed",
+						miss = "missed",
+						resist = "was resisted by",
+						absorb = "was absorbed by",
+						block = "was blocked by",
+						deflect = "was deflected by",
+						dodge = "was dodged by",
+						evade = "was evaded by",
+						parry = "was parried by",
+						immune = "immune",
+						reflect = "was reflected by",
+					},
+				},
+			},
 		},
 	}
 
@@ -26,7 +71,10 @@ local function BuildDefaults()
 end
 
 function RSA:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("RSADB", BuildDefaults, uClass) -- Setup Saved Variables
+
+	local defaults = BuildDefaults()
+
+	self.db = LibStub("AceDB-3.0"):New("RSADB", defaults, uClass) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
 	-- project-revision
@@ -42,12 +90,15 @@ function RSA:OnInitialize()
 	LibDualSpec:EnhanceDatabase(self.db, "RSA")
 
 	self:RegisterChatCommand("RSA", "ChatCommand")
-	RSA:TempOptions()
+
+
+	-- TODO Reimplement everything below
+	--RSA:TempOptions()
 
 	-- Profile Management
-	self.db.RegisterCallback(self, "OnProfileChanged", "RefreshConfig")
-	self.db.RegisterCallback(self, "OnProfileCopied", "RefreshConfig")
-	self.db.RegisterCallback(self, "OnProfileReset", "RefreshConfig")
+	--self.db.RegisterCallback(self, "OnProfileChanged", "RefreshConfig")
+	--self.db.RegisterCallback(self, "OnProfileCopied", "RefreshConfig")
+	--self.db.RegisterCallback(self, "OnProfileReset", "RefreshConfig")
 
-	RSA.Comm.Registry()
+	--RSA.Comm.Registry()
 end

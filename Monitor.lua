@@ -46,15 +46,22 @@ local function BuildMessageCache(currentSpell, currentSpellProfile, currentSpell
 		messageCacheProfile = {}
 		messageCache[currentSpellProfile] = {}
 	end
-	local validMessages = messageCacheProfile[currentSpell.events]
+	local validMessages = messageCacheProfile[currentSpellData]
 	if not validMessages then
 		validMessages = {}
-		for i = 1, #currentSpell.events do
+		print('messageCache events:')
+
+		local numEvents = 0
+		for _ in pairs(currentSpell.events) do
+			numEvents = numEvents + 1
+		end
+		print(numEvents)
+		for i = 1, numEvents do
 			if currentSpellData.messages[i] ~= '' then
 				validMessages[i] = currentSpellData.messages[i]
 			end
 		end
-		messageCache[currentSpellProfile][currentSpell.events] = validMessages
+		messageCache[currentSpellProfile][currentSpellData] = validMessages
 	end
 	if #validMessages == 0 then return end
 	local message = validMessages[math.random(#validMessages)]
@@ -70,20 +77,23 @@ local function HandleEvents()
 	local spellData = RSA.db.profile
 	local classData = spellData[uClass]
 					  -- RSA.db.profile.paladin
-
-
-	if not classData then print('NO CLASS DATA') end
-	local utilityData = spellData['utilities']
-	if not utilityData then print('NO UTILITY DATA') end
-	local racialData = spellData['racials']
-	if not racialData then print('NO Racial Data DATA') end
-
+	print('before')
+	if not classData then return end --print('NO CLASS DATA') end
+	--local utilityData = spellData['utilities']
+	--if not utilityData then return end --print('NO UTILITY DATA') end
+	--local racialData = spellData['racials']
+	--if not racialData then return end --print('NO Racial Data DATA') end
+	print('after returns')
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 	local missType = ex1
 
 
-	local currentSpellProfile = RSA.monitorData[uClass][spellID].profile
+	local currentSpellProfile = RSA.monitorData[uClass][spellID]
+	if not currentSpellProfile then
+		print('NO SPELL DATA')
+		return end
+	--currentSpellProfile = currentSpellProfile.profile
 								-- RSA.monitorData.paladin.ardentDefender.ardentDefender = 'ardentDefender'
 
 	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
@@ -104,11 +114,13 @@ local function HandleEvents()
 	if not currentSpell.events[event] then print('NO EVENT DATA') return end
 	local currentSpellData = currentSpell.events[event]
 							 -- RSA.db.profile.paladin['ardentDefender'].events[SPELL_HEAL] where SPELL_HEAL is the currently triggered event.
+							 print('we have event data')
 
 
 	if currentSpellData.targetIsMe and not RSA.IsMe(destFlags) then return end
 	if currentSpellData.targetNotMe and RSA.IsMe(destFlags) then return end
 	if currentSpellData.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
+	print('it is me')
 
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
 	local spell_tracker = currentSpellProfile
@@ -131,9 +143,11 @@ local function HandleEvents()
 		running[spell_tracker] = running[spell_tracker] - 1
 		return
 	end
+	print('passed tracker')
 
 	local message = BuildMessageCache(currentSpell, currentSpellProfile, currentSpellData)
 	if not message then return end
+	print('we have a message')
 
 
 	-- Build Spell Name and Link Cache

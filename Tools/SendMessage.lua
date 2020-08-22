@@ -1,5 +1,5 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
-RSA.SendMessage = RSA.SendMessage or {}
+RSA.SendMessage = {}
 
 function RSA.SendMessage.ChatFrame(message) -- Send a message to your default chat window.
 	ChatFrame1:AddMessage("|cFFFF75B3RSA:|r " .. format(message))
@@ -17,7 +17,7 @@ function RSA.SendMessage.Instance(message) -- Send a message to /instance.
 	end
 end
 
-function RSA.SendMessage.SmartGroup(message) -- Send a message to /instance, /raid, or /party in that order of priority.
+function RSA.SendMessage.smartGroup(message) -- Send a message to /instance, /raid, or /party in that order of priority.
 	if RSA.AnnouncementCheck() == false then return end
 	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) or IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then
 		SendChatMessage(format(message), "INSTANCE_CHAT", nil)
@@ -67,11 +67,11 @@ end
 function RSA.SendMessage.Channel(message, channel) -- Send a message to the custom channel that the user defines.
 	if 0 == 0 then return end -- 8.2.5 Broke Sending messages to custom channels and I'm too lazy to find every instance that this is called.
 	if RSA.AnnouncementCheck() == true then
-		if RSA.db.profile.General.GlobalAnnouncements.SmartCustomChannel == true then
+		if RSA.db.profile.general.globalAnnouncements.smartCustomChannel == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 				SendChatMessage(format(message), "CHANNEL", nil, GetChannelName(channel))
 			end
-		elseif RSA.db.profile.General.GlobalAnnouncements.SmartCustomChannel == false then
+		elseif RSA.db.profile.general.globalAnnouncements.smartCustomChannel == false then
 			SendChatMessage(format(message), "CHANNEL", nil, GetChannelName(channel))
 		end
 	end
@@ -80,11 +80,11 @@ end
 function RSA.SendMessage.Say(message) -- Send a message to Say.
 	if IsInInstance() then
 		if RSA.AnnouncementCheck() == true then
-			if RSA.db.profile.General.GlobalAnnouncements.SmartSay == true then
+			if RSA.db.profile.general.globalAnnouncements.smartSay == true then
 				if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 					SendChatMessage(format(message), "SAY", nil)
 				end
-			elseif RSA.db.profile.General.GlobalAnnouncements.SmartSay == false then
+			elseif RSA.db.profile.general.globalAnnouncements.smartSay == false then
 				SendChatMessage(format(message), "SAY", nil)
 			end
 		end
@@ -93,11 +93,11 @@ end
 
 function RSA.SendMessage.Emote(message) -- Send a message to Emote.
 	if RSA.AnnouncementCheck() == true then
-		if RSA.db.profile.General.GlobalAnnouncements.SmartEmote == true then
+		if RSA.db.profile.general.globalAnnouncements.smartEmote == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 				SendChatMessage(format(message), "EMOTE", nil)
 			end
-		elseif RSA.db.profile.General.GlobalAnnouncements.SmartEmote == false then
+		elseif RSA.db.profile.general.globalAnnouncements.smartEmote == false then
 			SendChatMessage(format(message), "EMOTE", nil)
 		end
 	end
@@ -106,11 +106,11 @@ end
 function RSA.SendMessage.Yell(message) -- Send a message to Yell.
 	if IsInInstance() then
 		if RSA.AnnouncementCheck() == true then
-			if RSA.db.profile.General.GlobalAnnouncements.SmartYell == true then
+			if RSA.db.profile.general.globalAnnouncements.smartYell == true then
 				if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 					SendChatMessage(format(message), "YELL", nil)
 				end
-			elseif RSA.db.profile.General.GlobalAnnouncements.SmartYell == false then
+			elseif RSA.db.profile.general.globalAnnouncements.smartYell == false then
 				SendChatMessage(format(message), "YELL", nil)
 			end
 		end
@@ -129,7 +129,7 @@ function RSA.SendMessage.RaidWarning(message) -- Send a proper message to the ra
 end
 
 function RSA.SendMessage.Whisper(message, target, replacements, destName)
-	if RSA.db.profile.General.GlobalAnnouncements.AlwaysAllowWhispers == false then
+	if RSA.db.profile.general.globalAnnouncements.AlwaysAllowWhispers == false then
 		if RSA.AnnouncementCheck() == false then return end
 	end
 	if replacements and destName then -- Until we replace all instances where this function is used, check if we have all args before trying to create new format message.

@@ -1,5 +1,9 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 
+-- Global Frames and Event Registers
+RSA.SpellData = RSA.SpellData or {}
+RSA.monitorData = RSA.monitorData or {}
+
 local paladinData = {
 	['ardentDefender'] = {
 		profile = 'ardentDefender',
@@ -28,6 +32,7 @@ local paladinData = {
 					"[LINK] saved my life and healed me for [AMOUNT] hp!",
 				},
 				channels = {
+					emote = true,
 					-- Channels enabled by default, or in saved vars the channels actually enabled. None listed means this event doesn't announce by default.
 				},
 			},
@@ -41,13 +46,52 @@ local paladinData = {
 					"[LINK] Activated!",
 				},
 				channels = {
+					emote = true,
 				},
 			},
 			SPELL_AURA_REMOVED = {
 				tracker = 1,
 				tags = {},
 				messages = {"[LINK] faded!",},
-				channels = {},
+				channels = {emote = true,},
+			},
+			--SPELL_MISSED = {
+			--	messages = {'blah'},
+			--	immuneMessages = {'blah'}, -- immuneMessages is required for SPELL_MISSED events.
+			--},
+		},
+	},
+	['blessingOfFreedom'] = {
+		profile = 'blessingOfFreedom',
+		spellID = 305395,
+		additionalSpellIDs = {1044},
+		configDisplay = {
+			messageAreas = {},
+			disabledChannels = {['Whisper'] = true},
+			validTags = {'[AMOUNT]'}, -- [SPELL] and [LINK] are implied.
+			--customDesc = 'My custom description',
+			--customName = 'My custom spell name',
+		},
+		environments = {},
+		events = {
+			SPELL_AURA_APPLIED = {
+				--uniqueSpellID = 66235, -- We use the primary spell ID for this spell, 31850.
+				--tracker = 2, -- Tells the monitor to start tracking this spell so that we can prevent both the Heal and Finish message from playing if the heal triggers.
+				tags = {
+					-- No additional tags needed for this event.
+				},
+				messages = {
+					"[LINK] Activated!",
+				},
+				channels = {
+					emote = true,
+				},
+			},
+			SPELL_AURA_REMOVED = {
+				--tracker = 1,
+				tags = {},
+				messages = {"[LINK] faded!",},
+				channels = {emote = true,},
 			},
 			--SPELL_MISSED = {
 			--	messages = {'blah'},
@@ -56,5 +100,6 @@ local paladinData = {
 		},
 	},
 }
+
 
 RSA.SpellData.paladin, RSA.monitorData.paladin = RSA.PrepareDataTables(paladinData)
