@@ -17,7 +17,7 @@ function RSA.SendMessage.Instance(message) -- Send a message to /instance.
 	end
 end
 
-function RSA.SendMessage.smartGroup(message) -- Send a message to /instance, /raid, or /party in that order of priority.
+function RSA.SendMessage.SmartGroup(message) -- Send a message to /instance, /raid, or /party in that order of priority.
 	if RSA.AnnouncementCheck() == false then return end
 	if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) or IsInRaid(LE_PARTY_CATEGORY_INSTANCE) then
 		SendChatMessage(format(message), "INSTANCE_CHAT", nil)

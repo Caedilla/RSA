@@ -1,7 +1,7 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 
 -- Global Frames and Event Registers
-RSA.SpellData = RSA.SpellData or {}
+RSA.spellData = RSA.spellData or {}
 RSA.monitorData = RSA.monitorData or {}
 
 local paladinData = {
@@ -104,4 +104,4 @@ local paladinData = {
 }
 
 
-RSA.SpellData.paladin, RSA.monitorData.paladin = RSA.PrepareDataTables(paladinData)
+RSA.spellData.paladin, RSA.monitorData.paladin = RSA.PrepareDataTables(paladinData)

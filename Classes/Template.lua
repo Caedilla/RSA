@@ -51,8 +51,16 @@ local template = {
 					"[LINK] saved my life and healed me for [AMOUNT] hp!",
 				},
 				channels = {
+					say = true,
+					yell = true,
 					emote = true,
-					-- Channels enabled by default, or in saved vars the channels actually enabled. None listed means this event doesn't announce by default.
+					personal = true, -- Whatever LibSink is set to.
+					whisper = true,
+					party = true,
+					raid = true,
+					instance = true,
+					smartGroup = true, -- Smart Group only announces to one of the group channels. If you want to announce in both Party & Raid, or only one of those two, use party or raid instead.
+					-- These are all toggleable in config GUI, setting true only means that they are turned on by default. If none listed means this event doesn't announce by default.
 				},
 			},
 			SPELL_CAST_SUCCESS = {

@@ -21,20 +21,20 @@ local missTypes = {
 
 local function CommCheck(currentSpell)
 	-- Track group announced spells using RSA.Comm (AddonMessages)
-	local CommCanAnnounce = true
+	local canAnnounce = true
 	if currentSpell.comm then
-		if RSA.Comm.GroupAnnouncer then
-			CommCanAnnounce = true
-			if RSA.Comm.GroupAnnouncer == tonumber(RSA.db.global.ID) then -- This is us, continue as normal.
-				CommCanAnnounce = true
+		if RSA.Comm.groupAnnouncer then
+			canAnnounce = true
+			if RSA.Comm.groupAnnouncer == tonumber(RSA.db.global.ID) then -- This is us, continue as normal.
+				canAnnounce = true
 			else -- Someone else is announcing.
-				CommCanAnnounce = false
+				canAnnounce = false
 			end
 		else -- No Group, continue as normal.
-			CommCanAnnounce = true
+			canAnnounce = true
 		end
 	end
-	return CommCanAnnounce
+	return canAnnounce
 end
 
 local function BuildMessageCache(currentSpell, spellProfileName, currentSpellData)
@@ -101,7 +101,6 @@ local function HandleEvents()
 	end
 	if not spellProfileName then return end
 
-
 	local currentSpell = profile[uClass][spellProfileName]
 	if not currentSpell then return end
 	if not currentSpell.events[event] then return end
@@ -137,7 +136,6 @@ local function HandleEvents()
 	local message = BuildMessageCache(currentSpell, spellProfileName, currentSpellData)
 	if not message then return end
 
-
 	-- Build Spell Name and Link Cache
 	local tagSpellName = cacheTagSpellName[spellID]
 	if not tagSpellName then
@@ -151,7 +149,7 @@ local function HandleEvents()
 		cacheTagSpellLink = tagSpellLink
 	end
 
-	if currentSpellData.uniqueSpellID then -- Replace cached data with 'real' spell data to announce the expected spell.
+	if currentSpellData.uniqueSpellID then -- Replace cached data with 'real' spell name/link to announce the expected spell.
 		local parentSpell = currentSpell.spellID
 
 		tagSpellName = GetSpellInfo(parentSpell)
@@ -250,20 +248,18 @@ local function HandleEvents()
 		RSA.SendMessage.Emote(gsub(message, ".%a+.", replacements))
 	end
 
-	local Announced = false
+	local announced = false
 	if currentSpellData.channels.party == true then
-		if RSA.SendMessage.Party(gsub(message, ".%a+.", replacements)) == true then Announced = true end
+		if RSA.SendMessage.Party(gsub(message, ".%a+.", replacements)) == true then announced = true end
 	end
 	if currentSpellData.channels.raid == true then
-		if RSA.SendMessage.Raid(gsub(message, ".%a+.", replacements)) == true then Announced = true end
+		if RSA.SendMessage.Raid(gsub(message, ".%a+.", replacements)) == true then announced = true end
 	end
 	if currentSpellData.channels.instance == true then
-		if RSA.SendMessage.Instance(gsub(message, ".%a+.", replacements)) == true then Announced = true end
+		if RSA.SendMessage.Instance(gsub(message, ".%a+.", replacements)) == true then announced = true end
 	end
-	if currentSpellData.channels.smartGroup == true then
-		if Announced == false then
-			RSA.SendMessage.SmartGroup(gsub(message, ".%a+.", replacements))
-		end
+	if currentSpellData.channels.smartGroup == true and announced == false then
+		RSA.SendMessage.SmartGroup(gsub(message, ".%a+.", replacements))
 	end
 
 end
