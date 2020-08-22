@@ -37,31 +37,29 @@ local function CommCheck(currentSpell)
 	return CommCanAnnounce
 end
 
-local function BuildMessageCache(currentSpell, currentSpellProfile, currentSpellData)
+local function BuildMessageCache(currentSpell, spellProfileName, currentSpellData)
 	-- Build Cache of valid messages
 	-- We store empty strings when users blank a default message so we know not to use the default. An empty string can also be stored when a user deletes extra messages.
 	-- We need to validate the list of messages so when we pick a message at random, we don't accidentally pick the blanked message.
-	local messageCacheProfile = messageCache[currentSpellProfile]
+	local messageCacheProfile = messageCache[spellProfileName]
 	if not messageCacheProfile then
 		messageCacheProfile = {}
-		messageCache[currentSpellProfile] = {}
+		messageCache[spellProfileName] = {}
 	end
 	local validMessages = messageCacheProfile[currentSpellData]
 	if not validMessages then
 		validMessages = {}
-		print('messageCache events:')
 
 		local numEvents = 0
 		for _ in pairs(currentSpell.events) do
 			numEvents = numEvents + 1
 		end
-		print(numEvents)
 		for i = 1, numEvents do
 			if currentSpellData.messages[i] ~= '' then
 				validMessages[i] = currentSpellData.messages[i]
 			end
 		end
-		messageCache[currentSpellProfile][currentSpellData] = validMessages
+		messageCache[spellProfileName][currentSpellData] = validMessages
 	end
 	if #validMessages == 0 then return end
 	local message = validMessages[math.random(#validMessages)]
@@ -73,57 +71,49 @@ end
 local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 
-	--local spellData = RSA.SpellData
-	local spellData = RSA.db.profile
-	local classData = spellData[uClass]
-					  -- RSA.db.profile.paladin
-	print('before')
-	if not classData then return end --print('NO CLASS DATA') end
-	--local utilityData = spellData['utilities']
-	--if not utilityData then return end --print('NO UTILITY DATA') end
-	--local racialData = spellData['racials']
-	--if not racialData then return end --print('NO Racial Data DATA') end
-	print('after returns')
+	local profile = RSA.db.profile
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 	local missType = ex1
 
-
-	local currentSpellProfile = RSA.monitorData[uClass][spellID]
-	if not currentSpellProfile then
-		print('NO SPELL DATA')
-		return end
-	--currentSpellProfile = currentSpellProfile.profile
-								-- RSA.monitorData.paladin.ardentDefender.ardentDefender = 'ardentDefender'
+	local spellProfileName = RSA.monitorData[uClass][spellID]
+	if not spellProfileName then
+		if RSA.monitorData['utilities'][spellID] then
+			spellProfileName = RSA.monitorData['utilities'][spellID]
+		elseif RSA.monitorData['racials'][spellID] then
+			spellProfileName = RSA.monitorData['racials'][spellID]
+		else
+			for k in pairs(RSA.monitorData.customCategories) do
+				if RSA.monitorData.customCategories[k][spellID] then
+					spellProfileName = RSA.monitorData.customCategories[k][spellID]
+				end
+			end
+		end
+	end
 
 	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
-		if not currentSpellProfile then
+		if not spellProfileName then
 			spellID, extraSpellID = extraSpellID, spellID
 			spellName, extraSpellName = extraSpellName, spellName
 			spellSchool, extraSchool = extraSchool, spellSchool
-			currentSpellProfile = RSA.monitorData[uClass][spellID]
+			spellProfileName = RSA.monitorData[uClass][spellID]
 		end
 	end
-	if not currentSpellProfile then print('NO SPELL PROFILE') return end
-	local currentSpell = classData[currentSpellProfile]
-						 -- RSA.db.profile.paladin['ardentDefender']
+	if not spellProfileName then return end
 
 
+	local currentSpell = profile[uClass][spellProfileName]
+	if not currentSpell then return end
+	if not currentSpell.events[event] then return end
 
-	if not currentSpell then print('NO SPELL DATA') return end
-	if not currentSpell.events[event] then print('NO EVENT DATA') return end
 	local currentSpellData = currentSpell.events[event]
-							 -- RSA.db.profile.paladin['ardentDefender'].events[SPELL_HEAL] where SPELL_HEAL is the currently triggered event.
-							 print('we have event data')
-
 
 	if currentSpellData.targetIsMe and not RSA.IsMe(destFlags) then return end
 	if currentSpellData.targetNotMe and RSA.IsMe(destFlags) then return end
 	if currentSpellData.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
-	print('it is me')
 
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
-	local spell_tracker = currentSpellProfile
+	local spell_tracker = spellProfileName
 	local tracker = currentSpellData.tracker or -1 -- Tracks spells like AoE Taunts to prevent multiple messages playing.
 	if tracker == 1 and running[spell_tracker] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
 	if tracker == 1 and running[spell_tracker] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
@@ -143,11 +133,9 @@ local function HandleEvents()
 		running[spell_tracker] = running[spell_tracker] - 1
 		return
 	end
-	print('passed tracker')
 
-	local message = BuildMessageCache(currentSpell, currentSpellProfile, currentSpellData)
+	local message = BuildMessageCache(currentSpell, spellProfileName, currentSpellData)
 	if not message then return end
-	print('we have a message')
 
 
 	-- Build Spell Name and Link Cache
@@ -217,14 +205,14 @@ local function HandleEvents()
 		else
 			if missType == 'IMMUNE' then
 				replacements['[MISSTYPE]'] = RSA.db.profile.general.replacements.missType.immune
-				local validMessages = messageCache[currentSpellProfile][currentSpell.events].immuneMessages or nil
+				local validMessages = messageCache[spellProfileName][currentSpell.events].immuneMessages or nil
 				if not validMessages then
 					validMessages = {}
 					for i = 1, #currentSpell.events[event].immuneMessages do
 						if currentSpellData.immuneMessages[i] ~= '' then
 							validMessages[i] = currentSpellData.immuneMessages[i]
 						end
-						messageCache[currentSpellProfile][currentSpell.events].immuneMessages = validMessages
+						messageCache[spellProfileName][currentSpell.events].immuneMessages = validMessages
 						if #validMessages == 0 then return end
 						message = validMessages[math.random(#validMessages)]
 						if not message then return end

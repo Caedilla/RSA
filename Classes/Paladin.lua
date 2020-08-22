@@ -44,6 +44,7 @@ local paladinData = {
 				},
 				messages = {
 					"[LINK] Activated!",
+					"AD STARTED",
 				},
 				channels = {
 					emote = true,
@@ -64,7 +65,7 @@ local paladinData = {
 	['blessingOfFreedom'] = {
 		profile = 'blessingOfFreedom',
 		spellID = 305395,
-		additionalSpellIDs = {1044},
+		additionalSpellIDs = {1044}, -- If a spell has multiple variants, i.e differnt Polymorphs or the same spell but modified by talents we should probably just have one profile for all of those, rather than a whole buunch which would be confusing.
 		configDisplay = {
 			messageAreas = {},
 			disabledChannels = {['Whisper'] = true},
@@ -82,6 +83,8 @@ local paladinData = {
 				},
 				messages = {
 					"[LINK] Activated!",
+					"RANOM MESSAGE START",
+					"ANOTHER START MESSAGE",
 				},
 				channels = {
 					emote = true,
@@ -90,7 +93,7 @@ local paladinData = {
 			SPELL_AURA_REMOVED = {
 				--tracker = 1,
 				tags = {},
-				messages = {"[LINK] faded!",},
+				messages = {"[LINK] faded!", "END MESSAGE ONE"},
 				channels = {emote = true,},
 			},
 			--SPELL_MISSED = {

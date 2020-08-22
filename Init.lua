@@ -2,6 +2,8 @@ local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local uClass = string.lower(select(2, UnitClass('player')))
 
+
+
 local function BuildDefaults()
 	local defaults = {
 		profile = {
@@ -71,6 +73,23 @@ local function BuildDefaults()
 end
 
 function RSA:OnInitialize()
+
+	-- TEMP until implemented.
+	RSA.SpellData.racials = {}
+	RSA.SpellData.utilities = {}
+	RSA.monitorData.racials = {}
+	RSA.monitorData.utilities = {}
+
+	RSA.SpellData.customCategories = {
+		['General'] = {
+
+		},
+	}
+	RSA.monitorData.customCategories = {
+		['General'] = {
+
+		},
+	}
 
 	local defaults = BuildDefaults()
 

@@ -81,11 +81,19 @@ function RSA.PrepareDataTables(dataTable)
 	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
 	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
 	-- Why not store the profile in this manner by default? It's more human readable to have everything needed for a spell to function within
-	--one table, rather than having multiple references to the profile in separate event tables as RSA used to do.
+	-- one table, rather than having multiple references to the profile in separate event tables as RSA used to do.
 	local spellToProfile = {}
 
-	for k, v in pairs(dataTable) do
+	--/dump LibStub('AceAddon-3.0'):GetAddon('RSA').monitorData
+	for k in pairs(dataTable) do
 		spellToProfile[dataTable[k].spellID] = dataTable[k].profile
+
+		if dataTable[k].additionalSpellIDs then -- Add the additional spell variants to the list of spellIDs for the monitor to... monitor.
+			for i = 1, #dataTable[k].additionalSpellIDs do
+				spellToProfile[dataTable[k].additionalSpellIDs[i]] = dataTable[k].profile
+			end
+		end
+
 		if not dataTable[k].environments then
 			dataTable[k].environments = {
 				useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
@@ -114,10 +122,10 @@ function RSA.PrepareDataTables(dataTable)
 			}
 		end
 
-		for k2, v2 in pairs(dataTable[k].events) do -- Generate list of events which have a message to allow us to know what config options to supply
-			table.insert(dataTable[k].configDisplay.messageAreas, k2)
+		for k2 in pairs(dataTable[k].events) do
+			table.insert(dataTable[k].configDisplay.messageAreas, k2) -- Generate list of events which have a message to allow us to know what config options to supply.
 
-			if spellToProfile[dataTable[k].events[k2].uniqueSpellID] then
+			if spellToProfile[dataTable[k].events[k2].uniqueSpellID] then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
 				spellToProfile[dataTable[k].events[k2].uniqueSpellID] = spellToProfile[k].profile
 			end
 
