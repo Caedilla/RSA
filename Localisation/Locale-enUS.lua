@@ -181,3 +181,6 @@ L["Enable in Combat"] = true
 L["Allow announcements if you are in combat."] = true
 L["Enable out of Combat"] = true
 L["Allow announcements if you are not in combat."] = true
+L["Announcements"] = true
+L["Channel Options"] = true
+L["Configuring:|r %s"] = true

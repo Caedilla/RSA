@@ -1,7 +1,14 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 local LDS = LibStub('LibDualSpec-1.0')
+local localisedClass, uClass = UnitClass('player')
+uClass = string.lower(uClass)
 RSA.Options = RSA:NewModule('Options')
+
+local colors = {
+	['titles'] = 'FF00DBBD',
+	['descriptions'] = 'FFD1D1D1',
+}
 
 local function BaseOptions()
 	local optionsTable = {
@@ -21,7 +28,7 @@ local function BaseOptions()
 						hidden = true,
 					},
 					groupToggles = {
-						name = '|cffCF374D'..L["Channel Group Toggles"]..'|r',
+						name = '|cffCF374D'..L["Channel Options"]..'|r',
 						type = 'group',
 						inline = true,
 						order = 100.2,
@@ -30,7 +37,6 @@ local function BaseOptions()
 								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/emote"])..'|r',
 								type = 'toggle',
 								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/emote"]),
-								descStyle = 'inline',
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.emote
@@ -43,7 +49,6 @@ local function BaseOptions()
 								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/say"])..'|r',
 								type = 'toggle',
 								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/say"]),
-								descStyle = 'inline',
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.say
@@ -56,7 +61,6 @@ local function BaseOptions()
 								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/yell"])..'|r',
 								type = 'toggle',
 								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/yell"]),
-								descStyle = 'inline',
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.yell
@@ -69,7 +73,6 @@ local function BaseOptions()
 								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/whisper"])..'|r',
 								type = 'toggle',
 								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/whisper"]),
-								descStyle = 'inline',
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.whisper
@@ -266,8 +269,8 @@ local function BaseOptions()
 					},
 				},
 			},
-			Spells = {
-				name = L["Spells"],
+			spells = {
+				name = L["Announcements"],
 				type = 'group',
 				childGroups = 'tab',
 				order = 1,
@@ -684,6 +687,112 @@ local function BaseOptions()
 	return optionsTable
 end
 
+local function GetSpellConfigName(selected)
+	local configDisplay = selected.configDisplay
+	if configDisplay.customName then
+		return configDisplay.customName
+	else
+		return GetSpellInfo(selected.spellID)
+	end
+end
+
+local function GetSpellConfigDesc(selected)
+	local configDisplay = selected.configDisplay
+	if configDisplay.customDesc then
+		return configDisplay.customDesc
+	else
+		return GetSpellDescription(selected.spellID)
+	end
+end
+
+local function GetEventName(event)
+
+	-- TODO fill in the rest of the event types.
+local eventList = {
+	["SPELL_HEAL"] = L["Heal"],
+	["SPELL_CAST_SUCCESS"] = L["Cast"],
+	["SPELL_AURA_APPLIED"] = L["Start"],
+	["SPELL_AURA_REMOVED"] = L["End"],
+}
+
+if eventList[event] then
+	return eventList[event]
+else
+	return event
+end
+
+end
+
+local function GenerateClassOptions()
+	local optionsData = RSA.db.profile[uClass]
+	if not optionsData then return
+		{
+			name = localisedClass,
+			type = 'group',
+			args = {
+				missing = {
+					name = "Missing class options.",
+					type = 'description',
+					order = 0.02,
+					fontSize = 'large',
+				},
+			},
+		}
+	end
+
+	local optionsTable = {
+		name = localisedClass,
+		type = 'group',
+		order = 0,
+		args = {
+		},
+	}
+
+	for k,v in pairs(optionsData) do
+		local selected = optionsData[k]
+		local configDisplay = selected.configDisplay
+		optionsTable.args[selected.profile] = {
+			name = GetSpellConfigName(selected),
+			desc = GetSpellConfigDesc(selected),
+			hidden = configDisplay.hidden or false,
+			disabled = configDisplay.disabled or false,
+			order = configDisplay.order or 50,
+			type = 'group',
+			childGroups = 'tab',
+			args = {
+				title = {
+					--name = '|cFF00DBBD'..L["Configuring"]..':|r '..  GetSpellConfigName(selected),
+					name = '|c' .. colors['titles'] .. L["Configuring:|r %s"]:format(GetSpellConfigName(selected)),
+					type = 'description',
+					order = 1,
+					fontSize = 'large',
+				},
+				description = {
+					--name = '|cffd1d1d1'..Spells[i].Desc..'|r',
+					name = '|c' .. colors['descriptions'] .. GetSpellConfigDesc(selected) .. '|r',
+					type = 'description',
+					order = 1.01,
+				},
+			},
+		}
+
+		for i = 1, #configDisplay.messageAreas do
+			optionsTable.args[selected.profile].args[configDisplay.messageAreas[i]] = {
+				--name = L[configDisplay.messageAreas[i]],
+				name = GetEventName(configDisplay.messageAreas[i]),
+				type = 'group',
+				order = 100, -- TODO: Order by start to finish like old options panel, see orderVal in old options.
+				args = {
+					-- TODO: Messages go here
+				},
+			}
+
+		end
+	end
+
+	return optionsTable
+end
+
 
 local function GenerateLibSinkOptions(optionsTable)
 	optionsTable.args.general.args.libSink = RSA:GetSinkAce3OptionsDataTable() -- Add LibSink Options.
@@ -695,7 +804,7 @@ end
 
 local function BuildOptions(optionsTable)
 	optionsTable.args.general.args.libSink = GenerateLibSinkOptions(optionsTable)
-
+	optionsTable.args.spells.args[uClass] = GenerateClassOptions()
 	return optionsTable
 end
 
