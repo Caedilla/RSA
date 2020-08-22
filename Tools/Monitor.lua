@@ -1,5 +1,6 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local uClass = string.lower(select(2, UnitClass('player')))
+RSA.Monitor = {}
 
 local running = {}
 local messageCache = {}
@@ -264,4 +265,19 @@ local function HandleEvents()
 
 end
 
-RSA.Monitor:SetScript('OnEvent', HandleEvents)
+function RSA.Monitor.Start()
+	local monitorFrame = _G['RSACombatLogMonitor'] or nil
+	if not monitorFrame then
+		monitorFrame = CreateFrame("Frame", "RSACombatLogMonitor")
+		monitorFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+	end
+
+	monitorFrame:SetScript('OnEvent', nil)
+	monitorFrame:SetScript('OnEvent', HandleEvents)
+end
+
+function RSA.Monitor.Stop()
+	local monitorFrame = _G['RSACombatLogMonitor'] or nil
+	if not monitorFrame then return end
+	monitorFrame:SetScript('OnEvent', nil)
+end

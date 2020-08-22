@@ -35,4 +35,6 @@ Classes\Paladin.lua
 
 
 
-Monitor.lua
+Tools\Monitor.lua
+
+Options.lua

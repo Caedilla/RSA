@@ -153,3 +153,31 @@ L["You have %d messages for this section."] = true
 L["You have no messages for this section."] = true
 L["Your message must contain at least one number or letter!"] = true
 L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = true
+
+
+
+
+
+
+
+
+
+
+
+
+
+----- NEW:
+L["%s only while grouped"] = true
+L["Allow announcements in %s only when you are in a group."] = true
+L["/emote"] = true
+L["/say"] = true
+L["/yell"] = true
+L["/whisper"] = true
+L["Cannot configure while in combat."] = true
+L["Enable in the non-instanced world area when playing with War Mode %s."] = true
+L["turned off"] = true
+L["turned on"] = true
+L["Enable in Combat"] = true
+L["Allow announcements if you are in combat."] = true
+L["Enable out of Combat"] = true
+L["Allow announcements if you are not in combat."] = true

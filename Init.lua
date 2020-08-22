@@ -1,5 +1,6 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
+local ACD = LibStub('AceConfigDialog-3.0')
 local uClass = string.lower(select(2, UnitClass('player')))
 
 local function BuildDefaults()
@@ -73,7 +74,7 @@ local function BuildDefaults()
 	return defaults
 end
 
-local function TempOptions()
+local function BlizzPanelOptions()
 	-- Register Various Options
 	local Options = {
 		type = "group",
@@ -101,16 +102,14 @@ end
 
 function RSA:ChatCommand(input)
 	if not InCombatLockdown() then
-		if not IsAddOnLoaded("RSA_Options") then
-			local loaded, reason = LoadAddOn("RSA_Options")
-			if not loaded then
-				ChatFrame1:AddMessage(L["%s is disabled. If you want to configure RSA, you need to enable it."]:format("|cFFFF75B3RSA|r [|cffFFCC00Options|r]"))
-			else
-				LibStub("AceConfigDialog-3.0"):Open("RSA")
-			end
+		self:EnableModule('Options')
+		if ACD.OpenFrames['RSA'] then
+			ACD:Close('RSA')
 		else
-			LibStub("AceConfigDialog-3.0"):Open("RSA")
+			ACD:Open('RSA')
 		end
+	else
+		RSA.SendMessage.ChatFrame(L["Cannot configure while in combat."])
 	end
 end
 
@@ -145,7 +144,7 @@ function RSA:OnInitialize()
 	-- project-revision
 	self.db.global.version = 5.0
 	self.db.global.revision = string.match(GetAddOnMetadata("RSA","Version"),"%d+") or 0
-	self.db.global.releaseType = string.match(GetAddOnMetadata('RSA','Version'),'%a+',2) or 'dev'
+	self.db.global.releaseType = string.match(GetAddOnMetadata('RSA','Version'),'%a+',2)
 
 	if not RSA.db.global.personalID then
 		RSA.db.global.personalID = RSA.GetPersonalID() --RSA.GetGetMyRandomNumber()
@@ -156,12 +155,14 @@ function RSA:OnInitialize()
 
 	self:RegisterChatCommand("RSA", "ChatCommand")
 
-	TempOptions()
+	BlizzPanelOptions()
 
 	-- Profile Management
 	self.db.RegisterCallback(self, "OnProfileChanged", "RefreshConfig")
 	self.db.RegisterCallback(self, "OnProfileCopied", "RefreshConfig")
 	self.db.RegisterCallback(self, "OnProfileReset", "RefreshConfig")
 
-	--RSA.Comm.Registry()
+	RSA.Comm.Registry()
+
+	RSA.Monitor.Start()
 end
