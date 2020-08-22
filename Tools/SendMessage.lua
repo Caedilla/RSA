@@ -80,11 +80,11 @@ end
 function RSA.SendMessage.Say(message) -- Send a message to Say.
 	if IsInInstance() then
 		if RSA.AnnouncementCheck() == true then
-			if RSA.db.profile.general.globalAnnouncements.smartSay == true then
+			if RSA.db.profile.general.globalAnnouncements.groupToggles.say == true then
 				if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 					SendChatMessage(format(message), "SAY", nil)
 				end
-			elseif RSA.db.profile.general.globalAnnouncements.smartSay == false then
+			elseif RSA.db.profile.general.globalAnnouncements.groupToggles.say == false then
 				SendChatMessage(format(message), "SAY", nil)
 			end
 		end
@@ -93,11 +93,11 @@ end
 
 function RSA.SendMessage.Emote(message) -- Send a message to Emote.
 	if RSA.AnnouncementCheck() == true then
-		if RSA.db.profile.general.globalAnnouncements.smartEmote == true then
+		if RSA.db.profile.general.globalAnnouncements.groupToggles.emote == true then
 			if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 				SendChatMessage(format(message), "EMOTE", nil)
 			end
-		elseif RSA.db.profile.general.globalAnnouncements.smartEmote == false then
+		elseif RSA.db.profile.general.globalAnnouncements.groupToggles.emote == false then
 			SendChatMessage(format(message), "EMOTE", nil)
 		end
 	end
@@ -106,11 +106,11 @@ end
 function RSA.SendMessage.Yell(message) -- Send a message to Yell.
 	if IsInInstance() then
 		if RSA.AnnouncementCheck() == true then
-			if RSA.db.profile.general.globalAnnouncements.smartYell == true then
+			if RSA.db.profile.general.globalAnnouncements.groupToggles.yell == true then
 				if GetNumGroupMembers() > 0 or GetNumSubgroupMembers() > 0 then
 					SendChatMessage(format(message), "YELL", nil)
 				end
-			elseif RSA.db.profile.general.globalAnnouncements.smartYell == false then
+			elseif RSA.db.profile.general.globalAnnouncements.groupToggles.yell == false then
 				SendChatMessage(format(message), "YELL", nil)
 			end
 		end
@@ -129,8 +129,11 @@ function RSA.SendMessage.RaidWarning(message) -- Send a proper message to the ra
 end
 
 function RSA.SendMessage.Whisper(message, target, replacements, destName)
-	if RSA.db.profile.general.globalAnnouncements.AlwaysAllowWhispers == false then
+	if RSA.db.profile.general.globalAnnouncements.alwaysWhisper == false then
 		if RSA.AnnouncementCheck() == false then return end
+	end
+	if RSA.db.profile.general.globalAnnouncements.groupToggles.whisper then
+		if (not GetNumGroupMembers() > 0) and (not GetNumSubgroupMembers() > 0) then return end
 	end
 	if replacements and destName then -- Until we replace all instances where this function is used, check if we have all args before trying to create new format message.
 		if RSA.db.profile.General.Replacements.Target.AlwaysUseName == true then

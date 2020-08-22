@@ -1,20 +1,42 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 
+local function CombatState()
+
+	local profile = RSA.db.profile.general.globalAnnouncements.combatState
+	local canAnnounce = false
+	if InCombatLockdown() then
+		if profile.inCombat then
+			canAnnounce = true
+		end
+	else
+		if profile.noCombat then
+			canAnnounce = true
+		end
+	end
+
+	return canAnnounce
+end
+
 function RSA.AnnouncementCheck() -- Checks against user settings to see if we are allowed to announce.
 	if 1 == 1 then return true end
-	local InInstance, InstanceType = IsInInstance()
+	local InstanceType = select(2, IsInInstance())
 	local LFParty = IsInGroup(LE_PARTY_CATEGORY_INSTANCE) -- party group found through group finder
 	local LFRaid = IsInRaid(LE_PARTY_CATEGORY_INSTANCE) -- raid grounp found through group finder
-	if RSA.db.profile.General.GlobalAnnouncements.OnlyInCombat and not InCombatLockdown() then return false end -- If we're not in combat and only announce in combat, stop right here.
-	if RSA.db.profile.General.GlobalAnnouncements.InWarMode and C_PvP.IsWarModeActive() and InstanceType == "none" and not LFParty and not LFRaid then return true end -- Enable in World PvP.
-	if RSA.db.profile.General.GlobalAnnouncements.Arena and InstanceType == "arena" then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.Battlegrounds and LFRaid and (InstanceType == "pvp" or InstanceType == "none") then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.InDungeon and InstanceType == "party" and not LFParty then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.InRaid and InstanceType == "raid" and not LFRaid then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.InScenario and InstanceType == "scenario" == true then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.InLFG_Party and (InstanceType == "party" and LFParty) then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.InLFG_Raid and (InstanceType == "raid" and LFRaid) then return true end
-	if RSA.db.profile.General.GlobalAnnouncements.InWorld and InstanceType == "none" and not LFParty and not LFRaid and not C_PvP.IsWarModeActive() then return true end -- Enable in World PvE.
+
+	local profile = RSA.db.profile.general.globalAnnouncements
+
+	if not CombatState() then return false end
+
+	if profile.warModeWorld and C_PvP.IsWarModeActive() and InstanceType == "none" and not LFParty and not LFRaid then return true end -- Enable in World PvP.
+	if profile.nonWarWorld and InstanceType == "none" and not LFParty and not LFRaid and not C_PvP.IsWarModeActive() then return true end -- Enable in World PvE.
+	if profile.arenas and InstanceType == "arena" then return true end
+	if profile.bgs and LFRaid and (InstanceType == "pvp" or InstanceType == "none") then return true end
+	if profile.dungeons and InstanceType == "party" and not LFParty then return true end
+	if profile.raids and InstanceType == "raid" and not LFRaid then return true end
+	if profile.scenarios and InstanceType == "scenario" == true then return true end
+	if profile.lfg and (InstanceType == "party" and LFParty) then return true end
+	if profile.lfr and (InstanceType == "raid" and LFRaid) then return true end
+
 	return false
 end
 

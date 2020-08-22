@@ -2,8 +2,6 @@ local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local uClass = string.lower(select(2, UnitClass('player')))
 
-
-
 local function BuildDefaults()
 	local defaults = {
 		profile = {
@@ -22,29 +20,32 @@ local function BuildDefaults()
 			racials = RSA.SpellData.racials,
 			utilities = RSA.SpellData.utilities,
 			general = {
-				["*"] = true,
 				globalAnnouncements = {
-					smartSay = true,
-					smartYell = true,
-					smartEmote = false,
-					smartCustomChannel = true,
-					arena = true,
-					battlegrounds = false,
-					inWarMode = false,
-					inDungeon = true,
-					inRaid = true,
-					InLFG_Party = false,
-					InLFG_Raid = false,
-					InScenario = false,
-					InWorld = false,
-					OnlyInCombat = false,
+					--useGlobal = true, -- Implement as button in config to toggle this ON for all sub spells.
+					alwaysWhisper = false, -- Allows whispers to always be sent.
 					removeServerNames = true,
-					AlwaysAllowWhispers = true,
+					enableIn = {
+						arenas = false,
+						bgs = false,
+						warModeWorld = false, -- Enable in War Mode world zones.
+						nonWarWorld = false, -- Enable in world zones without war mode enabled.
+						dungeons = false,
+						raids = false,
+						lfg = false,
+						lfr = false,
+						scenarios = false,
+					},
+					groupToggles = { -- When true, only announce to these channels if you are in a group
+						emote = true,
+						say = true,
+						yell = true,
+						whisper = true,
+					},
+					combatState = {
+						inCombat = true, -- Announce only in Combat
+						noCombat = false, -- Announce not in Combat
+					},
 				},
-				Local = {
-					["*"] = true,
-				},
-				globalCustomChannel = "MyCustomChannel",
 				replacements = {
 					target = {
 						alwaysUseName = false,

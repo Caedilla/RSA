@@ -26,7 +26,6 @@ local paladinData = {
 					MISSTYPE = true,
 					AMOUNT = true,
 					EXTRA = '[AURA]', -- Valid string values: [AURA], [TARSPELL]
-
 				},
 				messages = {
 					"[LINK] saved my life and healed me for [AMOUNT] hp!",
