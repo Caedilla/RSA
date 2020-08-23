@@ -763,7 +763,7 @@ local function GenerateClassOptions()
 		},
 	}
 
-	for k,v in pairs(optionsData) do
+	for k in pairs(optionsData) do
 		local selected = optionsData[k]
 		local configDisplay = selected.configDisplay
 		optionsTable.args[selected.profile] = {
@@ -831,15 +831,66 @@ local function GenerateClassOptions()
 				},
 			}
 
+			local numMessages = selected.events[event].messages
+
 			local messages = {}
 
+			for _, v in pairs(RSA.db.profile[uClass][k].events[event].messages) do
+				if string.match(v,'%w') then
+					if v ~= '' then
+						table.insert(messages, v)
+					end
+				end
+			end
+
+			for m = 1,#messages do
+				local curMessage = selected.events[event].messages[m]
+				local curNumAsString = tostring(m)
+
+				optionsTable.args[selected.profile].args[event].args[curNumAsString] = {
+					name = curNumAsString,
+					type = 'input',
+					order = 20,
+					validate = function(info, value)
+						if value == '' then return true end
+						if not string.match(value,'%w') then
+							RSA.SendMessage.ChatFrame(L["Your message must contain at least one number or letter!"])
+							return L["Your message must contain at least one number or letter!"]
+						else
+							return true
+						end
+					end,
+					get = function(info)
+						--RSA.db.profile[uClass][k].events[event].messages
+						if curMessage == '' then
+							table.remove(RSA.db.profile[uClass][k].events[event].messages,m)
+						--if RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] == '' then
+						--	table.remove(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]],l)
+						end
+						RSA.Options:UpdateOptions()
+						--return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l]
+						return curMessage
+					end,
+					set = function(info, value)
+						if value == '' then
+							RSA.db.profile[uClass][k].events[event].messages[m] = ''
+							--RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] = ''
+						else
+							RSA.db.profile[uClass][k].events[event].messages[m] = value
+							--RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] = value
+						end
+						RSA.Options:UpdateOptions()
+						RSA:WipeMessageCache()
+					end,
+				}
+
+			end
 
 		end
 	end
 
 	return optionsTable
 end
-
 
 local function GenerateLibSinkOptions(optionsTable)
 	optionsTable.args.general.args.libSink = RSA:GetSinkAce3OptionsDataTable() -- Add LibSink Options.
@@ -849,38 +900,39 @@ local function GenerateLibSinkOptions(optionsTable)
 	optionsTable.args.general.args.libSink.inline = true
 end
 
-local function BuildOptions(optionsTable)
+function RSA:RegisterOptions()
+	local optionsTable = BaseOptions()
+	LibStub('AceConfig-3.0'):RegisterOptionsTable('RSA', optionsTable)
+
+	local profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(self.db)
+	optionsTable.args.profiles = profiles
+	optionsTable.args.profiles.order = 100
+
 	optionsTable.args.general.args.libSink = GenerateLibSinkOptions(optionsTable)
 	optionsTable.args.spells.args[uClass] = GenerateClassOptions()
-	return optionsTable
+	LDS:EnhanceDatabase(self.db, 'RSA')
+	LDS:EnhanceOptions(profiles, self.db)
 end
 
 function RSA.Options:UpdateOptions()
-	local optionsTable = BaseOptions()
-	BuildOptions(optionsTable)
+	RSA:RegisterOptions()
 	LibStub('AceConfigRegistry-3.0'):NotifyChange('RSA')
 end
-
 
 function RSA.Options:OnInitialize()
 	self.db = RSA.db
 	RSA:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
-	local optionsTable = BaseOptions()
+	RSA:RegisterOptions()
+	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',975,740)
+	InterfaceAddOnsList_Update()
 
-	-- Profile Management
 	self.db.RegisterCallback(RSA, 'OnProfileChanged', 'RefreshConfig')
 	self.db.RegisterCallback(RSA, 'OnProfileCopied', 'RefreshConfig')
 	self.db.RegisterCallback(RSA, 'OnProfileReset', 'RefreshConfig')
+end
 
-	-- Register Various Options
-	LibStub('AceConfig-3.0'):RegisterOptionsTable('RSA', optionsTable) -- Register Options
-	local Profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(self.db)
-	optionsTable.args.profiles = Profiles
-	optionsTable.args.profiles.order = 99
-	optionsTable = BuildOptions(optionsTable)
-	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',975,740)
-	LDS:EnhanceDatabase(self.db, 'RSA')
-	LDS:EnhanceOptions(Profiles, self.db)
-	InterfaceAddOnsList_Update()
+function RSA:RefreshConfig()
+	RSA.db.profile = self.db.profile
+	RSA.Options:UpdateOptions()
 end

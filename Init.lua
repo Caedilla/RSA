@@ -113,10 +113,6 @@ function RSA:ChatCommand(input)
 	end
 end
 
-function RSA:RefreshConfig()
-	RSA.db.profile = self.db.profile
-end
-
 function RSA:OnInitialize()
 
 	-- TEMP until implemented.
