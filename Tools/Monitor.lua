@@ -69,6 +69,10 @@ local function BuildMessageCache(currentSpell, spellProfileName, currentSpellDat
 	return message
 end
 
+function RSA:WipeMessageCache()
+	wipe(messageCache)
+end
+
 local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 

@@ -10,6 +10,39 @@ local colors = {
 	['descriptions'] = 'FFD1D1D1',
 }
 
+-- TODO fill in the rest of the event types.
+local eventList = {
+	["SPELL_HEAL"] = L["Heal"],
+	["SPELL_CAST_SUCCESS"] = L["Cast"],
+	["SPELL_AURA_APPLIED"] = L["Start"],
+	["SPELL_AURA_REMOVED"] = L["End"],
+}
+
+local eventOrder = {
+	["SPELL_HEAL"] = 6,
+	["SPELL_CAST_SUCCESS"] = 3,
+	["SPELL_AURA_APPLIED"] = 1,
+	["SPELL_AURA_REMOVED"] = 14,
+}
+
+local function GetEventName(event)
+	if eventList[event] then
+		return eventList[event]
+	else
+		return event
+	end
+end
+
+local GetEventDescription = GetEventName -- TODO: Implement function
+
+local function GetEventOrder(event)
+	if eventOrder[event] then
+		return eventOrder[event]
+	else
+		return 100
+	end
+end
+
 local function BaseOptions()
 	local optionsTable = {
 		type = 'group',
@@ -705,24 +738,6 @@ local function GetSpellConfigDesc(selected)
 	end
 end
 
-local function GetEventName(event)
-
-	-- TODO fill in the rest of the event types.
-local eventList = {
-	["SPELL_HEAL"] = L["Heal"],
-	["SPELL_CAST_SUCCESS"] = L["Cast"],
-	["SPELL_AURA_APPLIED"] = L["Start"],
-	["SPELL_AURA_REMOVED"] = L["End"],
-}
-
-if eventList[event] then
-	return eventList[event]
-else
-	return event
-end
-
-end
-
 local function GenerateClassOptions()
 	local optionsData = RSA.db.profile[uClass]
 	if not optionsData then return
@@ -777,15 +792,47 @@ local function GenerateClassOptions()
 		}
 
 		for i = 1, #configDisplay.messageAreas do
-			optionsTable.args[selected.profile].args[configDisplay.messageAreas[i]] = {
-				--name = L[configDisplay.messageAreas[i]],
-				name = GetEventName(configDisplay.messageAreas[i]),
+			local event = configDisplay.messageAreas[i]
+
+
+			optionsTable.args[selected.profile].args[event] = {
+				--name = L[event],
+				name = GetEventName(event),
 				type = 'group',
-				order = 100, -- TODO: Order by start to finish like old options panel, see orderVal in old options.
+				order = 100 + GetEventOrder(event),
 				args = {
-					-- TODO: Messages go here
+					desc = {
+						name = GetEventName(event).. ': |cffFFCC00'.. GetEventDescription(event)..'|r\n',
+						type = 'description',
+						order = 0,
+						fontSize = 'medium',
+					},
+					Add = {
+						name = L["Add New Message"],
+						type = 'input',
+						order = 10,
+						width = 'full',
+						validate = function(info, value)
+							if value == '' then return true end -- Pressed enter without entering anything, we don't need to warn about this.
+							if not string.match(value,'%w') then
+								RSA.SendMessage.ChatFrame(L["Your message must contain at least one number or letter!"])
+								return L["Your message must contain at least one number or letter!"]
+							else
+								return true
+							end
+						end,
+						set = function(info, value)
+							--table.insert(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]],value)
+							table.insert(RSA.db.profile[uClass][k].events[event].messages, value)
+							RSA.Options:UpdateOptions()
+							RSA:WipeMessageCache()
+						end,
+					},
 				},
 			}
+
+			local messages = {}
+
 
 		end
 	end
@@ -807,6 +854,13 @@ local function BuildOptions(optionsTable)
 	optionsTable.args.spells.args[uClass] = GenerateClassOptions()
 	return optionsTable
 end
+
+function RSA.Options:UpdateOptions()
+	local optionsTable = BaseOptions()
+	BuildOptions(optionsTable)
+	LibStub('AceConfigRegistry-3.0'):NotifyChange('RSA')
+end
+
 
 function RSA.Options:OnInitialize()
 	self.db = RSA.db
