@@ -37,7 +37,7 @@ local function BuildDefaults()
 						scenarios = false,
 					},
 					groupToggles = { -- When true, only announce to these channels if you are in a group
-						emote = false,
+						emote = true,
 						say = true,
 						yell = true,
 						whisper = true,

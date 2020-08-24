@@ -101,7 +101,6 @@ local channelDescriptions = {
 	['personal'] = L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."],
 	['smartGroup'] = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."],
 	['whisper'] = L["|cffFFCC00Whispers|r the target of the spell."],
-
 }
 
 local function GetChannelColor(channel)
@@ -897,7 +896,6 @@ local function GenerateClassOptions()
 			local event = configDisplay.messageAreas[i]
 
 			optionsTable.args[selected.profile].args[event] = {
-				--name = L[event],
 				name = GetEventName(event),
 				type = 'group',
 				order = 100 + GetEventOrder(event),
@@ -939,7 +937,8 @@ local function GenerateClassOptions()
 						name = '|c' .. colors['titles'] .. L["Current Messages:"] .. '|r',
 						type = 'description',
 						order = 12,
-						fontSize = 'medium'
+						fontSize = 'medium',
+						hidden = #selected.events[event].messages <1,
 					}
 				},
 			}
@@ -1012,6 +1011,8 @@ local function GenerateClassOptions()
 					end,
 				}
 			end
+
+			-- TODO implement environments for each spell, essentially a mirror of global options.
 
 		end
 	end
