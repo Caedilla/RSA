@@ -181,3 +181,4 @@ L["Announcements"] = true
 L["Channel Options"] = true
 L["Configuring:|r %s"] = true
 L["Local Output"] = true
+L["Current Messages:"] = true

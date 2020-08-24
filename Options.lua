@@ -9,7 +9,7 @@ local colors = {
 	['titles'] = 'FF00DBBD',
 	['descriptions'] = 'FFD1D1D1',
 	['deepRed'] = 'FFCF374D',
-	['orange'] = 'FF91BE0F',
+	['orange'] = 'FFFF8019',
 	['green'] = 'FF91BE0F',
 	['gold'] = 'FFFFCC00',
 	['blue'] = 'FF00B2FA',
@@ -28,6 +28,26 @@ local eventOrder = {
 	["SPELL_CAST_SUCCESS"] = 3,
 	["SPELL_AURA_APPLIED"] = 1,
 	["SPELL_AURA_REMOVED"] = 14,
+
+}
+
+local eventDescriptions = {
+	['SPELL_AURA_APPLIED'] = 'When you start casting this spell or when this spell starts.',
+	--[2] = 'When you have placed this in the world.',
+	['SPELL_CAST_SUCCESS'] = 'When you cast this spell.',
+	--[4] = 'When you dispel a buff or debuff.',
+	--[5] = 'When you deal damage.',
+	['SPELL_HEAL'] = 'When you heal.',
+	--[7] = 'When you debuff a unit.',
+	--[8] = 'When you absorb damage.',
+	--[9] = 'When you absorb a debuff.',
+	--[10] = 'When you interrupt a spell cast.',
+	--[11] = 'When your spell is resisted.',
+	--[12] = 'When the target is immune to your spell.',
+	--[13] = 'When the spell failed.',
+	['SPELL_AURA_REMOVED'] = 'When the spell ends.',
+	--[15] = 'When you cast Provoke on your Statue of the Black Ox.',
+	--[16] = 'When someone accepts the resurrect you cast on them.',
 }
 
 local channels = {
@@ -109,7 +129,13 @@ local function GetEventName(event)
 	end
 end
 
-local GetEventDescription = GetEventName -- TODO: Implement function
+local function GetEventDescription(event)
+	if eventDescriptions[event] then
+		return eventDescriptions[event]
+	else
+		return event
+	end
+end
 
 local function GetEventOrder(event)
 	if eventOrder[event] then
@@ -876,13 +902,13 @@ local function GenerateClassOptions()
 				type = 'group',
 				order = 100 + GetEventOrder(event),
 				args = {
-					desc = {
-						name = GetEventName(event) .. ': |cffFFCC00' .. GetEventDescription(event) .. '|r\n',
+					eventDescription = {
+						name = '|c' .. colors['titles'] .. GetEventName(event) .. ':|r ' .. '|c' .. colors['descriptions'] .. GetEventDescription(event) .. '|r\n',
 						type = 'description',
 						order = 0,
 						fontSize = 'medium',
 					},
-					Add = {
+					addNewMessage = {
 						name = L["Add New Message"],
 						type = 'input',
 						order = 10,
@@ -898,24 +924,43 @@ local function GenerateClassOptions()
 							end
 						end,
 						set = function(info, value)
-							--table.insert(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]],value)
 							table.insert(RSA.db.profile[uClass][k].events[event].messages, value)
 							RSA.Options:UpdateOptions()
 							RSA:WipeMessageCache()
 						end,
 					},
+					numMessagesDescription = {
+						name = 'temp',
+						type = 'description',
+						order = 11,
+						fontSize = 'medium',
+					},
+					currentMessages = {
+						name = '|c' .. colors['titles'] .. L["Current Messages:"] .. '|r',
+						type = 'description',
+						order = 12,
+						fontSize = 'medium'
+					}
 				},
 			}
+			local numMessages = #selected.events[event].messages
 
-			local numMessages = selected.events[event].messages
-			for m = 1,#numMessages do
+			if numMessages == 0 then
+				optionsTable.args[selected.profile].args[event].args.numMessagesDescription.name = '\n'.. L["You have no messages for this section."]..L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."]
+			elseif numMessages == 1 then
+				optionsTable.args[selected.profile].args[event].args.numMessagesDescription.name = '\n'.. L["You have %d message for this section."]:format(numMessages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
+			else
+				optionsTable.args[selected.profile].args[event].args.numMessagesDescription.name = '\n'.. L["You have %d messages for this section."]:format(numMessages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
+			end
+
+			for m = 1, numMessages do
 				local curMessage = selected.events[event].messages[m]
 				local curNumAsString = tostring(m)
 
 				optionsTable.args[selected.profile].args[event].args[curNumAsString] = {
-					name = curNumAsString,
+					name = '',
 					type = 'input',
-					order = 200,
+					order = 20,
 					width = 'full',
 					validate = function(info, value)
 						if value == '' then return true end
