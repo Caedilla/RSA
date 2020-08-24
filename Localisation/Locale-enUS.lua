@@ -182,3 +182,12 @@ L["Channel Options"] = true
 L["Configuring:|r %s"] = true
 L["Local Output"] = true
 L["Current Messages:"] = true
+
+L["racials"] = "Racials"
+L["Environments"] = true
+L["Control the areas of the game this spell is allowed to be announced."] = true
+L["Control the areas of the game that RSA is allowed announce in."] = true
+L["Configure each spell's announcement settings, such as what channels to announce in and what messages to send."] = true
+L["Use Global Environment Settings"] = true
+L["Use the global settings to determine where it can be announced."] = true
+L["When disabled, use the Environments tab below to configure where this spell is allowed to announce. Affects all events this spell can announce."] = true

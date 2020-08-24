@@ -13,7 +13,6 @@ local paladinData = {
 			disabledChannels = {whisper = true},
 			validTags = {'[AMOUNT]'}, -- [SPELL] and [LINK] are implied.
 		},
-		environments = {},
 		events = {
 			SPELL_HEAL = {
 				uniqueSpellID = 66235, -- Ardent Defender uses a different spell ID when the heal effect triggers.
@@ -40,7 +39,6 @@ local paladinData = {
 			disabledChannels = {},
 			validTags = {'[TARGET]'}, -- [SPELL] and [LINK] are implied.
 		},
-		environments = {},
 		events = {
 			SPELL_AURA_APPLIED = {
 				messages = {"[LINK] Activated!",},

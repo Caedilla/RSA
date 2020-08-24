@@ -142,6 +142,43 @@ function RSA.PrepareDataTables(dataTable)
 					noCombat = false, -- Announce not in Combat
 				},
 			}
+		else
+			local environments = {
+				useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
+				alwaysWhisper = false, -- Allows whispers to always be sent.
+				enableIn = {
+					arenas = false,
+					bgs = false,
+					warModeWorld = false, -- Enable in War Mode world zones.
+					nonWarWorld = false, -- Enable in world zones without war mode enabled.
+					dungeons = false,
+					raids = false,
+					lfg = false,
+					lfr = false,
+					scenarios = false,
+				},
+				groupToggles = { -- When true, only announce to these channels if you are in a group
+					emote = true,
+					say = true,
+					yell = true,
+					whisper = true,
+				},
+				combatState = {
+					inCombat = true, -- Announce only in Combat
+					noCombat = false, -- Announce not in Combat
+				},
+			}
+			for e in pairs(environments) do
+				if not dataTable[k].environments[e] then
+					dataTable[k].environments[e] = environments[e]
+				elseif type(environments[e]) == 'table' then
+					for i = 1, #dataTable[k].environments[e] do
+						if not dataTable[k].environments[e][i] then
+							dataTable[k].environments[e][i] = environments[e][i]
+						end
+					end
+				end
+			end
 		end
 
 		for k2 in pairs(dataTable[k].events) do
