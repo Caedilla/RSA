@@ -8,6 +8,11 @@ RSA.Options = RSA:NewModule('Options')
 local colors = {
 	['titles'] = 'FF00DBBD',
 	['descriptions'] = 'FFD1D1D1',
+	['deepRed'] = 'FFCF374D',
+	['orange'] = 'FF91BE0F',
+	['green'] = 'FF91BE0F',
+	['gold'] = 'FFFFCC00',
+	['blue'] = 'FF00B2FA',
 }
 
 -- TODO fill in the rest of the event types.
@@ -24,6 +29,77 @@ local eventOrder = {
 	["SPELL_AURA_APPLIED"] = 1,
 	["SPELL_AURA_REMOVED"] = 14,
 }
+
+local channels = {
+	'say',
+	'yell',
+	'emote',
+	'party',
+	'raid',
+	'instance',
+	'personal',
+	'smartGroup',
+	'whisper',
+}
+
+local channelStrings = {
+	['smartGroup'] = 'Smart Group Channel',
+	['personal'] = 'Local Output',
+}
+
+local channelOrder = {
+	['say'] = 1,
+	['yell'] = 2,
+	['emote'] = 3,
+	['party'] = 4,
+	['raid'] = 5,
+	['instance'] = 6,
+	['personal'] = 7,
+	['smartGroup'] = 8,
+	['whisper'] = 9,
+}
+
+local channelColor = {
+	['say'] = colors['deepRed'],
+	['yell'] = colors['deepRed'],
+	['emote'] = colors['deepRed'],
+	['party'] = colors['green'],
+	['raid'] = colors['green'],
+	['instance'] = colors['green'],
+	['personal'] = colors['blue'],
+	['smartGroup'] = colors['gold'],
+	['whisper'] = colors['gold'],
+}
+
+local channelDescriptions = {
+	['say'] = L["%s can only function inside instances since 8.2.5."]:format(L["Say"]),
+	['yell'] = L["%s can only function inside instances since 8.2.5."]:format(L["Yell"]),
+	['emote'] = '',
+	['party'] = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+	['raid'] = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+	['instance'] = L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."],
+	['personal'] = L["Sends a message locally only visible to you. To choose which part of the UI this is displayed in go to the |cff00B2FALocal Message Output Area|r in the General options."],
+	['smartGroup'] = L["Sends a message to one of the following channels in order of priority:"] .. '\n' .. L["|cff91BE0F/instance|r if you're in an instance group such as when in LFR or Battlegrounds."] .. '\n' .. L["|cff91BE0F/raid|r if you're in a manually formed raid."] .. '\n' .. L["|cff91BE0F/party|r if you're in a manually formed group."],
+	['whisper'] = L["|cffFFCC00Whispers|r the target of the spell."],
+
+}
+
+local function GetChannelColor(channel)
+	if channelColor[channel] then
+		return channelColor[channel]
+	else
+		return 'FF00FFFF'
+	end
+end
+
+local function GetChannelName(channel)
+	local globalString = _G[string.upper(channel)] or nil
+	if channelStrings[channel] then
+		return channelStrings[channel]
+	elseif globalString then
+		return globalString
+	end
+end
 
 local function GetEventName(event)
 	if eventList[event] then
@@ -46,7 +122,7 @@ end
 local function BaseOptions()
 	local optionsTable = {
 		type = 'group',
-		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision ..'|r',
+		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision .. '|r',
 		order = 0,
 		args = {
 			general = {
@@ -61,15 +137,15 @@ local function BaseOptions()
 						hidden = true,
 					},
 					groupToggles = {
-						name = '|cffCF374D'..L["Channel Options"]..'|r',
+						name = '|c' .. colors['deepRed'] .. L["Channel Options"] .. '|r',
 						type = 'group',
 						inline = true,
 						order = 100.2,
 						args = {
 							emote = {
-								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/emote"])..'|r',
+								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['EMOTE']) .. '|r',
 								type = 'toggle',
-								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/emote"]),
+								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['EMOTE']),
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.emote
@@ -79,9 +155,9 @@ local function BaseOptions()
 								end,
 							},
 							say = {
-								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/say"])..'|r',
+								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['SAY']) .. '|r',
 								type = 'toggle',
-								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/say"]),
+								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['SAY']),
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.say
@@ -91,9 +167,9 @@ local function BaseOptions()
 								end,
 							},
 							yell = {
-								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/yell"])..'|r',
+								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['YELL']) .. '|r',
 								type = 'toggle',
-								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/yell"]),
+								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['YELL']),
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.yell
@@ -103,9 +179,9 @@ local function BaseOptions()
 								end,
 							},
 							whisper = {
-								name = '|cffCF374D'..L["%s only while grouped"]:format(L["/whisper"])..'|r',
+								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['WHISPER']) .. '|r',
 								type = 'toggle',
-								desc = L["Allow announcements in %s only when you are in a group."]:format(L["/whisper"]),
+								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['WHISPER']),
 								width = 'double',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.whisper
@@ -117,13 +193,13 @@ local function BaseOptions()
 						},
 					},
 					enableInPVPAreas = {
-						name = '|cffFF8019'..L["PvP Options"]..'|r',
+						name = '|c' .. colors['orange'] .. L["PvP Options"] .. '|r',
 						type = 'group',
 						inline = true,
 						order = 100.3,
 						args = {
 							arenas = {
-								name = '|cffFF8019'..L["Enable in Arenas"]..'|r',
+								name = '|c' .. colors['orange'] .. L["Enable in Arenas"] .. '|r',
 								type = 'toggle',
 								order = 0,
 								width = 'double',
@@ -135,7 +211,7 @@ local function BaseOptions()
 								end,
 							},
 							bgs = {
-								name = '|cffFF8019'..L["Enable in Battlegrounds"]..'|r',
+								name = '|c' .. colors['orange'] .. L["Enable in Battlegrounds"] .. '|r',
 								type = 'toggle',
 								order = 0,
 								width = 'double',
@@ -147,7 +223,7 @@ local function BaseOptions()
 								end,
 							},
 							warModeWorld = {
-								name = '|cffFF8019'..L["Enable in War Mode"]..'|r',
+								name = '|c' .. colors['orange'] .. L["Enable in War Mode"] .. '|r',
 								type = 'toggle',
 								order = 1,
 								desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"]),
@@ -163,13 +239,13 @@ local function BaseOptions()
 						},
 					},
 					enableInPvEAreas = {
-						name = '|cff91BE0F'..L["PvE Options"]..'|r',
+						name = '|c' .. colors['green'] .. L["PvE Options"] .. '|r',
 						type = 'group',
 						inline = true,
 						order = 100.4,
 						args = {
 							dungeons = {
-								name = '|cff91BE0F'..L["Enable in Dungeons"]..'|r',
+								name = '|c' .. colors['green'] .. L["Enable in Dungeons"] .. '|r',
 								type = 'toggle',
 								order = 0,
 								desc = L["Enable in manually formed dungeon groups."],
@@ -183,7 +259,7 @@ local function BaseOptions()
 								end,
 							},
 							raids = {
-								name = '|cff91BE0F'..L["Enable in Raid Instances"]..'|r',
+								name = '|c' .. colors['green'] .. L["Enable in Raid Instances"] .. '|r',
 								type = 'toggle',
 								order = 0,
 								desc = L["Enable in manually formed raid groups."],
@@ -197,7 +273,7 @@ local function BaseOptions()
 								end,
 							},
 							lfg = {
-								name = '|cff91BE0F'..L["Enable in Group Finder Dungeons"]..'|r',
+								name = '|c' .. colors['green'] .. L["Enable in Group Finder Dungeons"] .. '|r',
 								type = 'toggle',
 								order = 1,
 								width = 'double',
@@ -209,7 +285,7 @@ local function BaseOptions()
 								end,
 							},
 							lfr = {
-								name = '|cff91BE0F'..L["Enable in Group Finder Raids"]..'|r',
+								name = '|c' .. colors['green'] .. L["Enable in Group Finder Raids"] .. '|r',
 								type = 'toggle',
 								order = 1,
 								width = 'double',
@@ -221,7 +297,7 @@ local function BaseOptions()
 								end,
 							},
 							scenarios = {
-								name = '|cff91BE0F'..L["Enable in Scenarios"]..'|r',
+								name = '|c' .. colors['green'] .. L["Enable in Scenarios"] .. '|r',
 								type = 'toggle',
 								order = 2,
 								desc = L["Enable in scenario instances."],
@@ -235,7 +311,7 @@ local function BaseOptions()
 								end,
 							},
 							nonWarWorld = {
-								name = '|cff91BE0F'..L["Enable in the World"]..'|r',
+								name = '|c' .. colors['green'] .. L["Enable in the World"] .. '|r',
 								type = 'toggle',
 								order = 2,
 								desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"]),
@@ -251,13 +327,13 @@ local function BaseOptions()
 						},
 					},
 					combatState = {
-						name = '|cffFFCC00'..L["Other Options"]..'|r',
+						name = '|c' .. colors['gold'] .. L["Other Options"] .. '|r',
 						type = 'group',
 						inline = true,
 						order = 100.5,
 						args = {
 							inCombat = {
-								name = '|cffFFCC00'..L["Enable in Combat"]..'|r',
+								name = '|c' .. colors['gold'] .. L["Enable in Combat"] .. '|r',
 								type = 'toggle',
 								order = 110,
 								desc = L["Allow announcements if you are in combat."],
@@ -271,7 +347,7 @@ local function BaseOptions()
 								end,
 							},
 							noCombat = {
-								name = '|cffFFCC00'..L["Enable out of Combat"]..'|r',
+								name = '|c' .. colors['gold'] .. L["Enable out of Combat"] .. '|r',
 								type = 'toggle',
 								order = 110,
 								desc = L["Allow announcements if you are not in combat."],
@@ -285,7 +361,7 @@ local function BaseOptions()
 								end,
 							},
 							alwaysWhisper = {
-								name = '|cffFFCC00'..L["Always allow Whispers"]..'|r',
+								name = '|c' .. colors['gold'] .. L["Always allow Whispers"] .. '|r',
 								type = 'toggle',
 								order = 110,
 								desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
@@ -340,13 +416,13 @@ local function BaseOptions()
 				order = 10,
 				args = {
 					Target = {
-						name = '|c5500DBBD[TARGET]|r '..L["Tag Options"],
+						name = '|c5500DBBD[TARGET]|r ' .. L["Tag Options"],
 						type = 'group',
 						order = 10,
 						inline = true,
 						args = {
 							removeServerNames = {
-								name = '|cffFFCC00'..L["Remove Server Names"]..'|r',
+								name = '|c' .. colors['gold'] .. L["Remove Server Names"] .. '|r',
 								type = 'toggle',
 								order = 0,
 								desc = L["Removes server name from |c5500DBBD[TARGET]|r tags."],
@@ -360,7 +436,7 @@ local function BaseOptions()
 								end,
 							},
 							AlwaysUseName = {
-								name = '|cffFFCC00'..L["Always uses spell target's name"]..'|r',
+								name = '|c' .. colors['gold'] .. L["Always uses spell target's name"] .. '|r',
 								type = 'toggle',
 								order = 10,
 								desc = L["If selected, |c5500DBBD[TARGET]|r will always use the spell target's name, rather than using the input below for whispers."],
@@ -396,16 +472,16 @@ local function BaseOptions()
 						},
 					},
 					missType = {
-						name = '|c5500DBBD[MISSTYPE]|r '.. L["Tag Options"],
+						name = '|c5500DBBD[MISSTYPE]|r ' .. L["Tag Options"],
 						type = 'group',
 						order = 20,
 						inline = true,
 						args = {
 							useGeneralReplacement = {
-								name = '|cffFFCC00' .. L["Use Single Replacement"] .. '|r',
+								name = '|c' .. colors['gold'] .. L["Use Single Replacement"] .. '|r',
 								type = 'toggle',
 								order = 10,
-								desc = L["If selected, |c5500DBBD[MISSTYPE]|r will always use the General Replacement set below."]..'\n'..L["Does not affect Immune, Immune will always use its own replacement."],
+								desc = L["If selected, |c5500DBBD[MISSTYPE]|r will always use the General Replacement set below."] .. '\n' .. L["Does not affect Immune, Immune will always use its own replacement."],
 								descStyle = 'inline',
 								width = 'full',
 								get = function(info)
@@ -664,7 +740,7 @@ local function BaseOptions()
 						order = 1,
 					},
 					Curseforge_Header = {
-						name = '|cff91BE0F'..L["Curseforge"]..'|r',
+						name = '|c' .. colors['green'] .. L["Curseforge"] .. '|r',
 						type = 'description',
 						order = 50,
 						fontSize = 'large',
@@ -683,7 +759,7 @@ local function BaseOptions()
 						order = 75,
 					},
 					Community_Header = {
-						name = '|cff00B2FA'..L["Discord"]..'|r',
+						name = '|cff00B2FA' .. L["Discord"] .. '|r',
 						type = 'description',
 						order = 100,
 						fontSize = 'large',
@@ -776,14 +852,14 @@ local function GenerateClassOptions()
 			childGroups = 'tab',
 			args = {
 				title = {
-					--name = '|cFF00DBBD'..L["Configuring"]..':|r '..  GetSpellConfigName(selected),
+					--name = '|cFF00DBBD' .. L["Configuring"] .. ':|r ' .. GetSpellConfigName(selected),
 					name = '|c' .. colors['titles'] .. L["Configuring:|r %s"]:format(GetSpellConfigName(selected)),
 					type = 'description',
 					order = 1,
 					fontSize = 'large',
 				},
 				description = {
-					--name = '|cffd1d1d1'..Spells[i].Desc..'|r',
+					--name = '|cffd1d1d1' .. Spells[i].Desc .. '|r',
 					name = '|c' .. colors['descriptions'] .. GetSpellConfigDesc(selected) .. '|r',
 					type = 'description',
 					order = 1.01,
@@ -794,7 +870,6 @@ local function GenerateClassOptions()
 		for i = 1, #configDisplay.messageAreas do
 			local event = configDisplay.messageAreas[i]
 
-
 			optionsTable.args[selected.profile].args[event] = {
 				--name = L[event],
 				name = GetEventName(event),
@@ -802,7 +877,7 @@ local function GenerateClassOptions()
 				order = 100 + GetEventOrder(event),
 				args = {
 					desc = {
-						name = GetEventName(event).. ': |cffFFCC00'.. GetEventDescription(event)..'|r\n',
+						name = GetEventName(event) .. ': |cffFFCC00' .. GetEventDescription(event) .. '|r\n',
 						type = 'description',
 						order = 0,
 						fontSize = 'medium',
@@ -812,6 +887,7 @@ local function GenerateClassOptions()
 						type = 'input',
 						order = 10,
 						width = 'full',
+						 -- TODO Move out and reuse same func in messages.
 						validate = function(info, value)
 							if value == '' then return true end -- Pressed enter without entering anything, we don't need to warn about this.
 							if not string.match(value,'%w') then
@@ -832,25 +908,15 @@ local function GenerateClassOptions()
 			}
 
 			local numMessages = selected.events[event].messages
-
-			local messages = {}
-
-			for _, v in pairs(RSA.db.profile[uClass][k].events[event].messages) do
-				if string.match(v,'%w') then
-					if v ~= '' then
-						table.insert(messages, v)
-					end
-				end
-			end
-
-			for m = 1,#messages do
+			for m = 1,#numMessages do
 				local curMessage = selected.events[event].messages[m]
 				local curNumAsString = tostring(m)
 
 				optionsTable.args[selected.profile].args[event].args[curNumAsString] = {
 					name = curNumAsString,
 					type = 'input',
-					order = 20,
+					order = 200,
+					width = 'full',
 					validate = function(info, value)
 						if value == '' then return true end
 						if not string.match(value,'%w') then
@@ -861,23 +927,17 @@ local function GenerateClassOptions()
 						end
 					end,
 					get = function(info)
-						--RSA.db.profile[uClass][k].events[event].messages
 						if curMessage == '' then
 							table.remove(RSA.db.profile[uClass][k].events[event].messages,m)
-						--if RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] == '' then
-						--	table.remove(RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]],l)
 						end
 						RSA.Options:UpdateOptions()
-						--return RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l]
 						return curMessage
 					end,
 					set = function(info, value)
 						if value == '' then
 							RSA.db.profile[uClass][k].events[event].messages[m] = ''
-							--RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] = ''
 						else
 							RSA.db.profile[uClass][k].events[event].messages[m] = value
-							--RSA.db.profile[ProfileName].Spells[Spells[i].Profile].Messages[Spells[i].Message_Areas[k]][l] = value
 						end
 						RSA.Options:UpdateOptions()
 						RSA:WipeMessageCache()
@@ -886,18 +946,32 @@ local function GenerateClassOptions()
 
 			end
 
+			for c = 1, #channels do
+				optionsTable.args[selected.profile].args[event].args[channels[c]] = {
+					name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
+					type = 'toggle',
+					order = 0.11 + channelOrder[channels[c]],
+					desc = channelDescriptions[channels[c]] or nil,
+					hidden = function()
+						if configDisplay.disabledChannels then
+							if configDisplay.disabledChannels[channels[c]] then
+								return true
+							end
+						end
+					end,
+					get = function(info)
+						return RSA.db.profile[uClass][k].events[event].channels[channels[c]]
+					end,
+					set = function (info, value)
+						RSA.db.profile[uClass][k].events[event].channels[channels[c]] = value
+					end,
+				}
+			end
+
 		end
 	end
 
 	return optionsTable
-end
-
-local function GenerateLibSinkOptions(optionsTable)
-	optionsTable.args.general.args.libSink = RSA:GetSinkAce3OptionsDataTable() -- Add LibSink Options.
-	optionsTable.args.general.args.libSink.args.Channel = nil -- We don't want to display this, and it's broken since 8.2.5 anyway.
-	optionsTable.args.general.args.libSink.name = '|cff00B2FA'..L["Local Message Output Area"]..'|r'
-	optionsTable.args.general.args.libSink.order = 100.6
-	optionsTable.args.general.args.libSink.inline = true
 end
 
 function RSA:RegisterOptions()
@@ -908,7 +982,16 @@ function RSA:RegisterOptions()
 	optionsTable.args.profiles = profiles
 	optionsTable.args.profiles.order = 100
 
-	optionsTable.args.general.args.libSink = GenerateLibSinkOptions(optionsTable)
+	optionsTable.args.general.args.output = RSA:GetSinkAce3OptionsDataTable() -- Add LibSink Options.
+	optionsTable.args.general.args.output.args.Channel = nil -- We don't want to display this, and it's broken since 8.2.5 anyway.
+	optionsTable.args.general.args.output.name = '|c' .. colors['blue'] .. L["Local Message Output Area"] .. '|r'
+	optionsTable.args.general.args.output.order = 100.6
+	optionsTable.args.general.args.output.inline = true
+
+	for k in pairs(optionsTable.args.general.args.output.args) do
+		optionsTable.args.general.args.output.args[k].name = '|c' .. colors['blue'] .. optionsTable.args.general.args.output.args[k].name .. '|r'
+	end
+
 	optionsTable.args.spells.args[uClass] = GenerateClassOptions()
 	LDS:EnhanceDatabase(self.db, 'RSA')
 	LDS:EnhanceOptions(profiles, self.db)
@@ -924,7 +1007,7 @@ function RSA.Options:OnInitialize()
 	RSA:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
 	RSA:RegisterOptions()
-	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',975,740)
+	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',985,750)
 	InterfaceAddOnsList_Update()
 
 	self.db.RegisterCallback(RSA, 'OnProfileChanged', 'RefreshConfig')

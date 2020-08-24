@@ -10,7 +10,7 @@ local paladinData = {
 		spellID = 31850,
 		configDisplay = {
 			messageAreas = {},
-			disabledChannels = {['Whisper'] = true},
+			disabledChannels = {whisper = true},
 			validTags = {'[AMOUNT]'}, -- [SPELL] and [LINK] are implied.
 			--customDesc = 'My custom description',
 			--customName = 'My custom spell name',

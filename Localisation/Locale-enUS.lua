@@ -168,11 +168,7 @@ L["Your version of RSA is out of date. You may want to grab the latest version f
 
 ----- NEW:
 L["%s only while grouped"] = true
-L["Allow announcements in %s only when you are in a group."] = true
-L["/emote"] = true
-L["/say"] = true
-L["/yell"] = true
-L["/whisper"] = true
+L["Allow announcements in /%s only when you are in a group."] = true
 L["Cannot configure while in combat."] = true
 L["Enable in the non-instanced world area when playing with War Mode %s."] = true
 L["turned off"] = true
@@ -184,3 +180,4 @@ L["Allow announcements if you are not in combat."] = true
 L["Announcements"] = true
 L["Channel Options"] = true
 L["Configuring:|r %s"] = true
+L["Local Output"] = true
