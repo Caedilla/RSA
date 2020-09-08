@@ -185,8 +185,8 @@ function RSA.PrepareDataTables(dataTable)
 			end
 		end
 
-		for k2 in pairs(dataTable[k].events) do
-			table.insert(dataTable[k].configDisplay.messageAreas, k2) -- Generate list of events which have a message to allow us to know what config options to supply.
+		for k2,v2 in pairs(dataTable[k].events) do
+			dataTable[k].configDisplay.messageAreas[k2] = k2
 
 			if spellToProfile[dataTable[k].events[k2].uniqueSpellID] then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
 				spellToProfile[dataTable[k].events[k2].uniqueSpellID] = spellToProfile[k].profile

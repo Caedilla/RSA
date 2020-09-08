@@ -8,18 +8,18 @@ local function BuildDefaults()
 		profile = {
 			deathknight = RSA.spellData.deathknight,
 			demonhunter = RSA.spellData.demonhunter,
-			druid = RSA.spellData.druid,
-			hunter = RSA.spellData.hunter,
-			mage = RSA.spellData.mage,
-			monk = RSA.spellData.monk,
+			druid = RSA.spellData.druid or {},
+			hunter = RSA.spellData.hunter or {},
+			mage = RSA.spellData.mage or {},
+			monk = RSA.spellData.monk or {},
 			paladin = RSA.spellData.paladin,
-			priest = RSA.spellData.priest,
-			rogue = RSA.spellData.rogue,
-			shaman = RSA.spellData.shaman,
-			warlock = RSA.spellData.warlock,
-			warrior = RSA.spellData.warrior,
-			racials = RSA.spellData.racials,
-			utilities = RSA.spellData.utilities,
+			priest = RSA.spellData.priest or {},
+			rogue = RSA.spellData.rogue or {},
+			shaman = RSA.spellData.shaman or {},
+			warlock = RSA.spellData.warlock or {},
+			warrior = RSA.spellData.warrior or {},
+			racials = RSA.spellData.racials or {},
+			utilities = RSA.spellData.utilities or {},
 			general = {
 				advancedConfig = false,
 				globalAnnouncements = {
@@ -117,10 +117,7 @@ end
 function RSA:OnInitialize()
 
 	-- TEMP until implemented.
-	RSA.spellData.racials = {}
 	RSA.monitorData.racials = {}
-
-	RSA.spellData.utilities = {}
 	RSA.monitorData.utilities = {}
 
 	RSA.spellData.customCategories = {
@@ -136,7 +133,7 @@ function RSA:OnInitialize()
 
 	local defaults = BuildDefaults()
 
-	self.db = LibStub("AceDB-3.0"):New("RSADB", defaults, uClass) -- Setup Saved Variables
+	self.db = LibStub("AceDB-3.0"):New("RSADB", defaults, UnitClass('player')) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
 	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass])

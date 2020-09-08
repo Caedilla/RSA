@@ -865,6 +865,339 @@ local function GetSpellConfigDesc(selected)
 	end
 end
 
+local function ConfigSpellEnvironments(section, k)
+	local environments = {
+		name = L["Environments"],
+		desc = L["Control the areas of the game this spell is allowed to be announced."],
+		order = 0,
+		type = 'group',
+		disabled = RSA.db.profile[section][k].environments.useGlobal,
+		args = {
+			groupToggles = {
+				name = function()
+					local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
+					return '|c' .. curCol .. L["Channel Options"] .. '|r'
+				end,
+				type = 'group',
+				inline = true,
+				disabled = RSA.db.profile[section][k].environments.useGlobal,
+				order = 1000.2,
+				args = {
+					emote = {
+						name = function()
+							local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["%s only while grouped"]:format(_G['EMOTE']) .. '|r'
+						end,
+						type = 'toggle',
+						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['EMOTE']),
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.groupToggles.emote
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.groupToggles.emote = value
+						end,
+					},
+					say = {
+						name = function()
+							local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["%s only while grouped"]:format(_G['SAY']) .. '|r'
+						end,
+						type = 'toggle',
+						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['SAY']),
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.groupToggles.say
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.groupToggles.say = value
+						end,
+					},
+					yell = {
+						name = function()
+							local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["%s only while grouped"]:format(_G['YELL']) .. '|r'
+						end,
+						type = 'toggle',
+						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['YELL']),
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.groupToggles.yell
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.groupToggles.yell = value
+						end,
+					},
+					whisper = {
+						name = function()
+							local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["%s only while grouped"]:format(_G['WHISPER']) .. '|r'
+						end,
+						type = 'toggle',
+						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['WHISPER']),
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.groupToggles.whisper
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.groupToggles.whisper = value
+						end,
+					},
+				},
+			},
+			enableInPVPAreas = {
+				name = function()
+					local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
+					return '|c' .. curCol .. L["PvP Options"] .. '|r'
+				end,
+				type = 'group',
+				inline = true,
+				disabled = RSA.db.profile[section][k].environments.useGlobal,
+				order = 1000.3,
+				args = {
+					arenas = {
+						name = function()
+							local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Arenas"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 0,
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.arenas
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.arenas = value
+						end,
+					},
+					bgs = {
+						name = function()
+							local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Battlegrounds"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 0,
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.bgs
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.bgs = value
+						end,
+					},
+					warModeWorld = {
+						name = function()
+							local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in War Mode"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 1,
+						desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"]),
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.warModeWorld
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.warModeWorld = value
+						end,
+					},
+				},
+			},
+			enableInPvEAreas = {
+				name = function()
+					local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+					return '|c' .. curCol .. L["PvE Options"] .. '|r'
+				end,
+				type = 'group',
+				inline = true,
+				disabled = RSA.db.profile[section][k].environments.useGlobal,
+				order = 1000.4,
+				args = {
+					dungeons = {
+						name = function()
+							local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Dungeons"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 0,
+						desc = L["Enable in manually formed dungeon groups."],
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.dungeons
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.dungeons = value
+						end,
+					},
+					raids = {
+						name = function()
+							local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Raid Instances"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 0,
+						desc = L["Enable in manually formed raid groups."],
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.raids
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.raids = value
+						end,
+					},
+					lfg = {
+						name = function()
+							local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Group Finder Dungeons"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 1,
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.lfg
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.lfg = value
+						end,
+					},
+					lfr = {
+						name = function()
+							local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Group Finder Raids"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 1,
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.lfr
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.lfr = value
+						end,
+					},
+					scenarios = {
+						name = function()
+							local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Scenarios"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 2,
+						desc = L["Enable in scenario instances."],
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.scenarios
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.scenarios = value
+						end,
+					},
+					nonWarWorld = {
+						name = function()
+							local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in the World"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 2,
+						desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"]),
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.enableIn.nonWarWorld
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.enableIn.nonWarWorld = value
+						end,
+					},
+				},
+			},
+			combatState = {
+				name = function()
+					local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
+					return '|c' .. curCol .. L["Other Options"] .. '|r'
+				end,
+				type = 'group',
+				inline = true,
+				disabled = RSA.db.profile[section][k].environments.useGlobal,
+				order = 1000.5,
+				args = {
+					inCombat = {
+						name = function()
+							local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable in Combat"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 110,
+						desc = L["Allow announcements if you are in combat."],
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.combatState.inCombat
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.combatState.inCombat = value
+						end,
+					},
+					noCombat = {
+						name = function()
+							local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Enable out of Combat"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 110,
+						desc = L["Allow announcements if you are not in combat."],
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.combatState.noCombat
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.combatState.noCombat = value
+						end,
+					},
+					alwaysWhisper = {
+						name = function()
+							local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
+							return '|c' .. curCol .. L["Always allow Whispers"] .. '|r'
+						end,
+						type = 'toggle',
+						order = 110,
+						desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
+						width = 'double',
+						get = function(info)
+							return RSA.db.profile[section][k].environments.alwaysWhisper
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].environments.alwaysWhisper = value
+						end,
+					},
+				},
+			},
+		},
+	}
+
+	return environments
+end
+
+local function ConfigSpellEventChannels(section, configDisplay, c, event, k)
+	local channel = {
+		name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
+		type = 'toggle',
+		order = 0.11 + channelOrder[channels[c]],
+		desc = channelDescriptions[channels[c]] or nil,
+		hidden = function()
+			if configDisplay.disabledChannels then
+				if configDisplay.disabledChannels[channels[c]] then
+					return true
+				end
+			end
+		end,
+		get = function(info)
+			return RSA.db.profile[section][k].events[event].channels[channels[c]]
+		end,
+		set = function(info, value)
+			RSA.db.profile[section][k].events[event].channels[channels[c]] = value
+		end,
+	}
+	return channel
+end
+
 local function GenerateSpellOptions(section)
 	local optionsData = RSA.db.profile[section]
 	local sectionName = section
@@ -930,313 +1263,8 @@ local function GenerateSpellOptions(section)
 					end,
 					set = function(info, value)
 						RSA.db.profile[section][k].environments.useGlobal = value
-						RSA.Options:UpdateOptions()
+						optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
 					end,
-				},
-				environments = {
-					name = L["Environments"],
-					desc = L["Control the areas of the game this spell is allowed to be announced."],
-					order = 0,
-					type = 'group',
-					disabled = RSA.db.profile[section][k].environments.useGlobal,
-					args = {
-						groupToggles = {
-							name = function()
-								local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
-								return '|c' .. curCol .. L["Channel Options"] .. '|r'
-							end,
-							type = 'group',
-							inline = true,
-							disabled = RSA.db.profile[section][k].environments.useGlobal,
-							order = 1000.2,
-							args = {
-								emote = {
-									name = function()
-										local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["%s only while grouped"]:format(_G['EMOTE']) .. '|r'
-									end,
-									type = 'toggle',
-									desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['EMOTE']),
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.groupToggles.emote
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.groupToggles.emote = value
-									end,
-								},
-								say = {
-									name = function()
-										local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["%s only while grouped"]:format(_G['SAY']) .. '|r'
-									end,
-									type = 'toggle',
-									desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['SAY']),
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.groupToggles.say
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.groupToggles.say = value
-									end,
-								},
-								yell = {
-									name = function()
-										local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["%s only while grouped"]:format(_G['YELL']) .. '|r'
-									end,
-									type = 'toggle',
-									desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['YELL']),
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.groupToggles.yell
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.groupToggles.yell = value
-									end,
-								},
-								whisper = {
-									name = function()
-										local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["%s only while grouped"]:format(_G['WHISPER']) .. '|r'
-									end,
-									type = 'toggle',
-									desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['WHISPER']),
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.groupToggles.whisper
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.groupToggles.whisper = value
-									end,
-								},
-							},
-						},
-						enableInPVPAreas = {
-							name = function()
-								local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
-								return '|c' .. curCol .. L["PvP Options"] .. '|r'
-							end,
-							type = 'group',
-							inline = true,
-							disabled = RSA.db.profile[section][k].environments.useGlobal,
-							order = 1000.3,
-							args = {
-								arenas = {
-									name = function()
-										local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Arenas"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 0,
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.arenas
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.arenas = value
-									end,
-								},
-								bgs = {
-									name = function()
-										local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Battlegrounds"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 0,
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.bgs
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.bgs = value
-									end,
-								},
-								warModeWorld = {
-									name = function()
-										local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in War Mode"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 1,
-									desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"]),
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.warModeWorld
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.warModeWorld = value
-									end,
-								},
-							},
-						},
-						enableInPvEAreas = {
-							name = function()
-								local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-								return '|c' .. curCol .. L["PvE Options"] .. '|r'
-							end,
-							type = 'group',
-							inline = true,
-							disabled = RSA.db.profile[section][k].environments.useGlobal,
-							order = 1000.4,
-							args = {
-								dungeons = {
-									name = function()
-										local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Dungeons"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 0,
-									desc = L["Enable in manually formed dungeon groups."],
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.dungeons
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.dungeons = value
-									end,
-								},
-								raids = {
-									name = function()
-										local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Raid Instances"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 0,
-									desc = L["Enable in manually formed raid groups."],
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.raids
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.raids = value
-									end,
-								},
-								lfg = {
-									name = function()
-										local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Group Finder Dungeons"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 1,
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.lfg
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.lfg = value
-									end,
-								},
-								lfr = {
-									name = function()
-										local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Group Finder Raids"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 1,
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.lfr
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.lfr = value
-									end,
-								},
-								scenarios = {
-									name = function()
-										local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Scenarios"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 2,
-									desc = L["Enable in scenario instances."],
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.scenarios
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.scenarios = value
-									end,
-								},
-								nonWarWorld = {
-									name = function()
-										local curCol = GetDisabledColor('green', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in the World"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 2,
-									desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"]),
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.enableIn.nonWarWorld
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.enableIn.nonWarWorld = value
-									end,
-								},
-							},
-						},
-						combatState = {
-							name = function()
-								local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
-								return '|c' .. curCol .. L["Other Options"] .. '|r'
-							end,
-							type = 'group',
-							inline = true,
-							disabled = RSA.db.profile[section][k].environments.useGlobal,
-							order = 1000.5,
-							args = {
-								inCombat = {
-									name = function()
-										local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable in Combat"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 110,
-									desc = L["Allow announcements if you are in combat."],
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.combatState.inCombat
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.combatState.inCombat = value
-									end,
-								},
-								noCombat = {
-									name = function()
-										local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Enable out of Combat"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 110,
-									desc = L["Allow announcements if you are not in combat."],
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.combatState.noCombat
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.combatState.noCombat = value
-									end,
-								},
-								alwaysWhisper = {
-									name = function()
-										local curCol = GetDisabledColor('gold', not RSA.db.profile[section][k].environments.useGlobal)
-										return '|c' .. curCol .. L["Always allow Whispers"] .. '|r'
-									end,
-									type = 'toggle',
-									order = 110,
-									desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
-									width = 'double',
-									get = function(info)
-										return RSA.db.profile[section][k].environments.alwaysWhisper
-									end,
-									set = function(info, value)
-										RSA.db.profile[section][k].environments.alwaysWhisper = value
-									end,
-								},
-							},
-						},
-					},
 				},
 				spellConfig = {
 					-- TODO monitorData and spellData need to be rebuilt when we adjust spell config values. Function also needs to build from profile data.
@@ -1407,6 +1435,7 @@ local function GenerateSpellOptions(section)
 				},
 			},
 		}
+		optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
 
 		for c = 1, #channels do -- Spell Setup -> Disabled Channels
 			optionsTable.args[selected.profile].args.spellConfig.args.disabledChannels.args[channels[c]] = {
@@ -1426,12 +1455,15 @@ local function GenerateSpellOptions(section)
 				set = function(info, value)
 					-- TODO iterate through events to see if TARGET is checked in any of them. If it isn't, then automatically set this true so that it is disabled.
 					RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]] = value
-					RSA.Options:UpdateOptions()
+					for i in pairs(configDisplay.messageAreas) do
+						local event = configDisplay.messageAreas[i]
+						optionsTable.args[selected.profile].args[event].args[channels[c]] = ConfigSpellEventChannels(section, configDisplay, c, event, k)
+					end
 				end,
 			}
 		end
 
-		for e = 1, #configDisplay.messageAreas do -- Spell Setup -> Combat Log Events
+		for e in pairs(configDisplay.messageAreas) do -- Spell Setup -> Combat Log Events
 			local event = configDisplay.messageAreas[e]
 			optionsTable.args[selected.profile].args.spellConfig.args[event] = {
 				name = L["Combat Log Event: |c%s%s|r"]:format(colors['white'],event),
@@ -1462,6 +1494,7 @@ local function GenerateSpellOptions(section)
 						end,
 						set = function(info, value)
 							RSA.db.profile[section][k].events[event].uniqueSpellID = tonumber(value)
+							RSA.RefreshMonitorData(section)
 						end,
 					},
 					tracker = {
@@ -1509,7 +1542,7 @@ local function GenerateSpellOptions(section)
 			end
 		end
 
-		for i = 1, #configDisplay.messageAreas do -- Event config
+		for i in pairs(configDisplay.messageAreas) do -- Event config
 			local event = configDisplay.messageAreas[i]
 			optionsTable.args[selected.profile].args[event] = {
 				name = GetEventName(event),
@@ -1607,25 +1640,7 @@ local function GenerateSpellOptions(section)
 
 			end
 			for c = 1, #channels do
-				optionsTable.args[selected.profile].args[event].args[channels[c]] = {
-					name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
-					type = 'toggle',
-					order = 0.11 + channelOrder[channels[c]],
-					desc = channelDescriptions[channels[c]] or nil,
-					hidden = function()
-						if configDisplay.disabledChannels then
-							if configDisplay.disabledChannels[channels[c]] then
-								return true
-							end
-						end
-					end,
-					get = function(info)
-						return RSA.db.profile[section][k].events[event].channels[channels[c]]
-					end,
-					set = function(info, value)
-						RSA.db.profile[section][k].events[event].channels[channels[c]] = value
-					end,
-				}
+				optionsTable.args[selected.profile].args[event].args[channels[c]] = ConfigSpellEventChannels(section, configDisplay, c, event, k)
 			end
 
 		end
@@ -1653,11 +1668,8 @@ function RSA:RegisterOptions()
 	end
 
 	optionsTable.args.spells.args[uClass] = GenerateSpellOptions(uClass)
-	RSA.RefreshMonitorData(uClass)
 	optionsTable.args.spells.args.racials = GenerateSpellOptions('racials')
-	--RSA.RefreshMonitorData('racials')
 	optionsTable.args.spells.args.utilities = GenerateSpellOptions('utilities')
-	--RSA.RefreshMonitorData('utilities')
 
 	-- TODO Iterate custom categories.
 
@@ -1685,5 +1697,4 @@ end
 
 function RSA:RefreshConfig()
 	RSA.db.profile = self.db.profile
-	RSA.Options:UpdateOptions()
 end
