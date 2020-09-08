@@ -118,8 +118,9 @@ function RSA:OnInitialize()
 
 	-- TEMP until implemented.
 	RSA.spellData.racials = {}
-	RSA.spellData.utilities = {}
 	RSA.monitorData.racials = {}
+
+	RSA.spellData.utilities = {}
 	RSA.monitorData.utilities = {}
 
 	RSA.spellData.customCategories = {
@@ -137,6 +138,8 @@ function RSA:OnInitialize()
 
 	self.db = LibStub("AceDB-3.0"):New("RSADB", defaults, uClass) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
+
+	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass])
 
 	-- project-revision
 	self.db.global.version = 5.0

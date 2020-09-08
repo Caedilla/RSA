@@ -111,8 +111,10 @@ function RSA.PrepareDataTables(dataTable)
 		spellToProfile[dataTable[k].spellID] = dataTable[k].profile
 
 		if dataTable[k].additionalSpellIDs then -- Add the additional spell variants to the list of spellIDs for the monitor to... monitor.
-			for i = 1, #dataTable[k].additionalSpellIDs do
-				spellToProfile[dataTable[k].additionalSpellIDs[i]] = dataTable[k].profile
+			for k2 in pairs(dataTable[k].additionalSpellIDs) do
+				if dataTable[k].additionalSpellIDs[k2] then
+					spellToProfile[k2] = dataTable[k].profile
+				end
 			end
 		else
 			dataTable[k].additionalSpellIDs = {}
@@ -201,5 +203,13 @@ function RSA.PrepareDataTables(dataTable)
 
 	end
 
-	return dataTable, spellToProfile
+	return spellToProfile, dataTable
+end
+
+function RSA.RefreshMonitorData(section)
+	if RSA.monitorData[section] then
+		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
+	else
+		RSA.SendMessage.ChatFrame(L["Unexpected Data Table"])
+	end
 end

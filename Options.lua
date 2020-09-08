@@ -435,26 +435,26 @@ local function BaseOptions()
 				childGroups = 'tab',
 				order = 1,
 				args = {
-					Racials = {
+					racials = {
 						name = L["Racials"],
 						type = 'group',
 						args = {
-							Disabled_Notification = {
-								name = 'Coming Soon',
+							missing = {
+								name = L["Missing options. Please report this!"],
 								type = 'description',
 								order = 0.02,
 								fontSize = 'large',
 							},
 						},
 					},
-					Utilities = {
+					utilities = {
 						name = L["Utilities"],
 						type = 'group',
 						args = {
-							Disabled_Notification = {
-								name = 'Coming Soon',
+							missing = {
+								name = L["Missing options. Please report this!"],
 								type = 'description',
-								order = 0.03,
+								order = 0.02,
 								fontSize = 'large',
 							},
 						},
@@ -879,7 +879,7 @@ local function GenerateSpellOptions(section)
 			type = 'group',
 			args = {
 				missing = {
-					name = "Missing class options.",
+					name = L["Missing options. Please report this!"],
 					type = 'description',
 					order = 0.02,
 					fontSize = 'large',
@@ -1321,6 +1321,7 @@ local function GenerateSpellOptions(section)
 										else
 											RSA.db.profile[section][k].additionalSpellIDs[numVal] = true
 										end
+										RSA.RefreshMonitorData(section)
 									end,
 								},
 								additionalSpellIDs = {
@@ -1357,6 +1358,7 @@ local function GenerateSpellOptions(section)
 									set = function(info, value)
 										if RSA.db.profile[section][k].additionalSpellIDs[tonumber(value)] then
 											RSA.db.profile[section][k].additionalSpellIDs[tonumber(value)] = false
+											RSA.RefreshMonitorData(section)
 										end
 									end,
 								},
@@ -1651,7 +1653,14 @@ function RSA:RegisterOptions()
 	end
 
 	optionsTable.args.spells.args[uClass] = GenerateSpellOptions(uClass)
-	optionsTable.args.spells.args.Racials = GenerateSpellOptions('racials')
+	RSA.RefreshMonitorData(uClass)
+	optionsTable.args.spells.args.racials = GenerateSpellOptions('racials')
+	--RSA.RefreshMonitorData('racials')
+	optionsTable.args.spells.args.utilities = GenerateSpellOptions('utilities')
+	--RSA.RefreshMonitorData('utilities')
+
+	-- TODO Iterate custom categories.
+
 	LDS:EnhanceDatabase(self.db, 'RSA')
 	LDS:EnhanceOptions(profiles, self.db)
 end

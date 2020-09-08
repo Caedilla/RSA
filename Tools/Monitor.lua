@@ -78,6 +78,10 @@ local function HandleEvents()
 
 	local profile = RSA.db.profile
 
+	if RSA.IsMe(sourceFlags) then
+		print(event .. ": " .. tostring(spellID) .. " - " .. spellName)
+	end
+
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 	local missType = ex1
 

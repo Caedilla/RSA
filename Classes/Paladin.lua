@@ -53,4 +53,4 @@ local paladinData = {
 }
 
 
-RSA.spellData.paladin, RSA.monitorData.paladin = RSA.PrepareDataTables(paladinData)
+RSA.monitorData.paladin, RSA.spellData.paladin = RSA.PrepareDataTables(paladinData)
