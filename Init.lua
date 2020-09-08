@@ -21,6 +21,7 @@ local function BuildDefaults()
 			racials = RSA.spellData.racials,
 			utilities = RSA.spellData.utilities,
 			general = {
+				advancedConfig = false,
 				globalAnnouncements = {
 					--useGlobal = true, -- Implement as button in config to toggle this ON for all sub spells.
 					alwaysWhisper = false, -- Allows whispers to always be sent.

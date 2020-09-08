@@ -6,7 +6,7 @@ local template = {
 		comm = false, -- Only required if you want to use the Addon Comms to determine if you are allowed to announce this spell.
 		configDisplay = {
 			messageAreas = {},
-			disabledChannels = {['Whisper'] = true},
+			disabledChannels = {whisper = true},
 			validTags = {'[AMOUNT]'}, -- [SPELL] and [LINK] are implied.
 			customDesc = 'My custom description',
 			customName = 'My custom spell name',

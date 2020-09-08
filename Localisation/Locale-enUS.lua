@@ -191,3 +191,6 @@ L["Configure each spell's announcement settings, such as what channels to announ
 L["Use Global Environment Settings"] = true
 L["Use the global settings to determine where it can be announced."] = true
 L["When disabled, use the Environments tab below to configure where this spell is allowed to announce. Affects all events this spell can announce."] = true
+L["Spell ID"] = true
+L["Spell Setup"] = true
+L["Configure how this spell functions."] = true

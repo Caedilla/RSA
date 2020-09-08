@@ -1229,11 +1229,67 @@ local function GenerateSpellOptions(section)
 						},
 					},
 				},
+				spellConfig = {
+					-- TODO monitorData and spellData need to be rebuilt when we adjust spell config values. Function also needs to build from profile data.
+					name = L["Spell Setup"],
+					desc = L["Configure how this spell functions."],
+					order = 1000,
+					type = 'group',
+					-- TODO Option to toggle advancedConfig
+					--hidden = not RSA.db.profile.general.advancedConfig,
+					args = {
+						spellID = {
+							name = L["Spell ID"],
+							order = 0,
+							type = 'input',
+							pattern = '%d',
+							get = function(info)
+								return tostring(RSA.db.profile[section][k].spellID)
+							end,
+							set = function (info, value)
+								RSA.db.profile[section][k].spellID = tonumber(value)
+							end,
+						},
+						comm = {
+							name = L["Group Announcement"],
+							desc = L["Prevents multiple RSA users from announcing this spell."],
+							order = 0,
+							type = 'toggle',
+							get = function(info)
+								return tostring(RSA.db.profile[section][k].comm)
+							end,
+							set = function (info, value)
+								RSA.db.profile[section][k].comm = tonumber(value)
+							end,
+						},
+						disabledChannels = {
+							name = L["Disabled Channels"],
+							order = 0,
+							inline = true,
+							type = 'group',
+							args = {
+
+							},
+						},
+					},
+				},
 			},
 		}
 
-
-		-- TODO implement environments for each spell, essentially a mirror of global options.
+		for c = 1, #channels do
+			optionsTable.args[selected.profile].args.spellConfig.args.disabledChannels.args[channels[c]] = {
+				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
+				type = 'toggle',
+				order = 0.11 + channelOrder[channels[c]],
+				desc = L["Prevents you from trying to send announcements to this channel."],
+				get = function(info)
+					return RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]]
+				end,
+				set = function (info, value)
+					RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]] = value
+				end,
+			}
+		end
 
 		for i = 1, #configDisplay.messageAreas do
 			local event = configDisplay.messageAreas[i]
