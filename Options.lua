@@ -839,7 +839,7 @@ end
 
 local function GetSpellConfigName(selected)
 	local configDisplay = selected.configDisplay
-	if configDisplay.customName then
+	if configDisplay.customName and configDisplay.customName ~= '' then
 		return configDisplay.customName
 	else
 		return GetSpellInfo(selected.spellID)
@@ -848,7 +848,7 @@ end
 
 local function GetSpellConfigDesc(selected)
 	local configDisplay = selected.configDisplay
-	if configDisplay.customDesc then
+	if configDisplay.customDesc and configDisplay.customDesc ~= '' then
 		return configDisplay.customDesc
 	else
 		return GetSpellDescription(selected.spellID)
@@ -1248,6 +1248,7 @@ local function GenerateSpellOptions(section)
 							end,
 							set = function (info, value)
 								RSA.db.profile[section][k].spellID = tonumber(value)
+								RSA.Options:UpdateOptions()
 							end,
 						},
 						comm = {
@@ -1256,10 +1257,10 @@ local function GenerateSpellOptions(section)
 							order = 0,
 							type = 'toggle',
 							get = function(info)
-								return tostring(RSA.db.profile[section][k].comm)
+								return RSA.db.profile[section][k].comm
 							end,
 							set = function (info, value)
-								RSA.db.profile[section][k].comm = tonumber(value)
+								RSA.db.profile[section][k].comm = value
 							end,
 						},
 						disabledChannels = {
@@ -1267,16 +1268,40 @@ local function GenerateSpellOptions(section)
 							order = 0,
 							inline = true,
 							type = 'group',
-							args = {
-
-							},
+							args = {},
+						},
+						customName = {
+							name = L["Custom Name"],
+							desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+							order = 0,
+							type = 'input',
+							get = function(info)
+								return RSA.db.profile[section][k].configDisplay.customName
+							end,
+							set = function (info, value)
+								RSA.db.profile[section][k].configDisplay.customName = value
+								RSA.Options:UpdateOptions()
+							end,
+						},
+						customDesc = {
+							name = L["Custom Description"],
+							desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+							order = 0,
+							type = 'input',
+							get = function(info)
+								return RSA.db.profile[section][k].configDisplay.customDesc
+							end,
+							set = function (info, value)
+								RSA.db.profile[section][k].configDisplay.customDesc = value
+								RSA.Options:UpdateOptions()
+							end,
 						},
 					},
 				},
 			},
 		}
 
-		for c = 1, #channels do
+		for c = 1, #channels do -- disabledChannels
 			optionsTable.args[selected.profile].args.spellConfig.args.disabledChannels.args[channels[c]] = {
 				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
 				type = 'toggle',
@@ -1287,6 +1312,7 @@ local function GenerateSpellOptions(section)
 				end,
 				set = function (info, value)
 					RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]] = value
+					RSA.Options:UpdateOptions()
 				end,
 			}
 		end
