@@ -187,13 +187,13 @@ local function HandleEvents()
 		if not name then
 			name = GetSpellInfo(extraSpellID)
 			cacheTagSpellName[extraSpellID] = name
-			replacements[tagReplacements.EXTRA] = name
+			replacements['[EXTRA]'] = name
 		end
 		local link = cacheTagSpellLink[extraSpellID]
 		if not link then
 			link = GetSpellLink(extraSpellID)
 			cacheTagSpellLink[extraSpellID] = link
-			replacements[tagReplacements.EXTRA] = link
+			replacements['[EXTRALINK]'] = link
 		end
 	end
 

@@ -5,6 +5,14 @@ local localisedClass, uClass = UnitClass('player')
 uClass = string.lower(uClass)
 RSA.Options = RSA:NewModule('Options')
 
+local tags = {
+	"TARGET",
+	"SOURCE",
+	"MISSTYPE",
+	"AMOUNT",
+	"EXTRA",
+}
+
 local colors = {
 	['titles'] = 'FF00DBBD',
 	['descriptions'] = 'FFD1D1D1',
@@ -190,7 +198,7 @@ local function BaseOptions()
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.emote
 								end,
-								set = function (info, value)
+								set = function(info, value)
 									RSA.db.profile.general.globalAnnouncements.groupToggles.emote = value
 								end,
 							},
@@ -202,7 +210,7 @@ local function BaseOptions()
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.say
 								end,
-								set = function (info, value)
+								set = function(info, value)
 									RSA.db.profile.general.globalAnnouncements.groupToggles.say = value
 								end,
 							},
@@ -214,7 +222,7 @@ local function BaseOptions()
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.yell
 								end,
-								set = function (info, value)
+								set = function(info, value)
 									RSA.db.profile.general.globalAnnouncements.groupToggles.yell = value
 								end,
 							},
@@ -226,7 +234,7 @@ local function BaseOptions()
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.whisper
 								end,
-								set = function (info, value)
+								set = function(info, value)
 									RSA.db.profile.general.globalAnnouncements.groupToggles.whisper = value
 								end,
 							},
@@ -919,7 +927,7 @@ local function GenerateSpellOptions(section)
 					get = function(info)
 						return RSA.db.profile[section][k].environments.useGlobal
 					end,
-					set = function (info, value)
+					set = function(info, value)
 						RSA.db.profile[section][k].environments.useGlobal = value
 						RSA.Options:UpdateOptions()
 					end,
@@ -952,7 +960,7 @@ local function GenerateSpellOptions(section)
 									get = function(info)
 										return RSA.db.profile[section][k].environments.groupToggles.emote
 									end,
-									set = function (info, value)
+									set = function(info, value)
 										RSA.db.profile[section][k].environments.groupToggles.emote = value
 									end,
 								},
@@ -967,7 +975,7 @@ local function GenerateSpellOptions(section)
 									get = function(info)
 										return RSA.db.profile[section][k].environments.groupToggles.say
 									end,
-									set = function (info, value)
+									set = function(info, value)
 										RSA.db.profile[section][k].environments.groupToggles.say = value
 									end,
 								},
@@ -982,7 +990,7 @@ local function GenerateSpellOptions(section)
 									get = function(info)
 										return RSA.db.profile[section][k].environments.groupToggles.yell
 									end,
-									set = function (info, value)
+									set = function(info, value)
 										RSA.db.profile[section][k].environments.groupToggles.yell = value
 									end,
 								},
@@ -997,7 +1005,7 @@ local function GenerateSpellOptions(section)
 									get = function(info)
 										return RSA.db.profile[section][k].environments.groupToggles.whisper
 									end,
-									set = function (info, value)
+									set = function(info, value)
 										RSA.db.profile[section][k].environments.groupToggles.whisper = value
 									end,
 								},
@@ -1246,7 +1254,7 @@ local function GenerateSpellOptions(section)
 							get = function(info)
 								return tostring(RSA.db.profile[section][k].spellID)
 							end,
-							set = function (info, value)
+							set = function(info, value)
 								RSA.db.profile[section][k].spellID = tonumber(value)
 								RSA.Options:UpdateOptions()
 							end,
@@ -1259,7 +1267,7 @@ local function GenerateSpellOptions(section)
 							get = function(info)
 								return RSA.db.profile[section][k].comm
 							end,
-							set = function (info, value)
+							set = function(info, value)
 								RSA.db.profile[section][k].comm = value
 							end,
 						},
@@ -1278,7 +1286,7 @@ local function GenerateSpellOptions(section)
 							get = function(info)
 								return RSA.db.profile[section][k].configDisplay.customName
 							end,
-							set = function (info, value)
+							set = function(info, value)
 								RSA.db.profile[section][k].configDisplay.customName = value
 								RSA.Options:UpdateOptions()
 							end,
@@ -1291,10 +1299,17 @@ local function GenerateSpellOptions(section)
 							get = function(info)
 								return RSA.db.profile[section][k].configDisplay.customDesc
 							end,
-							set = function (info, value)
+							set = function(info, value)
 								RSA.db.profile[section][k].configDisplay.customDesc = value
 								RSA.Options:UpdateOptions()
 							end,
+						},
+						events = {
+							name = L["Events"],
+							order = 0,
+							inline = true,
+							type = 'group',
+							args = {},
 						},
 					},
 				},
@@ -1306,20 +1321,106 @@ local function GenerateSpellOptions(section)
 				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
 				type = 'toggle',
 				order = 0.11 + channelOrder[channels[c]],
-				desc = L["Prevents you from trying to send announcements to this channel."],
+				desc = function()
+					if channels[c] == 'whisper' then
+						return L["Prevents you from trying to send announcements to this channel."] .. '\n' .. L["This will not work without a valid target so should be disabled for all self-cast or non-targetted abilities."]
+					else
+					return L["Prevents you from trying to send announcements to this channel."]
+					end
+				end,
 				get = function(info)
 					return RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]]
 				end,
-				set = function (info, value)
+				set = function(info, value)
+					-- TODO iterate through events to see if TARGET is checked in any of them. If it isn't, then automatically set this true so that it is disabled.
 					RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]] = value
 					RSA.Options:UpdateOptions()
 				end,
 			}
 		end
 
+		for e = 1, #configDisplay.messageAreas do
+			local event = configDisplay.messageAreas[e]
+
+			optionsTable.args[selected.profile].args.spellConfig.args.events.args[event] = {
+				name = event,
+				order = 0,
+				type = 'group',
+				args = {
+					spellID = {
+						name = L["Event unique spell ID"],
+						desc = L["If this event uses a different spell ID to the primary one, enter it here."],
+						order = 0,
+						type = 'input',
+						validate = function(info, value)
+							if value == '' then return true end
+							if not string.match(value, '%d') then
+								return L["You must enter a valid Spell ID."]
+							end
+							if not GetSpellInfo(value) then
+								return L["You must enter a valid Spell ID."]
+							end
+							return true
+						end,
+						get = function(info)
+							if not RSA.db.profile[section][k].events[event].uniqueSpellID then
+								return ''
+							end
+							return tostring(RSA.db.profile[section][k].events[event].uniqueSpellID)
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].events[event].uniqueSpellID = tonumber(value)
+						end,
+					},
+					tracker = {
+						name = L["Prevent duplicate announcements"],
+						desc = L["If this spell can trigger multiple events at the same time, such as if it is an AoE spell, you can start the event tracker when you trigger the spell, and set it to end on all events where you want to prevent subsequent announcements."],
+						order = 0,
+						type = 'select',
+						values = {
+							[-1] = L["No tracking required"],
+							[2] = L["Start event tracking"],
+							[1] = L["Prevent subsequent"],
+						},
+						get = function(info)
+							if not RSA.db.profile[section][k].events[event].tracker then
+								return -1
+							end
+							return RSA.db.profile[section][k].events[event].tracker
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].events[event].tracker = value
+						end,
+					},
+					tags = {
+						name = L["Tags"],
+						order = 0,
+						type = 'group',
+						inline = true,
+						args = {
+						},
+					},
+				},
+			}
+
+			for t = 1, #tags do
+				optionsTable.args[selected.profile].args.spellConfig.args.events.args[event].args.tags.args[tags[t]] = {
+					name = '|c' .. colors['titles'] .. "[" .. tags[t] .."]|r",
+					order = 0,
+					type = 'toggle',
+					get = function(info)
+						return RSA.db.profile[section][k].events[event].tags[tags[t]]
+					end,
+					set = function(info, value)
+						RSA.db.profile[section][k].events[event].tags[tags[t]] = value
+					end,
+				}
+			end
+		end
+
+
 		for i = 1, #configDisplay.messageAreas do
 			local event = configDisplay.messageAreas[i]
-
 			optionsTable.args[selected.profile].args[event] = {
 				name = GetEventName(event),
 				type = 'group',
@@ -1415,7 +1516,6 @@ local function GenerateSpellOptions(section)
 				}
 
 			end
-
 			for c = 1, #channels do
 				optionsTable.args[selected.profile].args[event].args[channels[c]] = {
 					name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
@@ -1432,7 +1532,7 @@ local function GenerateSpellOptions(section)
 					get = function(info)
 						return RSA.db.profile[section][k].events[event].channels[channels[c]]
 					end,
-					set = function (info, value)
+					set = function(info, value)
 						RSA.db.profile[section][k].events[event].channels[channels[c]] = value
 					end,
 				}
