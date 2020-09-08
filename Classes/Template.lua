@@ -3,6 +3,7 @@ local template = {
 	['fullOptions'] = {
 		profile = 'myProfileName',
 		spellID = 31850,
+		additionalSpellIDs = {[1044] = true,}, -- key, value list of any alternate variants of this spell, like if you want to use one announcement for all mage portal spells.
 		comm = false, -- Only required if you want to use the Addon Comms to determine if you are allowed to announce this spell.
 		configDisplay = {
 			messageAreas = {},

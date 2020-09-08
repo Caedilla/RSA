@@ -33,7 +33,7 @@ local paladinData = {
 	['blessingOfFreedom'] = {
 		profile = 'blessingOfFreedom',
 		spellID = 305395,
-		additionalSpellIDs = {1044},
+		additionalSpellIDs = {[1044] = true,},
 		configDisplay = {
 			messageAreas = {},
 			disabledChannels = {},

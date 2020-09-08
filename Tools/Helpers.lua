@@ -114,6 +114,8 @@ function RSA.PrepareDataTables(dataTable)
 			for i = 1, #dataTable[k].additionalSpellIDs do
 				spellToProfile[dataTable[k].additionalSpellIDs[i]] = dataTable[k].profile
 			end
+		else
+			dataTable[k].additionalSpellIDs = {}
 		end
 
 		if not dataTable[k].environments then
