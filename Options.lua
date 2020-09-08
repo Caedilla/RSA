@@ -26,6 +26,7 @@ local colors = {
 	['greenDisabled'] = 'FF5C702D',
 	['goldDisabled'] = 'FFBF9040',
 	['blueDisabled'] = 'FF3B7EB1',
+	['white'] = 'FFFFFFFF',
 }
 
 -- TODO fill in the rest of the event types.
@@ -171,6 +172,7 @@ local function BaseOptions()
 		type = 'group',
 		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision .. '|r',
 		order = 0,
+		childGroups = 'tab',
 		args = {
 			general = {
 				name = L["Environments"],
@@ -907,7 +909,6 @@ local function GenerateSpellOptions(section)
 			childGroups = 'tab',
 			args = {
 				title = {
-					--name = '|cFF00DBBD' .. L["Configuring"] .. ':|r ' .. GetSpellConfigName(selected),
 					name = '|c' .. colors['titles'] .. L["Configuring:|r %s"]:format(GetSpellConfigName(selected)),
 					type = 'description',
 					order = 1,
@@ -1246,99 +1247,152 @@ local function GenerateSpellOptions(section)
 					-- TODO Option to toggle advancedConfig
 					--hidden = not RSA.db.profile.general.advancedConfig,
 					args = {
-						spellID = {
-							name = L["Spell ID"],
+						spellIDs = {
+							name = L["Basic Spell Settings"],
 							order = 0,
-							type = 'input',
-							validate = function(info, value)
-								if value == '' then return true end
-								if not string.match(value, '%d') then
-									return L["You must enter a valid Spell ID."]
-								end
-								if not GetSpellInfo(value) then
-									return L["You must enter a valid Spell ID."]
-								end
-								return true
-							end,
-							get = function(info)
-								return tostring(RSA.db.profile[section][k].spellID)
-							end,
-							set = function(info, value)
-								RSA.db.profile[section][k].spellID = tonumber(value)
-								RSA.Options:UpdateOptions()
-							end,
-						},
-						additionalSpellIDs = {
-							name = L["Additional Spell IDs"],
-							desc = L["If this spell has multiple spell IDs, you can enter them here. Spells can often have multiple valid spell IDs if they are modified by a talent. This may also be useful for spells of the same type such as mage portal spells."],
-							order = 0,
-							type = 'select',
-							--disabled = true,
-							--values = RSA.db.profile[section][k].additionalSpellIDs,
-							values = function()
-								local val = {}
-								for k2,v2 in pairs(RSA.db.profile[section][k].additionalSpellIDs) do
-									if RSA.db.profile[section][k].additionalSpellIDs[k2] then
-										table.insert(val,RSA.db.profile[section][k].additionalSpellIDs[k2])
-									end
-								end
-								return val
-							end,
-							get = function(info)
-								if not RSA.db.profile[section][k].additionalSpellIDs then
-									return ''
-								end
-								local values = RSA.db.profile[section][k].additionalSpellIDs
-								for i = 1, #values do
-									print(values[i])
-									if values[i] then
-										if not string.match(values[i], '%d') then
-											table.remove(values, i)
+							type = 'group',
+							inline = true,
+							args = {
+								spellID = {
+									name = L["Spell ID"],
+									order = 0.1,
+									type = 'input',
+									validate = function(info, value)
+										if not string.match(value, '%d') then
+											return L["You must enter a valid Spell ID."]
 										end
-									end
-								end
-								return table.concat(values, ',')
-							end,
-						},
-						addAdditionalSpellID = {
-							name = L["Add or Remove Additional Spell ID"],
-							desc = L["Enter a Spell ID to add it to the list. If the spell ID already exists, you will instead remove it."],
-							order = 0,
-							type = 'input',
-							validate = function(info, value)
-								if value == '' then return true end
-								if not string.match(value, '%d') then
-									return L["You must enter a valid Spell ID."]
-								end
-								if not GetSpellInfo(value) then
-									return L["You must enter a valid Spell ID."]
-								end
-								return true
-							end,
-							set = function(info, value)
-								local insert = true
-								for i = 1, #RSA.db.profile[section][k].additionalSpellIDs do
-									if tonumber(RSA.db.profile[section][k].additionalSpellIDs[i]) == tonumber(value) then
-										RSA.db.profile[section][k].additionalSpellIDs[i] = ''
-										insert = false
-									end
-								end
-								if value ~= '' and insert then
-									table.insert(RSA.db.profile[section][k].additionalSpellIDs, tonumber(value))
-								end
-							end,
-						},
-						comm = {
-							name = L["Group Announcement"],
-							desc = L["Prevents multiple RSA users from announcing this spell."],
-							order = 0,
-							type = 'toggle',
-							get = function(info)
-								return RSA.db.profile[section][k].comm
-							end,
-							set = function(info, value)
-								RSA.db.profile[section][k].comm = value
-							end,
+										if not GetSpellInfo(value) then
+											return L["You must enter a valid Spell ID."]
+										end
+										return true
+									end,
+									get = function(info)
+										return tostring(RSA.db.profile[section][k].spellID)
+									end,
+									set = function(info, value)
+										RSA.db.profile[section][k].spellID = tonumber(value)
+										RSA.Options:UpdateOptions()
+									end,
+								},
+								comm = {
+									name = L["Group Announcement"],
+									desc = L["Prevents multiple RSA users from announcing this spell."],
+									order = 0.2,
+									type = 'toggle',
+									get = function(info)
+										return RSA.db.profile[section][k].comm
+									end,
+									set = function(info, value)
+										RSA.db.profile[section][k].comm = value
+									end,
+								},
+								commSpacer = {
+									name = "",
+									type = 'description',
+									order = 0.3,
+									width = 'full',
+								},
+								addAdditionalSpellID = {
+									name = L["Additional Spell IDs"],
+									desc = L["If this spell has multiple spell IDs, such as if you are trying to announce different Portals, or if it is modified by a talent which changes its Spell ID, you can enter those additional IDs here. Entering an ID already in the list will prompt you to remove it."],
+									order = 1.1,
+									type = 'input',
+									validate = function(info, value)
+										if value == '' then return true end
+										if not string.match(value, '%d') then
+											return L["You must enter a valid Spell ID."]
+										end
+										if not GetSpellInfo(value) then
+											return L["You must enter a valid Spell ID."]
+										end
+										return true
+									end,
+									confirm = function(info, value)
+										if RSA.db.profile[section][k].additionalSpellIDs[tonumber(value)] then
+											return L["Are you sure you want to remove this spell ID?"]
+										else
+											return false
+										end
+									end,
+									set = function(info, value)
+										local numVal = tonumber(value)
+										if RSA.db.profile[section][k].additionalSpellIDs[numVal] then
+											RSA.db.profile[section][k].additionalSpellIDs[numVal] = false
+										else
+											RSA.db.profile[section][k].additionalSpellIDs[numVal] = true
+										end
+									end,
+								},
+								additionalSpellIDs = {
+									name = L["List of Additional Spell IDs"],
+									desc = L["You can click a spell in this list to remove it."],
+									order = 1.2,
+									type = 'select',
+									width = 1.5,
+									confirm = function(info, value)
+										if RSA.db.profile[section][k].additionalSpellIDs[tonumber(value)] then
+											return L["Are you sure you want to remove this spell ID?"]
+										else
+											return false
+										end
+									end,
+									hidden = function()
+										if not RSA.db.profile[section][k].additionalSpellIDs then return true end
+										for k2 in pairs(RSA.db.profile[section][k].additionalSpellIDs) do
+											if RSA.db.profile[section][k].additionalSpellIDs[k2] == true then
+												return false
+											end
+										end
+										return true
+									end,
+									values = function()
+										local val = {}
+										for k2 in pairs(RSA.db.profile[section][k].additionalSpellIDs) do
+											if RSA.db.profile[section][k].additionalSpellIDs[k2] then
+												val[k2] = "(" .. k2 .. ") " .. GetSpellInfo(k2)
+											end
+										end
+										return val
+									end,
+									set = function(info, value)
+										if RSA.db.profile[section][k].additionalSpellIDs[tonumber(value)] then
+											RSA.db.profile[section][k].additionalSpellIDs[tonumber(value)] = false
+										end
+									end,
+								},
+								additionalSpellIDsSpacer = {
+									name = "",
+									type = 'description',
+									order = 1.3,
+									width = 'full',
+								},
+								customName = {
+									name = L["Custom Name"],
+									desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+									order = 2.1,
+									type = 'input',
+									get = function(info)
+										return RSA.db.profile[section][k].configDisplay.customName
+									end,
+									set = function(info, value)
+										RSA.db.profile[section][k].configDisplay.customName = value
+										RSA.Options:UpdateOptions()
+									end,
+								},
+								customDesc = {
+									name = L["Custom Description"],
+									desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+									order = 2.2,
+									type = 'input',
+									get = function(info)
+										return RSA.db.profile[section][k].configDisplay.customDesc
+									end,
+									set = function(info, value)
+										RSA.db.profile[section][k].configDisplay.customDesc = value
+										RSA.Options:UpdateOptions()
+									end,
+								},
+							},
 						},
 						disabledChannels = {
 							name = L["Disabled Channels"],
@@ -1347,38 +1401,12 @@ local function GenerateSpellOptions(section)
 							type = 'group',
 							args = {},
 						},
-						customName = {
-							name = L["Custom Name"],
-							desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
-							order = 0,
-							type = 'input',
-							get = function(info)
-								return RSA.db.profile[section][k].configDisplay.customName
-							end,
-							set = function(info, value)
-								RSA.db.profile[section][k].configDisplay.customName = value
-								RSA.Options:UpdateOptions()
-							end,
-						},
-						customDesc = {
-							name = L["Custom Description"],
-							desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
-							order = 0,
-							type = 'input',
-							get = function(info)
-								return RSA.db.profile[section][k].configDisplay.customDesc
-							end,
-							set = function(info, value)
-								RSA.db.profile[section][k].configDisplay.customDesc = value
-								RSA.Options:UpdateOptions()
-							end,
-						},
 					},
 				},
 			},
 		}
 
-		for c = 1, #channels do -- disabledChannels
+		for c = 1, #channels do -- Spell Setup -> Disabled Channels
 			optionsTable.args[selected.profile].args.spellConfig.args.disabledChannels.args[channels[c]] = {
 				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
 				type = 'toggle',
@@ -1401,11 +1429,10 @@ local function GenerateSpellOptions(section)
 			}
 		end
 
-		for e = 1, #configDisplay.messageAreas do
+		for e = 1, #configDisplay.messageAreas do -- Spell Setup -> Combat Log Events
 			local event = configDisplay.messageAreas[e]
-
 			optionsTable.args[selected.profile].args.spellConfig.args[event] = {
-				name = L["Combat Log Event: |c%s%s|r"]:format(colors['titles'],event),
+				name = L["Combat Log Event: |c%s%s|r"]:format(colors['white'],event),
 				order = 100,
 				type = 'group',
 				inline = true,
@@ -1465,7 +1492,6 @@ local function GenerateSpellOptions(section)
 					},
 				},
 			}
-
 			for t = 1, #tags do
 				optionsTable.args[selected.profile].args.spellConfig.args[event].args.tags.args[tags[t]] = {
 					name = '|c' .. colors['titles'] .. "[" .. tags[t] .."]|r",
@@ -1481,8 +1507,7 @@ local function GenerateSpellOptions(section)
 			end
 		end
 
-
-		for i = 1, #configDisplay.messageAreas do
+		for i = 1, #configDisplay.messageAreas do -- Event config
 			local event = configDisplay.messageAreas[i]
 			optionsTable.args[selected.profile].args[event] = {
 				name = GetEventName(event),

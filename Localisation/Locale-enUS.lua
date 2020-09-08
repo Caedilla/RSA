@@ -1,4 +1,4 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "enUS", true)
+local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "enUS", true, true)
 if not L then return end
 L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = true
 L[" is Missing!"] = true
