@@ -78,7 +78,7 @@ local function HandleEvents()
 
 	local profile = RSA.db.profile
 
-	if RSA.IsMe(sourceFlags) then
+	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
 		print(event .. ": " .. tostring(spellID) .. " - " .. spellName)
 	end
 
@@ -148,13 +148,13 @@ local function HandleEvents()
 	local tagSpellName = cacheTagSpellName[spellID]
 	if not tagSpellName then
 		tagSpellName = GetSpellInfo(spellID)
-		cacheTagSpellName = tagSpellName
+		cacheTagSpellName[spellID] = tagSpellName
 	end
 
 	local tagSpellLink = cacheTagSpellLink[spellID]
 	if not tagSpellLink then
 		tagSpellLink = GetSpellLink(spellID)
-		cacheTagSpellLink = tagSpellLink
+		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
 	if currentSpellData.uniqueSpellID then -- Replace cached data with 'real' spell name/link to announce the expected spell.
@@ -183,6 +183,7 @@ local function HandleEvents()
 	replacements['[SPELL]'] = tagSpellName
 	replacements['[LINK]'] = tagSpellLink
 	local tagReplacements = currentSpellData.tags or {}
+	-- TODO: Add fallbacks in case people try to enable tags where there is no appropriate replacement.
 	if tagReplacements.TARGET then replacements['[TARGET]'] = destName end
 	if tagReplacements.SOURCE then replacements['[TARGET]'] = sourceName end
 	if tagReplacements.AMOUNT then replacements['[AMOUNT]'] = ex1 end

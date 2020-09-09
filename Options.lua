@@ -42,7 +42,6 @@ local eventOrder = {
 	["SPELL_CAST_SUCCESS"] = 3,
 	["SPELL_AURA_APPLIED"] = 1,
 	["SPELL_AURA_REMOVED"] = 14,
-
 }
 
 local eventDescriptions = {
@@ -77,7 +76,7 @@ local channels = {
 }
 
 local channelStrings = {
-	['smartGroup'] = 'Smart Group Channel',
+	['smartGroup'] = 'Smart Group',
 	['personal'] = 'Local Output',
 }
 
@@ -117,7 +116,6 @@ local channelDescriptions = {
 	['whisper'] = L["|cffFFCC00Whispers|r the target of the spell."],
 }
 
-
 local function GetChannelColor(channel)
 	if channelColor[channel] then
 		return channelColor[channel]
@@ -137,7 +135,7 @@ end
 local function GetChannelName(channel)
 	local globalString = _G[string.upper(channel)] or nil
 	if channelStrings[channel] then
-		return channelStrings[channel]
+		return L[channelStrings[channel]]
 	elseif globalString then
 		return globalString
 	end
@@ -196,7 +194,7 @@ local function BaseOptions()
 								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['EMOTE']) .. '|r',
 								type = 'toggle',
 								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['EMOTE']),
-								width = 'double',
+								width = 1.15,
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.emote
 								end,
@@ -208,7 +206,7 @@ local function BaseOptions()
 								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['SAY']) .. '|r',
 								type = 'toggle',
 								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['SAY']),
-								width = 'double',
+								width = 1.15,
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.say
 								end,
@@ -220,7 +218,7 @@ local function BaseOptions()
 								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['YELL']) .. '|r',
 								type = 'toggle',
 								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['YELL']),
-								width = 'double',
+								width = 1.15,
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.yell
 								end,
@@ -232,7 +230,7 @@ local function BaseOptions()
 								name = '|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['WHISPER']) .. '|r',
 								type = 'toggle',
 								desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['WHISPER']),
-								width = 'double',
+								width = 1.15,
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.groupToggles.whisper
 								end,
@@ -252,7 +250,7 @@ local function BaseOptions()
 								name = '|c' .. colors['orange'] .. L["Enable in Arenas"] .. '|r',
 								type = 'toggle',
 								order = 0,
-								width = 'double',
+								width = 1,
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.arenas
 								end,
@@ -264,7 +262,7 @@ local function BaseOptions()
 								name = '|c' .. colors['orange'] .. L["Enable in Battlegrounds"] .. '|r',
 								type = 'toggle',
 								order = 0,
-								width = 'double',
+								width = 1.1,
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.bgs
 								end,
@@ -438,6 +436,7 @@ local function BaseOptions()
 					racials = {
 						name = L["Racials"],
 						type = 'group',
+						childGroups = 'select',
 						args = {
 							missing = {
 								name = L["Missing options. Please report this!"],
@@ -450,6 +449,7 @@ local function BaseOptions()
 					utilities = {
 						name = L["Utilities"],
 						type = 'group',
+						childGroups = 'select',
 						args = {
 							missing = {
 								name = L["Missing options. Please report this!"],
@@ -869,9 +869,8 @@ local function ConfigSpellEnvironments(section, k)
 	local environments = {
 		name = L["Environments"],
 		desc = L["Control the areas of the game this spell is allowed to be announced."],
-		order = 0,
+		order = 90,
 		type = 'group',
-		disabled = RSA.db.profile[section][k].environments.useGlobal,
 		args = {
 			groupToggles = {
 				name = function()
@@ -890,7 +889,7 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['EMOTE']),
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.groupToggles.emote
 						end,
@@ -905,7 +904,7 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['SAY']),
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.groupToggles.say
 						end,
@@ -920,7 +919,7 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['YELL']),
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.groupToggles.yell
 						end,
@@ -935,7 +934,7 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						desc = L["Allow announcements in /%s only when you are in a group."]:format(_G['WHISPER']),
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.groupToggles.whisper
 						end,
@@ -962,7 +961,7 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						order = 0,
-						width = 'double',
+						width = 1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.arenas
 						end,
@@ -977,7 +976,7 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						order = 0,
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.bgs
 						end,
@@ -993,7 +992,7 @@ local function ConfigSpellEnvironments(section, k)
 						type = 'toggle',
 						order = 1,
 						desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"]),
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.warModeWorld
 						end,
@@ -1021,7 +1020,7 @@ local function ConfigSpellEnvironments(section, k)
 						type = 'toggle',
 						order = 0,
 						desc = L["Enable in manually formed dungeon groups."],
-						width = 'double',
+						width = 0.9,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.dungeons
 						end,
@@ -1035,9 +1034,9 @@ local function ConfigSpellEnvironments(section, k)
 							return '|c' .. curCol .. L["Enable in Raid Instances"] .. '|r'
 						end,
 						type = 'toggle',
-						order = 0,
+						order = 1,
 						desc = L["Enable in manually formed raid groups."],
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.raids
 						end,
@@ -1051,8 +1050,8 @@ local function ConfigSpellEnvironments(section, k)
 							return '|c' .. curCol .. L["Enable in Group Finder Dungeons"] .. '|r'
 						end,
 						type = 'toggle',
-						order = 1,
-						width = 'double',
+						order = 2,
+						width = 1.3,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.lfg
 						end,
@@ -1066,8 +1065,8 @@ local function ConfigSpellEnvironments(section, k)
 							return '|c' .. curCol .. L["Enable in Group Finder Raids"] .. '|r'
 						end,
 						type = 'toggle',
-						order = 1,
-						width = 'double',
+						order = 3,
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.lfr
 						end,
@@ -1081,9 +1080,9 @@ local function ConfigSpellEnvironments(section, k)
 							return '|c' .. curCol .. L["Enable in Scenarios"] .. '|r'
 						end,
 						type = 'toggle',
-						order = 2,
+						order = 4,
 						desc = L["Enable in scenario instances."],
-						width = 'double',
+						width = 0.9,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.scenarios
 						end,
@@ -1097,9 +1096,9 @@ local function ConfigSpellEnvironments(section, k)
 							return '|c' .. curCol .. L["Enable in the World"] .. '|r'
 						end,
 						type = 'toggle',
-						order = 2,
+						order = 5,
 						desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"]),
-						width = 'double',
+						width = 1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.nonWarWorld
 						end,
@@ -1127,7 +1126,7 @@ local function ConfigSpellEnvironments(section, k)
 						type = 'toggle',
 						order = 110,
 						desc = L["Allow announcements if you are in combat."],
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.combatState.inCombat
 						end,
@@ -1143,7 +1142,7 @@ local function ConfigSpellEnvironments(section, k)
 						type = 'toggle',
 						order = 110,
 						desc = L["Allow announcements if you are not in combat."],
-						width = 'double',
+						width = 1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.combatState.noCombat
 						end,
@@ -1159,7 +1158,7 @@ local function ConfigSpellEnvironments(section, k)
 						type = 'toggle',
 						order = 110,
 						desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
-						width = 'double',
+						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.alwaysWhisper
 						end,
@@ -1171,14 +1170,33 @@ local function ConfigSpellEnvironments(section, k)
 			},
 		},
 	}
-
 	return environments
+end
+
+local function ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
+	local useGlobal = {
+	name = '|c' .. colors['gold'] .. L["Use Global Environment Settings"] .. '|r',
+	order = 0,
+	type = 'toggle',
+	desc = L["Use the global settings to determine where it can be announced."] .. '\n' .. L["When disabled, use the Environments tab below to configure where this spell is allowed to announce. Affects all events this spell can announce."],
+	width = 'full',
+	get = function(info)
+		return RSA.db.profile[section][k].environments.useGlobal
+	end,
+	set = function(info, value)
+		RSA.db.profile[section][k].environments.useGlobal = value
+		optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
+		optionsTable.args[selected.profile].args.environments.args.useGlobal = ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
+	end,
+	}
+	return useGlobal
 end
 
 local function ConfigSpellEventChannels(section, configDisplay, c, event, k)
 	local channel = {
 		name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
 		type = 'toggle',
+		width = 0.8,
 		order = 0.11 + channelOrder[channels[c]],
 		desc = channelDescriptions[channels[c]] or nil,
 		hidden = function()
@@ -1198,13 +1216,125 @@ local function ConfigSpellEventChannels(section, configDisplay, c, event, k)
 	return channel
 end
 
+local function ConfigSpellSetupEvents(section, event, k)
+	local events = {
+		name = event,
+		order = 100,
+		type = 'group',
+		args = {
+			spellID = {
+				name = L["Event unique spell ID"],
+				desc = L["If this event uses a different spell ID to the primary one, enter it here."],
+				order = 0,
+				width = 0.8,
+				type = 'input',
+				validate = function(info, value)
+					if value == '' then return true end
+					if not string.match(value, '%d') then
+						return L["You must enter a valid Spell ID."]
+					end
+					if not GetSpellInfo(value) then
+						return L["You must enter a valid Spell ID."]
+					end
+					return true
+				end,
+				get = function(info)
+					if not RSA.db.profile[section][k].events[event].uniqueSpellID then
+						return ''
+					end
+					return tostring(RSA.db.profile[section][k].events[event].uniqueSpellID)
+				end,
+				set = function(info, value)
+					RSA.db.profile[section][k].events[event].uniqueSpellID = tonumber(value)
+					RSA.RefreshMonitorData(section)
+				end,
+			},
+			tracker = {
+				name = L["Prevent duplicate announcements"],
+				desc = L["If this spell can trigger multiple events at the same time, such as if it is an AoE spell, you can start the event tracker when you trigger the spell, and set it to end on all events where you want to prevent subsequent announcements. Where multiple events can trigger the final message, you should select Spell Ends on both events."],
+				order = 1,
+				type = 'select',
+				values = {
+					[-1] = L["No tracking required"],
+					[2] = L["Spell Starts"],
+					[1] = L["Spell Ends"],
+				},
+				get = function(info)
+					if not RSA.db.profile[section][k].events[event].tracker then
+						return -1
+					end
+					return RSA.db.profile[section][k].events[event].tracker
+				end,
+				set = function(info, value)
+					RSA.db.profile[section][k].events[event].tracker = value
+				end,
+			},
+			customSource = {
+				name = L["Caster & Target Settings"],
+				order = 50,
+				type = 'group',
+				inline = true,
+				args = {
+
+					-- TODO: Make these arrays and list the entries like we do for additionalSpellIDs.
+					useCustomSource = {
+						name = L["Custom Caster"],
+						order = 0,
+						type = 'input',
+						get = function(info)
+							return RSA.db.profile[section][k].events[event].customSourceUnit
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].events[event].customSourceUnit = value
+						end,
+					},
+					useCustomTarget = {
+						name = L["Custom Target"],
+						order = 0,
+						type = 'input',
+						get = function(info)
+							return RSA.db.profile[section][k].events[event].customDestUnit
+						end,
+						set = function(info, value)
+							RSA.db.profile[section][k].events[event].customDestUnit = value
+						end,
+					},
+				},
+			},
+			tags = {
+				name = L["Tags"],
+				order = 100,
+				type = 'group',
+				inline = true,
+				args = {
+				},
+			},
+		},
+	}
+	for t = 1, #tags do
+		events.args.tags.args[tags[t]] = {
+			name = '|c' .. colors['titles'] .. "[" .. tags[t] .."]|r",
+			order = 0,
+			type = 'toggle',
+			get = function(info)
+				return RSA.db.profile[section][k].events[event].tags[tags[t]]
+			end,
+			set = function(info, value)
+				RSA.db.profile[section][k].events[event].tags[tags[t]] = value
+			end,
+		}
+	end
+
+	return events
+end
+
 local function GenerateSpellOptions(section)
 	local optionsData = RSA.db.profile[section]
 	local sectionName = section
 	if uClass == section then
 		sectionName = localisedClass
 	else
-		sectionName = L[section]
+		sectionName = L[string.gsub(section, '%l', string.upper, 1)]
 	end
 	if not optionsData then return
 		{
@@ -1234,6 +1364,7 @@ local function GenerateSpellOptions(section)
 		local configDisplay = selected.configDisplay
 		optionsTable.args[selected.profile] = {
 			name = GetSpellConfigName(selected),
+			icon = GetSpellTexture(selected.spellID),
 			desc = GetSpellConfigDesc(selected),
 			hidden = configDisplay.hidden or false,
 			disabled = configDisplay.disabled or false,
@@ -1252,19 +1383,7 @@ local function GenerateSpellOptions(section)
 					name = '|c' .. colors['descriptions'] .. GetSpellConfigDesc(selected) .. '|r',
 					type = 'description',
 					order = 1.01,
-				},
-				useGlobal = {
-					name = '|c' .. colors['gold'] .. L["Use Global Environment Settings"] .. '|r',
-					type = 'toggle',
-					desc = L["Use the global settings to determine where it can be announced."] .. '\n' .. L["When disabled, use the Environments tab below to configure where this spell is allowed to announce. Affects all events this spell can announce."],
-					width = 'full',
-					get = function(info)
-						return RSA.db.profile[section][k].environments.useGlobal
-					end,
-					set = function(info, value)
-						RSA.db.profile[section][k].environments.useGlobal = value
-						optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
-					end,
+					fontSize = 'small',
 				},
 				spellConfig = {
 					-- TODO monitorData and spellData need to be rebuilt when we adjust spell config values. Function also needs to build from profile data.
@@ -1272,6 +1391,7 @@ local function GenerateSpellOptions(section)
 					desc = L["Configure how this spell functions."],
 					order = 1000,
 					type = 'group',
+					childGroups = 'tab',
 					-- TODO Option to toggle advancedConfig
 					--hidden = not RSA.db.profile.general.advancedConfig,
 					args = {
@@ -1279,7 +1399,6 @@ local function GenerateSpellOptions(section)
 							name = L["Basic Spell Settings"],
 							order = 0,
 							type = 'group',
-							inline = true,
 							args = {
 								spellID = {
 									name = L["Spell ID"],
@@ -1323,6 +1442,7 @@ local function GenerateSpellOptions(section)
 								addAdditionalSpellID = {
 									name = L["Additional Spell IDs"],
 									desc = L["If this spell has multiple spell IDs, such as if you are trying to announce different Portals, or if it is modified by a talent which changes its Spell ID, you can enter those additional IDs here. Entering an ID already in the list will prompt you to remove it."],
+									width = 0.8,
 									order = 1.1,
 									type = 'input',
 									validate = function(info, value)
@@ -1355,7 +1475,7 @@ local function GenerateSpellOptions(section)
 								additionalSpellIDs = {
 									name = L["List of Additional Spell IDs"],
 									desc = L["You can click a spell in this list to remove it."],
-									order = 1.2,
+									order = 1.4,
 									type = 'select',
 									width = 1.5,
 									confirm = function(info, value)
@@ -1413,6 +1533,7 @@ local function GenerateSpellOptions(section)
 									name = L["Custom Description"],
 									desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
 									order = 2.2,
+									width = 1.5,
 									type = 'input',
 									get = function(info)
 										return RSA.db.profile[section][k].configDisplay.customDesc
@@ -1422,13 +1543,21 @@ local function GenerateSpellOptions(section)
 										RSA.Options:UpdateOptions()
 									end,
 								},
+								disabledChannels = {
+									name = L["Disabled Channels"],
+									order = 100,
+									type = 'group',
+									inline = true,
+									args = {},
+								},
 							},
 						},
-						disabledChannels = {
-							name = L["Disabled Channels"],
-							order = 0,
-							inline = true,
+
+						events = {
+							name = L["Combat Log Events"],
+							order = 2,
 							type = 'group',
+							childGroups = 'tab',
 							args = {},
 						},
 					},
@@ -1436,11 +1565,13 @@ local function GenerateSpellOptions(section)
 			},
 		}
 		optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
+		optionsTable.args[selected.profile].args.environments.args.useGlobal = ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
 
 		for c = 1, #channels do -- Spell Setup -> Disabled Channels
-			optionsTable.args[selected.profile].args.spellConfig.args.disabledChannels.args[channels[c]] = {
+			optionsTable.args[selected.profile].args.spellConfig.args.spellIDs.args.disabledChannels.args[channels[c]] = {
 				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
 				type = 'toggle',
+				width = 0.8,
 				order = 0.11 + channelOrder[channels[c]],
 				desc = function()
 					if channels[c] == 'whisper' then
@@ -1465,81 +1596,7 @@ local function GenerateSpellOptions(section)
 
 		for e in pairs(configDisplay.messageAreas) do -- Spell Setup -> Combat Log Events
 			local event = configDisplay.messageAreas[e]
-			optionsTable.args[selected.profile].args.spellConfig.args[event] = {
-				name = L["Combat Log Event: |c%s%s|r"]:format(colors['white'],event),
-				order = 100,
-				type = 'group',
-				inline = true,
-				args = {
-					spellID = {
-						name = L["Event unique spell ID"],
-						desc = L["If this event uses a different spell ID to the primary one, enter it here."],
-						order = 0,
-						type = 'input',
-						validate = function(info, value)
-							if value == '' then return true end
-							if not string.match(value, '%d') then
-								return L["You must enter a valid Spell ID."]
-							end
-							if not GetSpellInfo(value) then
-								return L["You must enter a valid Spell ID."]
-							end
-							return true
-						end,
-						get = function(info)
-							if not RSA.db.profile[section][k].events[event].uniqueSpellID then
-								return ''
-							end
-							return tostring(RSA.db.profile[section][k].events[event].uniqueSpellID)
-						end,
-						set = function(info, value)
-							RSA.db.profile[section][k].events[event].uniqueSpellID = tonumber(value)
-							RSA.RefreshMonitorData(section)
-						end,
-					},
-					tracker = {
-						name = L["Prevent duplicate announcements"],
-						desc = L["If this spell can trigger multiple events at the same time, such as if it is an AoE spell, you can start the event tracker when you trigger the spell, and set it to end on all events where you want to prevent subsequent announcements. Where multiple events can trigger the final message, you should select Spell Ends on both events."],
-						order = 0,
-						type = 'select',
-						values = {
-							[-1] = L["No tracking required"],
-							[2] = L["Spell Starts"],
-							[1] = L["Spell Ends"],
-						},
-						get = function(info)
-							if not RSA.db.profile[section][k].events[event].tracker then
-								return -1
-							end
-							return RSA.db.profile[section][k].events[event].tracker
-						end,
-						set = function(info, value)
-							RSA.db.profile[section][k].events[event].tracker = value
-						end,
-					},
-					tags = {
-						name = L["Tags"],
-						order = 0,
-						type = 'group',
-						inline = true,
-						args = {
-						},
-					},
-				},
-			}
-			for t = 1, #tags do
-				optionsTable.args[selected.profile].args.spellConfig.args[event].args.tags.args[tags[t]] = {
-					name = '|c' .. colors['titles'] .. "[" .. tags[t] .."]|r",
-					order = 0,
-					type = 'toggle',
-					get = function(info)
-						return RSA.db.profile[section][k].events[event].tags[tags[t]]
-					end,
-					set = function(info, value)
-						RSA.db.profile[section][k].events[event].tags[tags[t]] = value
-					end,
-				}
-			end
+			optionsTable.args[selected.profile].args.spellConfig.args.events.args[event] = ConfigSpellSetupEvents(section, event, k)
 		end
 
 		for i in pairs(configDisplay.messageAreas) do -- Event config
@@ -1548,7 +1605,7 @@ local function GenerateSpellOptions(section)
 				name = GetEventName(event),
 				type = 'group',
 				desc = GetEventDescription(event),
-				order = 100 + GetEventOrder(event),
+				order = 0 + GetEventOrder(event),
 				args = {
 					eventDescription = {
 						name = '|c' .. colors['titles'] .. GetEventName(event) .. ':|r ' .. '|c' .. colors['descriptions'] .. GetEventDescription(event) .. '|r\n',
@@ -1649,6 +1706,303 @@ local function GenerateSpellOptions(section)
 	return optionsTable
 end
 
+local customSpellSetupData = {
+	profile = nil,
+	spellID = nil,
+	comm = nil,
+	additionalSpellIDs = {},
+	configDisplay = {
+		messageAreas = {},
+		disabledChannels = {},
+		validTags = {},
+		customName = nil,
+		customDesc = nil,
+	},
+	events = {},
+	environments = {
+		useGlobal = true,
+		alwaysWhisper = false,
+		enableIn = {
+			arenas = false,
+			bgs = false,
+			warModeWorld = false,
+			nonWarWorld = false,
+			dungeons = false,
+			raids = false,
+			lfg = false,
+			lfr = false,
+			scenarios = false,
+		},
+		groupToggles = {
+			emote = true,
+			say = true,
+			yell = true,
+			whisper = true,
+		},
+		combatState = {
+			inCombat = true,
+			noCombat = false,
+		},
+	},
+}
+RSA.ccData = customSpellSetupData
+
+local function GenerateCustomSpellSetupOptions()
+	local optionsTable = {
+		name = L["Manage Announcements"],
+		type = 'group',
+		childGroups = 'tab',
+		order = 100,
+		args = {
+			add = {
+				name = L["Add a Spell"],
+				order = 0,
+				type = 'group',
+				args = {
+					spellIDs = {
+						name = L["Basic Spell Settings"],
+						order = 0,
+						type = 'group',
+						inline = true,
+						args = {
+							spellID = {
+								name = L["Spell ID"],
+								order = 0.1,
+								type = 'input',
+								validate = function(info, value)
+									if not string.match(value, '%d') then
+										return L["You must enter a valid Spell ID."]
+									end
+									if not GetSpellInfo(value) then
+										return L["You must enter a valid Spell ID."]
+									end
+									return true
+								end,
+								get = function(info)
+									return tostring(customSpellSetupData.spellID)
+								end,
+								set = function(info, value)
+									customSpellSetupData.spellID = tonumber(value)
+									RSA.Options:UpdateOptions()
+								end,
+							},
+							comm = {
+								name = L["Group Announcement"],
+								desc = L["Prevents multiple RSA users from announcing this spell."],
+								order = 0.2,
+								type = 'toggle',
+								get = function(info)
+									return customSpellSetupData.comm
+								end,
+								set = function(info, value)
+									customSpellSetupData.comm = value
+								end,
+							},
+							commSpacer = {
+								name = "",
+								type = 'description',
+								order = 0.3,
+								width = 'full',
+							},
+							addAdditionalSpellID = {
+								name = L["Additional Spell IDs"],
+								desc = L["If this spell has multiple spell IDs, such as if you are trying to announce different Portals, or if it is modified by a talent which changes its Spell ID, you can enter those additional IDs here. Entering an ID already in the list will prompt you to remove it."],
+								width = 0.8,
+								order = 1.1,
+								type = 'input',
+								validate = function(info, value)
+									if value == '' then return true end
+									if not string.match(value, '%d') then
+										return L["You must enter a valid Spell ID."]
+									end
+									if not GetSpellInfo(value) then
+										return L["You must enter a valid Spell ID."]
+									end
+									return true
+								end,
+								confirm = function(info, value)
+									if customSpellSetupData.additionalSpellIDs[tonumber(value)] then
+										return L["Are you sure you want to remove this spell ID?"]
+									else
+										return false
+									end
+								end,
+								set = function(info, value)
+									local numVal = tonumber(value)
+									if customSpellSetupData.additionalSpellIDs[numVal] then
+										customSpellSetupData.additionalSpellIDs[numVal] = false
+									else
+										customSpellSetupData.additionalSpellIDs[numVal] = true
+									end
+								end,
+							},
+							additionalSpellIDs = {
+								name = L["List of Additional Spell IDs"],
+								desc = L["You can click a spell in this list to remove it."],
+								order = 1.4,
+								type = 'select',
+								width = 1.5,
+								confirm = function(info, value)
+									if customSpellSetupData.additionalSpellIDs[tonumber(value)] then
+										return L["Are you sure you want to remove this spell ID?"]
+									else
+										return false
+									end
+								end,
+								hidden = function()
+									if not customSpellSetupData.additionalSpellIDs then return true end
+									for k2 in pairs(customSpellSetupData.additionalSpellIDs) do
+										if customSpellSetupData.additionalSpellIDs[k2] == true then
+											return false
+										end
+									end
+									return true
+								end,
+								values = function()
+									local val = {}
+									for k2 in pairs(customSpellSetupData.additionalSpellIDs) do
+										if customSpellSetupData.additionalSpellIDs[k2] then
+											val[k2] = "(" .. k2 .. ") " .. GetSpellInfo(k2)
+										end
+									end
+									return val
+								end,
+								set = function(info, value)
+									if customSpellSetupData.additionalSpellIDs[tonumber(value)] then
+										customSpellSetupData.additionalSpellIDs[tonumber(value)] = false
+										RSA.Options:UpdateOptions()
+									end
+								end,
+							},
+							additionalSpellIDsSpacer = {
+								name = "",
+								type = 'description',
+								order = 1.3,
+								width = 'full',
+							},
+							customName = {
+								name = L["Custom Name"],
+								desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+								order = 2.1,
+								type = 'input',
+								get = function(info)
+									return customSpellSetupData.configDisplay.customName
+								end,
+								set = function(info, value)
+									customSpellSetupData.configDisplay.customName = value
+									RSA.Options:UpdateOptions()
+								end,
+							},
+							customDesc = {
+								name = L["Custom Description"],
+								desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+								order = 2.2,
+								width = 1.5,
+								type = 'input',
+								get = function(info)
+									return customSpellSetupData.configDisplay.customDesc
+								end,
+								set = function(info, value)
+									customSpellSetupData.configDisplay.customDesc = value
+									RSA.Options:UpdateOptions()
+								end,
+							},
+							disabledChannels = {
+								name = L["Disabled Channels"],
+								order = 100,
+								type = 'group',
+								inline = true,
+								args = {},
+							},
+							eventData = {
+								name = L["Combat Log Events"],
+								order = 200,
+								type = 'group',
+								args = {
+									eventName = {
+										name = L["Add Event"],
+										order = 0,
+										type = 'input',
+										set = function(info, value)
+											if not customSpellSetupData.events[value] then
+												customSpellSetupData.events[value] = {
+													event = value,
+													uniqueSpellID = nil,
+													tracker = nil,
+													tags = {},
+													messages = {},
+													immuneMessages = {},
+													channels = {},
+												}
+											end
+											RSA.Options:UpdateOptions()
+										end,
+									},
+									finaliseSpell = {
+										name = L["Add Announcement"],
+										type = 'execute',
+										order = 100,
+										func = function()
+											local profile = tostring(customSpellSetupData.spellID) .. tostring(time())
+											RSA.db.profile[uClass][profile] = customSpellSetupData
+											RSA.db.profile[uClass][profile].profile = profile
+										end,
+									}
+								},
+							},
+						},
+					},
+				},
+			},
+			remove = {
+				name = L["Remove a Spell"],
+				order = 1,
+				type = 'group',
+				args = {
+
+				},
+			}
+		},
+	}
+
+		for e in pairs(customSpellSetupData.events) do
+			local event = customSpellSetupData.events[e]
+			optionsTable.args.add.args.spellIDs.args.eventData.args[event] = {
+				name = event.event,
+				order = 10,
+				type = 'group',
+				inline = true,
+				args = {
+
+				},
+			}
+		end
+
+	for c = 1, #channels do
+		optionsTable.args.add.args.spellIDs.args.disabledChannels.args[channels[c]] = {
+			name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
+			type = 'toggle',
+			width = 0.8,
+			order = 0.11 + channelOrder[channels[c]],
+			desc = function()
+				if channels[c] == 'whisper' then
+					return L["Prevents you from trying to send announcements to this channel."] .. '\n' .. L["This will not work without a valid target so should be disabled for all self-cast or non-targetted abilities."]
+				else
+				return L["Prevents you from trying to send announcements to this channel."]
+				end
+			end,
+			get = function(info)
+				return customSpellSetupData.configDisplay.disabledChannels[channels[c]]
+			end,
+			set = function(info, value)
+				customSpellSetupData.configDisplay.disabledChannels[channels[c]] = value
+			end,
+		}
+	end
+
+	return optionsTable
+end
+
 function RSA:RegisterOptions()
 	local optionsTable = BaseOptions()
 	LibStub('AceConfig-3.0'):RegisterOptionsTable('RSA', optionsTable)
@@ -1670,6 +2024,7 @@ function RSA:RegisterOptions()
 	optionsTable.args.spells.args[uClass] = GenerateSpellOptions(uClass)
 	optionsTable.args.spells.args.racials = GenerateSpellOptions('racials')
 	optionsTable.args.spells.args.utilities = GenerateSpellOptions('utilities')
+	optionsTable.args.spells.args.customSpells = GenerateCustomSpellSetupOptions()
 
 	-- TODO Iterate custom categories.
 
@@ -1687,7 +2042,7 @@ function RSA.Options:OnInitialize()
 	RSA:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
 	RSA:RegisterOptions()
-	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',960,760)
+	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',900,770)
 	InterfaceAddOnsList_Update()
 
 	self.db.RegisterCallback(RSA, 'OnProfileChanged', 'RefreshConfig')
