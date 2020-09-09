@@ -187,6 +187,16 @@ function RSA.PrepareDataTables(dataTable)
 		end
 
 		for k2,v2 in pairs(dataTable[k].events) do
+			if not dataTable[k].configDisplay then
+				dataTable[k].configDisplay = {}
+			end
+			if not dataTable[k].configDisplay.disabledChannels then
+				dataTable[k].configDisplay.disabledChannels = {}
+			end
+
+			if not dataTable[k].configDisplay.messageAreas then
+				dataTable[k].configDisplay.messageAreas = {}
+			end
 			dataTable[k].configDisplay.messageAreas[k2] = k2
 
 			if spellToProfile[dataTable[k].events[k2].uniqueSpellID] then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
@@ -199,6 +209,10 @@ function RSA.PrepareDataTables(dataTable)
 
 			if not dataTable[k].events[k2].tags then
 				dataTable[k].events[k2].tags = {}
+			end
+
+			if not dataTable[k].events[k2].messages then
+				dataTable[k].events[k2].messages = {}
 			end
 		end
 

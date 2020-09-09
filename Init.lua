@@ -64,7 +64,7 @@ local function BuildDefaults()
 						dodge = "was dodged by",
 						evade = "was evaded by",
 						parry = "was parried by",
-						immune = "immune",
+						immune = "is immune to",
 						reflect = "was reflected by",
 					},
 				},

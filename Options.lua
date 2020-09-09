@@ -1714,7 +1714,6 @@ local customSpellSetupData = {
 	configDisplay = {
 		messageAreas = {},
 		disabledChannels = {},
-		validTags = {},
 		customName = nil,
 		customDesc = nil,
 	},
