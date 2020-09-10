@@ -860,7 +860,7 @@ local function GetSpellConfigInfo(selected)
 		for i = 1,#spellTable do
 			if IsPlayerSpell(spellTable[i]) then
 				name = GetSpellInfo(spellTable[i])
-				description = GetSpellDescription(spellTable[i])
+				description = '|c' .. colors['descriptions'] .. GetSpellDescription(spellTable[i]) .. '|r'
 				icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
 			end
 		end
@@ -894,7 +894,7 @@ local function GetSpellConfigInfo(selected)
 		name = GetSpellInfo(selected.spellID)
 	end
 	if not description then
-		description = GetSpellDescription(selected.spellID)
+		description = '|c' .. colors['descriptions'] .. GetSpellDescription(selected.spellID) .. '|r'
 	end
 	if not icon then
 		icon = GetSpellTexture(selected.spellID)
@@ -1403,8 +1403,12 @@ local function GenerateSpellOptions(section)
 		local spellName,spellDesc,spellIcon = GetSpellConfigInfo(selected)
 		optionsTable.args[k] = {
 			name = function()
-				if string.len(spellName) > 30 then
-					return spellName:gsub('(%w)%S+','%1'):gsub('%s*(%a)%s*','%1'):gsub('(%A)',' %1 ')
+				if string.len(spellName) >= 25 then
+					if string.len(spellName) == strlenutf8(spellName) then
+						return spellName:gsub('(%w)%S+','%1'):gsub('%s*(%a)%s*','%1'):gsub('(%A)',' %1 ')
+					else
+						return spellName
+					end
 				else
 					return spellName
 				end

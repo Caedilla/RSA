@@ -193,7 +193,291 @@ local paladinData = {
 			},
 		},
 	},
+	['cleanse'] = {
+		spellID = 4987,
+		additionalSpellIDs = {
+			[213644] = true, -- Cleanse Toxins
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [AURALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
+	['divineProtection'] = {
+		spellID = 498,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['divineShield'] = {
+		spellID = 642,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['eyeForAnEye'] = {
+		spellID = 205191,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['finalStand'] = {
+		spellID = 204079,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['forbearance'] = {
+		spellID = 25771,
+		configDisplay = {
+			disabledChannels = {
+				say = true,
+				yell = true,
+				emote = true,
+				party = true,
+				raid = true,
+				instance = true,
+				smartGroup = true,
+				whisper = true,
+			},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[TARGET] afflicted with [LINK]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] ended!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['guardianOfAncientKings'] = {
+		spellID = 86659,
+		additionalSpellIDs = {
+			[212641] = true, -- Glyph of the Queen
+		},
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['guardianOfTheForgottenQueen'] = {
+		spellID = 228049,
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['hammerOfJustice'] = {
+		spellID = 853,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['handOfReckoning'] = {
+		spellID = 62124,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"Taunted [TARGET]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true, -- Replaces AURA and TARSPELL.
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+					EXTRA = true,
+				},
+			},
+			['RSA_SPELL_MISSED_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['holyAvenger'] = {
+		spellID = 105809,
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['layOnHands'] = {
+		spellID = 633,
+		events = {
+			['SPELL_HEAL'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {
+					TARGET = true,
+					AMOUNT = true,
+				},
+			},
+		},
+	},
+	['rebuke'] = {
+		spellID = 96231,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_INTERRUPT'] = {
+				messages = {"Interrupted [TARGET]'s [TARLINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true, -- Replaces AURA and TARSPELL.
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+					EXTRA = true,
+				},
+			},
+			--TODO: Support fake events in monitor.
+			['RSA_SPELL_MISSED_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['redemption'] = {
+		spellID = 7328,
+		events = {
+			['SPELL_RESURRECT'] = {
+				messages = {"Resurrected [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_CAST_START'] = {
+				messages = {"Casting [LINK] on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['repentance'] = {
+		spellID = 20066,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_MISSED_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['shieldOfVengeance'] = {
+		spellID = 184662,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 }
-
 
 RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(paladinData)
