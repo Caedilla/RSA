@@ -35,11 +35,11 @@ local paladinData = {
 			},
 			['SPELL_CAST_SUCCESS'] = {
 				tracker = 2, -- Tells the monitor to start tracking this spell so that we can prevent both the Heal and Finish message from playing if the heal triggers.
-				messages = {"[LINK] Activated!",},
+				messages = {"[LINK] activated!",},
 			},
 			['SPELL_AURA_REMOVED'] = {
 				tracker = 1,
-				messages = {"[LINK] faded!",},
+				messages = {"[LINK] finished!",},
 			},
 		},
 	},
@@ -51,12 +51,12 @@ local paladinData = {
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
-				messages = {"[LINK] Activated!",},
+				messages = {"[LINK] activated!",},
 			},
 			--TODO: Implement source/dest options and code support for event based targets and sources.
 			['SPELL_AURA_REMOVED'] = {
 				target = {'player'},
-				messages = {"[LINK] Finished!",},
+				messages = {"[LINK] finished!",},
 			},
 		},
 	},
@@ -96,19 +96,46 @@ local paladinData = {
 		profile = 'avengingWrath',
 		spellID = 31884,
 		additionalSpellIDs = {
-			[231895] = true,
-			[216331] = true,
+			[231895] = true, -- Crusade
+			[216331] = true, -- Avenging Crusader
 		},
 		configDisplay = {
 			disabledChannels = {whisper = true},
-			customName = GetSpellInfo(31884) .. ' / ' .. GetSpellInfo(216331) .. ' / ' .. GetSpellInfo(231895),
+			-- TODO: implement defaultName/defaultDesc for default spells - overrides base name, but customName/customDesc overrides this.
+			defaultName = GetSpellInfo(31884) .. ' | ' .. GetSpellInfo(216331) .. ' | ' .. GetSpellInfo(231895),
+			defaultDesc = '|cffFFCC00'..GetSpellInfo(31884) .. ':|r |cffd1d1d1' .. GetSpellDescription(31884) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(216331) .. ':|r |cffd1d1d1' .. GetSpellDescription(216331) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(231895) .. ':|r |cffd1d1d1' .. GetSpellDescription(231895) .. '|r',
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
-				messages = {"[LINK] Activated!",},
+				messages = {"[LINK] activated!",},
 			},
 			['SPELL_AURA_REMOVED'] = {
-				messages = {"[LINK] Finished!",},
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['beaconOfLight'] = {
+		profile = 'beaconOfLight',
+		spellID = 53563,
+		additionalSpellIDs = {[156910] = true,},
+		configDisplay = {
+			defaultName = function()
+				if IsSpellKnown(156910) then
+					print('yes')
+					return GetSpellInfo(156910)
+				else
+					return GetSpellInfo(53563)
+				end
+			 end,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
 			},
 		},
 	},
@@ -118,11 +145,11 @@ local paladinData = {
 		additionalSpellIDs = {[1044] = true,},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
-				messages = {"[LINK] Activated!",},
+				messages = {"[LINK] cast on [TARGET]!",},
 				tags = {TARGET = true,},
 			},
 			['SPELL_AURA_REMOVED'] = {
-				messages = {"[LINK] faded!"},
+				messages = {"[LINK] on [TARGET] finished!",},
 				tags = {TARGET = true,},
 			},
 		},

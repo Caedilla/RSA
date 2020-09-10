@@ -847,22 +847,62 @@ local function BaseOptions()
 	return optionsTable
 end
 
-local function GetSpellConfigName(selected)
+local function GetSpellConfigInfo(selected)
 	local configDisplay = selected.configDisplay
-	if configDisplay.customName and configDisplay.customName ~= '' then
-		return configDisplay.customName
-	else
-		return GetSpellInfo(selected.spellID)
-	end
-end
+	local name,description,icon
 
-local function GetSpellConfigDesc(selected)
-	local configDisplay = selected.configDisplay
-	if configDisplay.customDesc and configDisplay.customDesc ~= '' then
-		return configDisplay.customDesc
-	else
-		return GetSpellDescription(selected.spellID)
+
+	if selected.additionalSpellIDs then
+		local spellTable = {}
+		for k in pairs(selected.additionalSpellIDs) do
+			table.insert(spellTable, k)
+		end
+		table.insert(spellTable, selected.spellID)
+		for i = 1,#spellTable do
+			if IsSpellKnown(spellTable[i]) then
+				name = GetSpellInfo(spellTable[i])
+				description = GetSpellDescription(spellTable[i])
+				icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
+			end
+		end
 	end
+
+	if configDisplay.defaultName and configDisplay.defaultName ~= '' then
+		if type(configDisplay.defaultName) == 'function' then
+			name = configDisplay.defaultName()
+		else
+			name = configDisplay.defaultName
+		end
+	end
+
+	if configDisplay.defaultDesc and configDisplay.defaultDesc ~= '' then
+		if type(configDisplay.defaultDesc) == 'function' then
+			description = configDisplay.defaultDesc()
+		else
+			description = configDisplay.defaultDesc
+		end
+	end
+
+	if configDisplay.customName and configDisplay.customName ~= '' then
+		name = configDisplay.customName
+	end
+
+	if configDisplay.customDesc and configDisplay.customDesc ~= '' then
+		description = configDisplay.customDesc
+	end
+
+
+	if not name then
+		name = GetSpellInfo(selected.spellID)
+	end
+	if not description then
+		description = GetSpellDescription(selected.spellID)
+	end
+	if not icon then
+		icon = GetSpellTexture(selected.spellID)
+	end
+
+	return name,description,icon
 end
 
 local function ConfigSpellEnvironments(section, k)
@@ -1362,10 +1402,19 @@ local function GenerateSpellOptions(section)
 	for k in pairs(optionsData) do
 		local selected = optionsData[k]
 		local configDisplay = selected.configDisplay
+		local spellName,spellDesc,spellIcon = GetSpellConfigInfo(selected)
 		optionsTable.args[selected.profile] = {
-			name = GetSpellConfigName(selected),
-			icon = GetSpellTexture(selected.spellID),
-			desc = GetSpellConfigDesc(selected),
+			name = function()
+				if string.len(spellName) > 35 then
+					local name = spellName
+					name = name:gsub('(%w)%S+','%1'):gsub('%s*(%a)%s*','%1'):gsub('(%A)',' %1 ')
+					return name
+				else
+					return spellName
+				end
+			end,
+			icon = spellIcon,
+			desc = spellDesc,
 			hidden = configDisplay.hidden or false,
 			disabled = configDisplay.disabled or false,
 			order = configDisplay.order or 50,
@@ -1373,14 +1422,14 @@ local function GenerateSpellOptions(section)
 			childGroups = 'tab',
 			args = {
 				title = {
-					name = '|c' .. colors['titles'] .. L["Configuring:|r %s"]:format(GetSpellConfigName(selected)),
+					name = '|c' .. colors['titles'] .. L["Configuring:|r %s"]:format(spellName),
 					type = 'description',
 					order = 1,
 					fontSize = 'large',
 				},
 				description = {
 					--name = '|cffd1d1d1' .. Spells[i].Desc .. '|r',
-					name = '|c' .. colors['descriptions'] .. GetSpellConfigDesc(selected) .. '|r',
+					name = '|c' .. colors['descriptions'] .. spellDesc .. '|r',
 					type = 'description',
 					order = 1.01,
 					fontSize = 'small',
