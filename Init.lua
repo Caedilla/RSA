@@ -6,20 +6,20 @@ local uClass = string.lower(select(2, UnitClass('player')))
 local function BuildDefaults()
 	local defaults = {
 		profile = {
-			deathknight = RSA.spellData.deathknight,
-			demonhunter = RSA.spellData.demonhunter,
-			druid = RSA.spellData.druid or {},
-			hunter = RSA.spellData.hunter or {},
-			mage = RSA.spellData.mage or {},
-			monk = RSA.spellData.monk or {},
-			paladin = RSA.spellData.paladin,
-			priest = RSA.spellData.priest or {},
-			rogue = RSA.spellData.rogue or {},
-			shaman = RSA.spellData.shaman or {},
-			warlock = RSA.spellData.warlock or {},
-			warrior = RSA.spellData.warrior or {},
-			racials = RSA.spellData.racials or {},
-			utilities = RSA.spellData.utilities or {},
+			deathknight = RSA.configData.deathknight,
+			demonhunter = RSA.configData.demonhunter,
+			druid = RSA.configData.druid or {},
+			hunter = RSA.configData.hunter or {},
+			mage = RSA.configData.mage or {},
+			monk = RSA.configData.monk or {},
+			paladin = RSA.configData.paladin,
+			priest = RSA.configData.priest or {},
+			rogue = RSA.configData.rogue or {},
+			shaman = RSA.configData.shaman or {},
+			warlock = RSA.configData.warlock or {},
+			warrior = RSA.configData.warrior or {},
+			racials = RSA.configData.racials or {},
+			utilities = RSA.configData.utilities or {},
 			general = {
 				advancedConfig = false,
 				globalAnnouncements = {
@@ -120,7 +120,7 @@ function RSA:OnInitialize()
 	RSA.monitorData.racials = {}
 	RSA.monitorData.utilities = {}
 
-	RSA.spellData.customCategories = {
+	RSA.configData.customCategories = {
 		['General'] = {
 
 		},

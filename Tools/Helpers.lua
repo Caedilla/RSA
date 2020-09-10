@@ -100,29 +100,29 @@ function RSA.AffiliationGroup(sourceFlags)
 	end
 end
 
-function RSA.PrepareDataTables(dataTable)
+function RSA.PrepareDataTables(configData)
 	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
 	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
 	-- Why not store the profile in this manner by default? It's more human readable to have everything needed for a spell to function within
 	-- one table, rather than having multiple references to the profile in separate event tables as RSA used to do.
-	local spellToProfile = {}
+	local monitorData = {}
 
 	--/dump LibStub('AceAddon-3.0'):GetAddon('RSA').monitorData
-	for k in pairs(dataTable) do
-		spellToProfile[dataTable[k].spellID] = dataTable[k].profile
+	for profile in pairs(configData) do
+		monitorData[configData[profile].spellID] = profile
 
-		if dataTable[k].additionalSpellIDs then -- Add the additional spell variants to the list of spellIDs for the monitor to... monitor.
-			for k2 in pairs(dataTable[k].additionalSpellIDs) do
-				if dataTable[k].additionalSpellIDs[k2] then
-					spellToProfile[k2] = dataTable[k].profile
+		if configData[profile].additionalSpellIDs then -- Add the additional spell variants to the list of spellIDs for the monitor to... monitor.
+			for k in pairs(configData[profile].additionalSpellIDs) do
+				if configData[profile].additionalSpellIDs[k] then
+					monitorData[k] = profile
 				end
 			end
 		else
-			dataTable[k].additionalSpellIDs = {}
+			configData[profile].additionalSpellIDs = {}
 		end
 
-		if not dataTable[k].environments then
-			dataTable[k].environments = {
+		if not configData[profile].environments then
+			configData[profile].environments = {
 				useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
 				alwaysWhisper = false, -- Allows whispers to always be sent.
 				enableIn = {
@@ -173,52 +173,52 @@ function RSA.PrepareDataTables(dataTable)
 					noCombat = false, -- Announce not in Combat
 				},
 			}
-			for e in pairs(environments) do
-				if not dataTable[k].environments[e] then
-					dataTable[k].environments[e] = environments[e]
-				elseif type(environments[e]) == 'table' then
-					for i = 1, #dataTable[k].environments[e] do
-						if not dataTable[k].environments[e][i] then
-							dataTable[k].environments[e][i] = environments[e][i]
+			for k in pairs(environments) do
+				if not configData[profile].environments[k] then
+					configData[profile].environments[k] = environments[k]
+				elseif type(environments[k]) == 'table' then
+					for i = 1, #configData[profile].environments[k] do
+						if not configData[profile].environments[k][i] then
+							configData[profile].environments[k][i] = environments[k][i]
 						end
 					end
 				end
 			end
 		end
 
-		for k2,v2 in pairs(dataTable[k].events) do
-			if not dataTable[k].configDisplay then
-				dataTable[k].configDisplay = {}
+		for k in pairs(configData[profile].events) do
+			if not configData[profile].configDisplay then
+				configData[profile].configDisplay = {}
 			end
-			if not dataTable[k].configDisplay.disabledChannels then
-				dataTable[k].configDisplay.disabledChannels = {}
-			end
-
-			if not dataTable[k].configDisplay.messageAreas then
-				dataTable[k].configDisplay.messageAreas = {}
-			end
-			dataTable[k].configDisplay.messageAreas[k2] = k2
-
-			if spellToProfile[dataTable[k].events[k2].uniqueSpellID] then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
-				spellToProfile[dataTable[k].events[k2].uniqueSpellID] = spellToProfile[k].profile
+			if not configData[profile].configDisplay.disabledChannels then
+				configData[profile].configDisplay.disabledChannels = {}
 			end
 
-			if not dataTable[k].events[k2].channels then
-				dataTable[k].events[k2].channels = {}
+			if not configData[profile].configDisplay.messageAreas then
+				configData[profile].configDisplay.messageAreas = {}
+			end
+			configData[profile].configDisplay.messageAreas[k] = k
+
+			if monitorData[configData[profile].events[k].uniqueSpellID] then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
+				monitorData[configData[profile].events[k].uniqueSpellID] = monitorData[profile]
 			end
 
-			if not dataTable[k].events[k2].tags then
-				dataTable[k].events[k2].tags = {}
+			if not configData[profile].events[k].channels then
+				configData[profile].events[k].channels = {}
 			end
 
-			if not dataTable[k].events[k2].messages then
-				dataTable[k].events[k2].messages = {}
+			if not configData[profile].events[k].tags then
+				configData[profile].events[k].tags = {}
+			end
+
+			if not configData[profile].events[k].messages then
+				configData[profile].events[k].messages = {}
 			end
 		end
 
 	end
 
-	return spellToProfile, dataTable
+	return monitorData, configData
 end
 
 function RSA.RefreshMonitorData(section)

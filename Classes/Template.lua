@@ -1,7 +1,6 @@
 -- Example
 local fullTemplate = {
-	['fullOptions'] = {
-		profile = 'myProfileName',
+	['profileName'] = {
 		spellID = 31850,
 		additionalSpellIDs = {[1044] = true,}, -- key, value list of any alternate variants of this spell, like if you want to use one announcement for all mage portal spells.
 		comm = false, -- Only required if you want to use the Addon Comms to determine if you are allowed to announce this spell.
@@ -92,44 +91,11 @@ local fullTemplate = {
 
 -- Minimum required
 local minimalTemplate = {
-	['fullOptions'] = {
-		profile = 'myProfileName',
+	['profileName'] = {
 		spellID = 31850,
-		additionalSpellIDs = {[1044] = true,}, -- key, value list of any alternate variants of this spell, like if you want to use one announcement for all mage portal spells.
-		comm = false, -- Only required if you want to use the Addon Comms to determine if you are allowed to announce this spell.
-		configDisplay = {
-			messageAreas = {},
-			disabledChannels = {whisper = true},
-		},
 		events = {
-			SPELL_HEAL = {
-				uniqueSpellID = 66235, -- Ardent Defender uses a different spell ID when the heal effect triggers.
-				tracker = 1, -- Tells the monitor to not announce any further messages for this spell, so that we don't also announce the finishing message.
-				tags = { -- The types of tags this particular event can replace. Each type is implied false if not supplied.
-					TARGET = true,
-					SOURCE = true,
-					MISSTYPE = true,
-					AMOUNT = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
-				},
-				messages = {
-					"[LINK] saved my life and healed me for [AMOUNT] hp!",
-				},
-			},
-			SPELL_CAST_SUCCESS = {
-				tracker = 2, -- Tells the monitor to start tracking this spell so that we can prevent both the Heal and Finish message from playing if the heal triggers.
-				tags = {
-					-- No additional tags needed for this event.
-				},
-				messages = {
-					"[LINK] Activated!",
-				},
-			},
-			SPELL_AURA_REMOVED = {
-				tracker = 1,
-				tags = {},
-				messages = {"[LINK] faded!",},
-			},
+			SPELL_CAST_SUCCESS = {},
+			SPELL_AURA_REMOVED = {},
 		},
 	},
 }

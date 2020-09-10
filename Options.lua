@@ -851,15 +851,14 @@ local function GetSpellConfigInfo(selected)
 	local configDisplay = selected.configDisplay
 	local name,description,icon
 
-
 	if selected.additionalSpellIDs then
 		local spellTable = {}
+		table.insert(spellTable, selected.spellID)
 		for k in pairs(selected.additionalSpellIDs) do
 			table.insert(spellTable, k)
 		end
-		table.insert(spellTable, selected.spellID)
 		for i = 1,#spellTable do
-			if IsSpellKnown(spellTable[i]) then
+			if IsPlayerSpell(spellTable[i]) then
 				name = GetSpellInfo(spellTable[i])
 				description = GetSpellDescription(spellTable[i])
 				icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
@@ -890,7 +889,6 @@ local function GetSpellConfigInfo(selected)
 	if configDisplay.customDesc and configDisplay.customDesc ~= '' then
 		description = configDisplay.customDesc
 	end
-
 
 	if not name then
 		name = GetSpellInfo(selected.spellID)
@@ -1225,8 +1223,8 @@ local function ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selecte
 	end,
 	set = function(info, value)
 		RSA.db.profile[section][k].environments.useGlobal = value
-		optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
-		optionsTable.args[selected.profile].args.environments.args.useGlobal = ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
+		optionsTable.args[k].args.environments = ConfigSpellEnvironments(section,k)
+		optionsTable.args[k].args.environments.args.useGlobal = ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
 	end,
 	}
 	return useGlobal
@@ -1403,12 +1401,10 @@ local function GenerateSpellOptions(section)
 		local selected = optionsData[k]
 		local configDisplay = selected.configDisplay
 		local spellName,spellDesc,spellIcon = GetSpellConfigInfo(selected)
-		optionsTable.args[selected.profile] = {
+		optionsTable.args[k] = {
 			name = function()
-				if string.len(spellName) > 35 then
-					local name = spellName
-					name = name:gsub('(%w)%S+','%1'):gsub('%s*(%a)%s*','%1'):gsub('(%A)',' %1 ')
-					return name
+				if string.len(spellName) > 30 then
+					return spellName:gsub('(%w)%S+','%1'):gsub('%s*(%a)%s*','%1'):gsub('(%A)',' %1 ')
 				else
 					return spellName
 				end
@@ -1613,11 +1609,11 @@ local function GenerateSpellOptions(section)
 				},
 			},
 		}
-		optionsTable.args[selected.profile].args.environments = ConfigSpellEnvironments(section,k)
-		optionsTable.args[selected.profile].args.environments.args.useGlobal = ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
+		optionsTable.args[k].args.environments = ConfigSpellEnvironments(section,k)
+		optionsTable.args[k].args.environments.args.useGlobal = ConfigSpellEnvironmentGlobalToggle(optionsTable, section, selected, k)
 
 		for c = 1, #channels do -- Spell Setup -> Disabled Channels
-			optionsTable.args[selected.profile].args.spellConfig.args.spellIDs.args.disabledChannels.args[channels[c]] = {
+			optionsTable.args[k].args.spellConfig.args.spellIDs.args.disabledChannels.args[channels[c]] = {
 				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
 				type = 'toggle',
 				width = 0.8,
@@ -1637,7 +1633,7 @@ local function GenerateSpellOptions(section)
 					RSA.db.profile[section][k].configDisplay.disabledChannels[channels[c]] = value
 					for i in pairs(configDisplay.messageAreas) do
 						local event = configDisplay.messageAreas[i]
-						optionsTable.args[selected.profile].args[event].args[channels[c]] = ConfigSpellEventChannels(section, configDisplay, c, event, k)
+						optionsTable.args[k].args[event].args[channels[c]] = ConfigSpellEventChannels(section, configDisplay, c, event, k)
 					end
 				end,
 			}
@@ -1645,12 +1641,12 @@ local function GenerateSpellOptions(section)
 
 		for e in pairs(configDisplay.messageAreas) do -- Spell Setup -> Combat Log Events
 			local event = configDisplay.messageAreas[e]
-			optionsTable.args[selected.profile].args.spellConfig.args.events.args[event] = ConfigSpellSetupEvents(section, event, k)
+			optionsTable.args[k].args.spellConfig.args.events.args[event] = ConfigSpellSetupEvents(section, event, k)
 		end
 
 		for i in pairs(configDisplay.messageAreas) do -- Event config
 			local event = configDisplay.messageAreas[i]
-			optionsTable.args[selected.profile].args[event] = {
+			optionsTable.args[k].args[event] = {
 				name = GetEventName(event),
 				type = 'group',
 				desc = GetEventDescription(event),
@@ -1701,18 +1697,18 @@ local function GenerateSpellOptions(section)
 			local numMessages = #selected.events[event].messages
 
 			if numMessages == 0 then
-				optionsTable.args[selected.profile].args[event].args.numMessagesDescription.name = '\n'.. L["You have no messages for this section."]..L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."]
+				optionsTable.args[k].args[event].args.numMessagesDescription.name = '\n'.. L["You have no messages for this section."]..L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."]
 			elseif numMessages == 1 then
-				optionsTable.args[selected.profile].args[event].args.numMessagesDescription.name = '\n'.. L["You have %d message for this section."]:format(numMessages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
+				optionsTable.args[k].args[event].args.numMessagesDescription.name = '\n'.. L["You have %d message for this section."]:format(numMessages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
 			else
-				optionsTable.args[selected.profile].args[event].args.numMessagesDescription.name = '\n'.. L["You have %d messages for this section."]:format(numMessages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
+				optionsTable.args[k].args[event].args.numMessagesDescription.name = '\n'.. L["You have %d messages for this section."]:format(numMessages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
 			end
 
 			for m = 1, numMessages do
 				local curMessage = selected.events[event].messages[m]
 				local curNumAsString = tostring(m)
 
-				optionsTable.args[selected.profile].args[event].args[curNumAsString] = {
+				optionsTable.args[k].args[event].args[curNumAsString] = {
 					name = '',
 					type = 'input',
 					order = 20,
@@ -1746,7 +1742,7 @@ local function GenerateSpellOptions(section)
 
 			end
 			for c = 1, #channels do
-				optionsTable.args[selected.profile].args[event].args[channels[c]] = ConfigSpellEventChannels(section, configDisplay, c, event, k)
+				optionsTable.args[k].args[event].args[channels[c]] = ConfigSpellEventChannels(section, configDisplay, c, event, k)
 			end
 
 		end

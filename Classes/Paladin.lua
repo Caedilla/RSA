@@ -1,12 +1,11 @@
 local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
 
 -- Global Frames and Event Registers
-RSA.spellData = RSA.spellData or {}
+RSA.configData = RSA.configData or {}
 RSA.monitorData = RSA.monitorData or {}
 
 local paladinData = {
 	['absolution'] = {
-		profile = 'absolution',
 		spellID = 212056,
 		configDisplay = {
 			disabledChannels = {whisper = true},
@@ -21,7 +20,6 @@ local paladinData = {
 		},
 	},
 	['ardentDefender'] = {
-		profile = 'ardentDefender',
 		spellID = 31850,
 		configDisplay = {
 			disabledChannels = {whisper = true},
@@ -44,7 +42,6 @@ local paladinData = {
 		},
 	},
 	['auraMastery'] = {
-		profile = 'auraMastery',
 		spellID = 31821,
 		configDisplay = {
 			disabledChannels = {whisper = true},
@@ -61,7 +58,6 @@ local paladinData = {
 		},
 	},
 	['avengersShield'] = {
-		profile = 'avengersShield',
 		spellID = 31935,
 		configDisplay = {
 			disabledChannels = {whisper = true},
@@ -93,7 +89,6 @@ local paladinData = {
 		},
 	},
 	['avengingWrath'] = {
-		profile = 'avengingWrath',
 		spellID = 31884,
 		additionalSpellIDs = {
 			[231895] = true, -- Crusade
@@ -101,7 +96,6 @@ local paladinData = {
 		},
 		configDisplay = {
 			disabledChannels = {whisper = true},
-			-- TODO: implement defaultName/defaultDesc for default spells - overrides base name, but customName/customDesc overrides this.
 			defaultName = GetSpellInfo(31884) .. ' | ' .. GetSpellInfo(216331) .. ' | ' .. GetSpellInfo(231895),
 			defaultDesc = '|cffFFCC00'..GetSpellInfo(31884) .. ':|r |cffd1d1d1' .. GetSpellDescription(31884) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(216331) .. ':|r |cffd1d1d1' .. GetSpellDescription(216331) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(231895) .. ':|r |cffd1d1d1' .. GetSpellDescription(231895) .. '|r',
 		},
@@ -115,18 +109,13 @@ local paladinData = {
 		},
 	},
 	['beaconOfLight'] = {
-		profile = 'beaconOfLight',
 		spellID = 53563,
-		additionalSpellIDs = {[156910] = true,},
+		additionalSpellIDs = {
+			[156910] = true, -- Beacon of Faith
+		},
 		configDisplay = {
-			defaultName = function()
-				if IsSpellKnown(156910) then
-					print('yes')
-					return GetSpellInfo(156910)
-				else
-					return GetSpellInfo(53563)
-				end
-			 end,
+			defaultName = GetSpellInfo(53563) .. ' | ' .. GetSpellInfo(156910),
+			defaultDesc = '|cffFFCC00'..GetSpellInfo(53563) .. ':|r |cffd1d1d1' .. GetSpellDescription(53563) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(156910) .. ':|r |cffd1d1d1' .. GetSpellDescription(156910) .. '|r',
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
@@ -140,9 +129,59 @@ local paladinData = {
 		},
 	},
 	['blessingOfFreedom'] = {
-		profile = 'blessingOfFreedom',
-		spellID = 305395,
-		additionalSpellIDs = {[1044] = true,},
+		spellID = 1044,
+		additionalSpellIDs = {
+			[305395] = true, -- Unbound Freedom
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfSacrifice'] = {
+		spellID = 6940,
+		additionalSpellIDs = {
+			[199448] = true, -- Ultimate Sacrifice
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfSanctuary'] = {
+		spellID = 210256,
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfProtection'] = {
+		spellID = 1022,
+		additionalSpellIDs = {
+			[204018] = true, -- Blessing of Spellwarding
+		},
+		configDisplay = {
+			defaultName = GetSpellInfo(1022) .. ' | ' .. GetSpellInfo(204018),
+			defaultDesc = '|cffFFCC00'..GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. GetSpellDescription(204018) .. '|r',
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -157,4 +196,4 @@ local paladinData = {
 }
 
 
-RSA.monitorData.paladin, RSA.spellData.paladin = RSA.PrepareDataTables(paladinData)
+RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(paladinData)
