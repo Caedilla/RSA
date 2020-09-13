@@ -38,7 +38,12 @@ local function CommCheck(currentSpell)
 	return canAnnounce
 end
 
-local function BuildMessageCache(currentSpell, spellProfileName, currentSpellData)
+local function BuildMessageCache(currentSpell, spellProfileName, event, fakeEvent)
+	local currentSpellData = currentSpell.events[event]
+	if fakeEvent then
+		currentSpellData = currentSpell.events[fakeEvent]
+	end
+
 	-- Build Cache of valid messages
 	-- We store empty strings when users blank a default message so we know not to use the default. An empty string can also be stored when a user deletes extra messages.
 	-- We need to validate the list of messages so when we pick a message at random, we don't accidentally pick the blanked message.
@@ -141,7 +146,11 @@ local function HandleEvents()
 		return
 	end
 
-	local message = BuildMessageCache(currentSpell, spellProfileName, currentSpellData)
+	local fakeEvent
+	if missType == 'IMMUNE' and event == 'SPELL_MISSED' then
+		fakeEvent = 'RSA_SPELL_MISSED_IMMUNE'
+	end
+	local message = BuildMessageCache(currentSpell, spellProfileName, event, fakeEvent)
 	if not message then return end
 
 	-- Build Spell Name and Link Cache
@@ -210,25 +219,7 @@ local function HandleEvents()
 				end
 			end
 		else
-			if missType == 'IMMUNE' then
-				replacements['[MISSTYPE]'] = RSA.db.profile.general.replacements.missType.immune
-				local validMessages = messageCache[spellProfileName][currentSpell.events].immuneMessages or nil
-				if not validMessages then
-					validMessages = {}
-					for i = 1, #currentSpell.events[event].immuneMessages do
-						if currentSpellData.immuneMessages[i] ~= '' then
-							validMessages[i] = currentSpellData.immuneMessages[i]
-						end
-						messageCache[spellProfileName][currentSpell.events].immuneMessages = validMessages
-						if #validMessages == 0 then return end
-						message = validMessages[math.random(#validMessages)]
-						if not message then return end
-						message = gsub(message,'%%','%%%%')
-					end
-				end
-			else
-				replacements['MISSTYPE'] = RSA.db.profile.general.replacements.missType[string.lower(missType)]
-			end
+			replacements['MISSTYPE'] = RSA.db.profile.general.replacements.missType[string.lower(missType)]
 		end
 	end
 
