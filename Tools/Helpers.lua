@@ -199,8 +199,8 @@ function RSA.PrepareDataTables(configData)
 			end
 			configData[profile].configDisplay.messageAreas[k] = k
 
-			if monitorData[configData[profile].events[k].uniqueSpellID] then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
-				monitorData[configData[profile].events[k].uniqueSpellID] = monitorData[profile]
+			if configData[profile].events[k].uniqueSpellID then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
+				monitorData[configData[profile].events[k].uniqueSpellID] = profile
 			end
 
 			if not configData[profile].events[k].channels then
