@@ -10,6 +10,8 @@
 		"ambiguity-1"
 	],
 	"Lua.diagnostics.globals": [
+		"C_Spell",
+		"C_Spell.DoesSpellExist",
 		"LE_PARTY_CATEGORY_INSTANCE",
 		"LE_PARTY_CATEGORY_HOME",
 		"InterfaceAddOnsList_Update",

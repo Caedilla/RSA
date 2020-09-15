@@ -109,12 +109,20 @@ function RSA.PrepareDataTables(configData)
 
 	--/dump LibStub('AceAddon-3.0'):GetAddon('RSA').monitorData
 	for profile in pairs(configData) do
-		monitorData[configData[profile].spellID] = profile
+		if not monitorData[configData[profile].spellID] then
+			monitorData[configData[profile].spellID] = {[profile] = true,}
+		else
+			monitorData[configData[profile].spellID][profile] = true
+		end
 
 		if configData[profile].additionalSpellIDs then -- Add the additional spell variants to the list of spellIDs for the monitor to... monitor.
 			for k in pairs(configData[profile].additionalSpellIDs) do
 				if configData[profile].additionalSpellIDs[k] then
-					monitorData[k] = profile
+					if not monitorData[k] then
+						monitorData[k] = {[profile] = true,}
+					else
+						monitorData[k][profile] = true
+					end
 				end
 			end
 		else
@@ -200,7 +208,11 @@ function RSA.PrepareDataTables(configData)
 			configData[profile].configDisplay.messageAreas[k] = k
 
 			if configData[profile].events[k].uniqueSpellID then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
-				monitorData[configData[profile].events[k].uniqueSpellID] = profile
+				if not monitorData[configData[profile].events[k].uniqueSpellID] then
+					monitorData[configData[profile].events[k].uniqueSpellID] = {[profile] = true,}
+				else
+					monitorData[configData[profile].events[k].uniqueSpellID][profile] = true
+				end
 			end
 
 			if not configData[profile].events[k].channels then
