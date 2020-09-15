@@ -38,7 +38,7 @@ local function CommCheck(currentSpell)
 	return canAnnounce
 end
 
-local function BuildMessageCache(currentSpell, spellProfileName, event, fakeEvent)
+local function BuildMessageCache(currentSpell, monitorData, event, fakeEvent)
 	local currentSpellData = currentSpell.events[event]
 	if fakeEvent then
 		currentSpellData = currentSpell.events[fakeEvent]
@@ -47,10 +47,10 @@ local function BuildMessageCache(currentSpell, spellProfileName, event, fakeEven
 	-- Build Cache of valid messages
 	-- We store empty strings when users blank a default message so we know not to use the default. An empty string can also be stored when a user deletes extra messages.
 	-- We need to validate the list of messages so when we pick a message at random, we don't accidentally pick the blanked message.
-	local messageCacheProfile = messageCache[spellProfileName]
+	local messageCacheProfile = messageCache[monitorData]
 	if not messageCacheProfile then
 		messageCacheProfile = {}
-		messageCache[spellProfileName] = {}
+		messageCache[monitorData] = {}
 	end
 	local validMessages = messageCacheProfile[currentSpellData]
 	if not validMessages then
@@ -65,7 +65,7 @@ local function BuildMessageCache(currentSpell, spellProfileName, event, fakeEven
 				validMessages[i] = currentSpellData.messages[i]
 			end
 		end
-		messageCache[spellProfileName][currentSpellData] = validMessages
+		messageCache[monitorData][currentSpellData] = validMessages
 	end
 	if #validMessages == 0 then return end
 	local message = validMessages[math.random(#validMessages)]
@@ -78,84 +78,51 @@ function RSA:WipeMessageCache()
 	wipe(messageCache)
 end
 
-local function HandleEvents()
-	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
+function RSA:ExposeMessageCache()
+	_G.messageCache = messageCache
+end
 
-	local profile = RSA.db.profile
+local function ProcessSpell(monitorData, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 
-	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
-		print(event .. ": " .. tostring(spellID) .. " - " .. spellName)
-	end
-
-	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
-	local missType = ex1
-
-	local spellProfileName = RSA.monitorData[uClass][spellID]
-	if not spellProfileName then
-		if RSA.monitorData['utilities'][spellID] then
-			spellProfileName = RSA.monitorData['utilities'][spellID]
-		elseif RSA.monitorData['racials'][spellID] then
-			spellProfileName = RSA.monitorData['racials'][spellID]
-		else
-			for k in pairs(RSA.monitorData.customCategories) do
-				if RSA.monitorData.customCategories[k][spellID] then
-					spellProfileName = RSA.monitorData.customCategories[k][spellID]
-				end
-			end
-		end
-	end
-
-	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
-		if not spellProfileName then
-			spellID, extraSpellID = extraSpellID, spellID
-			spellName, extraSpellName = extraSpellName, spellName
-			spellSchool, extraSchool = extraSchool, spellSchool
-			spellProfileName = RSA.monitorData[uClass][spellID]
-		end
-	end
-	if not spellProfileName then return end
-
-	local currentSpell = profile[uClass][spellProfileName]
+	local currentSpell = RSA.db.profile[uClass][monitorData]
 	if not currentSpell then return end
 	if not currentSpell.events[event] then return end
 
-	local currentSpellData = currentSpell.events[event]
+	if currentSpell.events[event].targetIsMe and not RSA.IsMe(destFlags) then return end
+	if currentSpell.events[event].targetNotMe and RSA.IsMe(destFlags) then return end
+	if currentSpell.events[event].sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
-	if currentSpellData.targetIsMe and not RSA.IsMe(destFlags) then return end
-	if currentSpellData.targetNotMe and RSA.IsMe(destFlags) then return end
-	if currentSpellData.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
-
-	if not currentSpellData.customSourceUnit and not RSA.IsMe(sourceFlags) then return end
+	if not currentSpell.events[event].customSourceUnit and not RSA.IsMe(sourceFlags) then return end
 	-- TODO: handle customDestUnit and parse it as well as customSourceUnit for valid units.
 
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
-	local tracker = currentSpellData.tracker or nil -- Tracks spells like AoE Taunts to prevent multiple messages playing.
+	local tracker = currentSpell.events[event].tracker or nil -- Tracks spells like AoE Taunts to prevent multiple messages playing.
 	if tracker then
-		if tracker == 1 and running[spellProfileName] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
-		if tracker == 1 and running[spellProfileName] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
+		if tracker == 1 and running[monitorData] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
+		if tracker == 1 and running[monitorData] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
 		if tracker == 2 then
-			if running[spellProfileName] ~= nil then
-				if running[spellProfileName] >= 0 and running[spellProfileName] < 500 then -- Prevent multiple announcements of buff/debuff application.
-					running[spellProfileName] = running[spellProfileName] + 1
+			if running[monitorData] ~= nil then
+				if running[monitorData] >= 0 and running[monitorData] < 500 then -- Prevent multiple announcements of buff/debuff application.
+					running[monitorData] = running[monitorData] + 1
 					return
 				end
 			end
-			running[spellProfileName] = 0
+			running[monitorData] = 0
 		end
-		if tracker == 1 and running[spellProfileName] == 0 then
-			running[spellProfileName] = running[spellProfileName] + 500
+		if tracker == 1 and running[monitorData] == 0 then
+			running[monitorData] = running[monitorData] + 500
 		end
-		if tracker == 1 and running[spellProfileName] > 0 and running[spellProfileName] < 500 then
-			running[spellProfileName] = running[spellProfileName] - 1
+		if tracker == 1 and running[monitorData] > 0 and running[monitorData] < 500 then
+			running[monitorData] = running[monitorData] - 1
 			return
 		end
 	end
 
 	local fakeEvent
-	if missType == 'IMMUNE' and event == 'SPELL_MISSED' then
+	if ex1 == 'IMMUNE' and event == 'SPELL_MISSED' then
 		fakeEvent = 'RSA_SPELL_MISSED_IMMUNE'
 	end
-	local message = BuildMessageCache(currentSpell, spellProfileName, event, fakeEvent)
+	local message = BuildMessageCache(currentSpell, monitorData, event, fakeEvent)
 	if not message then return end
 
 	-- Build Spell Name and Link Cache
@@ -171,7 +138,7 @@ local function HandleEvents()
 		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
-	if currentSpellData.uniqueSpellID then -- Replace cached data with 'real' spell name/link to announce the expected spell.
+	if currentSpell.events[event].uniqueSpellID then -- Replace cached data with 'real' spell name/link to announce the expected spell.
 		local parentSpell = currentSpell.spellID
 
 		tagSpellName = GetSpellInfo(parentSpell)
@@ -196,7 +163,7 @@ local function HandleEvents()
 	wipe(replacements)
 	replacements['[SPELL]'] = tagSpellName
 	replacements['[LINK]'] = tagSpellLink
-	local tagReplacements = currentSpellData.tags or {}
+	local tagReplacements = currentSpell.events[event].tags or {}
 	-- TODO: Add fallbacks in case people try to enable tags where there is no appropriate replacement.
 	if tagReplacements.TARGET then replacements['[TARGET]'] = destName end
 	if tagReplacements.SOURCE then replacements['[TARGET]'] = sourceName end
@@ -219,17 +186,17 @@ local function HandleEvents()
 	if tagReplacements.MISSTYPE then
 		if RSA.db.profile.general.replacements.missType.useGenericReplacement == true then
 			for i = 1,#missTypes do
-				if missType == missTypes[i] then
+				if ex1 == missTypes[i] then
 					replacements['[MISSTYPE]'] = RSA.db.profile.general.replacements.missType.genericReplacementString
 				end
 			end
 		else
-			replacements['MISSTYPE'] = RSA.db.profile.general.replacements.missType[string.lower(missType)]
+			replacements['MISSTYPE'] = RSA.db.profile.general.replacements.missType[string.lower(ex1)]
 		end
 	end
 
-	if currentSpellData.channels.personal == true then
-		if currentSpellData.groupRequired then -- Used in Mage Teleports, only locally announces if you are in a group.
+	if currentSpell.events[event].channels.personal == true then
+		if currentSpell.events[event].groupRequired then -- Used in Mage Teleports, only locally announces if you are in a group.
 			if not (GetNumSubgroupMembers() > 0 or GetNumGroupMembers() > 0) then return end
 		end
 		RSA.SendMessage.LibSink(gsub(message, ".%a+.", replacements))
@@ -240,33 +207,78 @@ local function HandleEvents()
 		--Local messages can always go through, so only check this after sending the local message.
 	end
 
-	if currentSpellData.channels.yell == true then
+	if currentSpell.events[event].channels.yell == true then
 		RSA.SendMessage.Yell(gsub(message, ".%a+.", replacements))
 	end
-	if currentSpellData.channels.whisper == true and UnitExists(longName) and RSA.Whisperable(destFlags) then
+	if currentSpell.events[event].channels.whisper == true and UnitExists(longName) and RSA.Whisperable(destFlags) then
 		RSA.SendMessage.Whisper(message, longName, replacements, destName)
 	end
-	if currentSpellData.channels.say == true then
+	if currentSpell.events[event].channels.say == true then
 		RSA.SendMessage.Say(gsub(message, ".%a+.", replacements))
 	end
-	if currentSpellData.channels.emote == true then
+	if currentSpell.events[event].channels.emote == true then
 		RSA.SendMessage.Emote(gsub(message, ".%a+.", replacements))
 	end
 
 	local announced = false
-	if currentSpellData.channels.party == true then
+	if currentSpell.events[event].channels.party == true then
 		if RSA.SendMessage.Party(gsub(message, ".%a+.", replacements)) == true then announced = true end
 	end
-	if currentSpellData.channels.raid == true then
+	if currentSpell.events[event].channels.raid == true then
 		if RSA.SendMessage.Raid(gsub(message, ".%a+.", replacements)) == true then announced = true end
 	end
-	if currentSpellData.channels.instance == true then
+	if currentSpell.events[event].channels.instance == true then
 		if RSA.SendMessage.Instance(gsub(message, ".%a+.", replacements)) == true then announced = true end
 	end
-	if currentSpellData.channels.smartGroup == true and announced == false then
+	if currentSpell.events[event].channels.smartGroup == true and announced == false then
 		RSA.SendMessage.SmartGroup(gsub(message, ".%a+.", replacements))
 	end
 
+end
+
+local function HandleEvents()
+	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
+
+	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
+		--print(event .. ": " .. tostring(spellID) .. " - " .. spellName)
+	end
+
+	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
+
+	local monitorData = RSA.monitorData[uClass][spellID]
+	if not monitorData then
+		if RSA.monitorData['utilities'][spellID] then
+			monitorData = RSA.monitorData['utilities'][spellID]
+		elseif RSA.monitorData['racials'][spellID] then
+			monitorData = RSA.monitorData['racials'][spellID]
+		else
+			for k in pairs(RSA.monitorData.customCategories) do
+				if RSA.monitorData.customCategories[k][spellID] then
+					monitorData = RSA.monitorData.customCategories[k][spellID]
+				end
+			end
+		end
+	end
+
+	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
+		if not monitorData then
+			spellID, extraSpellID = extraSpellID, spellID
+			spellName, extraSpellName = extraSpellName, spellName
+			spellSchool, extraSchool = extraSchool, spellSchool
+			monitorData = RSA.monitorData[uClass][spellID]
+		end
+	end
+
+	if not monitorData then return end
+	if #monitorData > 1 then
+		for i = 1, #monitorData do
+			local profileName = monitorData[i]
+			ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+		end
+	else
+		local profileName = monitorData[1]
+		ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+	end
 end
 
 function RSA.Monitor.Start()
