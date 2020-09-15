@@ -1,9 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 
--- Global Frames and Event Registers
-RSA.configData = RSA.configData or {}
-RSA.monitorData = RSA.monitorData or {}
-
 local paladinData = {
 	['absolution'] = {
 		spellID = 212056,

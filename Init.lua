@@ -3,6 +3,9 @@ local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local ACD = LibStub('AceConfigDialog-3.0')
 local uClass = string.lower(select(2, UnitClass('player')))
 
+RSA.configData = {}
+RSA.monitorData = {}
+
 local function BuildDefaults()
 	local defaults = {
 		profile = {
@@ -115,8 +118,6 @@ function RSA:ChatCommand(input)
 end
 
 function RSA:OnInitialize()
-	RSA.configData = {}
-	RSA.monitorData = {}
 
 	-- TEMP until implemented.
 	RSA.monitorData.racials = {}
