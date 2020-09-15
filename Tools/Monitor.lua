@@ -126,24 +126,26 @@ local function HandleEvents()
 	if currentSpellData.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
-	local tracker = currentSpellData.tracker or -1 -- Tracks spells like AoE Taunts to prevent multiple messages playing.
-	if tracker == 1 and running[spellProfileName] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
-	if tracker == 1 and running[spellProfileName] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
-	if tracker == 2 then
-		if running[spellProfileName] ~= nil then
-			if running[spellProfileName] >= 0 and running[spellProfileName] < 500 then -- Prevent multiple announcements of buff/debuff application.
-				running[spellProfileName] = running[spellProfileName] + 1
-				return
+	local tracker = currentSpellData.tracker or nil -- Tracks spells like AoE Taunts to prevent multiple messages playing.
+	if tracker then
+		if tracker == 1 and running[spellProfileName] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
+		if tracker == 1 and running[spellProfileName] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
+		if tracker == 2 then
+			if running[spellProfileName] ~= nil then
+				if running[spellProfileName] >= 0 and running[spellProfileName] < 500 then -- Prevent multiple announcements of buff/debuff application.
+					running[spellProfileName] = running[spellProfileName] + 1
+					return
+				end
 			end
+			running[spellProfileName] = 0
 		end
-		running[spellProfileName] = 0
-	end
-	if tracker == 1 and running[spellProfileName] == 0 then
-		running[spellProfileName] = running[spellProfileName] + 500
-	end
-	if tracker == 1 and running[spellProfileName] > 0 and running[spellProfileName] < 500 then
-		running[spellProfileName] = running[spellProfileName] - 1
-		return
+		if tracker == 1 and running[spellProfileName] == 0 then
+			running[spellProfileName] = running[spellProfileName] + 500
+		end
+		if tracker == 1 and running[spellProfileName] > 0 and running[spellProfileName] < 500 then
+			running[spellProfileName] = running[spellProfileName] - 1
+			return
+		end
 	end
 
 	local fakeEvent
