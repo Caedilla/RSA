@@ -43,11 +43,11 @@ end
 
 function RSA.GetPersonalID()
 	local random = math.random(1,time())
-	local namebytes = 0
+	local nameBytes = 0
 	for i = 1,string.len(UnitName("player")) do
-		namebytes = namebytes + string.byte(UnitName("player"),i)
+		nameBytes = nameBytes + string.byte(UnitName("player"),i)
 	end
-	random = tostring(random) .. tostring(namebytes)
+	random = tostring(random) .. tostring(nameBytes)
 	return random
 end
 

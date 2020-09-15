@@ -125,6 +125,9 @@ local function HandleEvents()
 	if currentSpellData.targetNotMe and RSA.IsMe(destFlags) then return end
 	if currentSpellData.sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
+	if not currentSpellData.customSourceUnit and not RSA.IsMe(sourceFlags) then return end
+	-- TODO: handle customDestUnit and parse it as well as customSourceUnit for valid units.
+
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
 	local tracker = currentSpellData.tracker or nil -- Tracks spells like AoE Taunts to prevent multiple messages playing.
 	if tracker then
