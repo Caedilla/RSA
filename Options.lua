@@ -1366,6 +1366,22 @@ local function ConfigSpellSetupEvents(section, event, k)
 	return events
 end
 
+local function Abbreviate(inputString, ...)
+	local locale = GetLocale()
+	if locale == "koKR" or locale == "zhCN" or locale == "zhTW" then
+		return inputString
+	else
+		local newString = inputString
+		for i = 2, select('#', ...) do
+			if i % 2 == 0 and (select(i-1,...)) then
+				newString = newString:gsub((select(i-1,...)),(select(i,...)))
+			end
+		end
+
+		return newString
+	end
+end
+
 local function GenerateSpellOptions(section)
 	local optionsData = RSA.db.profile[section]
 	local sectionName = section
@@ -1404,11 +1420,8 @@ local function GenerateSpellOptions(section)
 		optionsTable.args[k] = {
 			name = function()
 				if string.len(spellName) >= 25 then
-					if string.len(spellName) == strlenutf8(spellName) then
-						return spellName:gsub('(%w)%S+','%1'):gsub('%s*(%a)%s*','%1'):gsub('(%A)',' %1 ')
-					else
-						return spellName
-					end
+					return Abbreviate(spellName,'([%z\1-\127\194-\244][\128-\191])%S+','%1','(%w)%S+','%1',' ','','(\124)(\124)','%1','%p',' %1 ')
+					--return spellName:gsub('([%z\1-\127\194-\244][\128-\191])%S+','%1'):gsub('(%w)%S+','%1'):gsub(' ',''):gsub('(\124)(\124)','%1'):gsub('%p',' %1 ')
 				else
 					return spellName
 				end
