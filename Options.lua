@@ -2113,4 +2113,5 @@ end
 
 function RSA:RefreshConfig()
 	RSA.db.profile = self.db.profile
+	RSA.Options:UpdateOptions()
 end
