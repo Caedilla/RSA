@@ -1,4 +1,4 @@
-local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
+local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local uClass = string.lower(select(2, UnitClass('player')))
 RSA.Monitor = {}
 

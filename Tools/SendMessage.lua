@@ -1,4 +1,4 @@
-local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
+local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 RSA.SendMessage = {}
 
 function RSA.SendMessage.ChatFrame(message) -- Send a message to your default chat window.

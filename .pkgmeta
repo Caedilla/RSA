@@ -37,6 +37,10 @@ externals:
   url: git://github.com/phanx-wow/LibResInfo.git
 
 ignore:
+ - .gitattributes
+ - .gitignore
+ - .travis.yml
+ - .vscode
  - Release
  - .pkgmeta
  - README.md

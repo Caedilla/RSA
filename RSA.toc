@@ -25,15 +25,11 @@ Localisation\Locale-zhTW.lua
 
 Load.lua
 
-Init.lua
-
 Tools\Helpers.lua
 Tools\SendMessage.lua
 Tools\Comm.lua
 
 Classes\Paladin.lua
-
-
 
 Tools\Monitor.lua
 

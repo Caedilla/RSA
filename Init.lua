@@ -1,4 +1,4 @@
-local RSA = RSA or LibStub('AceAddon-3.0'):GetAddon('RSA')
+local RSA = LibStub("AceAddon-3.0"):NewAddon("RSA", "AceConsole-3.0", "LibSink-2.0", "AceEvent-3.0", "AceComm-3.0")
 local L = LibStub("AceLocale-3.0"):GetLocale("RSA")
 local ACD = LibStub('AceConfigDialog-3.0')
 local uClass = string.lower(select(2, UnitClass('player')))
@@ -115,6 +115,8 @@ function RSA:ChatCommand(input)
 end
 
 function RSA:OnInitialize()
+	RSA.configData = {}
+	RSA.monitorData = {}
 
 	-- TEMP until implemented.
 	RSA.monitorData.racials = {}
