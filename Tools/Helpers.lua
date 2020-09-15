@@ -227,7 +227,17 @@ function RSA.PrepareDataTables(configData)
 				configData[profile].events[k].messages = {}
 			end
 		end
+	end
 
+	-- Reorganise spell profiles in monitorData to indexed tables for easier iteration in the Monitor.
+	for k in pairs(monitorData) do
+		local spells = {}
+		local count = 0
+		for c in pairs(monitorData[k]) do
+			count = count + 1
+			spells[count] = c
+		end
+			monitorData[k] = spells
 	end
 
 	return monitorData, configData
