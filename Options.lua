@@ -1304,7 +1304,11 @@ local function ConfigSpellSetupEvents(section, event, k)
 					return RSA.db.profile[section][k].events[event].tracker
 				end,
 				set = function(info, value)
-					RSA.db.profile[section][k].events[event].tracker = value
+					if value ~= -1 then
+						RSA.db.profile[section][k].events[event].tracker = value
+					else
+						RSA.db.profile[section][k].events[event].tracker = nil
+					end
 				end,
 			},
 			customSource = {
