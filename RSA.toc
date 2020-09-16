@@ -29,7 +29,20 @@ Tools\Helpers.lua
 Tools\SendMessage.lua
 Tools\Comm.lua
 
-Classes\Paladin.lua
+SpellData\DeathKnight.lua
+SpellData\DemonHunter.lua
+SpellData\Druid.lua
+SpellData\Hunter.lua
+SpellData\Mage.lua
+SpellData\Monk.lua
+SpellData\Paladin.lua
+SpellData\Priest.lua
+SpellData\Rogue.lua
+SpellData\Shaman.lua
+SpellData\Warlock.lua
+SpellData\Warrior.lua
+SpellData\Racials.lua
+SpellData\Utilities.lua
 
 Tools\Monitor.lua
 
