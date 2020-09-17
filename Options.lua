@@ -31,56 +31,61 @@ local colors = {
 
 -- TODO fill in the rest of the event types.
 local configEventInfo = {
+	['SPELL_CAST_START'] = {
+		localisedName = L["Start"],
+		desc = L["When the casting of this spell begins."],
+		order = 4,
+	},
 	['SPELL_AURA_APPLIED'] = {
 		localisedName = L["Aura Applied"],
 		desc = L["When this buff or debuff is applied to a target."],
-		order = 1,
+		order = 2,
 	},
 	['SPELL_SUMMON'] = {
 		localisedName = L["Summon"],
 		desc = L["When this spell spawns another creature or object in the world."],
-		order = 2,
+		order = 3,
 	},
 	['SPELL_CAST_SUCCESS'] = {
 		localisedName = L["Cast"],
 		desc = L["When this spell is cast. If the spell has a cast-time, this is when you finish the cast. If the spell is instant, this is when the spell begins its effect."],
-		order = 3,
+		order = 4,
 	},
 	['SPELL_DISPEL'] = {
 		localisedName = L["Dispel"],
 		desc = L["When this spell removes a buff or debuff."],
-		order = 4,
+		order = 5,
 	},
 	['SPELL_DAMAGE'] = {
 		localisedName = L["Damage"],
 		desc = L["When this spell causes damage."],
-		order = 5,
+		order = 6,
 	},
 	['SPELL_HEAL'] = {
 		localisedName = L["Heal"],
 		desc = L["When this spell causes healing."],
-		order = 6,
+		order = 7,
 	},
 	['SPELL_ABSORBED'] = {
 		localisedName = L["Damage Absorb"],
 		desc = L["When this spell absorbs damage or effects."],
-		order = 7,
+		order = 8,
 	},
 	['SPELL_INTERRUPT'] = {
 		localisedName = L["Interrupt"],
 		desc = L["When this spell interrupts another spell cast."],
-		order = 8,
+		order = 9,
 	},
 	['SPELL_MISSED'] = {
 		localisedName = RESIST,
 		desc = L["When this spell fails to connect with its target. See the Tag Options to configure what the [MISSTYPE] tag will turn into when used."],
-		order = 9,
+		order = 10,
 	},
 	['RSA_SPELL_IMMUNE'] = {
 		localisedName = IMMUNE,
 		desc = L["When the target is immune to your spell."],
 		advDesc = L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Immune."],
-		order = 10,
+		order = 11,
 	},
 }
 
