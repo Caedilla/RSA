@@ -6,11 +6,11 @@ uClass = string.lower(uClass)
 RSA.Options = RSA:NewModule('Options')
 
 local tags = {
-	"TARGET",
-	"SOURCE",
-	"MISSTYPE",
-	"AMOUNT",
-	"EXTRA",
+	'TARGET',
+	'SOURCE',
+	'MISSTYPE',
+	'AMOUNT',
+	'EXTRA',
 }
 
 local colors = {
@@ -30,37 +30,58 @@ local colors = {
 }
 
 -- TODO fill in the rest of the event types.
-local eventList = {
-	["SPELL_HEAL"] = L["Heal"],
-	["SPELL_CAST_SUCCESS"] = L["Cast"],
-	["SPELL_AURA_APPLIED"] = L["Start"],
-	["SPELL_AURA_REMOVED"] = L["End"],
-}
-
-local eventOrder = {
-	["SPELL_HEAL"] = 6,
-	["SPELL_CAST_SUCCESS"] = 3,
-	["SPELL_AURA_APPLIED"] = 1,
-	["SPELL_AURA_REMOVED"] = 14,
-}
-
-local eventDescriptions = {
-	['SPELL_AURA_APPLIED'] = 'When you start casting this spell or when this spell starts.',
-	--[2] = 'When you have placed this in the world.',
-	['SPELL_CAST_SUCCESS'] = 'When you cast this spell.',
-	--[4] = 'When you dispel a buff or debuff.',
-	--[5] = 'When you deal damage.',
-	['SPELL_HEAL'] = 'When you heal.',
-	--[7] = 'When you debuff a unit.',
-	--[8] = 'When you absorb damage.',
-	--[9] = 'When you absorb a debuff.',
-	--[10] = 'When you interrupt a spell cast.',
-	--[11] = 'When your spell is resisted.',
-	--[12] = 'When the target is immune to your spell.',
-	--[13] = 'When the spell failed.',
-	['SPELL_AURA_REMOVED'] = 'When the spell ends.',
-	--[15] = 'When you cast Provoke on your Statue of the Black Ox.',
-	--[16] = 'When someone accepts the resurrect you cast on them.',
+local configEventInfo = {
+	['SPELL_AURA_APPLIED'] = {
+		localisedName = L["Aura Applied"],
+		desc = L["When this buff or debuff is applied to a target."],
+		order = 1,
+	},
+	['SPELL_SUMMON'] = {
+		localisedName = L["Summon"],
+		desc = L["When this spell spawns another creature or object in the world."],
+		order = 2,
+	},
+	['SPELL_CAST_SUCCESS'] = {
+		localisedName = L["Cast"],
+		desc = L["When this spell is cast. If the spell has a cast-time, this is when you finish the cast. If the spell is instant, this is when the spell begins its effect."],
+		order = 3,
+	},
+	['SPELL_DISPEL'] = {
+		localisedName = L["Dispel"],
+		desc = L["When this spell removes a buff or debuff."],
+		order = 4,
+	},
+	['SPELL_DAMAGE'] = {
+		localisedName = L["Damage"],
+		desc = L["When this spell causes damage."],
+		order = 5,
+	},
+	['SPELL_HEAL'] = {
+		localisedName = L["Heal"],
+		desc = L["When this spell causes healing."],
+		order = 6,
+	},
+	['SPELL_ABSORBED'] = {
+		localisedName = L["Damage Absorb"],
+		desc = L["When this spell absorbs damage or effects."],
+		order = 7,
+	},
+	['SPELL_INTERRUPT'] = {
+		localisedName = L["Interrupt"],
+		desc = L["When this spell interrupts another spell cast."],
+		order = 8,
+	},
+	['SPELL_MISSED'] = {
+		localisedName = RESIST,
+		desc = L["When this spell fails to connect with its target. See the Tag Options to configure what the [MISSTYPE] tag will turn into when used."],
+		order = 9,
+	},
+	['RSA_SPELL_IMMUNE'] = {
+		localisedName = IMMUNE,
+		desc = L["When the target is immune to your spell."],
+		advDesc = L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Immune."],
+		order = 10,
+	},
 }
 
 local channels = {
@@ -142,26 +163,26 @@ local function GetChannelName(channel)
 end
 
 local function GetEventName(event)
-	if eventList[event] then
-		return eventList[event]
+	if configEventInfo[event] then
+		return configEventInfo[event].localisedName
 	else
 		return event
 	end
 end
 
 local function GetEventDescription(event)
-	if eventDescriptions[event] then
-		return eventDescriptions[event]
+	if configEventInfo[event] then
+		return configEventInfo[event].desc
 	else
 		return event
 	end
 end
 
 local function GetEventOrder(event)
-	if eventOrder[event] then
-		return eventOrder[event]
+	if configEventInfo[event] then
+		return configEventInfo[event].order
 	else
-		return 100
+		return 50
 	end
 end
 
@@ -855,7 +876,9 @@ local function GetSpellConfigInfo(selected)
 		local spellTable = {}
 		table.insert(spellTable, selected.spellID)
 		for k in pairs(selected.additionalSpellIDs) do
-			table.insert(spellTable, k)
+			if selected.additionalSpellIDs == true then
+				table.insert(spellTable, k)
+			end
 		end
 		for i = 1,#spellTable do
 			if IsPlayerSpell(spellTable[i]) then
@@ -1499,17 +1522,42 @@ local function GenerateSpellOptions(section)
 										RSA.db.profile[section][k].comm = value
 									end,
 								},
-								commSpacer = {
+								throttle = {
+									name = L["Throttle Duration"],
+									desc = L["Prevents multiple announcements from occuring within this duration. Useful for abilities that can affect multiple targets at the same time. Select 0 to disable."],
+									order = 1.1,
+									type = 'range',
+									min = 0,
+									max = 300,
+									softMin = 0,
+									softMax = 30,
+									step = 0.001,
+									bigStep = 0.1,
+									get = function(info)
+										if not RSA.db.profile[section][k].throttle then
+											return 0
+										end
+										return RSA.db.profile[section][k].throttle
+									end,
+									set = function(info, value)
+										if value ~= 0 then
+											RSA.db.profile[section][k].throttle = value
+										else
+											RSA.db.profile[section][k].throttle = nil
+										end
+									end,
+								},
+								throttleSpacer = {
 									name = "",
 									type = 'description',
-									order = 0.3,
+									order = 1.2,
 									width = 'full',
 								},
 								addAdditionalSpellID = {
 									name = L["Additional Spell IDs"],
 									desc = L["If this spell has multiple spell IDs, such as if you are trying to announce different Portals, or if it is modified by a talent which changes its Spell ID, you can enter those additional IDs here. Entering an ID already in the list will prompt you to remove it."],
 									width = 0.8,
-									order = 1.1,
+									order = 2.1,
 									type = 'input',
 									validate = function(info, value)
 										if value == '' then return true end
@@ -1541,7 +1589,7 @@ local function GenerateSpellOptions(section)
 								additionalSpellIDs = {
 									name = L["List of Additional Spell IDs"],
 									desc = L["You can click a spell in this list to remove it."],
-									order = 1.4,
+									order = 2.2,
 									type = 'select',
 									width = 1.5,
 									confirm = function(info, value)
@@ -1579,13 +1627,13 @@ local function GenerateSpellOptions(section)
 								additionalSpellIDsSpacer = {
 									name = "",
 									type = 'description',
-									order = 1.3,
+									order = 2.3,
 									width = 'full',
 								},
 								customName = {
 									name = L["Custom Name"],
 									desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
-									order = 2.1,
+									order = 3.1,
 									type = 'input',
 									get = function(info)
 										return RSA.db.profile[section][k].configDisplay.customName
@@ -1598,7 +1646,7 @@ local function GenerateSpellOptions(section)
 								customDesc = {
 									name = L["Custom Description"],
 									desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
-									order = 2.2,
+									order = 3.2,
 									width = 1.5,
 									type = 'input',
 									get = function(info)
