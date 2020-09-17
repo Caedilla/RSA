@@ -2,7 +2,8 @@ local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local uClass = string.lower(select(2, UnitClass('player')))
 RSA.Monitor = {}
 
-local running = {}
+local curTracking = {}
+local curThrottled = {}
 local messageCache = {}
 local cacheTagSpellName = {}
 local cacheTagSpellLink = {}
@@ -36,6 +37,10 @@ local function CommCheck(currentSpell)
 		end
 	end
 	return canAnnounce
+end
+
+function RSA:ExposeRunning()
+_G.runningTable = curTracking
 end
 
 local function BuildMessageCache(currentSpell, monitorData, event, fakeEvent)
@@ -78,13 +83,152 @@ function RSA:WipeMessageCache()
 	wipe(messageCache)
 end
 
-function RSA:ExposeMessageCache()
-	_G.messageCache = messageCache
+function RSA:ExposeTables()
+	_G.RSA_messageCache = messageCache
+	_G.RSA_curTracking = curTracking
+	_G.RSA_curThrottled = curThrottled
+	_G.cacheTagSpellName = cacheTagSpellName
+	_G.cacheTagSpellName = cacheTagSpellLink
 end
 
-local function ProcessSpell(monitorData, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 
-	local currentSpell = RSA.db.profile[uClass][monitorData]
+-- Situations that can occur:
+-- SPELL_CAST_SUCCESS + SPELL_AURA_APPLIED
+-- SPELL_AURA_REMOVED + Other
+
+
+local function Tracker(currentSpell, profileName, event)
+	local tracker = currentSpell.events[event].tracker or nil
+	if tracker then
+		print(('|cFF00FF000: Tracker triggered: %s|r'):format(event))
+		if tracker == 2 then -- Begin or increment tracker.
+			if not curTracking[profileName] then
+				print('S: create tracker')
+				curTracking[profileName] = {
+					['events'] = {
+						[event] = {
+							['count'] = 1,
+						}
+					},
+				}
+				return true
+			elseif curTracking[profileName].count then -- We started triggering the end of the tracker but we have a new tracker trying to start so reset the tracker.
+			print('S: reset tracker')
+				curTracking[profileName] = nil
+				curTracking[profileName] = {
+					['events'] = {
+						[event] = {
+							['count'] = 1,
+						}
+					},
+				}
+				return true
+			else
+				local matched
+				for k in pairs(curTracking[profileName].events) do
+					if k == event and not matched then
+						print(('S: increment current event: %s'):format(event))
+						-- Increment counter but don't announce because we're already tracking this profile.
+						matched = true
+						curTracking[profileName].events[k].count = curTracking[profileName].events[k].count + 1
+						return false
+					end
+				end
+				if not matched then
+					print('S: not matched add event to tracker')
+					-- New event for this profile, but don't announce because it's also selected as a starting announcement.
+					curTracking[profileName].events[event] = {count = 1}
+					return false
+				end
+			end
+		elseif tracker == 1 then -- End or decrement tracker.
+			if not curTracking[profileName] then
+				print('F: no tracker found')
+				return false -- Nothing started the tracker so this must be from some other type of effect.
+			else
+				if not curTracking[profileName].count then
+					print('F: no total Count found')
+					local highestCount = 0
+					for k in pairs(curTracking[profileName].events) do
+						if curTracking[profileName].events[k].count > highestCount then
+							highestCount = curTracking[profileName].events[k].count
+							print(('F: create total count: %d'):format(highestCount))
+						end
+					end
+					if highestCount > 1 then
+						print('F: reduce newly created total count')
+						curTracking[profileName].count = highestCount - 1
+						return false
+					else
+						print('F: newly created total count already below 1. WIPE data.')
+						curTracking[profileName] = nil
+						return true
+					end
+				else
+					if curTracking[profileName].count > 1 then
+						print('F: total Count exists, reduce by 1')
+						curTracking[profileName].count = curTracking[profileName].count -1
+						return false
+					elseif curTracking[profileName].count == 1 then
+						print('F: total count exists and is already at 1. WIPE data.')
+						curTracking[profileName] = nil
+						return true
+					end
+				end
+			end
+		end
+	end
+	return true
+
+--[[
+	tracker = currentSpell.events[event].tracker or nil -- Tracks spells like AoE Taunts to prevent multiple messages playing.
+	if tracker then
+		print(tracker)
+		print(event)
+		if tracker == 1 and curTracking[profileName] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
+		if tracker == 1 and curTracking[profileName] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
+		if tracker == 2 then
+			if curTracking[profileName] ~= nil then
+				if curTracking[profileName] >= 0 and curTracking[profileName] < 500 then -- Prevent multiple announcements of buff/debuff application.
+					curTracking[profileName] = curTracking[profileName] + 1
+					return
+				end
+			end
+			curTracking[profileName] = 0
+		end
+		if tracker == 1 and curTracking[profileName] == 0 then
+			curTracking[profileName] = curTracking[profileName] + 500
+		end
+		if tracker == 1 and curTracking[profileName] > 0 and curTracking[profileName] < 500 then
+			curTracking[profileName] = curTracking[profileName] - 1
+			return
+		end
+	end]]--
+end
+
+local function Throttle(currentSpell, profileName)
+	local throttle = currentSpell.throttle or nil
+	if throttle then
+		if throttle <= 0 then
+			return false
+		end
+		if not curThrottled[profileName] then
+			curThrottled[profileName] = GetTime()
+			return false
+		elseif curThrottled[profileName] + throttle >= GetTime() then
+			return true
+		else
+			curThrottled[profileName] = GetTime()
+			return false
+		end
+	end
+	return false
+end
+
+
+local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+
+	local currentSpell = RSA.db.profile[uClass][profileName]
 	if not currentSpell then return end
 	if not currentSpell.events[event] then return end
 
@@ -96,33 +240,14 @@ local function ProcessSpell(monitorData, extraSpellID, extraSpellName, extraScho
 	-- TODO: handle customDestUnit and parse it as well as customSourceUnit for valid units.
 
 	-- Track multiple occurences of the same spell to more accurately detect it's real end point.
-	local tracker = currentSpell.events[event].tracker or nil -- Tracks spells like AoE Taunts to prevent multiple messages playing.
-	if tracker then
-		if tracker == 1 and running[monitorData] == nil then return end -- Prevent announcement if we didn't start the tracker (i.e Tank Metamorphosis random procs from Artifact)
-		if tracker == 1 and running[monitorData] >= 500 then return end -- Prevent multiple announcements of buff/debuff removal.
-		if tracker == 2 then
-			if running[monitorData] ~= nil then
-				if running[monitorData] >= 0 and running[monitorData] < 500 then -- Prevent multiple announcements of buff/debuff application.
-					running[monitorData] = running[monitorData] + 1
-					return
-				end
-			end
-			running[monitorData] = 0
-		end
-		if tracker == 1 and running[monitorData] == 0 then
-			running[monitorData] = running[monitorData] + 500
-		end
-		if tracker == 1 and running[monitorData] > 0 and running[monitorData] < 500 then
-			running[monitorData] = running[monitorData] - 1
-			return
-		end
-	end
+	--if not Tracker(currentSpell, profileName, event) then return end
+	if Throttle(currentSpell, profileName) then	return end
 
 	local fakeEvent
 	if ex1 == 'IMMUNE' and event == 'SPELL_MISSED' then
-		fakeEvent = 'RSA_SPELL_MISSED_IMMUNE'
+		fakeEvent = 'RSA_SPELL_IMMUNE'
 	end
-	local message = BuildMessageCache(currentSpell, monitorData, event, fakeEvent)
+	local message = BuildMessageCache(currentSpell, profileName, event, fakeEvent)
 	if not message then return end
 
 	-- Build Spell Name and Link Cache
@@ -199,7 +324,7 @@ local function ProcessSpell(monitorData, extraSpellID, extraSpellName, extraScho
 		if currentSpell.events[event].groupRequired then -- Used in Mage Teleports, only locally announces if you are in a group.
 			if not (GetNumSubgroupMembers() > 0 or GetNumGroupMembers() > 0) then return end
 		end
-		RSA.SendMessage.LibSink(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.LibSink(gsub(message, '.%a+.', replacements))
 	end
 
 	if currentSpell.comm then -- Track group announced spells using RSA.Comm (AddonMessages)
@@ -208,30 +333,30 @@ local function ProcessSpell(monitorData, extraSpellID, extraSpellName, extraScho
 	end
 
 	if currentSpell.events[event].channels.yell == true then
-		RSA.SendMessage.Yell(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.Yell(gsub(message, '.%a+.', replacements))
 	end
 	if currentSpell.events[event].channels.whisper == true and UnitExists(longName) and RSA.Whisperable(destFlags) then
 		RSA.SendMessage.Whisper(message, longName, replacements, destName)
 	end
 	if currentSpell.events[event].channels.say == true then
-		RSA.SendMessage.Say(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.Say(gsub(message, '.%a+.', replacements))
 	end
 	if currentSpell.events[event].channels.emote == true then
-		RSA.SendMessage.Emote(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.Emote(gsub(message, '.%a+.', replacements))
 	end
 
 	local announced = false
 	if currentSpell.events[event].channels.party == true then
-		if RSA.SendMessage.Party(gsub(message, ".%a+.", replacements)) == true then announced = true end
+		if RSA.SendMessage.Party(gsub(message, '.%a+.', replacements)) == true then announced = true end
 	end
 	if currentSpell.events[event].channels.raid == true then
-		if RSA.SendMessage.Raid(gsub(message, ".%a+.", replacements)) == true then announced = true end
+		if RSA.SendMessage.Raid(gsub(message, '.%a+.', replacements)) == true then announced = true end
 	end
 	if currentSpell.events[event].channels.instance == true then
-		if RSA.SendMessage.Instance(gsub(message, ".%a+.", replacements)) == true then announced = true end
+		if RSA.SendMessage.Instance(gsub(message, '.%a+.', replacements)) == true then announced = true end
 	end
 	if currentSpell.events[event].channels.smartGroup == true and announced == false then
-		RSA.SendMessage.SmartGroup(gsub(message, ".%a+.", replacements))
+		RSA.SendMessage.SmartGroup(gsub(message, '.%a+.', replacements))
 	end
 
 end
@@ -240,7 +365,7 @@ local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 
 	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
-		--print(event .. ": " .. tostring(spellID) .. " - " .. spellName)
+	--	print(event .. ': ' .. tostring(spellID) .. ' - ' .. spellName)
 	end
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
@@ -284,8 +409,8 @@ end
 function RSA.Monitor.Start()
 	local monitorFrame = _G['RSACombatLogMonitor'] or nil
 	if not monitorFrame then
-		monitorFrame = CreateFrame("Frame", "RSACombatLogMonitor")
-		monitorFrame:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+		monitorFrame = CreateFrame('Frame', 'RSACombatLogMonitor')
+		monitorFrame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
 	end
 
 	monitorFrame:SetScript('OnEvent', nil)

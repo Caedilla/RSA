@@ -17,6 +17,7 @@ local paladinData = {
 	},
 	['ardentDefender'] = {
 		spellID = 31850,
+		throttle = 0.25,
 		configDisplay = {
 			disabledChannels = {whisper = true},
 		},
@@ -75,7 +76,7 @@ local paladinData = {
 				},
 			},
 			--TODO: Support fake events in monitor.
-			['RSA_SPELL_MISSED_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
@@ -352,7 +353,7 @@ local paladinData = {
 					EXTRA = true,
 				},
 			},
-			['RSA_SPELL_MISSED_IMMUNE'] = {
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
@@ -408,7 +409,7 @@ local paladinData = {
 				},
 			},
 			--TODO: Support fake events in monitor.
-			['RSA_SPELL_MISSED_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
@@ -451,7 +452,7 @@ local paladinData = {
 					MISSTYPE = true,
 				},
 			},
-			['RSA_SPELL_MISSED_IMMUNE'] = {
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
