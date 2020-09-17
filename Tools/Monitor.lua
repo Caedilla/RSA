@@ -365,7 +365,7 @@ local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 
 	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
-	--	print(event .. ': ' .. tostring(spellID) .. ' - ' .. spellName)
+		print(event .. ': ' .. tostring(spellID) .. ' - ' .. spellName)
 	end
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3

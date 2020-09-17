@@ -34,7 +34,7 @@ local configEventInfo = {
 	['SPELL_CAST_START'] = {
 		localisedName = L["Start"],
 		desc = L["When the casting of this spell begins."],
-		order = 4,
+		order = 0,
 	},
 	['SPELL_AURA_APPLIED'] = {
 		localisedName = L["Aura Applied"],
@@ -86,6 +86,17 @@ local configEventInfo = {
 		desc = L["When the target is immune to your spell."],
 		advDesc = L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Immune."],
 		order = 11,
+	},
+	['RSA_UNIT_ACCEPTED_RESS'] = {
+		localisedName = L["Resurrected"],
+		desc = L["When the target of this spell accepts the resurrection."],
+		advDesc = L["A Fake event supplied by RSA to that occurs when a player accepts a ressurect."],
+		order = 12,
+	},
+	['SPELL_AURA_REMOVED'] = {
+		localisedName = L["Aura Removed"],
+		desc = L["When this buff or debuff is expires."],
+		order = 13,
 	},
 }
 
