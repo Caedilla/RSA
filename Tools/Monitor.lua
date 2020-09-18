@@ -291,7 +291,7 @@ local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraScho
 	local tagReplacements = currentSpell.events[event].tags or {}
 	-- TODO: Add fallbacks in case people try to enable tags where there is no appropriate replacement.
 	if tagReplacements.TARGET then replacements['[TARGET]'] = destName end
-	if tagReplacements.SOURCE then replacements['[TARGET]'] = sourceName end
+	if tagReplacements.SOURCE then replacements['[SOURCE]'] = sourceName end
 	if tagReplacements.AMOUNT then replacements['[AMOUNT]'] = ex1 end
 	if tagReplacements.EXTRA then
 		local name = cacheTagSpellName[extraSpellID]
@@ -366,6 +366,9 @@ local function HandleEvents()
 
 	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
 		print(event .. ': ' .. tostring(spellID) .. ' - ' .. spellName)
+		if event == 'SPELL_AURA_BROKEN' then
+			print(event .. ': ' .. tostring(ex1) .. ' - ' .. ex2)
+		end
 	end
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
