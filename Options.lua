@@ -51,52 +51,62 @@ local configEventInfo = {
 		desc = L["When this spell is cast. If the spell has a cast-time, this is when you finish the cast. If the spell is instant, this is when the spell begins its effect."],
 		order = 4,
 	},
+	['SPELL_RESURRECT'] = {
+		localisedName = L["Resurrect"],
+		desc = L["When this resurrection spell finishes, giving the target the option to return to life."],
+		order = 5,
+	},
 	['SPELL_DISPEL'] = {
 		localisedName = L["Dispel"],
 		desc = L["When this spell removes a buff or debuff."],
-		order = 5,
+		order = 6,
+	},
+	['SPELL_DISPEL_MISSED'] = {
+		localisedName = L["Dispel Resist"],
+		desc = L["When this spell is resisted by the target."],
+		order = 7,
 	},
 	['SPELL_DAMAGE'] = {
 		localisedName = L["Damage"],
 		desc = L["When this spell causes damage."],
-		order = 6,
+		order = 8,
 	},
 	['SPELL_HEAL'] = {
 		localisedName = L["Heal"],
 		desc = L["When this spell causes healing."],
-		order = 7,
+		order = 9,
 	},
 	['SPELL_ABSORBED'] = {
 		localisedName = L["Damage Absorb"],
 		desc = L["When this spell absorbs damage or effects."],
-		order = 8,
+		order = 10,
 	},
 	['SPELL_INTERRUPT'] = {
 		localisedName = L["Interrupt"],
 		desc = L["When this spell interrupts another spell cast."],
-		order = 9,
+		order = 11,
 	},
 	['SPELL_MISSED'] = {
 		localisedName = RESIST,
-		desc = L["When this spell fails to connect with its target. See the Tag Options to configure what the [MISSTYPE] tag will turn into when used."],
-		order = 10,
+		desc = L["When this spell fails to connect with the target. See the Tag Options to configure what the [MISSTYPE] tag will turn into when used."],
+		order = 12,
 	},
 	['RSA_SPELL_IMMUNE'] = {
 		localisedName = IMMUNE,
 		desc = L["When the target is immune to your spell."],
 		advDesc = L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Immune."],
-		order = 11,
+		order = 13,
 	},
 	['RSA_UNIT_ACCEPTED_RESS'] = {
-		localisedName = L["Resurrected"],
+		localisedName = L["Accepted Resurrect"],
 		desc = L["When the target of this spell accepts the resurrection."],
 		advDesc = L["A Fake event supplied by RSA to that occurs when a player accepts a ressurect."],
-		order = 12,
+		order = 14,
 	},
 	['SPELL_AURA_REMOVED'] = {
 		localisedName = L["Aura Removed"],
 		desc = L["When this buff or debuff is expires."],
-		order = 13,
+		order = 15,
 	},
 }
 
@@ -944,7 +954,7 @@ end
 
 local function ConfigSpellEnvironments(section, k)
 	local environments = {
-		name = L["Environments"],
+		name = '|c' .. colors['titles'] .. L["Environments"] .. '|r',
 		desc = L["Control the areas of the game this spell is allowed to be announced."],
 		order = 90,
 		type = 'group',
@@ -1492,7 +1502,7 @@ local function GenerateSpellOptions(section)
 				},
 				spellConfig = {
 					-- TODO monitorData and spellData need to be rebuilt when we adjust spell config values. Function also needs to build from profile data.
-					name = L["Spell Setup"],
+					name = '|c' .. colors['titles'] .. L["Spell Setup"] .. '|r',
 					desc = L["Configure how this spell functions."],
 					order = 1000,
 					type = 'group',

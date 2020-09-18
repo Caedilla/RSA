@@ -25,7 +25,7 @@ local paladinData = {
 			['SPELL_HEAL'] = {
 				uniqueSpellID = 66235, -- Ardent Defender uses a different spell ID when the heal effect triggers.
 				tracker = 1, -- Tells the monitor to not announce any further messages for this spell, so that we don't also announce the finishing message.
-				messages = {"[LINK] saved my life and healed me for [AMOUNT] hp!",},
+				messages = {"[LINK] saved my life and healed me for [AMOUNT]!",},
 				tags = {AMOUNT = true,},
 			},
 			['SPELL_CAST_SUCCESS'] = {
@@ -75,7 +75,6 @@ local paladinData = {
 					EXTRA = true,
 				},
 			},
-			--TODO: Support fake events in monitor.
 			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
@@ -408,7 +407,6 @@ local paladinData = {
 					EXTRA = true,
 				},
 			},
-			--TODO: Support fake events in monitor.
 			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
