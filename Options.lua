@@ -61,7 +61,7 @@ local configEventInfo = {
 		desc = L["When this spell removes a buff or debuff."],
 		order = 6,
 	},
-	['SPELL_DISPEL_MISSED'] = {
+	['SPELL_DISPEL_FAILED'] = {
 		localisedName = L["Dispel Resist"],
 		desc = L["When this spell is resisted by the target."],
 		order = 7,
@@ -107,6 +107,17 @@ local configEventInfo = {
 		localisedName = L["Aura Removed"],
 		desc = L["When this buff or debuff is expires."],
 		order = 15,
+	},
+	['SPELL_AURA_BROKEN_SPELL'] = {
+		localisedName = L["CC Broken"],
+		desc = L["When this CC ability is broken prematurely by another spell."],
+		order = 16,
+	},
+	['RSA_END_TIMER'] = {
+		localisedName = L["End"],
+		desc = L["When the spell's usual duration ends."],
+		advDesc = L["A Fake event supplied by RSA to trigger an announcement after a set number of seconds. Useful when a spell doesn't have an appropriate combat log event to track when it expires. You can modify the duration in the Spell Setup tab."],
+		order = 17,
 	},
 }
 
