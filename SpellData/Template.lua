@@ -2,6 +2,7 @@
 local fullTemplate = {
 	['profileName'] = {
 		spellID = 31850,
+		throttle = 2.25, -- Prevent any subsequent announcements from this profile for this amount of time after it has already caused an announcement. A spell can belong to multiple profiles, this just limits announcemenets tied to this profile.
 		additionalSpellIDs = {[1044] = true,}, -- key, value list of any alternate variants of this spell, like if you want to use one announcement for all mage portal spells.
 		comm = false, -- Only required if you want to use the Addon Comms to determine if you are allowed to announce this spell.
 		configDisplay = {
@@ -10,7 +11,7 @@ local fullTemplate = {
 			customDesc = 'My custom description',
 			customName = 'My custom spell name',
 		},
-		environments = { -- entire environment table supplied with following values if not manually entered.
+		environments = { -- Entire environment table supplied with following values if not manually entered.
 			useGlobal = true, -- This spell will use the global envrionment settings to determine where it can announce, this overrides the other values in this section.
 			alwaysWhisper = false, -- Allows whispers to always be sent.
 			enableIn = {
@@ -31,20 +32,17 @@ local fullTemplate = {
 				whisper = true,
 			},
 			combatState = {
-				inCombat = true, -- Announce only in Combat
-				noCombat = false, -- Announce not in Combat
+				inCombat = true, -- Allow announcements while in Combat
+				noCombat = false, -- Allow announcements while not in Combat
 			},
 		},
 		events = {
-			SPELL_HEAL = {
+			SPELL_HEAL = { -- Combat log event. RSA also has various "fake" events to help with certain spells where a real event doesn't easily get the job done.
 				uniqueSpellID = 66235, -- Ardent Defender uses a different spell ID when the heal effect triggers.
 				tracker = 1, -- Tells the monitor to not announce any further messages for this spell, so that we don't also announce the finishing message.
-				tags = { -- The types of tags this particular event can replace. Each type is implied false if not supplied.
+				tags = { -- The types of tags this particular event can replace. Each is implied false if not supplied.
 					TARGET = true,
-					SOURCE = true,
-					MISSTYPE = true,
 					AMOUNT = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
 				},
 				messages = {
 					"[LINK] saved my life and healed me for [AMOUNT] hp!",
@@ -81,15 +79,11 @@ local fullTemplate = {
 				messages = {"[LINK] faded!",},
 				channels = {emote = true,},
 			},
-			SPELL_MISSED = {
-				messages = {'blah'},
-				immuneMessages = {'blah'}, -- immuneMessages is required for SPELL_MISSED events.
-			},
 		},
 	},
 }
 
--- Minimum required
+-- Minimum data for a valid spell profile.
 local minimalTemplate = {
 	['profileName'] = {
 		spellID = 31850,
