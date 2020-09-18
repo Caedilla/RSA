@@ -49,7 +49,7 @@ local paladinData = {
 			},
 			--TODO: Implement source/dest options and code support for event based targets and sources.
 			['SPELL_AURA_REMOVED'] = {
-				target = {'player'},
+				dest = {'player'},
 				messages = {"[LINK] finished!",},
 			},
 		},
@@ -61,7 +61,7 @@ local paladinData = {
 		},
 		events = {
 			['SPELL_INTERRUPT'] = {
-				messages = {"Interrupted [TARGET]'s [TARLINK]!",},
+				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
 					EXTRA = true, -- Replaces AURA and TARSPELL.
@@ -191,12 +191,13 @@ local paladinData = {
 	},
 	['cleanse'] = {
 		spellID = 4987,
+		throttle = 0.25,
 		additionalSpellIDs = {
 			[213644] = true, -- Cleanse Toxins
 		},
 		events = {
 			['SPELL_DISPEL'] = {
-				messages = {"Cleansed [TARGET]'s [AURALINK]!",},
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
 					EXTRA = true,
@@ -393,7 +394,7 @@ local paladinData = {
 		},
 		events = {
 			['SPELL_INTERRUPT'] = {
-				messages = {"Interrupted [TARGET]'s [TARLINK]!",},
+				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
 					EXTRA = true, -- Replaces AURA and TARSPELL.
@@ -442,6 +443,14 @@ local paladinData = {
 			['SPELL_AURA_REMOVED'] = {
 				messages = {"[LINK] on [TARGET] finished!",},
 				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
 			},
 			['SPELL_MISSED'] = {
 				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
