@@ -42,6 +42,21 @@ local priestData = {
 			},
 		},
 	},
+	['desperatePrayer'] = {
+		spellID = 19236,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_HEAL'] = {
+				messages = {"[LINK] activated, healing me for [AMOUNT]!",},
+				tags = {AMOUNT = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['dispelMagic'] = {
 		spellID = 528,
 		throttle = 0.25,
