@@ -1,48 +1,69 @@
-# RSA - Raeli's Spell Announcer
+# RSA5 - Raeli's Spell Announcer
 Easy spell announcements
 
 ## Download
 <https://www.curseforge.com/wow/addons/rsa>
 
-## About
-RSA is an addon that can announce spell casts to various chat channels. There is a large selection of abilities for each class that RSA can announce, such as interrupts, defensive cooldowns, and utility spells e.g Soulstone.
+# About
+RSA is an addon that can announce spell casts in the chat. It comes with a selection of spells already setup for every class, and can announce racial abilities and various other utilities such as repair bots or feasts.
 
-## Classic Support
-RSA Currently does not support classic. Support for classic may come in the upcoming weeks.
+## RSA5 - Shadowlands & Classic support
+With the Shadowlands comes a new version of RSA that gives you finer control over your announcements. You can now announce each event in different channels and configure on a per spell basis which content you want to be able to announce it in.
 
-## Options & Features
+Additionally, you will soon be able to add your own spell profiles to RSA, allowing you to easily announce any spell that is currently not included with RSA. You can see the groundwork of this in the Spell Setup when configuring a spell within RSA.
+
+As for Classic - This finally means that RSA will work in Classic. The default included spells will be initially limited, but you'll be able to add your own, so that should be ok!
+
+By default RSA's configuration panel will look largely similar to how it has looked for the past few years. In order to expose the more advanced settings, you will need to turn on the advanced mode option.
+
+## I don't like change
+For those of you that aren't eager to change just yet - the 9.0 Pre-patch version of RSA should continue working for some time to come, giving you plenty of time to switch in the future.
+
+## What about my old settings?
+RSA5 stores its settings in the same file as your old settings, but it saves them seperately. Your settings are all stored inside the RSA.lua file in the following folder:
+
+    World of Warcraft\_retail_\WTF\Account\AccountID#\SavedVariables\
+
+If you want to go and copy old messages, you'll be able to easily find them all there, and then copy and paste them in-game to RSA5. Or if you go back to the previous version of RSA, they'll be there waiting.
+
+# Options & Features
 You can open RSA's configuration window by typing **/rsa** in chat. You can alternatively go to the addon settings tab in the Interface options, and find RSA in your list of addons, which has a button to open RSA's configuration panel.
-### Announcement Conditions
-You can configure RSA to only send messages when you are doing certain content or under certain conditions:
 
-* **PvP:** Choose whether to enable in Arenas, Battlegrounds, and War Mode.
-* **PvE:** Choose whether to enable in manually formed Dungeons, Raids, LFG Dungeons, LFG Raids, or out in the world when War Mode is off.
-* Choose whether to only announce in Combat
-* Whispers can be set to ignore the PvP & PvE settings to allow them to always whisper targets. Useful if you always want to let someone know when you're resurrecting them for example.
+## Environments
+Environments are settings that configure where RSA is allowed to announce spells in. These can be configured on a global level, but each spell can also individually have its own options that can differ from the global settings, allowing you finer control.
 
-### Messages
-* The messages sent by RSA are completely customisable, you can add several messages for each announcement, and RSA will choose a random one to use each time.
-* You can remove messages by simply clearing the box containing your message and pressing enter, this will remove it from the list of potential messages.
-* If you have no messages for a given spell or section, then it will not announce.
-* You can use the Tags below in your messages to make your messages more informative.
+As an example, you can make sure that your interrupts can always announce, but your defensive cooldowns only announce when you're inside a raid.
 
-### Tags
-Every spell uses the first two tags, other tags are usable only on spells where they would return anything useful.
+## Announcements
+Every spell has it's own section where you can configure everything about it from what in-game channel RSA announces the spell in, to what RSA says when it does announce that spell.
+
+Advanced users can also configure which [CLEU](https://wow.gamepedia.com/COMBAT_LOG_EVENT) events a spell tracks and relevant data such as spell IDs or throttle the ammount of announcements in a given time-frame.
+
+## Tags
+RSA allows you to completely customise the message sent to chat when you cas a spell. Tags are a way of replacing part of the message with relevant information such as who the spell was cast on, or what spell you interrupted.
+
+Each spell shows which tags are valid for that spell. Advanced users adding their own spells will need to specify which tags are valid for that spell.
+
+To use a tag just write it as you see below in your message, including the square brackets.
 
 * **[SPELL]** will be replaced with the name of the spell.
 * **[LINK]** will be replaced by a clickable spell link of the spell cast.
 * **[TARGET]** will be replaced with the target of the spell.
 * **[AMOUNT]** will be replaced with the amount of damage or healing done.
 * **[MISSTYPE]** will be replaced with Immune/Blocked/Resisted etc.
-* **[AURA]** will be replaced with the buff or debuff removed by dispels.
-* **[AURALINK]** will be replaced with a clickable spell link of the buff or debuff removed by dispels.
-* **[TARCAST]** will be replaced by the spell that you have just interrupted.
-* **[TARLINK]** will be replaced by a clickable spell link of the spell that you have just interrupted.
 
-### Channels
+There are options that define the grammar of the replacements for MISSTYPE in the Tag Options tab, so that you can configure RSA's announcements to be gramatically correct in your own language.
+
+There are also two final tags that can do different things depending on the supported spell. These are:
+* **[EXTRA]**
+* **[EXTRALINK]**
+
+With a like Purge, these would function like the **[SPELL]** and **[LINK]** tags, but they would instead be replaced with the buff that Purge removed. With an interrupt, they would show which the enemy was trying to cast. It also works when someone breaks CC effects to show what ability broke the effect.
+
+## Channels
 Each spell can be announced in a variety of different channels:
 
-* **Local** - Sends a message locally only visible to you. You can choose which part of your UI this is sent to in the Local Message Output Area in the General Options.
+* **Local Output** - Sends a message locally only visible to you. You can choose which part of your UI this is sent to in the Local Message Output Area in the General Options.
 * **Instance** - Sends to /instance if you're in an instance group.
 * **Raid** - Sends to /raid or /instance depending on what is most appropriate.
 * **Party** -Sends to /party or /instance depending on what is most appropriate.
@@ -50,12 +71,11 @@ Each spell can be announced in a variety of different channels:
 * **Say** - Can only be used inside instances since 8.2.5.
 * **Yell** - Can only be used inside instances since 8.2.5.
 * **Emote**
-* **Whisper** - sends a whisper to the target. Only available if the target has the potential to be someone other than yourself.
+* **Whisper** - sends a whisper to the target of the spell. Obviously this only works when the target of the spell is a friendly player.
 
-#### 8.2.5 API Changes
-Blizzard made an unannounced change to limit [ClassicLFG](https://www.curseforge.com/wow/addons/classiclfg)'s ability to post LFG messages. Why they decided to also make this change to the live client, I don't know. The end result though is that custom channel announcements are no longer possible, and sending to Say or Yell is no longer possible outside of instances as it requires a button press outside of instances.
+Many of these are affected by other settings. For example, Say, Yell, Emote, and Whisper all have options to only allow them to work when you are in a group of some sort.
 
-## Feedback & Support
+# Feedback & Support
 
 You can [report issues on Curseforge](https://wow.curseforge.com/projects/rsa/issues) or contact me directly on [Discord](https://discord.gg/99QZ6sd).
 
