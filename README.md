@@ -17,7 +17,9 @@ As for Classic - This finally means that RSA will work in Classic. The default i
 By default RSA's configuration panel will look largely similar to how it has looked for the past few years. In order to expose the more advanced settings, you will need to turn on the advanced mode option.
 
 ## I don't like change
-For those of you that aren't eager to change just yet - the 9.0 Pre-patch version of RSA should continue working for some time to come, giving you plenty of time to switch in the future.
+For those of you that aren't eager to change just yet - the 9.0.1 Pre-patch version of RSA should continue working for some time to come, giving you plenty of time to switch in the future.
+
+The 9.0.1 version of RSA is available [here](https://www.curseforge.com/wow/addons/rsa/files/3058655).
 
 ## What about my old settings?
 RSA5 stores its settings in the same file as your old settings, but it saves them seperately. Your settings are all stored inside the RSA.lua file in the following folder:
