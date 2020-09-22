@@ -136,7 +136,7 @@ function RSA:OnInitialize()
 
 	local defaults = BuildDefaults()
 
-	self.db = LibStub("AceDB-3.0"):New("RSADB", defaults, UnitClass('player')) -- Setup Saved Variables
+	self.db = LibStub("AceDB-3.0"):New("RSA5", defaults, UnitClass('player')) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
 	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass])

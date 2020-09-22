@@ -3,7 +3,7 @@
 ## Notes: Easy Spell Announcements!
 ## Author: Raeli
 ## Version: @project-version@
-## SavedVariables: RSADB
+## SavedVariables: RSADB, RSA5
 ## OptionalDeps: Ace3, LibDualSpec-1.0, LibSink-2.0, LibResInfo-1.0
 ## X-Credits: Jenneth, Rowaasr13, Xadurk
 ## X-Curse-Project-ID: 21464
