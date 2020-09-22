@@ -1,6 +1,6 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 
-local priestData = {
+local defaults = {
 	['apotheosis'] = {
 		spellID = 200183,
 		configDisplay = {
@@ -487,7 +487,6 @@ local priestData = {
 				tags = {
 					TARGET = true,
 					MISSTYPE = true,
-					EXTRA = true,
 				},
 			},
 			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
@@ -530,4 +529,4 @@ local priestData = {
 	},
 }
 
-RSA.monitorData.priest, RSA.configData.priest = RSA.PrepareDataTables(priestData)
+RSA.monitorData.priest, RSA.configData.priest = RSA.PrepareDataTables(defaults)

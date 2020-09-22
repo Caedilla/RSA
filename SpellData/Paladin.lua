@@ -1,6 +1,6 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 
-local paladinData = {
+local defaults = {
 	['absolution'] = {
 		spellID = 212056,
 		configDisplay = {
@@ -72,7 +72,6 @@ local paladinData = {
 				tags = {
 					TARGET = true,
 					MISSTYPE = true,
-					EXTRA = true,
 				},
 			},
 			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
@@ -342,7 +341,6 @@ local paladinData = {
 				messages = {"Taunted [TARGET]!",},
 				tags = {
 					TARGET = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
 				},
 			},
 			['SPELL_MISSED'] = {
@@ -350,7 +348,6 @@ local paladinData = {
 				tags = {
 					TARGET = true,
 					MISSTYPE = true,
-					EXTRA = true,
 				},
 			},
 			['RSA_SPELL_IMMUNE'] = {
@@ -405,7 +402,6 @@ local paladinData = {
 				tags = {
 					TARGET = true,
 					MISSTYPE = true,
-					EXTRA = true,
 				},
 			},
 			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
@@ -484,4 +480,4 @@ local paladinData = {
 	},
 }
 
-RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(paladinData)
+RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(defaults)
