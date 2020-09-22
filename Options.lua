@@ -119,6 +119,11 @@ local configEventInfo = {
 		advDesc = L["A Fake event supplied by RSA to trigger an announcement after a set number of seconds. Useful when a spell doesn't have an appropriate combat log event to track when it expires. You can modify the duration in the Spell Setup tab."],
 		order = 17,
 	},
+	['SPELL_INSTAKILL'] = {
+		localisedName = L["Killed"],
+		desc = L["When this spell instantly kills the target."],
+		order = 18,
+	},
 }
 
 local channels = {
