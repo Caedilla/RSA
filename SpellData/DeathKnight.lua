@@ -188,7 +188,7 @@ local defaults = {
 		},
 	},
 	['perdition'] = { -- Forbearance effect of Purgatory
-		spellID = 114556,
+		spellID = 114556, -- ID of the talent so [LINK] links that, rather than Perdition. Unused in any events since all have a uniqueSpellID.
 		configDisplay = {
 			defaultName = L["Purgatory Cooldown"],
 			defaultDesc = '|cffFFCC00'..GetSpellInfo(123981) .. ':|r |cffd1d1d1' .. GetSpellDescription(123981) .. '|r',
@@ -202,7 +202,7 @@ local defaults = {
 		},
 	},
 	['purgatory'] = {
-		spellID = 116888,
+		spellID = 114556,  -- ID of the talent so [LINK] links that, rather than Shroud of Purgatory. Unused in any events since all have a uniqueSpellID.
 		throttle = 0.25,
 		configDisplay = {
 			disabledChannels = {whisper = true},
@@ -214,10 +214,12 @@ local defaults = {
 				messages = {"[LINK] killed me!",},
 			},
 			['SPELL_AURA_APPLIED'] = {
+				uniqueSpellID = 116888,
 				tracker = 2,
 				messages = {"[LINK] saved my life!",},
 			},
 			['SPELL_AURA_REMOVED'] = {
+				uniqueSpellID = 116888,
 				tracker = 1,
 				messages = {"[LINK] healing absorb removed!",},
 			},
