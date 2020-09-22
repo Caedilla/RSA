@@ -232,10 +232,6 @@ local defaults = {
 				messages = {"Resurrected [TARGET]!",},
 				tags = {TARGET = true,},
 			},
-			['SPELL_CAST_START'] = {
-				messages = {"Casting [LINK] on [TARGET]!",},
-				tags = {TARGET = true,},
-			},
 		},
 	},
 	['runeTap'] = {
