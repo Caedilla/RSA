@@ -202,7 +202,7 @@ local defaults = {
 		},
 	},
 	['purgatory'] = {
-		spellID = 114556,  -- ID of the talent so [LINK] links that, rather than Shroud of Purgatory. Unused in any events since all have a uniqueSpellID.
+		spellID = 114556, -- ID of the talent so [LINK] links that, rather than Shroud of Purgatory. Unused in any events since all have a uniqueSpellID.
 		throttle = 0.25,
 		configDisplay = {
 			disabledChannels = {whisper = true},

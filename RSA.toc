@@ -8,11 +8,9 @@
 ## X-Credits: Jenneth, Rowaasr13, Xadurk
 ## X-Curse-Project-ID: 21464
 
-
 #@no-lib-strip@
 embeds.xml
 #@end-no-lib-strip@
-
 
 Localisation\Locale-enUS.lua
 Localisation\Locale-esES.lua
