@@ -177,7 +177,6 @@ local defaults = {
 				messages = {"[LINK] activated!",},
 			},
 			['SPELL_AURA_REMOVED'] = {
-				dest = {'player'},
 				messages = {"[LINK] finished!",},
 			},
 		},
@@ -197,17 +196,47 @@ local defaults = {
 			},
 		},
 	},
+	['feralSpirit'] = {
+		spellID = 51533,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['fireElemental'] = {
+		spellID = 198067,
+		additionalSpellIDs = {
+			[118291] = true,
+			[188592] = true,
+		},
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 --[[
 Earthgrab Totem
-Feral Spirit
-Fire Elemental
+-----------------------Feral Spirit
+-----------------------Fire Elemental
 Grounding Totem
 Healing Tide Totem
-Hex
-Purge
-Reincarnation
+-----------------------Reincarnation
 Spirit Link Totem
-Thunderstorm
+-----------------------Thunderstorm
 Tremor Totem
 Wind Rush Totem
 ]]--
@@ -280,6 +309,28 @@ Wind Rush Totem
 					TARGET = true,
 					MISSTYPE = true,
 				},
+			},
+		},
+	},
+	['reincarnation'] = {
+		spellID = 21169,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"Resurrected myself with [LINK]!",},
+			},
+		},
+	},
+	['thunderstorm'] = {
+		spellID = 51490,
+		configDisplay = {
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
 			},
 		},
 	},
