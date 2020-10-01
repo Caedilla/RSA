@@ -38,7 +38,7 @@ local defaults = {
 				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
+					EXTRA = true,
 				},
 			},
 			['SPELL_MISSED'] = {
@@ -48,7 +48,7 @@ local defaults = {
 					MISSTYPE = true,
 				},
 			},
-			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,

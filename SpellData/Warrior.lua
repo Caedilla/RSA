@@ -158,7 +158,7 @@ local defaults = {
 			},
 		},
 	},
-	-- Spell Reflection
+	--TODO: Spell Reflection
 	['stormBolt'] = {
 		spellID = 132169,
 		configDisplay = {

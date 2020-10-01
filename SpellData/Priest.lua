@@ -268,7 +268,7 @@ local defaults = {
 				messages = {"[LINK] on [TARGET] finished!",},
 				tags = {TARGET = true,},
 			},
-			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
@@ -418,7 +418,6 @@ local defaults = {
 				messages = {"[LINK] on [TARGET] finished!",},
 				tags = {TARGET = true,},
 			},
-
 			-- TODO: Check source is source of spell breaking, not source of the CC itself.
 			['SPELL_AURA_BROKEN_SPELL'] = {
 				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
@@ -471,7 +470,7 @@ local defaults = {
 				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
+					EXTRA = true,
 				},
 			},
 			['SPELL_AURA_APPLIED'] = {
@@ -489,7 +488,7 @@ local defaults = {
 					MISSTYPE = true,
 				},
 			},
-			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
