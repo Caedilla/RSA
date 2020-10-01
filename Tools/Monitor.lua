@@ -110,6 +110,43 @@ local function Throttle(currentSpell, profileName)
 	return false
 end
 
+local bor,band = bit.bor, bit.band -- get a local reference to some bitlib functions for faster lookups
+local CL_OBJECT_PLAYER_MINE = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_AFFILIATION_MINE) -- construct a bitmask for a player controlled by me
+function RSA.IsMe(unitFlags)
+	if unitFlags == "Me" then return true end
+	if unitFlags == true then return true end
+	if unitFlags == false then return false end
+	if band(CL_OBJECT_PLAYER_MINE,unitFlags) == CL_OBJECT_PLAYER_MINE then
+		return true
+	end
+end
+
+local function MatchUnit(compareUnit, unitGUID, unitFlags, destRaidFlags)
+	local flag
+	if compareUnit == 'party' then
+		flag = COMBATLOG_OBJECT_AFFILIATION_PARTY
+	elseif compareUnit == 'raid' then
+		flag = COMBATLOG_OBJECT_AFFILIATION_RAID
+	end
+	if flag then
+		if bit.band(flag, unitFlags) == flag then
+			return true
+		end
+	end
+
+	--TODO support raid flags for target marks
+
+	local compareGUID = UnitGUID(compareUnit)
+	if compareGUID then
+		if unitGUID == compareGUID then
+			return true
+		end
+	end
+
+	return false
+end
+
+
 local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 
 	local currentSpell = RSA.db.profile[uClass][profileName]
@@ -121,6 +158,10 @@ local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraScho
 	if currentSpell.events[event].sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
 	if not currentSpell.events[event].customSourceUnit and not RSA.IsMe(sourceFlags) then return end
+	if currentSpell.events[event].dest then
+		if not MatchUnit(currentSpell.events[event].dest, destGUID, destFlags, destRaidFlags) then return end
+	end
+
 	-- TODO: handle customDestUnit and parse it as well as customSourceUnit for valid units.
 
 	if Throttle(currentSpell, profileName) then return end
