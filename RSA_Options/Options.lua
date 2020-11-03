@@ -2285,8 +2285,8 @@ local function Rogue_Options()
 		},
 		["Shiv"] = {
 			Profile = 'Shiv',
-			Name = GetSpellInfo(248744),
-			Desc = GetSpellDescription(248744),
+			Name = GetSpellInfo(5938),
+			Desc = GetSpellDescription(5938),
 			Message_Amount = 1,
 			Message_Areas = {'Dispel'},
 			Message_Channels_Disabled = {["Whisper"] = true},
@@ -3222,7 +3222,7 @@ local function Spell_Options(NonClass)
 	}
 	for i,v in pairs(Spells) do
 		if Spells[i] then
-			if not Spells[i].Name then print(Spells[i].Profile) else
+			if not Spells[i].Name then error('The following spell profile is causing an issue in RSA: ' .. Spells[i].Profile) else
 				Options.args[Spells[i].Name] = {
 					name = function()
 						if Spells[i].Race then
