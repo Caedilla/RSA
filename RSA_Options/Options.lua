@@ -1663,6 +1663,15 @@ local function Monk_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
+		['CelestialBrew'] = {
+			Profile = 'CelestialBrew',
+			Name = GetSpellInfo(322507),
+			Desc = GetSpellDescription(322507),
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
 	}
 	return Spells
 end
