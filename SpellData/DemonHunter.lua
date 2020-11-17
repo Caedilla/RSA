@@ -168,21 +168,21 @@ local defaults = {
 		},
 	},
 	['lastResort'] = { -- Forbearance effect of Last Resort
-	spellID = 209258, -- ID of the talent so [LINK] links that, rather than Perdition. Unused in any events since all have a uniqueSpellID.
-	configDisplay = {
-		disabledChannels = {whisper = true},
-	},
-	events = {
-		['SPELL_AURA_APPLIED'] = {
-			uniqueSpellID = 209261,
-			messages = {"[LINK] saved my life!",},
+		spellID = 209258, -- ID of the talent so [LINK] links that, rather than Perdition. Unused in any events since all have a uniqueSpellID.
+		configDisplay = {
+			disabledChannels = {whisper = true},
 		},
-		['SPELL_AURA_REMOVED'] = {
-			uniqueSpellID = 209261,
-			messages = {"[LINK] available again!",},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				uniqueSpellID = 209261,
+				messages = {"[LINK] saved my life!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				uniqueSpellID = 209261,
+				messages = {"[LINK] available again!",},
+			},
 		},
 	},
-},
 	-- TODO Check it on Beta.
 	['metamorposis'] = {
 		spellID = 187827,

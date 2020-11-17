@@ -12,7 +12,7 @@ local releasePriority = {
 	['release'] = 0,
 }
 
-function RSA.CommRegistry()
+function RSA.Comm.Registry()
 	--RSA:RegisterComm('RSA5', 'OnCommReceived')
 	RSA:RegisterComm('status', 'OnStatusReceived')
 	RSA:RegisterComm('version', 'OnVersionCheckReceived')

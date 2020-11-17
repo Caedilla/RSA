@@ -258,4 +258,4 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.hunter, RSA.configData.hunter = RSA.PrepareDataTables(defaults)
+RSA.monitorData.mage, RSA.configData.mage = RSA.PrepareDataTables(defaults)
