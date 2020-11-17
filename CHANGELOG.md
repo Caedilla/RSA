@@ -1,4 +1,3 @@
 # RSA r539-Release
 
-### Monk
-* Added Celestial Brew
+* Updated interface version for 9.0.2.
