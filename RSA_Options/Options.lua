@@ -1469,7 +1469,7 @@ local function Mage_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[10] = {
+		["IceBlock"] = {
 			Profile = 'IceBlock',
 			Name = GetSpellInfo(45438),
 			Desc = GetSpellDescription(45438),
@@ -1478,7 +1478,7 @@ local function Mage_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
-		[10] = {
+		["SlowFall"] = {
 			Profile = 'SlowFall',
 			Name = GetSpellInfo(130),
 			Desc = GetSpellDescription(130),
