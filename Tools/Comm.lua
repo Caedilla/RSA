@@ -14,22 +14,22 @@ local releasePriority = {
 
 function RSA.Comm.Registry()
 	--RSA:RegisterComm('RSA5', 'OnCommReceived')
-	RSA:RegisterComm('status', 'OnStatusReceived')
-	RSA:RegisterComm('version', 'OnVersionCheckReceived')
+	RSA:RegisterComm('RSA5Status', 'OnStatusReceived')
+	RSA:RegisterComm('RSA5V', 'OnVersionCheckReceived')
 end
 
 function RSA.VersionCheck(type)
 	if not type then return end
 	if type == 'joinedGroup' then
 		if IsInRaid() then
-			RSA:SendCommMessage('version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
+			RSA:SendCommMessage('RSA5V', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
 		elseif IsInGroup() then
-			RSA:SendCommMessage('version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
+			RSA:SendCommMessage('RSA5V', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
 		end
 	end
 	if type == 'guild' then
 		if IsInGuild() and type then
-			RSA:SendCommMessage('version', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, 'GUILD')
+			RSA:SendCommMessage('RSA5V', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, 'GUILD')
 		end
 	end
 end
@@ -55,9 +55,9 @@ function RSA.CheckGroupStatus(self, status)
 		RSA.db.global.personalID = RSA.GetPersonalID()
 	end
 	if IsInRaid() then
-		RSA:SendCommMessage('status', RSA.db.global.ID, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
+		RSA:SendCommMessage('RSA5Status', RSA.db.global.personalID, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
 	elseif IsInGroup() then
-		RSA:SendCommMessage('status', RSA.db.global.ID, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
+		RSA:SendCommMessage('RSA5Status', RSA.db.global.personalID, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
 	else
 		RSA.Comm.groupAnnouncer = nil
 		wipe(groupMembers)
