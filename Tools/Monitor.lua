@@ -39,10 +39,6 @@ local function CommCheck(currentSpell)
 	return canAnnounce
 end
 
-function RSA:ExposeRunning()
-_G.runningTable = curTracking
-end
-
 local function BuildMessageCache(currentSpell, monitorData, event, fakeEvent)
 	local currentSpellData = currentSpell.events[event]
 	if fakeEvent then
@@ -83,6 +79,7 @@ function RSA:WipeMessageCache()
 	wipe(messageCache)
 end
 
+-- For quicker reference while testing in game.
 function RSA:ExposeTables()
 	_G.RSA_messageCache = messageCache
 	_G.RSA_curTracking = curTracking
@@ -159,6 +156,7 @@ local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraScho
 
 	if not currentSpell.events[event].customSourceUnit and not RSA.IsMe(sourceFlags) then return end
 	if currentSpell.events[event].dest then
+		-- TODO currentSpell.events[event].dest is a table or valid units
 		if not MatchUnit(currentSpell.events[event].dest, destGUID, destFlags, destRaidFlags) then return end
 	end
 
@@ -287,12 +285,12 @@ end
 local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 
-	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
+--[[	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
 		print(event .. ': ' .. tostring(spellID) .. ' - ' .. spellName)
 		if event == 'SPELL_AURA_BROKEN' then
 			print(event .. ': ' .. tostring(ex1) .. ' - ' .. ex2)
 		end
-	end
+	end]]--
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 
