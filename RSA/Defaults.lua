@@ -1266,6 +1266,17 @@ local function Paladin()
 				},
 				SmartGroup = true,
 			},
+			TurnEvil = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] has ended!"},
+					Immune = {"[TARGET] is immune to my [LINK]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
 			Rebuke = {
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},

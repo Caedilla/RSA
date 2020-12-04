@@ -1916,6 +1916,15 @@ local function Paladin_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
+		['TurnEvil'] = {
+			Profile = 'TurnEvil',
+			Name = GetSpellInfo(10326),
+			Desc = GetSpellDescription(10326),
+			Message_Amount = 3,
+			Message_Areas = {'Start', 'End', 'Immune'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[MISSTYPE]'},
+		},
 	}
 	return Spells
 end
