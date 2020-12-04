@@ -290,6 +290,19 @@ local defaults = {
 			},
 		},
 	},
+	['powerInfusion'] = {
+		spellID = 10060,
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
 	['powerWordBarrier'] = {
 		spellID = 62618,
 		configDisplay = {
