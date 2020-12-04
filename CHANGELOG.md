@@ -1,3 +1,13 @@
-# RSA r540-Release
+# RSA r541-Release
 
-* Updated interface version for 9.0.2.
+### Mage
+* Added Oribos Portal & Teleport
+
+### Paladin
+* Added Turn Evil
+### Priest
+* Addded Power Infusion
+
+### Utilities
+* Added Eternal Cauldron
+* Added Disposable Spectrophasic Reanimator (New Engineer Ress)
