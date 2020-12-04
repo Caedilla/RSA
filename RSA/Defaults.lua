@@ -1478,6 +1478,16 @@ local function Priest()
 				},
 				SmartGroup = true,
 			},
+			PowerInfusion = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				SmartGroup = true,
+			},
 			Chastise = {
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},

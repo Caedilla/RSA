@@ -1983,6 +1983,15 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
 		},
+		["PowerInfusion"] = {
+			Profile = 'PowerInfusion',
+			Name = GetSpellInfo(10060),
+			Desc = GetSpellDescription(10060),
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
+		},
 		["Chastise"] = {
 			Profile = 'Chastise',
 			Name = GetSpellInfo(88625),
