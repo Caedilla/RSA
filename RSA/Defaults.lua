@@ -575,6 +575,15 @@ local function Druid()
 					Channel = "",
 				},
 			},
+			Convoke = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 			RemoveCorruption = {
 				Messages = {
 					Cast = {"Removed [TARGET]'s [AURALINK]!"},

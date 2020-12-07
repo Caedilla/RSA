@@ -150,6 +150,9 @@ function RSA_Druid:OnEnable()
 			[106951] = { -- Berserk
 				profile = 'Berserk',
 			},
+			[323764] = { -- Night Fae Convoke
+				profile = 'Convoke',
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[106898] = Config_StampedingRoar_End,
@@ -230,6 +233,10 @@ function RSA_Druid:OnEnable()
 			[2637] = { -- Hibernate
 				profile = 'Hibernate',
 				replacements = { TARGET = 1 },
+				section = "End",
+			},
+			[323764] = { -- Night Fae Convoke
+				profile = 'Convoke',
 				section = "End",
 			},
 		},

@@ -1148,6 +1148,15 @@ local function Druid_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
+		["Convoke"] = {
+			Profile = 'Convoke',
+			Name = GetSpellInfo(323764),
+			Desc = GetSpellDescription(323764),
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
 		["RemoveCorruption"] = {
 			Profile = 'RemoveCorruption',
 			Name = GetSpellInfo(2782) .. ' / ' .. GetSpellInfo(88423),
