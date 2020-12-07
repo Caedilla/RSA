@@ -1,13 +1,7 @@
-# RSA r541-Release
+# RSA r542-Release
 
-### Mage
-* Added Oribos Portal & Teleport
+### Druid
+* Added Thorns PvP Talent
+* Added Convoke the Spirits
 
-### Paladin
-* Added Turn Evil
-### Priest
-* Addded Power Infusion
-
-### Utilities
-* Added Eternal Cauldron
-* Added Disposable Spectrophasic Reanimator (New Engineer Ress)
+Please note: I don't have a druid to test, so Convoke the Spirits may or may not function as expected, please leave a report if it doesn't appear to be working correctly.
