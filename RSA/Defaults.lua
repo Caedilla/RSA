@@ -477,6 +477,15 @@ local function Druid()
 					Channel = "",
 				},
 			},
+			Thorns = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] ended!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 			SkullBash = {
 				Messages = {
 					Interrupt = {"Interrupted [TARGET]'s [TARLINK]!"},

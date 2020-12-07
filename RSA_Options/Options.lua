@@ -1094,6 +1094,14 @@ local function Druid_Options()
 			Message_Areas = {'Start', 'End'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
 		},
+		["Thorns"] = {
+			Profile = 'Thorns',
+			Name = GetSpellInfo(305497),
+			Desc = GetSpellDescription(305497),
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
+		},
 		["TreeOfLife"] = {
 			Profile = 'TreeOfLife',
 			Name = GetSpellInfo(33891),

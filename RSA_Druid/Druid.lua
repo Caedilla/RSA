@@ -99,6 +99,10 @@ function RSA_Druid:OnEnable()
 				profile = 'Innervate',
 				replacements = { TARGET = 1 }
 			},
+			[305497] = { -- Thorns PvP Talent
+				profile = 'Thorns',
+				replacements = { TARGET = 1 }
+			},
 			[192081] = { -- IRONFUR
 				profile = 'Ironfur'
 			},
@@ -160,6 +164,11 @@ function RSA_Druid:OnEnable()
 			[77761] = Config_StampedingRoar_End,
 			[61336] = { -- SURVIVAL INSTINCTS
 				profile = 'SurvivalInstincts',
+				section = 'End'
+			},
+			[305497] = { -- Thorns PvP Talent
+				profile = 'Thorns',
+				replacements = { TARGET = 1 },
 				section = 'End'
 			},
 			[33891] = { -- TREE OF LIFE
