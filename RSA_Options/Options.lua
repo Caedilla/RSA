@@ -1998,7 +1998,6 @@ local function Priest_Options()
 			Desc = GetSpellDescription(10060),
 			Message_Amount = 2,
 			Message_Areas = {'Start', 'End'},
-			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
 		},
 		["Chastise"] = {
