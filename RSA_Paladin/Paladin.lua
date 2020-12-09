@@ -383,15 +383,15 @@ function RSA_Paladin:OnEnable()
 				section = 'End',
 				targetIsMe = 1
 			},
-            [276112] = Config_DivineSteed, --Divine Steed
-            [254473] = Config_DivineSteed, --Divine Steed
-            [276111] = Config_DivineSteed, --Divine Steed
-            [254474] = Config_DivineSteed, --Divine Steed
-            [221887] = Config_DivineSteed, --Divine Steed
-            [254472] = Config_DivineSteed, --Divine Steed
-            [254471] = Config_DivineSteed, --Divine Steed
-            [221885] = Config_DivineSteed, --Divine Steed
-            [221886] = Config_DivineSteed, --Divine Steed
+            [276112] = Config_DivineSteed_End, --Divine Steed
+            [254473] = Config_DivineSteed_End, --Divine Steed
+            [276111] = Config_DivineSteed_End, --Divine Steed
+            [254474] = Config_DivineSteed_End, --Divine Steed
+            [221887] = Config_DivineSteed_End, --Divine Steed
+            [254472] = Config_DivineSteed_End, --Divine Steed
+            [254471] = Config_DivineSteed_End, --Divine Steed
+            [221885] = Config_DivineSteed_End, --Divine Steed
+            [221886] = Config_DivineSteed_End, --Divine Steed
 		},
 		SPELL_INTERRUPT = {
 			[96231] = { -- REBUKE
