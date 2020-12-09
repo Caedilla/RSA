@@ -1431,6 +1431,16 @@ local function Paladin()
 					Channel = "",
 				},
 			},
+            DivineSteed = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] faded!"},
+					Disabled = "",
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Paladin
