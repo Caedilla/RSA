@@ -100,6 +100,20 @@ function RSA.AffiliationGroup(sourceFlags)
 	end
 end
 
+function RSA.DescTableBuilder(...)
+	local argTable = {}
+	local iterator = 0
+	for i = 1, select('#',...) do
+		local id = select(i,...)
+		iterator = iterator + 1
+		argTable[iterator] = '|cffFFCC00' .. GetSpellInfo(id) .. ':|r '
+		iterator = iterator + 1
+		argTable[iterator] = '|cffd1d1d1' .. GetSpellDescription(id) .. '|r\n\n'
+	end
+	string.gsub(argTable[#argTable], '[\n]', '')
+	return table.concat(argTable)
+end
+
 function RSA.PrepareDataTables(configData)
 	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
 	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.

@@ -92,7 +92,7 @@ local defaults = {
 		configDisplay = {
 			disabledChannels = {whisper = true},
 			defaultName = GetSpellInfo(31884) .. ' | ' .. GetSpellInfo(216331) .. ' | ' .. GetSpellInfo(231895),
-			defaultDesc = '|cffFFCC00'..GetSpellInfo(31884) .. ':|r |cffd1d1d1' .. GetSpellDescription(31884) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(216331) .. ':|r |cffd1d1d1' .. GetSpellDescription(216331) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(231895) .. ':|r |cffd1d1d1' .. GetSpellDescription(231895) .. '|r',
+			defaultDesc = RSA.DescTableBuilder(31884,216331,231895),
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
