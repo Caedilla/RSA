@@ -1169,6 +1169,7 @@ local function Monk()
 			TigersLust = {
 				Messages = {
 					Start = {"[LINK] cast on [TARGET]!"},
+					End = {"[LINK] on [TARGET] faded!"},
 				},
 				CustomChannel = {
 					Channel = "",

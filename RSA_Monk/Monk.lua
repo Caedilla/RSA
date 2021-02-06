@@ -162,6 +162,11 @@ function RSA_Monk:OnEnable()
 				section = 'End',
 				targetIsMe = 1
 			},
+			[116841] = {-- TIGER'S LUST
+				profile = 'TigersLust',
+				section = 'End',
+				replacements = { TARGET = 1 },
+			},
 		},
 		SPELL_MISSED = {
 			[115078] = {-- PARALYSIS

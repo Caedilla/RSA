@@ -1719,8 +1719,8 @@ local function Monk_Options()
 			Profile = 'TigersLust',
 			Name = GetSpellInfo(116841),
 			Desc = GetSpellDescription(116841),
-			Message_Amount = 1,
-			Message_Areas = {'Start'},
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
 		},
 	}
