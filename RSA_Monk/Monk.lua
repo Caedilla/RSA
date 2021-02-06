@@ -105,6 +105,10 @@ function RSA_Monk:OnEnable()
 				profile = 'TouchOfKarma',
 				targetIsMe = 1,
 			},
+			[116841] = {-- TIGER'S LUST
+				profile = 'TigersLust',
+				replacements = { TARGET = 1 },
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[115176] = {-- ZEN MEDITATION

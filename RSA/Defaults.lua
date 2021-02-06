@@ -1166,6 +1166,14 @@ local function Monk()
 				},
 				SmartGroup = true,
 			},
+			TigersLust = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Monk
