@@ -1,7 +1,12 @@
-# RSA r542-Release
+# RSA r543-Release
+### Healers
+* Single target resurrections should now be properly tracked again.
+### Mage
+* Polymorph now supports Polymorph: Bumblebee
 
-### Druid
-* Added Thorns PvP Talent
-* Added Convoke the Spirits
+### Priest
+* Added Spirit Shell
 
-Please note: I don't have a druid to test, so Convoke the Spirits may or may not function as expected, please leave a report if it doesn't appear to be working correctly.
+### Utility
+* Shadowlands Engineer Res should work now
+* Added Shadowlands Feasts

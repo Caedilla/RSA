@@ -3084,7 +3084,7 @@ local function Utilities_Options()
 		["Feasts"] = {
 			Profile = 'Feasts',
 			Name = L['Feasts'],
-			Desc = GetSpellDescription(259410),
+			Desc = GetSpellDescription(308462),
 			Message_Amount = 1,
 			Message_Areas = {'Placed'},
 			Message_Channels_Disabled = {["Whisper"] = true},
