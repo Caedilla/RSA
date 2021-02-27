@@ -700,6 +700,15 @@ local Options = {
 	},
 }
 
+--[[local function GetSpell(spellID)
+	if not GetSpellInfo(spellID) then
+		print(spellID .. ' is invalid.')
+	else
+		return GetSpellInfo(spellID)
+end]]--
+
+local GetSpellInfo = GetSpell
+
 local function DeathKnight_Options()
 	local Spells = {
 		['Army'] = {

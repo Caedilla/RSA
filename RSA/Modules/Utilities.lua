@@ -86,6 +86,12 @@ function RSA_Utilities:OnEnable()
 				sourceIsMe = true,
 				replacements = { TARGET = 1 }
 			},
+			[348477] = {
+				profile = 'EngineerRessBFA',
+				section = 'Cast',
+				sourceIsMe = true,
+				replacements = { TARGET = 1 }
+			},
 		},
 		SPELL_SUMMON = {
 			[22700] = configRepairBots, -- Field Repair Bot 74A
@@ -158,6 +164,12 @@ function RSA_Utilities:OnEnable()
 				sourceIsMe = true,
 				replacements = { TARGET = 1 }
 			},
+			[348477] = {
+				profile = 'EngineerRessBFA',
+				section = 'AcceptedRess',
+				sourceIsMe = true,
+				replacements = { TARGET = 1 }
+			},
 		},
 		UNIT_SPELLCAST_SUCCEEDED = {
 			[256230] = configCodex,
@@ -174,7 +186,7 @@ function RSA_Utilities:OnEnable()
 			local timestamp, event, hideCaster, sourceGUID, source, sourceFlags, sourceRaidFlag, destGUID, dest, destFlags, destRaidFlags, spellID, spellName, spellSchool, missType, overheal, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 			if RSA.AffiliationGroup(sourceFlags) then
 				if event == 'SPELL_RESURRECT' then
-					if spellID == 265116 and RSA.AffiliationMine(sourceFlags) then
+					if (spellID == 265116 or spellID == 345130 or spellID == 348477) and RSA.AffiliationMine(sourceFlags) then
 						EngineerRessBFA_Target = dest
 						RSA_Utilities.CombatLogMonitor:RegisterEvent('UNIT_HEALTH')
 
