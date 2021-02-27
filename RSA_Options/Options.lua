@@ -707,7 +707,7 @@ local Options = {
 		return GetSpellInfo(spellID)
 end]]--
 
-local GetSpellInfo = GetSpell
+--local GetSpellInfo = GetSpell
 
 local function DeathKnight_Options()
 	local Spells = {
