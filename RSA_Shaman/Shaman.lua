@@ -5,7 +5,7 @@ local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 local RSA_Shaman = RSA:NewModule('Shaman')
 
-local SpiritLink_GUID,TremorTotem_GUID,WindRush_GUID,Protection_GUID,LightningSurge_GUID,Cloudburst_GUID,EarthenShield_GUID,Grounding_GUID,EarthGrab_GUID
+local SpiritLink_GUID,TremorTotem_GUID,WindRush_GUID,Protection_GUID,LightningSurge_GUID,Cloudburst_GUID,EarthenShield_GUID,Grounding_GUID,EarthGrab_GUID,ManaTide_GUID
 local Protection_Cast,LightningCounter,Cloudburst_Announced,GroundingCounter
 
 function RSA_Shaman:OnInitialize()
