@@ -99,6 +99,13 @@ function RSA_Paladin:OnEnable()
 		section = 'End',
 		replacements = { TARGET = 1 }
 	}
+    local Config_DivineSteed = { -- Divine Steed
+        profile = 'DivineSteed'
+    }
+    local Config_DivineSteed_End = { -- Divine Steed
+        profile = 'DivineSteed',
+        section = 'End'
+    }
 	MonitorConfig_Paladin = {
 		player_profile = RSA.db.profile.Paladin,
 		SPELL_DISPEL = {
@@ -229,6 +236,15 @@ function RSA_Paladin:OnEnable()
 				profile = 'TyrsDeliverance',
 				targetIsMe = 1
 			},
+            [276112] = Config_DivineSteed, --Divine Steed
+            [254473] = Config_DivineSteed, --Divine Steed
+            [276111] = Config_DivineSteed, --Divine Steed
+            [254474] = Config_DivineSteed, --Divine Steed
+            [221887] = Config_DivineSteed, --Divine Steed
+            [254472] = Config_DivineSteed, --Divine Steed
+            [254471] = Config_DivineSteed, --Divine Steed
+            [221885] = Config_DivineSteed, --Divine Steed
+            [221886] = Config_DivineSteed, --Divine Steed
 		},
 		SPELL_AURA_REMOVED = {
 			[31884] = Config_AvengingWrath_End, -- AVENGING WRATH
@@ -324,6 +340,15 @@ function RSA_Paladin:OnEnable()
 				section = 'End',
 				targetIsMe = 1
 			},
+            [276112] = Config_DivineSteed_End, --Divine Steed
+            [254473] = Config_DivineSteed_End, --Divine Steed
+            [276111] = Config_DivineSteed_End, --Divine Steed
+            [254474] = Config_DivineSteed_End, --Divine Steed
+            [221887] = Config_DivineSteed_End, --Divine Steed
+            [254472] = Config_DivineSteed_End, --Divine Steed
+            [254471] = Config_DivineSteed_End, --Divine Steed
+            [221885] = Config_DivineSteed_End, --Divine Steed
+            [221886] = Config_DivineSteed_End, --Divine Steed
 		},
 		SPELL_INTERRUPT = {
 			[96231] = { -- REBUKE

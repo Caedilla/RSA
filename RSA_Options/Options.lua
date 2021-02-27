@@ -1968,6 +1968,14 @@ local function Paladin_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[MISSTYPE]'},
 		},
+        ['DivineSteed'] = {
+            Profile = 'DivineSteed',
+            Name = GetSpellInfo(190784),
+            Desc = GetSpellDescription(190784),
+            Message_Amount = 2,
+            Message_Areas = {'Start', 'End'},
+            Valid_Tags = {'[SPELL]', '[LINK]'},
+        },
 	}
 	return Spells
 end
