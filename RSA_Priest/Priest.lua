@@ -193,6 +193,10 @@ function RSA_Priest:OnEnable()
 				profile = 'Evangelism',
 				section = 'Cast'
 			},
+			[109964] = {
+				profile = 'SpiritShell',
+				section = 'Cast',
+			},
 		},
 		SPELL_AURA_REMOVED = {
 			[586] = Config_Fade_End, -- Fade
@@ -275,6 +279,10 @@ function RSA_Priest:OnEnable()
 			},
 			[47536] = {
 				profile = 'Rapture',
+				section = 'End',
+			},
+			[109964] = {
+				profile = 'SpiritShell',
 				section = 'End',
 			},
 		},

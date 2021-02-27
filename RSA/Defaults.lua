@@ -1740,6 +1740,15 @@ local function Priest()
 					Channel = "",
 				},
 			},
+			SpiritShell = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Priest

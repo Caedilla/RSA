@@ -2239,6 +2239,15 @@ local function Priest_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
+		["SpiritShell"] = {
+			Profile = 'SpiritShell',
+			Name = GetSpellInfo(109964),
+			Desc = GetSpellDescription(109964),
+			Message_Amount = 2,
+			Message_Areas = {'Cast', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
 	}
 	return Spells
 end
