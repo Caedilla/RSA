@@ -117,6 +117,7 @@ function RSA_Mage:OnEnable()
 			[61305] = Config_Polymorph, -- BLACK CAT
 			[61721] = Config_Polymorph, -- RABBIT
 			[61780] = Config_Polymorph, -- TURKEY
+			[277792] = Config_Polymorph -- Bee
 			[80353] = { -- TIME WARP
 				profile = 'TimeWarp',
 				targetIsMe = 1
