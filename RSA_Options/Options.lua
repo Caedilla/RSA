@@ -3101,8 +3101,8 @@ local function Utilities_Options()
 		},
 		["EngineerRessBFA"] = {
 			Profile = 'EngineerRessBFA',
-			Name = GetSpellInfo(265116),
-			Desc = GetSpellDescription(265116),
+			Name = GetSpellInfo(348477),
+			Desc = GetSpellDescription(348477),
 			Message_Amount = 2,
 			Message_Areas = {'Cast','AcceptedRess'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
