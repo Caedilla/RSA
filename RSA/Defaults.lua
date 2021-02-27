@@ -840,7 +840,7 @@ local function Hunter()
 			},
 			WildSpirit = {
 				Messages = {
-					Start = {"[LINK] activated!"},
+					Placed = {"[LINK] activated!"},
 					End = {"[LINK] faded!"},
 				},
 				CustomChannel = {
@@ -1770,7 +1770,7 @@ local function Priest()
 			},
 			SpiritShell = {
 				Messages = {
-					Start = {"[LINK] activated!"},
+					Cast = {"[LINK] activated!"},
 					End = {"[LINK] faded!"},
 				},
 				CustomChannel = {
