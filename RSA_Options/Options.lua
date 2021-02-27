@@ -3573,20 +3573,6 @@ local function Spell_Options(NonClass)
 				Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args.List_Description.name = '\n'.. L["You have %d messages for this section."]:format(#Messages)..L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."]
 			end
 
-
-			if Spells[i].Requirements then
-				for r=1,#Spells[i].Requirements do
-					if Spells[i].Requirements[r] == 'LRI' and k == 2 then -- k == 2 means it's the second message. The second message for resses in RSA is always the end message.
-					local LRI = LibStub('LibResInfo-1.0',true)
-					if not LRI then
-						Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args.List_Description.name = L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."]
-					end
-					end
-				end
-			end
-
-
-
 			for l=1,#Messages do
 				Options.args[Spells[i].Name].args[Spells[i].Message_Areas[k]].args[tostring(l)] = {
 					type = 'input',

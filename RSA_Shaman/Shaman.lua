@@ -3,7 +3,6 @@
 -----------------------------------------------
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
-local LRI = LibStub('LibResInfo-1.0',true)
 local RSA_Shaman = RSA:NewModule('Shaman')
 
 local SpiritLink_GUID,TremorTotem_GUID,WindRush_GUID,Protection_GUID,LightningSurge_GUID,Cloudburst_GUID,EarthenShield_GUID,Grounding_GUID,EarthGrab_GUID
@@ -17,55 +16,7 @@ function RSA_Shaman:OnInitialize()
 	end
 end
 
-function RSA.Resurrect(_, _, target, _, caster)
-	if caster ~= 'player' then return end
-	local dest = UnitName(target)
-	local pName = UnitName('player')
-	local spell = 2008
-	local messagemax = #RSA.db.profile.Shaman.Spells.AncestralSpirit.Messages.Start
-	if messagemax == 0 then return end
-	local messagerandom = math.random(messagemax)
-	local message = RSA.db.profile.Shaman.Spells.AncestralSpirit.Messages.Start[messagerandom]
-	local full_destName
-	full_destName,dest = RSA.RemoveServerNames(dest)
-	local spellinfo = GetSpellInfo(spell)
-	local spelllinkinfo = GetSpellLink(spell)
-	RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo, ['[TARGET]'] = dest,}
-	if message ~= '' then
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Local == true then
-			RSA.Print_LibSink(string.gsub(message, '.%a+.', RSA.String_Replace))
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Yell == true then
-			RSA.Print_Yell(string.gsub(message, '.%a+.', RSA.String_Replace))
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Whisper == true and dest ~= pName then
-			RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo, ['[TARGET]'] = L["You"],}
-			RSA.Print_Whisper(message, full_destName, RSA.Replacements, dest)
-			--RSA.Print_Whisper(string.gsub(message, '.%a+.', RSA.String_Replace), full_destName)
-			RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo, ['[TARGET]'] = dest,}
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.CustomChannel.Enabled == true then
-			RSA.Print_Channel(string.gsub(message, '.%a+.', RSA.String_Replace), RSA.db.profile.Shaman.Spells.AncestralSpirit.CustomChannel.Channel)
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Say == true then
-			RSA.Print_Say(string.gsub(message, '.%a+.', RSA.String_Replace))
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true then
-			RSA.Print_SmartGroup(string.gsub(message, '.%a+.', RSA.String_Replace))
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Party == true then
-			if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true and GetNumGroupMembers() == 0 then return end
-			RSA.Print_Party(string.gsub(message, '.%a+.', RSA.String_Replace))
-		end
-		if RSA.db.profile.Shaman.Spells.AncestralSpirit.Raid == true then
-			if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true and GetNumGroupMembers() > 0 then return end
-			RSA.Print_Raid(string.gsub(message, '.%a+.', RSA.String_Replace))
-		end
-	end
-end
-
 function RSA_Shaman:OnEnable()
-	if LRI then LRI.RegisterCallback(RSA, 'LibResInfo_ResCastStarted', 'Resurrect') end
 	RSA.db.profile.Modules.Shaman = true -- Set state to loaded, to know if we should announce when a spell is refreshed.
 	local pName = UnitName('player')
 	local Config_Ascendance = { -- ASCENDANCE
@@ -87,6 +38,11 @@ function RSA_Shaman:OnEnable()
 		SPELL_CAST_START = {
 			[212048] = { -- ANCESTRAL VISION
 				profile = 'AncestralVision'
+			},
+			[2008] = { -- AncestralSpirit
+				profile = 'AncestralSpirit',
+				section = 'Start',
+				replacements = { TARGET = 1 },
 			},
 		},
 		SPELL_CAST_SUCCESS = {
@@ -812,5 +768,4 @@ end
 
 function RSA_Shaman:OnDisable()
 	RSA.CombatLogMonitor:SetScript('OnEvent', nil)
-	if LRI then LRI.UnregisterAllCallbacks(RSA) end
 end
