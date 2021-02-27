@@ -1408,6 +1408,15 @@ local function Hunter_Options()
 			Message_Areas = {'Cast'},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]',},
 		},
+		['WildSpirit'] = {
+			Profile = 'WildSpirit',
+			Name = GetSpellInfo(328231),
+			Desc = GetSpellDescription(328231),
+			Message_Amount = 2,
+			Message_Areas = {'Placed', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
 	}
 	return Spells
 end
@@ -2587,6 +2596,15 @@ local function Shaman_Options()
 			Profile = 'EarthGrabTotem',
 			Name = GetSpellInfo(51485),
 			Desc = GetSpellDescription(51485),
+			Message_Amount = 2,
+			Message_Areas = {'Placed', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
+		["ManaTide"] = {
+			Profile = 'ManaTide',
+			Name = GetSpellInfo(16191),
+			Desc = GetSpellDescription(16191),
 			Message_Amount = 2,
 			Message_Areas = {'Placed', 'End'},
 			Message_Channels_Disabled = {["Whisper"] = true},

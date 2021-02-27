@@ -72,6 +72,10 @@ function RSA_Shaman:OnEnable()
 				profile = 'WindRushTotem',
 				section = 'Placed',
 			},
+			[16191] = { -- Mana Tide Totem
+				profile = 'ManaTide',
+				section = 'Placed',
+			},
 			[51485] = { -- Earth Grab Totem
 				profile = 'EarthGrabTotem',
 				section = 'Placed',
@@ -276,6 +280,9 @@ function RSA_Shaman:OnEnable()
 				if spellID == 204336 then -- GROUNDING TOTEM
 					GroundingCounter = 0
 					Grounding_GUID = destGUID return
+				end
+				if spellID == 16191 then -- ManaTide
+					ManaTide_GUID = destGUID return
 				end
 			end -- IF EVENT IS SPELL_SUMMON
 			if event == 'SPELL_CAST_SUCCESS' and spellID == 201764 then -- Recall Cloudburst Totem
@@ -579,6 +586,40 @@ function RSA_Shaman:OnEnable()
 					end
 					if RSA.db.profile.Shaman.Spells.TremorTotem.Raid == true then
 						if RSA.db.profile.Shaman.Spells.TremorTotem.SmartGroup == true and GetNumGroupMembers() > 0 then return end
+						RSA.Print_Raid(string.gsub(message, '.%a+.', RSA.String_Replace))
+					end
+				end
+			end
+			if destGUID == ManaTide_GUID then -- ManaTide UNIT_DIED
+				local spellinfo = GetSpellInfo(16191)
+				local spelllinkinfo = GetSpellLink(16191)
+				RSA.Replacements = {['[SPELL]'] = spellinfo, ['[LINK]'] = spelllinkinfo,}
+				local messagemax = #RSA.db.profile.Shaman.Spells.ManaTide.Messages.End
+				if messagemax == 0 then return end
+				local messagerandom = math.random(messagemax)
+				local message = RSA.db.profile.Shaman.Spells.ManaTide.Messages.End[messagerandom]
+				if message ~= '' then
+					if RSA.db.profile.Shaman.Spells.ManaTide.Local == true then
+						RSA.Print_LibSink(string.gsub(message, '.%a+.', RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.ManaTide.Yell == true then
+						RSA.Print_Yell(string.gsub(message, '.%a+.', RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.ManaTide.CustomChannel.Enabled == true then
+						RSA.Print_Channel(string.gsub(message, '.%a+.', RSA.String_Replace), RSA.db.profile.Shaman.Spells.ManaTide.CustomChannel.Channel)
+					end
+					if RSA.db.profile.Shaman.Spells.ManaTide.Say == true then
+						RSA.Print_Say(string.gsub(message, '.%a+.', RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.ManaTide.SmartGroup == true then
+						RSA.Print_SmartGroup(string.gsub(message, '.%a+.', RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.ManaTide.Party == true then
+						if RSA.db.profile.Shaman.Spells.ManaTide.SmartGroup == true and GetNumGroupMembers() == 0 then return end
+							RSA.Print_Party(string.gsub(message, '.%a+.', RSA.String_Replace))
+					end
+					if RSA.db.profile.Shaman.Spells.ManaTide.Raid == true then
+						if RSA.db.profile.Shaman.Spells.ManaTide.SmartGroup == true and GetNumGroupMembers() > 0 then return end
 						RSA.Print_Raid(string.gsub(message, '.%a+.', RSA.String_Replace))
 					end
 				end

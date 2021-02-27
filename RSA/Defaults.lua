@@ -838,6 +838,15 @@ local function Hunter()
 				Whisper = true,
 				SmartGroup = true,
 			},
+			WildSpirit = {
+				Messages = {
+					Start = {"[LINK] activated!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Hunter
@@ -2115,6 +2124,15 @@ local function Shaman()
 				},
 			},
 			EarthGrabTotem = {
+				Messages = {
+					Placed = {"[LINK] placed!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
+			ManaTide = {
 				Messages = {
 					Placed = {"[LINK] placed!"},
 					End = {"[LINK] faded!"},
