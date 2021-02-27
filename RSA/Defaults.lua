@@ -950,6 +950,15 @@ local function Mage()
 				},
 				Whisper = true,
 			},
+			FocusMagic = {
+				Messages = {
+					Start = {"[LINK] cast on [TARGET]!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+				Whisper = true,
+			},
 			RemoveCurse = { -- Remove Curse
 				Messages = {
 					Dispel = {"[LINK] on [TARGET] removed [AURALINK]!"},

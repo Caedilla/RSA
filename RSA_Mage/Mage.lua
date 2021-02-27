@@ -125,7 +125,11 @@ function RSA_Mage:OnEnable()
 			[130] = { -- SLOW FALL
 				profile = 'SlowFall',
 				replacements = { TARGET = 1 }
-			}
+			},
+			[321358] = {
+				profile = 'FocusMagic',
+				replacements = { TARGET = 1 }
+			},
 		},
 		SPELL_STOLEN = {
 			[30449] = { -- SPELL STEAL

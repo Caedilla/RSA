@@ -1521,6 +1521,14 @@ local function Mage_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]', '[AURA]', '[AURALINK]'},
 		},
+		["FocusMagic"] = {
+			Profile = 'FocusMagic',
+			Name = GetSpellInfo(321358),
+			Desc = GetSpellDescription(321358),
+			Message_Amount = 1,
+			Message_Areas = {'Start'},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
+		},
 	}
 	return Spells
 end
