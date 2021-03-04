@@ -1715,6 +1715,14 @@ local function Monk_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
+		[20] = {
+			Profile = 'TigersLust',
+			Name = GetSpellInfo(116841),
+			Desc = GetSpellDescription(116841),
+			Message_Amount = 2,
+			Message_Areas = {'Start', 'End'},
+			Valid_Tags = {'[SPELL]', '[LINK]', '[TARGET]'},
+		},
 	}
 	return Spells
 end
