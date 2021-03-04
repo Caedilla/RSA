@@ -2151,6 +2151,15 @@ local function Shaman()
 					Channel = "",
 				},
 			},
+			EarthbindTotem = {
+				Messages = {
+					Placed = {"[LINK] placed!"},
+					End = {"[LINK] faded!"},
+				},
+				CustomChannel = {
+					Channel = "",
+				},
+			},
 		},
 	}
 	return Shaman

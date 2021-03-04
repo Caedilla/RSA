@@ -2618,6 +2618,15 @@ local function Shaman_Options()
 			Message_Channels_Disabled = {["Whisper"] = true},
 			Valid_Tags = {'[SPELL]', '[LINK]'},
 		},
+		["EarthbindTotem"] = {
+			Profile = 'EarthbindTotem',
+			Name = GetSpellInfo(2484),
+			Desc = GetSpellDescription(2484),
+			Message_Amount = 2,
+			Message_Areas = {'Placed', 'End'},
+			Message_Channels_Disabled = {["Whisper"] = true},
+			Valid_Tags = {'[SPELL]', '[LINK]'},
+		},
 	}
 	return Spells
 end
