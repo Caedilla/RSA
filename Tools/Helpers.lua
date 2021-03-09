@@ -264,3 +264,18 @@ function RSA.RefreshMonitorData(section)
 		RSA.SendMessage.ChatFrame(L["Unexpected Data Table"])
 	end
 end
+
+function RSA.CopyTable(source)
+	local sourceType = type(source)
+	local copy
+	if sourceType == 'table' then
+		copy = {}
+		for sourceKey, sourceVal in next, source, nil do
+			copy[RSA.CopyTable(sourceKey)] = RSA.CopyTable(sourceVal)
+		end
+		setmetatable(copy, RSA.CopyTable(getmetatable(source)))
+	else
+		copy = source
+	end
+	return copy
+end

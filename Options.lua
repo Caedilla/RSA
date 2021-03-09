@@ -1452,6 +1452,7 @@ local function Abbreviate(inputString, ...)
 end
 
 local function GenerateSpellOptions(section)
+	RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass])
 	local optionsData = RSA.db.profile[section]
 	local sectionName = section
 	if uClass == section then
@@ -1896,6 +1897,7 @@ local function ResetCustomSpellSetupData()
 			disabledChannels = {},
 			customName = nil,
 			customDesc = nil,
+			configLocked = false,
 		},
 		events = {},
 		environments = {
@@ -1923,6 +1925,7 @@ local function ResetCustomSpellSetupData()
 				noCombat = false,
 			},
 		}
+	}
 end
 
 local function GenerateCustomSpellSetupOptions()
@@ -1959,7 +1962,7 @@ local function GenerateCustomSpellSetupOptions()
 						args = {
 							spellID = {
 								name = L["Primary spell ID"],
-								description = L["RSA takes the name and description for this to show in the configuration panel if a custom name & description are not set."],
+								desc = L["RSA takes the name and description for this to show in the configuration panel if a custom name & description are not set."],
 								order = 0.1,
 								type = 'input',
 								validate = function(info, value)
@@ -1979,95 +1982,7 @@ local function GenerateCustomSpellSetupOptions()
 									RSA.Options:UpdateOptions()
 								end,
 							},
-							comm = {
-								name = L["Group Announcement"],
-								desc = L["If selected, only the announcer chosen by RSA may announce this spell in a group setting. Useful for announcing other people's casts such as placing feasts or cauldrons to prevent spam."],
-								order = 0.2,
-								type = 'toggle',
-								get = function(info)
-									return customSpellSetupData.comm
-								end,
-								set = function(info, value)
-									customSpellSetupData.comm = value
-								end,
-							},
-							commSpacer = {
-								name = "",
-								type = 'description',
-								order = 0.3,
-								width = 'full',
-							},
-							addAdditionalSpellID = {
-								name = L["Additional Spell IDs"],
-								desc = L["If this spell has multiple spell IDs, such as if you are trying to announce different Portals, or if it is modified by a talent which changes its Spell ID, you can enter those additional IDs here. Entering an ID already in the list will prompt you to remove it."],
-								width = 0.8,
-								order = 1.1,
-								type = 'input',
-								validate = function(info, value)
-									if value == '' then return true end
-									if not string.match(value, '%d') then
-										return L["You must enter a valid Spell ID."]
-									end
-									if not GetSpellInfo(value) then
-										return L["You must enter a valid Spell ID."]
-									end
-									return true
-								end,
-								confirm = function(info, value)
-									if customSpellSetupData.additionalSpellIDs[tonumber(value)] then
-										return L["Are you sure you want to remove this spell ID?"]
-									else
-										return false
-									end
-								end,
-								set = function(info, value)
-									local numVal = tonumber(value)
-									if customSpellSetupData.additionalSpellIDs[numVal] then
-										customSpellSetupData.additionalSpellIDs[numVal] = false
-									else
-										customSpellSetupData.additionalSpellIDs[numVal] = true
-									end
-								end,
-							},
-							additionalSpellIDs = {
-								name = L["List of Additional Spell IDs"],
-								desc = L["You can click a spell in this list to remove it."],
-								order = 1.4,
-								type = 'select',
-								width = 1.5,
-								confirm = function(info, value)
-									if customSpellSetupData.additionalSpellIDs[tonumber(value)] then
-										return L["Are you sure you want to remove this spell ID?"]
-									else
-										return false
-									end
-								end,
-								hidden = function()
-									if not customSpellSetupData.additionalSpellIDs then return true end
-									for k2 in pairs(customSpellSetupData.additionalSpellIDs) do
-										if customSpellSetupData.additionalSpellIDs[k2] == true then
-											return false
-										end
-									end
-									return true
-								end,
-								values = function()
-									local val = {}
-									for k2 in pairs(customSpellSetupData.additionalSpellIDs) do
-										if customSpellSetupData.additionalSpellIDs[k2] then
-											val[k2] = "(" .. k2 .. ") " .. GetSpellInfo(k2)
-										end
-									end
-									return val
-								end,
-								set = function(info, value)
-									if customSpellSetupData.additionalSpellIDs[tonumber(value)] then
-										customSpellSetupData.additionalSpellIDs[tonumber(value)] = false
-										RSA.Options:UpdateOptions()
-									end
-								end,
-							},
-							additionalSpellIDsSpacer = {
+							SpellIDsSpacer = {
 								name = "",
 								type = 'description',
 								order = 1.3,
@@ -2100,13 +2015,6 @@ local function GenerateCustomSpellSetupOptions()
 									RSA.Options:UpdateOptions()
 								end,
 							},
-							disabledChannels = {
-								name = L["Disabled Channels"],
-								order = 100,
-								type = 'group',
-								inline = true,
-								args = {},
-							},
 							eventData = {
 								name = L["Combat Log Events"],
 								order = 200,
@@ -2131,19 +2039,21 @@ local function GenerateCustomSpellSetupOptions()
 											RSA.Options:UpdateOptions()
 										end,
 									},
-									finaliseSpell = {
-										name = L["Add Announcement"],
-										type = 'execute',
-										order = 100,
-										func = function()
-											local profile = tostring(customSpellSetupData.spellID) .. tostring(time())
-											RSA.db.profile[uClass][profile] = customSpellSetupData
-											RSA.db.profile[uClass][profile].profile = profile
-											RSA.Options:UpdateOptions()
-										end,
-									}
 								},
 							},
+							finaliseSpell = {
+								name = L["Add Announcement"],
+								type = 'execute',
+								order = 1000,
+								func = function()
+									local profile = tostring(customSpellSetupData.spellID) .. tostring(time())
+									RSA.db.profile[uClass][profile] = {}
+									RSA.db.profile[uClass][profile] = RSA.CopyTable(customSpellSetupData)
+									RSA.db.profile[uClass][profile].profile = profile
+									ResetCustomSpellSetupData()
+									RSA.Options:UpdateOptions()
+								end,
+							}
 						},
 					},
 				},
@@ -2166,35 +2076,10 @@ local function GenerateCustomSpellSetupOptions()
 			optionsTable.args.add.args.spellIDs.args.eventData.args[event] = {
 				name = event.event,
 				order = 10,
-				type = 'group',
+				type = 'description',
 				inline = true,
-				args = {
-
-				},
 			}
 		end
-
-	for c = 1, #channels do
-		optionsTable.args.add.args.spellIDs.args.disabledChannels.args[channels[c]] = {
-			name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
-			type = 'toggle',
-			width = 0.8,
-			order = 0.11 + channelOrder[channels[c]],
-			desc = function()
-				if channels[c] == 'whisper' then
-					return L["Prevents you from trying to send announcements to this channel."] .. '\n' .. L["This will not work without a valid target so should be disabled for all self-cast or non-targetted abilities."]
-				else
-				return L["Prevents you from trying to send announcements to this channel."]
-				end
-			end,
-			get = function(info)
-				return customSpellSetupData.configDisplay.disabledChannels[channels[c]]
-			end,
-			set = function(info, value)
-				customSpellSetupData.configDisplay.disabledChannels[channels[c]] = value
-			end,
-		}
-	end
 
 	return optionsTable
 end
@@ -2226,8 +2111,6 @@ function RSA:RegisterOptions()
 
 	LDS:EnhanceDatabase(self.db, 'RSA')
 	LDS:EnhanceOptions(profiles, self.db)
-
-	ResetCustomSpellSetupData()
 end
 
 function RSA.Options:UpdateOptions()
@@ -2236,6 +2119,8 @@ function RSA.Options:UpdateOptions()
 end
 
 function RSA.Options:OnInitialize()
+	ResetCustomSpellSetupData()
+
 	self.db = RSA.db
 	RSA:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
