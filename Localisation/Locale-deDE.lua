@@ -120,8 +120,6 @@ L["Success"] = "Erfolg"
 L["Tag Options"] = "Tag Options"
 L["The following tags are available for use with this spell:"] = "Die folgenden Tags sind für die Benutzung mit dieser Fähigkeit verfügbar:"
 --[[Translation missing --]]
-L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."
---[[Translation missing --]]
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."
 L["Unknown"] = "Unbekannt"
 L["URL"] = true

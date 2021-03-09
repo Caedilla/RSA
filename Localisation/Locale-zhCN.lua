@@ -116,7 +116,6 @@ L["StatueOfTheBlackOx"] = "玄牛AoE嘲讽"
 L["Success"] = "成功"
 L["Tag Options"] = "标签选项"
 L["The following tags are available for use with this spell:"] = "以下标记可用于此法术："
-L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "此阶段信息需要LibResInfo-1.0来运行。如果没有，此阶段不会有任何通告。"
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "此设置并不遵循全局通告设置，勾选以后，则无论如何设置都会通告。"
 L["Unknown"] = "未知"
 L["URL"] = true

@@ -111,7 +111,6 @@ L["StatueOfTheBlackOx"] = "흑우 광역 조롱"
 L["Success"] = "성공"
 L["Tag Options"] = "태그 옵션"
 L["The following tags are available for use with this spell:"] = "다음 태그를 이 주문에 사용할 수 있습니다:"
-L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "이 부분은 작동하는 LibResInfo-1.0 이 필요합니다. 없으므로 이 부분에서는 아무것도 알리지 않습니다."
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "이 설정은 또한 전역 알림 설정을 따르지 않으며, 체크한 경우 해당 설정과 상관없이 알립니다."
 L["Unknown"] = "알 수 없음"
 L["URL"] = true

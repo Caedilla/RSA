@@ -123,7 +123,6 @@ L["StatueOfTheBlackOx"] = "Bue nero AoE Taunt"
 L["Success"] = "Successo"
 L["Tag Options"] = "Opzioni di tag"
 L["The following tags are available for use with this spell:"] = "I seguenti tag sono disponibili per l'uso con questo incantesimo:"
-L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "Questa sezione richiede che LibResInfo-1.0 funzioni. Siccome non c'è l'hai, nulla da questa sezione lo annuncerà."
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "Questa impostazione inoltre non segue le impostazioni degli annunci globali e se selezionata, annuncia indipendentemente da tali impostazioni."
 L["Unknown"] = "Sconosciuto"
 --[[Translation missing --]]

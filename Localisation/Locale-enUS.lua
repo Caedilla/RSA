@@ -111,7 +111,6 @@ L["StatueOfTheBlackOx"] = "Black Ox AoE Taunt"
 L["Success"] = true
 L["Tag Options"] = true
 L["The following tags are available for use with this spell:"] = true
-L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = true
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = true
 L["Unknown"] = true
 L["URL"] = true

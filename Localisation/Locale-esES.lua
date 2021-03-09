@@ -197,8 +197,6 @@ L["Tag Options"] = "Tag Options"
 --[[Translation missing --]]
 L["The following tags are available for use with this spell:"] = "The following tags are available for use with this spell:"
 --[[Translation missing --]]
-L["This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."] = "This section requires LibResInfo-1.0 to work. As you don't have it, nothing from this section will announce."
---[[Translation missing --]]
 L["This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."] = "This setting also does not follow the global announcement settings, and will, if checked, announce regardless of those settings."
 --[[Translation missing --]]
 L["Unknown"] = "Unknown"
