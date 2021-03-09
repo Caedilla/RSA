@@ -1524,12 +1524,32 @@ local function GenerateSpellOptions(section)
 					type = 'group',
 					childGroups = 'tab',
 					-- TODO Option to toggle advancedConfig
-					--hidden = not RSA.db.profile.general.advancedConfig,
+					hidden = not RSA.db.profile.general.advancedConfig,
 					args = {
+						configLocked = {
+							name = L["Spell Setup for this spell is locked."],
+							type = 'description',
+							hidden = not configDisplay.configLocked,
+							order = 0,
+						},
+						lockToggle = {
+							name = L["Unlock setup"],
+							desc = L["WARNING: This spell is included with RSA by default and my cease to function correctly if you unlock and alter these settings."],
+							order = 0.2,
+							type = 'toggle',
+							get = function(info)
+								return configDisplay.configLocked
+							end,
+							set = function(info, value)
+								configDisplay.configLocked = value
+								RSA.Options:UpdateOptions()
+							end,
+						},
 						spellIDs = {
 							name = L["Basic Spell Settings"],
 							order = 0,
 							type = 'group',
+							hidden = configDisplay.configLocked,
 							args = {
 								spellID = {
 									name = L["Spell ID"],
@@ -1714,6 +1734,7 @@ local function GenerateSpellOptions(section)
 							order = 2,
 							type = 'group',
 							childGroups = 'tab',
+							hidden = configDisplay.configLocked,
 							args = {},
 						},
 					},
@@ -1862,45 +1883,47 @@ local function GenerateSpellOptions(section)
 	return optionsTable
 end
 
-local customSpellSetupData = {
-	profile = nil,
-	spellID = nil,
-	comm = nil,
-	additionalSpellIDs = {},
-	configDisplay = {
-		messageAreas = {},
-		disabledChannels = {},
-		customName = nil,
-		customDesc = nil,
-	},
-	events = {},
-	environments = {
-		useGlobal = true,
-		alwaysWhisper = false,
-		enableIn = {
-			arenas = false,
-			bgs = false,
-			warModeWorld = false,
-			nonWarWorld = false,
-			dungeons = false,
-			raids = false,
-			lfg = false,
-			lfr = false,
-			scenarios = false,
+local customSpellSetupData = {}
+
+local function ResetCustomSpellSetupData()
+	customSpellSetupData = {
+		profile = nil,
+		spellID = nil,
+		comm = nil,
+		additionalSpellIDs = {},
+		configDisplay = {
+			messageAreas = {},
+			disabledChannels = {},
+			customName = nil,
+			customDesc = nil,
 		},
-		groupToggles = {
-			emote = true,
-			say = true,
-			yell = true,
-			whisper = true,
-		},
-		combatState = {
-			inCombat = true,
-			noCombat = false,
-		},
-	},
-}
-RSA.ccData = customSpellSetupData
+		events = {},
+		environments = {
+			useGlobal = true,
+			alwaysWhisper = false,
+			enableIn = {
+				arenas = false,
+				bgs = false,
+				warModeWorld = false,
+				nonWarWorld = false,
+				dungeons = false,
+				raids = false,
+				lfg = false,
+				lfr = false,
+				scenarios = false,
+			},
+			groupToggles = {
+				emote = true,
+				say = true,
+				yell = true,
+				whisper = true,
+			},
+			combatState = {
+				inCombat = true,
+				noCombat = false,
+			},
+		}
+end
 
 local function GenerateCustomSpellSetupOptions()
 	local optionsTable = {
@@ -1909,10 +1932,24 @@ local function GenerateCustomSpellSetupOptions()
 		childGroups = 'tab',
 		order = 100,
 		args = {
+			advancedConfig = {
+				name = L["Advanced Mode"],
+				desc = L["Exposes more options to allow custom setup of spells."],
+				order = 0.2,
+				type = 'toggle',
+				get = function(info)
+					return RSA.db.profile.general.advancedConfig
+				end,
+				set = function(info, value)
+					RSA.db.profile.general.advancedConfig = value
+					RSA.Options:UpdateOptions()
+				end,
+			},
 			add = {
 				name = L["Add a Spell"],
 				order = 0,
 				type = 'group',
+				disabled = not RSA.db.profile.general.advancedConfig,
 				args = {
 					spellIDs = {
 						name = L["Basic Spell Settings"],
@@ -1921,7 +1958,8 @@ local function GenerateCustomSpellSetupOptions()
 						inline = true,
 						args = {
 							spellID = {
-								name = L["Spell ID"],
+								name = L["Primary spell ID"],
+								description = L["RSA takes the name and description for this to show in the configuration panel if a custom name & description are not set."],
 								order = 0.1,
 								type = 'input',
 								validate = function(info, value)
@@ -1943,7 +1981,7 @@ local function GenerateCustomSpellSetupOptions()
 							},
 							comm = {
 								name = L["Group Announcement"],
-								desc = L["Prevents multiple RSA users from announcing this spell."],
+								desc = L["If selected, only the announcer chosen by RSA may announce this spell in a group setting. Useful for announcing other people's casts such as placing feasts or cauldrons to prevent spam."],
 								order = 0.2,
 								type = 'toggle',
 								get = function(info)
@@ -2101,6 +2139,7 @@ local function GenerateCustomSpellSetupOptions()
 											local profile = tostring(customSpellSetupData.spellID) .. tostring(time())
 											RSA.db.profile[uClass][profile] = customSpellSetupData
 											RSA.db.profile[uClass][profile].profile = profile
+											RSA.Options:UpdateOptions()
 										end,
 									}
 								},
@@ -2113,6 +2152,8 @@ local function GenerateCustomSpellSetupOptions()
 				name = L["Remove a Spell"],
 				order = 1,
 				type = 'group',
+				hidden = true,
+				disabled = not RSA.db.profile.general.advancedConfig,
 				args = {
 
 				},
@@ -2185,6 +2226,8 @@ function RSA:RegisterOptions()
 
 	LDS:EnhanceDatabase(self.db, 'RSA')
 	LDS:EnhanceOptions(profiles, self.db)
+
+	ResetCustomSpellSetupData()
 end
 
 function RSA.Options:UpdateOptions()
