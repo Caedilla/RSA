@@ -134,6 +134,9 @@ local defaults = {
 		additionalSpellIDs = {
 			[305395] = true, -- Unbound Freedom
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -150,6 +153,9 @@ local defaults = {
 		additionalSpellIDs = {
 			[199448] = true, -- Ultimate Sacrifice
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -163,6 +169,9 @@ local defaults = {
 	},
 	['blessingOfSanctuary'] = {
 		spellID = 210256,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -200,6 +209,9 @@ local defaults = {
 		throttle = 0.25,
 		additionalSpellIDs = {
 			[213644] = true, -- Cleanse Toxins
+		},
+		configDisplay = {
+			isDefault = true,
 		},
 		events = {
 			['SPELL_DISPEL'] = {
@@ -317,6 +329,9 @@ local defaults = {
 	},
 	['guardianOfTheForgottenQueen'] = {
 		spellID = 228049,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] activated!",},
@@ -376,6 +391,9 @@ local defaults = {
 	},
 	['holyAvenger'] = {
 		spellID = 105809,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] activated!",},
@@ -389,6 +407,9 @@ local defaults = {
 	},
 	['layOnHands'] = {
 		spellID = 633,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_HEAL'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -431,6 +452,9 @@ local defaults = {
 	},
 	['redemption'] = {
 		spellID = 7328,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},

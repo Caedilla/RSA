@@ -114,6 +114,7 @@ function RSA.DescTableBuilder(...)
 	return table.concat(argTable)
 end
 
+local firstRun
 function RSA.PrepareDataTables(configData)
 	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
 	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
@@ -220,6 +221,13 @@ function RSA.PrepareDataTables(configData)
 				configData[profile].configDisplay.messageAreas = {}
 			end
 			configData[profile].configDisplay.messageAreas[k] = k
+
+			if configData[profile].configDisplay.configLocked == false then -- Re-lock any unlocked default spells when we reload.
+				if not firstRun then
+					firstRun = true
+					configData[profile].configDisplay.configLocked = true
+				end
+			end
 
 			if configData[profile].events[k].uniqueSpellID then -- Add uniqueSpellID for a specific event (i.e where SPELL_CAST_SUCCESS and SPELL_HEAL use different IDs) so that they are both tracked by the monitor.
 				if not monitorData[configData[profile].events[k].uniqueSpellID] then

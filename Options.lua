@@ -1532,26 +1532,23 @@ local function GenerateSpellOptions(section)
 							type = 'description',
 							hidden = function()
 								if not configDisplay.isDefault then return true end
-								if configDisplay.configLocked then
-									return false
-								end
+								if configDisplay.configLocked == false then return true end
+								return false
 							end,
 							order = 0,
 						},
-						lockToggle = {
+						unlockSetup = {
 							name = L["Unlock setup"],
 							desc = L["WARNING: This spell is included with RSA by default and my cease to function correctly if you unlock and alter these settings."],
 							order = 0.2,
-							type = 'toggle',
+							type = 'execute',
 							hidden = function()
 								if not configDisplay.isDefault then return true end
+								if configDisplay.configLocked == false then return true end
 								return false
 							end,
-							get = function(info)
-								return configDisplay.configLocked
-							end,
-							set = function(info, value)
-								configDisplay.configLocked = value
+							func = function()
+								RSA.db.profile[section][k].configDisplay.configLocked = false
 								RSA.Options:UpdateOptions()
 							end,
 						},
@@ -1561,7 +1558,6 @@ local function GenerateSpellOptions(section)
 							order = 0,
 							hidden = function()
 								if configDisplay.isDefault then return true end
-								if configDisplay.configLocked then return true end
 								return false
 							end,
 							func = function()
@@ -1573,7 +1569,17 @@ local function GenerateSpellOptions(section)
 							name = L["Basic Spell Settings"],
 							order = 0,
 							type = 'group',
-							hidden = configDisplay.configLocked,
+							disabled = function()
+								if configDisplay.isDefault then
+									if configDisplay.configLocked == false then
+										return false
+									else
+										return true
+									end
+								else
+									return false
+								end
+							end,
 							args = {
 								spellID = {
 									name = L["Spell ID"],
@@ -1758,7 +1764,17 @@ local function GenerateSpellOptions(section)
 							order = 2,
 							type = 'group',
 							childGroups = 'tab',
-							hidden = configDisplay.configLocked,
+							disabled = function()
+								if configDisplay.isDefault then
+									if configDisplay.configLocked == false then
+										return false
+									else
+										return true
+									end
+								else
+									return false
+								end
+							end,
 							args = {},
 						},
 					},
