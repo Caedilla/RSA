@@ -2014,7 +2014,11 @@ local function GenerateCustomSpellSetupOptions()
 									return true
 								end,
 								get = function(info)
-									return tostring(customSpellSetupData.spellID)
+									if customSpellSetupData.spellID == nil then
+										return ''
+									else
+										return tostring(customSpellSetupData.spellID)
+									end
 								end,
 								set = function(info, value)
 									customSpellSetupData.spellID = tonumber(value)
