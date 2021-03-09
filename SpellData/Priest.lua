@@ -4,6 +4,7 @@ local defaults = {
 	['apotheosis'] = {
 		spellID = 200183,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -18,6 +19,7 @@ local defaults = {
 	['archangel'] = {
 		spellID = 197862,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -31,6 +33,9 @@ local defaults = {
 	},
 	['bodyAndSoul'] = {
 		spellID = 65081,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -45,6 +50,7 @@ local defaults = {
 	['desperatePrayer'] = {
 		spellID = 19236,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -61,6 +67,7 @@ local defaults = {
 		spellID = 528,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -83,6 +90,7 @@ local defaults = {
 	['divineHymn'] = {
 		spellID = 64843,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -97,6 +105,7 @@ local defaults = {
 	['evangelism'] = {
 		spellID = 246287,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -111,6 +120,7 @@ local defaults = {
 			[213602] = true, -- Greater Fade
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -125,6 +135,9 @@ local defaults = {
 	['guardianSpirit'] = {
 		spellID = 47788,
 		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				tracker = 2,
@@ -149,6 +162,9 @@ local defaults = {
 	},
 	['holyWard'] = {
 		spellID = 213610,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -166,6 +182,7 @@ local defaults = {
 			[200200] = true, -- Chastise modified by Censure talent.
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -182,6 +199,7 @@ local defaults = {
 	['holyWordSalvation'] = {
 		spellID = 265202,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -192,6 +210,9 @@ local defaults = {
 	},
 	['leapOfFaith'] = {
 		spellID = 73325,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -201,6 +222,9 @@ local defaults = {
 	},
 	['levitate'] = {
 		spellID = 1706,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -211,6 +235,7 @@ local defaults = {
 	['massDispel'] = {
 		spellID = 32375,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -225,6 +250,7 @@ local defaults = {
 	['massResurrection'] = {
 		spellID = 212036,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -240,6 +266,7 @@ local defaults = {
 		throttle = 3,
 		spellID = 205369,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -257,6 +284,7 @@ local defaults = {
 	['mindControl'] = {
 		spellID = 605,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -279,6 +307,9 @@ local defaults = {
 	},
 	['painSuppression'] = {
 		spellID = 33206,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -292,6 +323,9 @@ local defaults = {
 	},
 	['powerInfusion'] = {
 		spellID = 10060,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -306,6 +340,7 @@ local defaults = {
 	['powerWordBarrier'] = {
 		spellID = 62618,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -322,6 +357,7 @@ local defaults = {
 	['psychicHorror'] = {
 		spellID = 64044,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -338,6 +374,7 @@ local defaults = {
 	['psychicScream'] = {
 		spellID = 8122,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -355,6 +392,9 @@ local defaults = {
 		additionalSpellIDs = {
 			[213634] = true, -- Purify Disease
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_DISPEL'] = {
 				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
@@ -368,6 +408,7 @@ local defaults = {
 	['rapture'] = {
 		spellID = 47536,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -382,6 +423,9 @@ local defaults = {
 	['rayOfHope'] = {
 		spellID = 197268,
 		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				tracker = 2,
@@ -406,6 +450,9 @@ local defaults = {
 	},
 	['resurrection'] = {
 		spellID = 2006,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},
@@ -420,6 +467,7 @@ local defaults = {
 	['shackleUndead'] = {
 		spellID = 9484,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -463,6 +511,7 @@ local defaults = {
 			[200174] = true, -- Mindbender Shadow
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -475,6 +524,7 @@ local defaults = {
 		spellID = 15487,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -513,6 +563,7 @@ local defaults = {
 	['symbolOfHope'] = {
 		spellID = 64901,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -528,6 +579,7 @@ local defaults = {
 	['vampiricEmbrace'] = {
 		spellID = 15286,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

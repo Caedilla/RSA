@@ -5,6 +5,7 @@ local defaults = {
 		spellID = 87023,
 		throttle = 5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -20,6 +21,7 @@ local defaults = {
 	['conjureRefreshment'] = {
 		spellID = 190336,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -31,6 +33,7 @@ local defaults = {
 	['counterspell'] = {
 		spellID = 2139,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -75,6 +78,7 @@ local defaults = {
 			[321395] = true, -- Mawrat
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -139,6 +143,7 @@ local defaults = {
 			[344597] = true, -- Oribos
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -150,6 +155,9 @@ local defaults = {
 	['removeCurse'] = {
 		spellID = 475,
 		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_DISPEL'] = {
 				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
@@ -163,6 +171,7 @@ local defaults = {
 	['ringOfFrost'] = {
 		spellID = 113724,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -176,6 +185,9 @@ local defaults = {
 	},
 	['slowFall'] = {
 		spellID = 130,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -191,6 +203,7 @@ local defaults = {
 		spellID = 30449,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -233,6 +246,7 @@ local defaults = {
 			[344587] = true, -- Oribos
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -244,6 +258,7 @@ local defaults = {
 	['timeWarp'] = {
 		spellID = 80353,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

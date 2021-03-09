@@ -6,6 +6,7 @@ local fullTemplate = {
 		additionalSpellIDs = {[1044] = true,}, -- key, value list of any alternate variants of this spell, like if you want to use one announcement for all mage portal spells.
 		comm = false, -- Only required if you want to use the Addon Comms to determine if you are allowed to announce this spell.
 		configDisplay = {
+			isDefault = true, -- Only for defaultly included spells so that the config GUI can know whether to allow removal or not.
 			messageAreas = {},
 			disabledChannels = {whisper = true},
 			customDesc = 'My custom description',

@@ -4,6 +4,7 @@ local defaults = {
 	['avertHarm'] = {
 		spellID = 202162,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -18,6 +19,7 @@ local defaults = {
 	['dampenHarm'] = {
 		spellID = 122278,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -35,6 +37,9 @@ local defaults = {
 		additionalSpellIDs = {
 			[218164] = true, -- Brewmaster & Windwalker variant
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_DISPEL'] = {
 				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
@@ -48,6 +53,7 @@ local defaults = {
 	['diffuseMagic'] = {
 		spellID = 122783,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -62,6 +68,7 @@ local defaults = {
 	['fortifyingBrew'] = {
 		spellID = 120954,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -77,6 +84,7 @@ local defaults = {
 		spellID = 119381,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -90,6 +98,9 @@ local defaults = {
 	},
 	['lifeCocoon'] = {
 		spellID = 116849,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -104,6 +115,7 @@ local defaults = {
 	['paralysis'] = {
 		spellID = 115078,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -142,6 +154,7 @@ local defaults = {
 	['provoke'] = {
 		spellID = 116189,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -170,6 +183,7 @@ local defaults = {
 	['purifyingBrew'] = {
 		spellID = 119582,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -184,6 +198,7 @@ local defaults = {
 	['reawaken'] = {
 		spellID = 212051,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -197,6 +212,9 @@ local defaults = {
 	},
 	['resuscitate'] = {
 		spellID = 115178,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},
@@ -211,6 +229,7 @@ local defaults = {
 	['revival'] = {
 		spellID = 115310,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -222,6 +241,7 @@ local defaults = {
 	['ringOfPeace'] = {
 		spellID = 116844,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -237,6 +257,7 @@ local defaults = {
 	['spearHandStrike'] = {
 		spellID = 116705,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -266,6 +287,7 @@ local defaults = {
 	['touchOfKarma'] = {
 		spellID = 122470,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -280,6 +302,7 @@ local defaults = {
 	['zenMeditation'] = {
 		spellID = 115176,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

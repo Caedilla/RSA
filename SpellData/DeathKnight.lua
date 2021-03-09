@@ -5,6 +5,7 @@ local defaults = {
 	['antiMagicShell'] = {
 		spellID = 48707,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -19,6 +20,7 @@ local defaults = {
 	['antiMagicZone'] = {
 		spellID = 51052,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -34,6 +36,7 @@ local defaults = {
 	['armyOfTheDead'] = {
 		spellID = 42650,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -51,6 +54,7 @@ local defaults = {
 			[221562] = true, -- Blood baseline version
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -67,6 +71,7 @@ local defaults = {
 	['dancingRuneWeapon'] = {
 		spellID = 49028,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -82,6 +87,7 @@ local defaults = {
 	['darkCommand'] = {
 		spellID = 56222,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -110,6 +116,7 @@ local defaults = {
 	['deathGrip'] = {
 		spellID = 49576,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -136,6 +143,7 @@ local defaults = {
 	['gorefiendsGrasp'] = {
 		spellID = 108199,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -147,6 +155,7 @@ local defaults = {
 	['iceboundFortitude'] = {
 		spellID = 48792,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -161,6 +170,7 @@ local defaults = {
 	['mindFreeze'] = {
 		spellID = 47528,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -190,6 +200,7 @@ local defaults = {
 	['perdition'] = { -- Forbearance effect of Purgatory
 		spellID = 114556, -- ID of the talent so [LINK] links that, rather than Perdition. Unused in any events since all have a uniqueSpellID.
 		configDisplay = {
+			isDefault = true,
 			defaultName = L["Purgatory Cooldown"],
 			defaultDesc = '|cffFFCC00'..GetSpellInfo(123981) .. ':|r |cffd1d1d1' .. GetSpellDescription(123981) .. '|r',
 			disabledChannels = {whisper = true},
@@ -205,6 +216,7 @@ local defaults = {
 		spellID = 114556, -- ID of the talent so [LINK] links that, rather than Shroud of Purgatory. Unused in any events since all have a uniqueSpellID.
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -227,6 +239,9 @@ local defaults = {
 	},
 	['raiseAlly'] = {
 		spellID = 61999,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},
@@ -237,6 +252,7 @@ local defaults = {
 	['runeTap'] = {
 		spellID = 194679,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -251,6 +267,7 @@ local defaults = {
 	['strangulate'] = {
 		spellID = 47476,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -267,6 +284,7 @@ local defaults = {
 	['vampiricBlood'] = {
 		spellID = 55233,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

@@ -4,6 +4,7 @@ local defaults = {
 	['blur'] = {
 		spellID = 212800,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -19,6 +20,7 @@ local defaults = {
 		spellID = 179057,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -34,6 +36,7 @@ local defaults = {
 		spellID = 278326,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -56,6 +59,7 @@ local defaults = {
 	['darkness'] = {
 		spellID = 196718,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -71,6 +75,7 @@ local defaults = {
 	['disrupt'] = {
 		spellID = 183752,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -100,6 +105,7 @@ local defaults = {
 	['felEruption'] = {
 		spellID = 211881,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -116,6 +122,7 @@ local defaults = {
 	['fieryBrand'] = {
 		spellID = 207744,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -132,6 +139,7 @@ local defaults = {
 	['imprison'] = {
 		spellID = 217832,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -170,6 +178,7 @@ local defaults = {
 	['lastResort'] = { -- Forbearance effect of Last Resort
 		spellID = 209258, -- ID of the talent so [LINK] links that, rather than Perdition. Unused in any events since all have a uniqueSpellID.
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -187,6 +196,7 @@ local defaults = {
 	['metamorposis'] = {
 		spellID = 187827,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -201,6 +211,7 @@ local defaults = {
 	['netherwalk'] = {
 		spellID = 196555,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -216,6 +227,7 @@ local defaults = {
 		spellID = 204843,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -231,6 +243,7 @@ local defaults = {
 		spellID = 207685,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -246,6 +259,7 @@ local defaults = {
 		spellID = 204490,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -260,6 +274,7 @@ local defaults = {
 	['spectralSight'] = {
 		spellID = 188501,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -274,6 +289,7 @@ local defaults = {
 	['torment'] = {
 		spellID = 185245,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

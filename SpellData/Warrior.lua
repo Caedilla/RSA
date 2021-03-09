@@ -5,6 +5,7 @@ local defaults = {
 		spellID = 1160,
 		throttle = 2,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -19,6 +20,7 @@ local defaults = {
 	['dieByTheSword'] = {
 		spellID = 118038,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -33,6 +35,7 @@ local defaults = {
 	['enragedRegeneration'] = {
 		spellID = 184364,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -46,6 +49,9 @@ local defaults = {
 	},
 	['intervene'] = {
 		spellID = 3411,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -61,6 +67,7 @@ local defaults = {
 		spellID = 5246,
 		throttle = 2,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -75,6 +82,7 @@ local defaults = {
 	['lastStand'] = {
 		spellID = 12975,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -89,6 +97,7 @@ local defaults = {
 	['pummel'] = {
 		spellID = 6552,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -118,6 +127,7 @@ local defaults = {
 	['rallyingCry'] = {
 		spellID = 97462,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -133,6 +143,7 @@ local defaults = {
 	['recklessness'] = {
 		spellID = 1719,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -147,6 +158,7 @@ local defaults = {
 	['shieldWall'] = {
 		spellID = 871,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -162,6 +174,7 @@ local defaults = {
 	['stormBolt'] = {
 		spellID = 132169,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -178,6 +191,7 @@ local defaults = {
 	['taunt'] = {
 		spellID = 355,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

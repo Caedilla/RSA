@@ -4,6 +4,7 @@ local defaults = {
 	['ancestralGuidance'] = {
 		spellID = 108281,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -18,6 +19,7 @@ local defaults = {
 	['ancestralProtectionTotem'] = {
 		spellID = 207399,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -35,6 +37,9 @@ local defaults = {
 	},
 	['ancestralSpirit'] = {
 		spellID = 2008,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},
@@ -49,6 +54,7 @@ local defaults = {
 	['ancestralVision'] = {
 		spellID = 212048,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -67,6 +73,7 @@ local defaults = {
 			[114052] = true, -- Restoration
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -81,6 +88,7 @@ local defaults = {
 	['astralShift'] = {
 		spellID = 108271,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -98,6 +106,7 @@ local defaults = {
 			[32182] = true, -- Heroism
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -113,6 +122,7 @@ local defaults = {
 	['capacitorTotem'] = {
 		spellID = 192058,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -136,6 +146,9 @@ local defaults = {
 		additionalSpellIDs = {
 			[77130] = true, -- Purify Spirit
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_DISPEL'] = {
 				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
@@ -149,6 +162,7 @@ local defaults = {
 	['cloudburstTotem'] = {
 		spellID = 157153,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -170,6 +184,7 @@ local defaults = {
 	['earthElemental'] = {
 		spellID = 198103,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -184,6 +199,7 @@ local defaults = {
 	['earthenWallTotem'] = {
 		spellID = 207399,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -199,6 +215,7 @@ local defaults = {
 	['feralSpirit'] = {
 		spellID = 51533,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -217,6 +234,7 @@ local defaults = {
 			[188592] = true,
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -254,6 +272,7 @@ Wind Rush Totem
 			[269352] = true, -- Skeletal Hatchling
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -293,6 +312,7 @@ Wind Rush Totem
 		spellID = 370,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -315,6 +335,7 @@ Wind Rush Totem
 	['reincarnation'] = {
 		spellID = 21169,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -326,6 +347,7 @@ Wind Rush Totem
 	['thunderstorm'] = {
 		spellID = 51490,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -337,6 +359,7 @@ Wind Rush Totem
 	['windShear'] = {
 		spellID = 57994,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

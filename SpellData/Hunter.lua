@@ -4,6 +4,7 @@ local defaults = {
 	['aspectOfTheTurtle'] = {
 		spellID = 186265,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -19,6 +20,7 @@ local defaults = {
 		spellID = 109248,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -35,6 +37,7 @@ local defaults = {
 	['camouflage'] = {
 		spellID = 199483,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -49,6 +52,7 @@ local defaults = {
 	['concussiveShot'] = {
 		spellID = 5116,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -65,6 +69,7 @@ local defaults = {
 	['counterShot'] = {
 		spellID = 147362,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -95,6 +100,7 @@ local defaults = {
 	['freezingTrap'] = {
 		spellID = 187650,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -134,6 +140,7 @@ local defaults = {
 	['intimidation'] = {
 		spellID = 19577,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -150,6 +157,9 @@ local defaults = {
 	--TODO: Support custom code to tally amount of threat transferred.
 	['misdirection'] = {
 		spellID = 34477,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				tracker = 2,
@@ -170,6 +180,7 @@ local defaults = {
 	['muzzle'] = {
 		spellID = 187707,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -199,6 +210,7 @@ local defaults = {
 	['primalRage'] = {
 		spellID = 264667,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -213,6 +225,9 @@ local defaults = {
 	},
 	['roarOfSacrifice'] = {
 		spellID = 53480,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -226,6 +241,9 @@ local defaults = {
 	},
 	['spiritMend'] = {
 		spellID = 90361,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_HEAL'] = {
 				messages = {"[LINK] healed [TARGET] for [AMOUNT]!",},

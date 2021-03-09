@@ -4,6 +4,7 @@ local defaults = {
 	['betweenTheEyes'] = {
 		spellID = 315341,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -20,6 +21,7 @@ local defaults = {
 	['blind'] = {
 		spellID = 2094,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -58,6 +60,7 @@ local defaults = {
 	['cheapShot'] = {
 		spellID = 1833,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -74,6 +77,7 @@ local defaults = {
 	['cloakOfShadows'] = {
 		spellID = 31224,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -88,6 +92,7 @@ local defaults = {
 	['kick'] = {
 		spellID = 1766,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -117,6 +122,7 @@ local defaults = {
 	['kidneyShot'] = {
 		spellID = 408,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -133,6 +139,7 @@ local defaults = {
 	['sap'] = {
 		spellID = 6770,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -162,6 +169,7 @@ local defaults = {
 	['shroudOfConcealment'] = {
 		spellID = 115834,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -181,6 +189,7 @@ local defaults = {
 	['smokeBomb'] = {
 		spellID = 212182,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -193,25 +202,28 @@ local defaults = {
 		},
 	},
 		--TODO: Support custom code to tally amount of threat transferred.
-		['tricks'] = {
-			spellID = 57934,
-			events = {
-				['SPELL_AURA_APPLIED'] = {
-					tracker = 2,
-					messages = {"[LINK] cast on [TARGET]!",},
-					tags = {TARGET = true,},
-				},
-				['SPELL_AURA_REMOVED'] = {
-					uniqueSpellID = 197336,
-					tracker = 1,
-					messages = {"[LINK] on [TARGET] finished and transferred [AMOUNT] threat!",},
-					tags = {
-						TARGET = true,
-						AMOUNT = true,
-					},
+	['tricks'] = {
+		spellID = 57934,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				tracker = 2,
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				uniqueSpellID = 197336,
+				tracker = 1,
+				messages = {"[LINK] on [TARGET] finished and transferred [AMOUNT] threat!",},
+				tags = {
+					TARGET = true,
+					AMOUNT = true,
 				},
 			},
 		},
+	},
 }
 
 RSA.monitorData.rogue, RSA.configData.rogue = RSA.PrepareDataTables(defaults)

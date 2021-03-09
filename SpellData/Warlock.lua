@@ -4,6 +4,7 @@ local defaults = {
 	['axeToss'] = {
 		spellID = 89766,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -20,6 +21,7 @@ local defaults = {
 	['banish'] = {
 		spellID = 710,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -50,6 +52,7 @@ local defaults = {
 	['createSoulwell'] = {
 		spellID = 29893,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -64,6 +67,7 @@ local defaults = {
 	['darkPact'] = {
 		spellID = 108416,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -78,6 +82,7 @@ local defaults = {
 	['demonicGateway'] = {
 		spellID = 111771,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -93,6 +98,7 @@ local defaults = {
 		spellID = 19505,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -115,6 +121,7 @@ local defaults = {
 	['fear'] = {
 		spellID = 5782,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -153,6 +160,7 @@ local defaults = {
 	['mortalCoil'] = {
 		spellID = 6789,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -169,6 +177,7 @@ local defaults = {
 	['ritualOfSummoning'] = {
 		spellID = 698,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -183,6 +192,7 @@ local defaults = {
 			[115268] = true, -- Mesmerize (Glyph of the Shivarra)
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -222,6 +232,7 @@ local defaults = {
 		spellID = 30283,
 		throttle = 0.5,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -240,6 +251,9 @@ local defaults = {
 			[115276] = true, -- Sear Magic (Glyph of Fel Imp)
 			[132411] = true, -- Player variant from Grimoire of Sacrifice
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_DISPEL'] = {
 				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
@@ -252,6 +266,9 @@ local defaults = {
 	},
 	['soulstone'] = {
 		spellID = 20707,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},
@@ -274,6 +291,7 @@ local defaults = {
 			[132409] = true, -- Player variant from Grimoire of Sacrifice
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -303,6 +321,7 @@ local defaults = {
 	['suffering'] = {
 		spellID = 17735,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -331,6 +350,7 @@ local defaults = {
 	['unendingResolve'] = {
 		spellID = 104773,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

@@ -3,6 +3,9 @@ local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local defaults = {
 	['barkskin'] = {
 		spellID = 22812,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -17,6 +20,7 @@ local defaults = {
 	['berserk'] = {
 		spellID = 106951,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -31,6 +35,7 @@ local defaults = {
 	['cyclone'] = {
 		spellID = 33786,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -48,6 +53,7 @@ local defaults = {
 		spellID = 201664,
 		throttle = 2,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -62,6 +68,7 @@ local defaults = {
 	['entanglingRoots'] = {
 		spellID = 339,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -101,6 +108,7 @@ local defaults = {
 	['frenziedRegeneration'] = {
 		spellID = 22842,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -115,6 +123,7 @@ local defaults = {
 	['growl'] = {
 		spellID = 6795,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -143,6 +152,7 @@ local defaults = {
 	['hibernate'] = {
 		spellID = 2637,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -182,6 +192,7 @@ local defaults = {
 		spellID = 99,
 		throttle = 2,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -195,6 +206,9 @@ local defaults = {
 	},
 	['innervate'] = {
 		spellID = 29166,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
@@ -209,6 +223,7 @@ local defaults = {
 	['ironbark'] = {
 		spellID = 102342,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -223,6 +238,7 @@ local defaults = {
 	['ironfur'] = {
 		spellID = 192081,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -238,6 +254,7 @@ local defaults = {
 		spellID = 102359,
 		throttle = 2,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -252,6 +269,7 @@ local defaults = {
 	['mightyBash'] = {
 		spellID = 5211,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -267,6 +285,9 @@ local defaults = {
 	},
 	['rebirth'] = {
 		spellID = 61999,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_CAST_START'] = {
 				messages = {"Casting [LINK] on [TARGET]!",},
@@ -284,6 +305,9 @@ local defaults = {
 		additionalSpellIDs = {
 			[88423] = true, -- Nature's Cure
 		},
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_DISPEL'] = {
 				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
@@ -297,6 +321,7 @@ local defaults = {
 	['revitalize'] = {
 		spellID = 212040,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -310,6 +335,9 @@ local defaults = {
 	},
 	['revive'] = {
 		spellID = 50769,
+		configDisplay = {
+			isDefault = true,
+		},
 		events = {
 			['SPELL_RESURRECT'] = {
 				messages = {"Resurrected [TARGET]!",},
@@ -324,6 +352,7 @@ local defaults = {
 	['skullBash'] = {
 		spellID = 93985,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -354,6 +383,7 @@ local defaults = {
 		spellID = 97547,
 		throttle = 0.25,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -369,6 +399,7 @@ local defaults = {
 	['soothe'] = {
 		spellID = 2908,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -389,6 +420,7 @@ local defaults = {
 			[77764] = true,
 		},
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -404,6 +436,7 @@ local defaults = {
 	['survivalInstincts'] = {
 		spellID = 61336,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -418,6 +451,7 @@ local defaults = {
 	['tranquility'] = {
 		spellID = 740,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -432,6 +466,7 @@ local defaults = {
 	['ursolsVortex'] = {
 		spellID = 102793,
 		configDisplay = {
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
