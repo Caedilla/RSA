@@ -4,7 +4,7 @@ local defaults = {
 	['absolution'] = {
 		spellID = 212056,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -20,7 +20,7 @@ local defaults = {
 		spellID = 31850,
 		throttle = 0.25,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -43,7 +43,7 @@ local defaults = {
 	['auraMastery'] = {
 		spellID = 31821,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -60,7 +60,7 @@ local defaults = {
 	['avengersShield'] = {
 		spellID = 31935,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -94,7 +94,7 @@ local defaults = {
 			[216331] = true, -- Avenging Crusader
 		},
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 			defaultName = GetSpellInfo(31884) .. ' | ' .. GetSpellInfo(216331) .. ' | ' .. GetSpellInfo(231895),
 			defaultDesc = RSA.DescTableBuilder(31884,216331,231895),
@@ -114,7 +114,7 @@ local defaults = {
 			[156910] = true, -- Beacon of Faith
 		},
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			defaultName = GetSpellInfo(53563) .. ' | ' .. GetSpellInfo(156910),
 			defaultDesc = '|cffFFCC00'..GetSpellInfo(53563) .. ':|r |cffd1d1d1' .. GetSpellDescription(53563) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(156910) .. ':|r |cffd1d1d1' .. GetSpellDescription(156910) .. '|r',
 		},
@@ -180,7 +180,7 @@ local defaults = {
 			[204018] = true, -- Blessing of Spellwarding
 		},
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			defaultName = GetSpellInfo(1022) .. ' | ' .. GetSpellInfo(204018),
 			defaultDesc = '|cffFFCC00'..GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. GetSpellDescription(204018) .. '|r',
 		},
@@ -214,7 +214,7 @@ local defaults = {
 	['divineProtection'] = {
 		spellID = 498,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -229,7 +229,7 @@ local defaults = {
 	['divineShield'] = {
 		spellID = 642,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -244,7 +244,7 @@ local defaults = {
 	['eyeForAnEye'] = {
 		spellID = 205191,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -259,7 +259,7 @@ local defaults = {
 	['finalStand'] = {
 		spellID = 204079,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -274,7 +274,7 @@ local defaults = {
 	['forbearance'] = {
 		spellID = 25771,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {
 				say = true,
 				yell = true,
@@ -303,7 +303,7 @@ local defaults = {
 			[212641] = true, -- Glyph of the Queen
 		},
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -331,7 +331,7 @@ local defaults = {
 	['hammerOfJustice'] = {
 		spellID = 853,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -348,7 +348,7 @@ local defaults = {
 	['handOfReckoning'] = {
 		spellID = 62124,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -402,7 +402,7 @@ local defaults = {
 	['rebuke'] = {
 		spellID = 96231,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -445,7 +445,7 @@ local defaults = {
 	['repentance'] = {
 		spellID = 20066,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
@@ -484,7 +484,7 @@ local defaults = {
 	['shieldOfVengeance'] = {
 		spellID = 184662,
 		configDisplay = {
-		configLocked = true,
+			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {

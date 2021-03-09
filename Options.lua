@@ -1530,7 +1530,12 @@ local function GenerateSpellOptions(section)
 						configLocked = {
 							name = L["Spell Setup for this spell is locked."],
 							type = 'description',
-							hidden = not configDisplay.configLocked,
+							hidden = function()
+								if not configDisplay.isDefault then return true end
+								if configDisplay.configLocked then
+									return false
+								end
+							end,
 							order = 0,
 						},
 						lockToggle = {
@@ -1538,11 +1543,29 @@ local function GenerateSpellOptions(section)
 							desc = L["WARNING: This spell is included with RSA by default and my cease to function correctly if you unlock and alter these settings."],
 							order = 0.2,
 							type = 'toggle',
+							hidden = function()
+								if not configDisplay.isDefault then return true end
+								return false
+							end,
 							get = function(info)
 								return configDisplay.configLocked
 							end,
 							set = function(info, value)
 								configDisplay.configLocked = value
+								RSA.Options:UpdateOptions()
+							end,
+						},
+						remove = {
+							name = L["Remove Spell"],
+							type = 'execute',
+							order = 0,
+							hidden = function()
+								if configDisplay.isDefault then return true end
+								if configDisplay.configLocked then return true end
+								return false
+							end,
+							func = function()
+								RSA.db.profile[section][k] = nil
 								RSA.Options:UpdateOptions()
 							end,
 						},
