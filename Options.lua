@@ -2106,6 +2106,19 @@ local function GenerateCustomSpellSetupOptions()
 										name = L["Add Event"],
 										order = 0,
 										type = 'input',
+										validate = function(info, value)
+											if value == '' then return true end
+											local hasLocalisation
+											for k,v in pairs(configEventInfo) do
+												if k == value then
+													hasLocalisation = true
+												end
+											end
+											if not hasLocalisation == true then
+												return L["This event is not currently supported by RSA or is not a valid event."]
+											end
+											return true
+										end,
 										set = function(info, value)
 											if not customSpellSetupData.events[value] then
 												customSpellSetupData.events[value] = {
