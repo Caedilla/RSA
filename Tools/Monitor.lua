@@ -90,7 +90,7 @@ function RSA:ExposeTables()
 	_G.curTimers = curTimers
 end
 
-function UpdateTimer()
+function RSA.Monitor.UpdateTimer()
 	for k in pairs(curTimers) do
 		if curTimers[k].startTime < GetTime() then
 			local fakeEvent = curTimers[k].fakeEvent
@@ -117,7 +117,7 @@ local function CreateTimer(currentSpell, profileName, logData, fakeEvent)
 				startTime = GetTime(),
 				duration = timerDuration,
 			}
-			C_Timer.After(curTimers[profileName].duration, UpdateTimer)
+			C_Timer.After(curTimers[profileName].duration, RSA.Monitor.UpdateTimer)
 		end
 	end
 end
