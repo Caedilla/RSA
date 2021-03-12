@@ -238,7 +238,8 @@ end
 local function BaseOptions()
 	local optionsTable = {
 		type = 'group',
-		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision .. '|r',
+		--name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision .. '|r',
+		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] |c5500DBBD" .. GetAddOnMetadata("RSA","Version") .. "|r",
 		order = 0,
 		childGroups = 'tab',
 		args = {
@@ -845,7 +846,8 @@ local function BaseOptions()
 						order = 0,
 					},
 					Revision = {
-						name = "|cffFFCC00" .. L["Current Version: %s"]:format("r|r|c5500DBBD" .. RSA.db.global.revision) .. "|r",
+						--name = "|cffFFCC00" .. L["Current Version: %s"]:format("r|r|c5500DBBD" .. RSA.db.global.revision) .. "|r",
+						name = "|cffFFCC00" .. L["Current Version: %s"]:format("|r|c5500DBBD" .. GetAddOnMetadata("RSA","Version")) .. "|r",
 						type = 'description',
 						order = 0.5,
 						fontSize = 'large',

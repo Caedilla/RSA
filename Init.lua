@@ -168,5 +168,5 @@ function RSA:OnInitialize()
 
 	RSA.Monitor.Start()
 
-	RSA.SendMessage.ChatFrame("You are using RSA5 Alpha 1. This is an in development early version of the new RSA. Please re-install the current release version if you accidentally installed this.")
+	RSA.SendMessage.ChatFrame("You are using RSA5 Alpha 2. This is an in development early version of the new RSA. Please re-install the current release version if you accidentally installed this.")
 end
