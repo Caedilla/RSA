@@ -347,7 +347,6 @@ local defaults = {
 			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] activated!",},
 			},
-			-- TODO: Support RSA_END_TIMER in monitor for spells without an appropriate event to hook into.
 			['RSA_END_TIMER'] = {
 				duration = 10,
 				messages = {"[LINK] finished!",},

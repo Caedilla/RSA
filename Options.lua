@@ -1352,7 +1352,38 @@ local function ConfigSpellSetupEvents(section, event, k)
 					RSA.RefreshMonitorData(section)
 				end,
 			},
+			duration = {
+				name = L["Duration"],
+				desc = L["How long before this fake event triggers after any other event for this spell has been processed."],
+				order = 0,
+				width = 0.8,
+				type = 'input',
+				hidden = function()
+					if RSA.db.profile[section][k].events[event] == RSA.db.profile[section][k].events['RSA_END_TIMER'] then
+						return false
+					end
+					return true
+				end,
+				validate = function(info, value)
+					if value == '' then return true end
+					if not string.match(value, '%d') then
+						return L["You must enter a number."]
+					end
+					return true
+				end,
+				get = function(info)
+					if not RSA.db.profile[section][k].events[event].duration then
+						return ''
+					end
+					return tostring(RSA.db.profile[section][k].events[event].duration)
+				end,
+				set = function(info, value)
+					RSA.db.profile[section][k].events[event].duration = tonumber(value)
+					RSA.RefreshMonitorData(section)
+				end,
+			},
 			tracker = {
+				hidden = true,
 				name = L["Prevent duplicate announcements"],
 				desc = L["If this spell can trigger multiple events at the same time, such as if it is an AoE spell, you can start the event tracker when you trigger the spell, and set it to end on all events where you want to prevent subsequent announcements. Where multiple events can trigger the final message, you should select Spell Ends on both events."],
 				order = 1,
@@ -2073,6 +2104,7 @@ local function GenerateCustomSpellSetupOptions()
 													event = value,
 													uniqueSpellID = nil,
 													tracker = nil,
+													duration = nil,
 													tags = {},
 													messages = {},
 													immuneMessages = {},

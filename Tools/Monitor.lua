@@ -90,7 +90,7 @@ function RSA:ExposeTables()
 	_G.curTimers = curTimers
 end
 
-local function UpdateTimer()
+function UpdateTimer()
 	for k in pairs(curTimers) do
 		if curTimers[k].startTime < GetTime() then
 			local fakeEvent = curTimers[k].fakeEvent
@@ -107,7 +107,8 @@ local function CreateTimer(currentSpell, profileName, logData, fakeEvent)
 	-- Stores data from the initiating spell event in a table since we can't pass arguments with C_Timer
 	-- I think this is better than using OnUpdate though it may look worse.
 	if fakeEvent == 'RSA_END_TIMER' then
-		local timerDuration = currentSpell.events['RSA_END_TIMER'].duration - 0.01 or 0
+		local timerDuration = currentSpell.events['RSA_END_TIMER'].duration or 0
+		if timerDuration <= 0 then return end
 		if not curTimers[profileName] then
 			curTimers[profileName] = {
 				fakeEvent = 'RSA_END_TIMER',
@@ -116,7 +117,7 @@ local function CreateTimer(currentSpell, profileName, logData, fakeEvent)
 				startTime = GetTime(),
 				duration = timerDuration,
 			}
-			C_Timer.After(curTimers[profileName].duration, UpdateTimer())
+			C_Timer.After(curTimers[profileName].duration, UpdateTimer)
 		end
 	end
 end
