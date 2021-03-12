@@ -1483,12 +1483,13 @@ local function Abbreviate(inputString, ...)
 end
 
 local function GenerateSpellOptions(section)
-	RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass])
 	local optionsData = RSA.db.profile[section]
 	local sectionName = section
 	if uClass == section then
 		sectionName = localisedClass
+		--RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass])
 	else
+		--RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
 		sectionName = L[string.gsub(section, '%l', string.upper, 1)]
 	end
 	if not optionsData then return

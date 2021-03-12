@@ -124,6 +124,7 @@ function RSA.PrepareDataTables(configData)
 
 	--/dump LibStub('AceAddon-3.0'):GetAddon('RSA').monitorData
 	for profile in pairs(configData) do
+		if not profile then return end
 		if not monitorData[configData[profile].spellID] then
 			monitorData[configData[profile].spellID] = {[profile] = true,}
 		else

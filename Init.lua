@@ -120,8 +120,8 @@ end
 function RSA:OnInitialize()
 
 	-- TEMP until implemented.
-	RSA.monitorData.racials = {}
-	RSA.monitorData.utilities = {}
+	--RSA.monitorData.racials = {}
+	--RSA.monitorData.utilities = {}
 
 	RSA.configData.customCategories = {
 		['General'] = {
@@ -139,6 +139,8 @@ function RSA:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("RSA5", defaults, UnitClass('player')) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
+	RSA.monitorData['racials'] = RSA.PrepareDataTables(self.db.profile['racials'])
+	RSA.monitorData['utilities'] = RSA.PrepareDataTables(self.db.profile['utilities'])
 	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass])
 
 	-- project-revision
