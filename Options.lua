@@ -1494,9 +1494,9 @@ local function GenerateSpellOptions(section)
 	local sectionName = section
 	if uClass == section then
 		sectionName = localisedClass
-		--RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass])
+		RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass]) -- Refresh Monitor Data so that options displays correctly (i.e if we added or changed an event for a spell profile)
 	else
-		--RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
+		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
 		sectionName = L[string.gsub(section, '%l', string.upper, 1)]
 	end
 	if not optionsData then return
