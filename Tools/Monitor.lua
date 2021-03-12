@@ -4,6 +4,7 @@ RSA.Monitor = {}
 
 local curTracking = {}
 local curThrottled = {}
+local curTimers = {}
 local messageCache = {}
 local cacheTagSpellName = {}
 local cacheTagSpellLink = {}
@@ -86,6 +87,38 @@ function RSA:ExposeTables()
 	_G.RSA_curThrottled = curThrottled
 	_G.cacheTagSpellName = cacheTagSpellName
 	_G.cacheTagSpellName = cacheTagSpellLink
+	_G.curTimers = curTimers
+end
+
+local function UpdateTimer()
+	for k in pairs(curTimers) do
+		if curTimers[k].startTime < GetTime() then
+			local fakeEvent = curTimers[k].fakeEvent
+			local profileName = curTimers[k].profileName
+			local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = unpack(curTimers[k].logData)
+			RSA.Monitor.ProcessSpell(profileName, nil, nil, nil, timestamp, fakeEvent, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+			curTimers[k] = nil
+		end
+	end
+end
+
+local function CreateTimer(currentSpell, profileName, logData, fakeEvent)
+	-- Called in ProcessSpell when we check a profile for fake events
+	-- Stores data from the initiating spell event in a table since we can't pass arguments with C_Timer
+	-- I think this is better than using OnUpdate though it may look worse.
+	if fakeEvent == 'RSA_END_TIMER' then
+		local timerDuration = currentSpell.events['RSA_END_TIMER'].duration - 0.01 or 0
+		if not curTimers[profileName] then
+			curTimers[profileName] = {
+				fakeEvent = 'RSA_END_TIMER',
+				profileName = profileName,
+				logData = logData,
+				startTime = GetTime(),
+				duration = timerDuration,
+			}
+			C_Timer.After(curTimers[profileName].duration, UpdateTimer())
+		end
+	end
 end
 
 local function Throttle(currentSpell, profileName)
@@ -143,10 +176,9 @@ local function MatchUnit(compareUnit, unitGUID, unitFlags, destRaidFlags)
 	return false
 end
 
+function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 
-local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
-
-	local currentSpell = RSA.db.profile[uClass][profileName]
+	local currentSpell = RSA.db.profile[uClass][profileName] or nil
 	if not currentSpell then return end
 	if not currentSpell.events[event] then return end
 
@@ -168,6 +200,12 @@ local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraScho
 	if ex1 == 'IMMUNE' and event == 'SPELL_MISSED' then
 		fakeEvent = 'RSA_SPELL_IMMUNE'
 	end
+
+	if currentSpell.events['RSA_END_TIMER'] and event ~= 'RSA_END_TIMER' then
+		local logData = {CombatLogGetCurrentEventInfo()}
+		CreateTimer(currentSpell, profileName, logData, 'RSA_END_TIMER')
+	end
+
 	local message = BuildMessageCache(currentSpell, profileName, event, fakeEvent)
 	if not message then return end
 
@@ -219,14 +257,14 @@ local function ProcessSpell(profileName, extraSpellID, extraSpellName, extraScho
 		if not name then
 			name = GetSpellInfo(extraSpellID)
 			cacheTagSpellName[extraSpellID] = name
-			replacements['[EXTRA]'] = name
 		end
 		local link = cacheTagSpellLink[extraSpellID]
 		if not link then
 			link = GetSpellLink(extraSpellID)
 			cacheTagSpellLink[extraSpellID] = link
-			replacements['[EXTRALINK]'] = link
 		end
+		replacements['[EXTRA]'] = name
+		replacements['[EXTRALINK]'] = link
 	end
 
 	if tagReplacements.MISSTYPE then
@@ -322,11 +360,11 @@ local function HandleEvents()
 	if #monitorData > 1 then
 		for i = 1, #monitorData do
 			local profileName = monitorData[i]
-			ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+			RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 		end
 	else
 		local profileName = monitorData[1]
-		ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+		RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 	end
 end
 
