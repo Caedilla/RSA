@@ -124,6 +124,13 @@ local configEventInfo = {
 		desc = L["When this spell instantly kills the target."],
 		order = 18,
 	},
+	['UNIT_DIED'] = {
+		localisedName = "UNIT_DIED: NYI",
+		desc = "This is not yet implemented.",
+		--localisedName = L["Unit Died"],
+		--desc = L["When a unit summoned by this spell has died. For example when a totem despawns at the end of its duration."],
+		order = 18,
+	},
 }
 
 local channels = {
