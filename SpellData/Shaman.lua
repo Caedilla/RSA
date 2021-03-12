@@ -197,7 +197,7 @@ local defaults = {
 		},
 	},
 	['earthenWallTotem'] = {
-		spellID = 207399,
+		spellID = 198838,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
