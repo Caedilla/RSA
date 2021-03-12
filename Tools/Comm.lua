@@ -19,6 +19,7 @@ function RSA.Comm.Registry()
 end
 
 function RSA.VersionCheck(type)
+	if true == true then return end -- For RSA5 Alpha only
 	if not type then return end
 	if type == 'joinedGroup' then
 		if IsInRaid() then
@@ -35,6 +36,7 @@ function RSA.VersionCheck(type)
 end
 
 function RSA.OnVersionCheckReceived(addon, prefix, message, channel, sender)
+	if true == true then return end -- For RSA5 Alpha only
 	local revision = tonumber(string.match(message,"%d+"))
 	local releaseType = string.match(message,"%a+") or 0
 	local mine = releasePriority[RSA.db.global.releaseType]
