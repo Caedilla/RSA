@@ -269,6 +269,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	end
 
 	if tagReplacements.MISSTYPE then
+
 		if RSA.db.profile.general.replacements.missType.useGenericReplacement == true then
 			for i = 1,#missTypes do
 				if ex1 == missTypes[i] then
@@ -276,7 +277,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 				end
 			end
 		else
-			replacements['MISSTYPE'] = RSA.db.profile.general.replacements.missType[string.lower(ex1)]
+			replacements['[MISSTYPE]'] = RSA.db.profile.general.replacements.missType[string.lower(ex1)]
 		end
 	end
 
