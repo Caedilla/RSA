@@ -2,7 +2,6 @@ local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local function CombatState()
-
 	local profile = RSA.db.profile.general.globalAnnouncements.combatState
 	local canAnnounce = false
 	if InCombatLockdown() then
@@ -19,7 +18,6 @@ local function CombatState()
 end
 
 function RSA.AnnouncementCheck() -- Checks against user settings to see if we are allowed to announce.
-	if 1 == 1 then return true end
 	local InstanceType = select(2, IsInInstance())
 	local LFParty = IsInGroup(LE_PARTY_CATEGORY_INSTANCE) -- party group found through group finder
 	local LFRaid = IsInRaid(LE_PARTY_CATEGORY_INSTANCE) -- raid grounp found through group finder
@@ -28,8 +26,8 @@ function RSA.AnnouncementCheck() -- Checks against user settings to see if we ar
 
 	if not CombatState() then return false end
 
-	if profile.warModeWorld and C_PvP.IsWarModeActive() and InstanceType == "none" and not LFParty and not LFRaid then return true end -- Enable in World PvP.
-	if profile.nonWarWorld and InstanceType == "none" and not LFParty and not LFRaid and not C_PvP.IsWarModeActive() then return true end -- Enable in World PvE.
+	if profile.warModeWorld and C_PvP.IsWarModeDesired() and InstanceType == "none" and not LFParty and not LFRaid then return true end -- Enable in World PvP.
+	if profile.nonWarWorld and InstanceType == "none" and not LFParty and not LFRaid and not C_PvP.IsWarModeDesired() then return true end -- Enable in World PvE.
 	if profile.arenas and InstanceType == "arena" then return true end
 	if profile.bgs and LFRaid and (InstanceType == "pvp" or InstanceType == "none") then return true end
 	if profile.dungeons and InstanceType == "party" and not LFParty then return true end
@@ -70,8 +68,7 @@ end
 
 local CL_OBJECT_FRIENDLY_PLAYER = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_REACTION_FRIENDLY) -- construct a friendly player bitmask
 function RSA.Whisperable(destFlags) -- Checks if the unit is a player or not. Since RSA can announce casts for any unit, not just units that fall under UnitID.
-
-	--When we send a fake event through the announcement monitor, ingnore flags.
+	--When we send a fake event through the announcement monitor, ignore flags.
 	if destFlags == true then return true end
 	if destFlags == false then return false end
 

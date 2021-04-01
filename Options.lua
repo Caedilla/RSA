@@ -483,9 +483,12 @@ local function BaseOptions()
 								name = '|c' .. colors['gold'] .. L["Always allow Whispers"] .. '|r',
 								type = 'toggle',
 								order = 110,
-								desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
+								desc = L["Allows whispers to ignore the %s and %s location options on this page. Does not ignore %s."]:format(
+									'|c' .. colors['orange'] .. L['PvP'] .. '|r',
+									'|c' .. colors['green'] .. L['PvE'] .. '|r',
+									'|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['WHISPER']) .. '|r'),
 								descStyle = 'inline',
-								width = 'double',
+								width = 'full',
 								get = function(info)
 									return RSA.db.profile.general.globalAnnouncements.alwaysWhisper
 								end,
@@ -1269,7 +1272,10 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						order = 110,
-						desc = L["Always allow whispers to be sent, ignoring the PvP and PvE Options on this page."],
+						desc = L["Allows whispers to ignore the %s and %s location options on this page. Does not ignore %s."]:format(
+							'|c' .. colors['orange'] .. L['PvP'] .. '|r',
+							'|c' .. colors['green'] .. L['PvE'] .. '|r',
+							'|c' .. colors['deepRed'] .. L["%s only while grouped"]:format(_G['WHISPER']) .. '|r'),
 						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.alwaysWhisper

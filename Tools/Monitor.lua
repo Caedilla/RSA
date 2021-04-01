@@ -296,7 +296,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	if currentSpell.events[event].channels.yell == true then
 		RSA.SendMessage.Yell(gsub(message, '.%a+.', replacements))
 	end
-	if currentSpell.events[event].channels.whisper == true and UnitExists(longName) and RSA.Whisperable(destFlags) then
+	if currentSpell.events[event].channels.whisper == true and RSA.Whisperable(destFlags) then --UnitExists(longName) and RSA.Whisperable(destFlags) then
 		RSA.SendMessage.Whisper(message, longName, replacements, destName)
 	end
 	if currentSpell.events[event].channels.say == true then
