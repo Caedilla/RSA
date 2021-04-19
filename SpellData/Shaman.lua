@@ -161,6 +161,7 @@ local defaults = {
 	},
 	['cloudburstTotem'] = {
 		spellID = 157153,
+		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -175,7 +176,7 @@ local defaults = {
 			--	messages = {"[LINK] activated!",},
 			--},
 			['SPELL_HEAL'] = {
-			--	uniqueSpellID = 118905,
+				uniqueSpellID = 157503,
 				messages = {"[LINK] healed for [AMOUNT]!",},
 				tags = {AMOUNT = true,},
 			},

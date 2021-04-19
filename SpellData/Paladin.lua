@@ -59,6 +59,7 @@ local defaults = {
 	},
 	['avengersShield'] = {
 		spellID = 31935,
+		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -138,7 +139,7 @@ local defaults = {
 			isDefault = true,
 		},
 		events = {
-			['SPELL_AURA_APPLIED'] = {
+			['SPEPLL_CAST_SUCCESS'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
 				tags = {TARGET = true,},
 			},
