@@ -39,11 +39,11 @@ function RSA_Shaman:OnEnable()
 			[212048] = { -- ANCESTRAL VISION
 				profile = 'AncestralVision'
 			},
-			[2008] = { -- AncestralSpirit
+			--[[[2008] = { -- AncestralSpirit
 				profile = 'AncestralSpirit',
 				section = 'Start',
 				replacements = { TARGET = 1 },
-			},
+			},]]--
 		},
 		SPELL_CAST_SUCCESS = {
 			[212048] = { -- ANCESTRAL VISION
@@ -805,6 +805,69 @@ function RSA_Shaman:OnEnable()
 		end -- IF EVENT IS UNIT_DIED
 	end -- END ENTIRELY
 	RSA.CombatLogMonitor:SetScript('OnEvent', Shaman_Spells)
+
+	local function ShamanRess(self, event, source, dest, _, spellid)
+		local spellinfo,spelllinkinfo
+		if UnitName(source) == pName then
+			if spellid == 2008 and RSA.db.profile.Shaman.Spells.AncestralSpirit.Messages.Start ~= "" then
+				if event == "UNIT_SPELLCAST_SENT" then
+					local messagemax = #RSA.db.profile.Shaman.Spells.AncestralSpirit.Messages.Start
+					if messagemax == 0 then return end
+					local messagerandom = math.random(messagemax)
+					local message = RSA.db.profile.Shaman.Spells.AncestralSpirit.Messages.Start[messagerandom]
+					if (dest == L["Unknown"] or dest == nil) then
+						if UnitExists("target") ~= 1 or (UnitHealth("target") > 1 and UnitIsDeadOrGhost("target") ~= 1) then
+							if GameTooltipTextLeft1:GetText() == nil then
+								dest = L["Unknown"]
+							else
+								dest = string.gsub(GameTooltipTextLeft1:GetText(), L["Corpse of "], "")
+							end
+						else
+							dest = UnitName("target")
+						end
+					end
+					local full_destName,dest = RSA.RemoveServerNames(dest)
+					spellinfo = GetSpellInfo(spellid) spelllinkinfo = GetSpellLink(spellid)
+					RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
+					if message ~= "" then
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.Local == true then
+							RSA.Print_LibSink(string.gsub(message, ".%a+.", RSA.String_Replace))
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.Yell == true then
+							RSA.Print_Yell(string.gsub(message, ".%a+.", RSA.String_Replace))
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.Whisper == true and dest ~= pName then
+							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = L["You"],}
+							RSA.Print_Whisper(message, full_destName, RSA.Replacements, dest)
+							--RSA.Print_Whisper(string.gsub(message, ".%a+.", RSA.String_Replace), full_destName)
+							RSA.Replacements = {["[SPELL]"] = spellinfo, ["[LINK]"] = spelllinkinfo, ["[TARGET]"] = dest,}
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.CustomChannel.Enabled == true then
+							RSA.Print_Channel(string.gsub(message, ".%a+.", RSA.String_Replace), RSA.db.profile.Shaman.Spells.AncestralSpirit.CustomChannel.Channel)
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.Say == true then
+							RSA.Print_Say(string.gsub(message, ".%a+.", RSA.String_Replace))
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true then
+							RSA.Print_SmartGroup(string.gsub(message, ".%a+.", RSA.String_Replace))
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.Party == true then
+							if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true and GetNumGroupMembers() == 0 then return end
+								RSA.Print_Party(string.gsub(message, ".%a+.", RSA.String_Replace))
+						end
+						if RSA.db.profile.Shaman.Spells.AncestralSpirit.Raid == true then
+							if RSA.db.profile.Shaman.Spells.AncestralSpirit.SmartGroup == true and GetNumGroupMembers() > 0 then return end
+							RSA.Print_Raid(string.gsub(message, ".%a+.", RSA.String_Replace))
+						end
+					end
+				end
+			end
+		end
+	end
+	RSA.ResMon = RSA.ResMon or CreateFrame("Frame", "RSA:RM")
+	RSA.ResMon:RegisterEvent("UNIT_SPELLCAST_SENT")
+	RSA.ResMon:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+	RSA.ResMon:SetScript("OnEvent", ShamanRess)
 end
 
 function RSA_Shaman:OnDisable()
