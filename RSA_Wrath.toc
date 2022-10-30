@@ -1,4 +1,4 @@
-## Interface: 100000
+## Interface: 30400
 ## Title: RSA
 ## Notes: Easy Spell Announcements!
 ## Author: Raeli

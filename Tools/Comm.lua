@@ -6,12 +6,6 @@ local groupAssistants = {}
 
 RSA.Comm = {}
 
-local releasePriority = {
-	['alpha'] = 2,
-	['beta'] = 1,
-	['release'] = 0,
-}
-
 function RSA.Comm.Registry()
 	--RSA:RegisterComm('RSA5', 'OnCommReceived')
 	RSA:RegisterComm('RSA5Status', 'OnStatusReceived')
@@ -23,24 +17,24 @@ function RSA.VersionCheck(type)
 	if not type then return end
 	if type == 'joinedGroup' then
 		if IsInRaid() then
-			RSA:SendCommMessage('RSA5V', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
+			RSA:SendCommMessage('RSA5V', RSA.db.global.version, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'RAID')
 		elseif IsInGroup() then
-			RSA:SendCommMessage('RSA5V', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
+			RSA:SendCommMessage('RSA5V', RSA.db.global.version, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and 'INSTANCE_CHAT' or 'PARTY')
 		end
 	end
 	if type == 'guild' then
 		if IsInGuild() and type then
-			RSA:SendCommMessage('RSA5V', RSA.db.global.revision .. '_' .. RSA.db.global.releaseType, 'GUILD')
+			RSA:SendCommMessage('RSA5V', RSA.db.global.version, 'GUILD')
 		end
 	end
 end
 
 function RSA.OnVersionCheckReceived(addon, prefix, message, channel, sender)
 	if true == true then return end -- For RSA5 Alpha only
-	local revision = tonumber(string.match(message,"%d+"))
-	local releaseType = string.match(message,"%a+") or 0
-	local mine = releasePriority[RSA.db.global.releaseType]
-	local theirs = releasePriority[releaseType]
+	local mine = RSA.db.global.version
+	local theirs = message
+
+	local major, minor, patch = mine:gsub('%f[.]%.%f[^.]', '\0'):gmatch'%Z+'
 
 	if mine < theirs then return end -- Don't warn on more recent development versions if we're on a more stable release type.
 	if sender == UnitName('player') then return end -- Don't compare with self.

@@ -7,7 +7,11 @@
 	],
 	"Lua.runtime.version": "Lua 5.1",
 	"Lua.diagnostics.disable": [
-		"ambiguity-1"
+		"ambiguity-1",
+		"undefined-field",
+		"param-type-mismatch",
+		"redundant-parameter",
+		"need-check-nil"
 	],
 	"Lua.diagnostics.globals": [
 		"C_Spell",

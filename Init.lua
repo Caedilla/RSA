@@ -82,7 +82,7 @@ local function BlizzPanelOptions()
 	-- Register Various Options
 	local Options = {
 		type = "group",
-		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] - ".."|cffFFCC00"..L["Current Version: %s"]:format("r|r|c5500DBBD"..RSA.db.global.revision).."|r",
+		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] - ".."|cffFFCC00"..L["Current Version: %s"]:format("|r|c5500DBBD"..RSA.db.global.revision).."|r",
 		order = 0,
 		args = {
 				Open = {
@@ -144,9 +144,7 @@ function RSA:OnInitialize()
 	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass])
 
 	-- project-revision
-	self.db.global.version = 5.0
-	self.db.global.revision = string.match(GetAddOnMetadata("RSA","Version"),"%d+") or 0
-	self.db.global.releaseType = string.match(GetAddOnMetadata('RSA','Version'),'%a+',2)
+	self.db.global.version = GetAddOnMetadata("RSA","Version")
 
 	if not RSA.db.global.personalID then
 		RSA.db.global.personalID = RSA.GetPersonalID() --RSA.GetGetMyRandomNumber()
@@ -167,6 +165,4 @@ function RSA:OnInitialize()
 	RSA.Comm.Registry()
 
 	RSA.Monitor.Start()
-
-	RSA.SendMessage.ChatFrame("You are using RSA5 Alpha 2. This is an in development early version of the new RSA. Please re-install the current release version if you accidentally installed this.")
 end

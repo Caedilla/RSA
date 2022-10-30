@@ -7,19 +7,14 @@ Easy spell announcements
 # About
 RSA is an addon that can announce spell casts in the chat. It comes with a selection of spells already setup for every class, and can announce racial abilities and various other utilities such as repair bots or feasts.
 
-## RSA5 - Shadowlands & Classic support
-With the Shadowlands comes a new version of RSA that gives you finer control over your announcements. You can now announce each event in different channels and configure on a per spell basis which content you want to be able to announce it in.
+## RSA Dragonflight & Classic support
+The new version of RSA that gives you finer control over your announcements. You can now announce each event in different channels and configure on a per spell basis which content you want to be able to announce it in.
 
 Additionally, you will soon be able to add your own spell profiles to RSA, allowing you to easily announce any spell that is currently not included with RSA. You can see the groundwork of this in the Spell Setup when configuring a spell within RSA.
 
 As for Classic - This finally means that RSA will work in Classic. The default included spells will be initially limited, but you'll be able to add your own, so that should be ok!
 
 By default RSA's configuration panel will look largely similar to how it has looked for the past few years. In order to expose the more advanced settings, you will need to turn on the advanced mode option.
-
-## I don't like change
-For those of you that aren't eager to change just yet - the 9.0.1 Pre-patch version of RSA should continue working for some time to come, giving you plenty of time to switch in the future.
-
-The 9.0.1 version of RSA is available [here](https://www.curseforge.com/wow/addons/rsa/files/3058655).
 
 ## What about my old settings?
 RSA5 stores its settings in the same file as your old settings, but it saves them seperately. Your settings are all stored inside the RSA.lua file in the following folder:

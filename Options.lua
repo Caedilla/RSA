@@ -1571,8 +1571,8 @@ local function GenerateSpellOptions(section)
 					order = 1000,
 					type = 'group',
 					childGroups = 'tab',
-					-- TODO Option to toggle advancedConfig
-					hidden = not RSA.db.profile.general.advancedConfig,
+					hidden = true,
+					--hidden = not RSA.db.profile.general.advancedConfig,
 					args = {
 						configLocked = {
 							name = L["Spell Setup for this spell is locked."],
@@ -2020,6 +2020,7 @@ local function GenerateCustomSpellSetupOptions()
 		type = 'group',
 		childGroups = 'tab',
 		order = 100,
+		hidden = true,
 		args = {
 			advancedConfig = {
 				name = L["Advanced Mode"],
@@ -2230,7 +2231,6 @@ function RSA.Options:OnInitialize()
 
 	RSA:RegisterOptions()
 	LibStub('AceConfigDialog-3.0'):SetDefaultSize('RSA',900,770)
-	InterfaceAddOnsList_Update()
 
 	self.db.RegisterCallback(RSA, 'OnProfileChanged', 'RefreshConfig')
 	self.db.RegisterCallback(RSA, 'OnProfileCopied', 'RefreshConfig')

@@ -26,39 +26,38 @@ function RSA.AnnouncementCheck() -- Checks against user settings to see if we ar
 
 	if not CombatState() then return false end
 
-	if profile.warModeWorld and C_PvP.IsWarModeDesired() and InstanceType == "none" and not LFParty and not LFRaid then return true end -- Enable in World PvP.
-	if profile.nonWarWorld and InstanceType == "none" and not LFParty and not LFRaid and not C_PvP.IsWarModeDesired() then return true end -- Enable in World PvE.
-	if profile.arenas and InstanceType == "arena" then return true end
-	if profile.bgs and LFRaid and (InstanceType == "pvp" or InstanceType == "none") then return true end
-	if profile.dungeons and InstanceType == "party" and not LFParty then return true end
-	if profile.raids and InstanceType == "raid" and not LFRaid then return true end
-	if profile.scenarios and InstanceType == "scenario" == true then return true end
-	if profile.lfg and (InstanceType == "party" and LFParty) then return true end
-	if profile.lfr and (InstanceType == "raid" and LFRaid) then return true end
+	if profile.warModeWorld and C_PvP.IsWarModeDesired() and InstanceType == 'none' and not LFParty and not LFRaid then return true end -- Enable in World PvP.
+	if profile.nonWarWorld and InstanceType == 'none' and not LFParty and not LFRaid and not C_PvP.IsWarModeDesired() then return true end -- Enable in World PvE.
+	if profile.arenas and InstanceType == 'arena' then return true end
+	if profile.bgs and LFRaid and (InstanceType == 'pvp' or InstanceType == 'none') then return true end
+	if profile.dungeons and InstanceType == 'party' and not LFParty then return true end
+	if profile.raids and InstanceType == 'raid' and not LFRaid then return true end
+	if profile.scenarios and InstanceType == 'scenario' == true then return true end
+	if profile.lfg and (InstanceType == 'party' and LFParty) then return true end
+	if profile.lfr and (InstanceType == 'raid' and LFRaid) then return true end
 
 	return false
 end
 
 function RSA.GetPersonalID()
-	local random = math.random(1,time())
 	local nameBytes = 0
-	for i = 1,string.len(UnitName("player")) do
-		nameBytes = nameBytes + string.byte(UnitName("player"),i)
+	for i = 1,string.len(UnitName('player')) do
+		nameBytes = nameBytes + string.byte(UnitName('player'),i)
 	end
-	random = tostring(random) .. tostring(nameBytes)
+	local random = tostring(random) .. tostring(nameBytes)
 	return random
 end
 
 function RSA.GetMobID(mobGUID) -- extracts the mob ID from the GUID
-	--[Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: "Creature-0-1461-1158-1458-61146-000136DF91")
-	local _, _, _, _, _, _, _, mob_id = string.find(mobGUID, "(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)")
+	--[Unit type]-0-[server ID]-[instance ID]-[zone UID]-[ID]-[Spawn UID] (Example: 'Creature-0-1461-1158-1458-61146-000136DF91')
+	local _, _, _, _, _, _, _, mob_id = string.find(mobGUID, '(%a+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)-(%d+)')
 	return tonumber(mob_id)
 end
 
 local bor,band = bit.bor, bit.band -- get a local reference to some bitlib functions for faster lookups
 local CL_OBJECT_PLAYER_MINE = bor(COMBATLOG_OBJECT_TYPE_PLAYER,COMBATLOG_OBJECT_AFFILIATION_MINE) -- construct a bitmask for a player controlled by me
 function RSA.IsMe(unitFlags)
-	if unitFlags == "Me" then return true end
+	if unitFlags == 'Me' then return true end
 	if unitFlags == true then return true end
 	if unitFlags == false then return false end
 	if band(CL_OBJECT_PLAYER_MINE,unitFlags) == CL_OBJECT_PLAYER_MINE then
@@ -107,7 +106,7 @@ function RSA.DescTableBuilder(...)
 		iterator = iterator + 1
 		argTable[iterator] = '|cffd1d1d1' .. GetSpellDescription(id) .. '|r\n\n'
 	end
-	string.gsub(argTable[#argTable], '[\n]', '')
+	--string.gsub(argTable[#argTable], '[\n]', '')
 	return table.concat(argTable)
 end
 
@@ -267,7 +266,7 @@ function RSA.RefreshMonitorData(section)
 	if RSA.monitorData[section] then
 		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
 	else
-		RSA.SendMessage.ChatFrame(L["Unexpected Data Table"])
+		RSA.SendMessage.ChatFrame(L['Unexpected Data Table'])
 	end
 end
 
