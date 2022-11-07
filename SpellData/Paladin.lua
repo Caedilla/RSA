@@ -97,7 +97,7 @@ local defaults = {
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
-			defaultName = GetSpellInfo(31884) .. ' | ' .. GetSpellInfo(216331) .. ' | ' .. GetSpellInfo(231895),
+			defaultName = RSA.GetSpellInfo(31884) .. ' | ' .. RSA.GetSpellInfo(216331) .. ' | ' .. RSA.GetSpellInfo(231895),
 			defaultDesc = RSA.DescTableBuilder(31884,216331,231895),
 		},
 		events = {
@@ -116,8 +116,8 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = GetSpellInfo(53563) .. ' | ' .. GetSpellInfo(156910),
-			defaultDesc = '|cffFFCC00'..GetSpellInfo(53563) .. ':|r |cffd1d1d1' .. GetSpellDescription(53563) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(156910) .. ':|r |cffd1d1d1' .. GetSpellDescription(156910) .. '|r',
+			defaultName = RSA.GetSpellInfo(53563) .. ' | ' .. RSA.GetSpellInfo(156910),
+			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(53563) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(53563) .. '|r\n\n|cffFFCC00' .. RSA.GetSpellInfo(156910) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(156910) .. '|r',
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
@@ -191,8 +191,8 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = GetSpellInfo(1022) .. ' | ' .. GetSpellInfo(204018),
-			defaultDesc = '|cffFFCC00'..GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. GetSpellDescription(204018) .. '|r',
+			defaultName = RSA.GetSpellInfo(1022) .. ' | ' .. RSA.GetSpellInfo(204018),
+			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. RSA.GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(204018) .. '|r',
 		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {

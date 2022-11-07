@@ -213,7 +213,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	-- Build Spell Name and Link Cache
 	local tagSpellName = cacheTagSpellName[spellID]
 	if not tagSpellName then
-		tagSpellName = GetSpellInfo(spellID)
+		tagSpellName = RSA.GetSpellInfo(spellID)
 		cacheTagSpellName[spellID] = tagSpellName
 	end
 
@@ -226,7 +226,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	if currentSpell.events[event].uniqueSpellID then -- Replace cached data with 'real' spell name/link to announce the expected spell.
 		local parentSpell = currentSpell.spellID
 
-		tagSpellName = GetSpellInfo(parentSpell)
+		tagSpellName = RSA.GetSpellInfo(parentSpell)
 		cacheTagSpellName[spellID] = tagSpellName
 
 		tagSpellLink = GetSpellLink(parentSpell)
@@ -256,7 +256,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	if tagReplacements.EXTRA then
 		local name = cacheTagSpellName[extraSpellID]
 		if not name then
-			name = GetSpellInfo(extraSpellID)
+			name = RSA.GetSpellInfo(extraSpellID)
 			cacheTagSpellName[extraSpellID] = name
 		end
 		local link = cacheTagSpellLink[extraSpellID]

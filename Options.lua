@@ -954,8 +954,8 @@ local function GetSpellConfigInfo(selected)
 		end
 		for i = 1,#spellTable do
 			if IsPlayerSpell(spellTable[i]) then
-				name = GetSpellInfo(spellTable[i])
-				description = '|c' .. colors['descriptions'] .. GetSpellDescription(spellTable[i]) .. '|r'
+				name = RSA.GetSpellInfo(spellTable[i])
+				description = '|c' .. colors['descriptions'] .. RSA.GetSpellDescription(spellTable[i]) .. '|r'
 				icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
 			end
 		end
@@ -986,10 +986,10 @@ local function GetSpellConfigInfo(selected)
 	end
 
 	if not name then
-		name = GetSpellInfo(selected.spellID)
+		name = RSA.GetSpellInfo(selected.spellID)
 	end
 	if not description then
-		description = '|c' .. colors['descriptions'] .. GetSpellDescription(selected.spellID) .. '|r'
+		description = '|c' .. colors['descriptions'] .. RSA.GetSpellDescription(selected.spellID) .. '|r'
 	end
 	if not icon then
 		icon = GetSpellTexture(selected.spellID)
@@ -1369,7 +1369,7 @@ local function ConfigSpellSetupEvents(section, event, k)
 					if not string.match(value, '%d') then
 						return L["You must enter a valid Spell ID."]
 					end
-					if not GetSpellInfo(value) then
+					if not RSA.GetSpellInfo(value) then
 						return L["You must enter a valid Spell ID."]
 					end
 					return true
@@ -1656,7 +1656,7 @@ local function GenerateSpellOptions(section)
 										if not string.match(value, '%d') then
 											return L["You must enter a valid Spell ID."]
 										end
-										if not GetSpellInfo(value) then
+										if not RSA.GetSpellInfo(value) then
 											return L["You must enter a valid Spell ID."]
 										end
 										return true
@@ -1723,7 +1723,7 @@ local function GenerateSpellOptions(section)
 										if not string.match(value, '%d') then
 											return L["You must enter a valid Spell ID."]
 										end
-										if not GetSpellInfo(value) then
+										if not RSA.GetSpellInfo(value) then
 											return L["You must enter a valid Spell ID."]
 										end
 										return true
@@ -1771,7 +1771,7 @@ local function GenerateSpellOptions(section)
 										local val = {}
 										for k2 in pairs(RSA.db.profile[section][k].additionalSpellIDs) do
 											if RSA.db.profile[section][k].additionalSpellIDs[k2] then
-												val[k2] = "(" .. k2 .. ") " .. GetSpellInfo(k2)
+												val[k2] = "(" .. k2 .. ") " .. RSA.GetSpellInfo(k2)
 											end
 										end
 										return val
@@ -2082,7 +2082,7 @@ local function GenerateCustomSpellSetupOptions()
 									if not string.match(value, '%d') then
 										return L["You must enter a valid Spell ID."]
 									end
-									if not GetSpellInfo(value) then
+									if not RSA.GetSpellInfo(value) then
 										return L["You must enter a valid Spell ID."]
 									end
 									return true
