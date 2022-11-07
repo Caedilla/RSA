@@ -1500,9 +1500,11 @@ end
 local function GenerateSpellOptions(section)
 	local optionsData = RSA.db.profile[section]
 	local sectionName = section
+	local order = 99
 	if uClass == section then
 		sectionName = localisedClass
 		RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass]) -- Refresh Monitor Data so that options displays correctly (i.e if we added or changed an event for a spell profile)
+		order = 0
 	else
 		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
 		sectionName = L[string.gsub(section, '%l', string.upper, 1)]
@@ -1525,7 +1527,7 @@ local function GenerateSpellOptions(section)
 	local optionsTable = {
 		name = sectionName,
 		type = 'group',
-		order = 0,
+		order = order,
 		args = {
 		},
 	}
