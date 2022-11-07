@@ -82,7 +82,7 @@ local function BlizzPanelOptions()
 	-- Register Various Options
 	local Options = {
 		type = "group",
-		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] - ".."|cffFFCC00"..L["Current Version: %s"]:format("|r|c5500DBBD"..RSA.db.global.revision).."|r",
+		name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] - ".."|cffFFCC00"..L["Current Version: %s"]:format("|r|c5500DBBD"..RSA.db.global.version).."|r",
 		order = 0,
 		args = {
 				Open = {
