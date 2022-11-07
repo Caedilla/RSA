@@ -11,6 +11,7 @@ local tags = {
 	'MISSTYPE',
 	'AMOUNT',
 	'EXTRA',
+	'EXTRALINK',
 }
 
 local colors = {
@@ -216,6 +217,23 @@ local function GetEventName(event)
 		return configEventInfo[event].localisedName
 	else
 		return event
+	end
+end
+
+local function GetValidTags(event)
+	local validTags = {}
+	if event.tags then
+		for k,v in pairs(event.tags) do
+			table.insert(validTags,'[' .. k .. ']')
+			if k == 'EXTRA' then
+				table.insert(validTags, '[EXTRALINK]')
+			end
+		end
+	end
+	if validTags[1] then
+		return '[SPELL], [LINK], '.. table.concat(validTags, ', ')
+	else
+		return '[SPELL], [LINK]'
 	end
 end
 
@@ -1904,6 +1922,12 @@ local function GenerateSpellOptions(section)
 						name = 'temp',
 						type = 'description',
 						order = 11,
+						fontSize = 'medium',
+					},
+					validTagsTitle = {
+						name = '|c' .. colors['titles'] .. L['Valid Tags:'] .. '|r ' .. GetValidTags(selected.events[event]),
+						type = 'description',
+						order = 11.5,
 						fontSize = 'medium',
 					},
 					currentMessages = {
