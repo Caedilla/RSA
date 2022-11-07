@@ -1,4 +1,4 @@
-# RSA5 - Raeli's Spell Announcer
+# RSA - Raeli's Spell Announcer
 Easy spell announcements
 
 ## Download

@@ -29,21 +29,30 @@ function RSA.VersionCheck(type)
 	end
 end
 
+
 function RSA.OnVersionCheckReceived(addon, prefix, message, channel, sender)
 	if true == true then return end -- For RSA5 Alpha only
-	local mine = RSA.db.global.version
-	local theirs = message
-
-	local major, minor, patch = mine:gsub('%f[.]%.%f[^.]', '\0'):gmatch'%Z+'
-
-	if mine < theirs then return end -- Don't warn on more recent development versions if we're on a more stable release type.
 	if sender == UnitName('player') then return end -- Don't compare with self.
-	if (tonumber(RSA.db.global.revision) < revision) and not RSA.Comm.userNotifiedOutOfDate then -- Someone else has a newer version
+	local outOfDate = false
+	if string.find(message, 'r') then -- Using version prior to RSA5
+		outOfDate = true
+	else
+		local mineMajor, mineMinor, minePatch = strsplit('%.', RSA.db.global.version)
+		local messageMajor, messageMinor, messagePatch = strsplit('%.', message)
+
+		if messageMajor > mineMajor then
+			outOfDate = true
+		elseif messageMinor > mineMinor then
+			outOfDate = true
+		elseif messagePatch > minePatch then
+			outOfDate = true
+		end
+	end
+	if outOfDate and not RSA.Comm.userNotifiedOutOfDate then
 		RSA.Comm.userNotifiedOutOfDate = true -- don't warn again this session.
 		RSA.Print_Self(L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"])
-	elseif tonumber(RSA.db.global.revision) > revision then -- We're on a newer version, but they should know this because we sent a comm message
-	else -- their version is our version
 	end
+
 end
 
 function RSA.CheckGroupStatus(self, status)
