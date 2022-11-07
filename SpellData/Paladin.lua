@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['absolution'] = {
@@ -523,4 +524,12 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(wrath)
+end

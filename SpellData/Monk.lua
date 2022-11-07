@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['avertHarm'] = {
@@ -316,4 +317,6 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.monk, RSA.configData.monk = RSA.PrepareDataTables(defaults)
+if RSA.IsRetail() then
+	RSA.monitorData.monk, RSA.configData.monk = RSA.PrepareDataTables(defaults)
+end

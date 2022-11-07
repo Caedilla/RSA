@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['aspectOfTheTurtle'] = {
@@ -256,4 +257,12 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.hunter, RSA.configData.hunter = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.hunter, RSA.configData.hunter = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.hunter, RSA.configData.hunter = RSA.PrepareDataTables(wrath)
+end

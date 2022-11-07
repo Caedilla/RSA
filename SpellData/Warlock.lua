@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['axeToss'] = {
@@ -364,4 +365,12 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.warlock, RSA.configData.warlock = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.warlock, RSA.configData.warlock = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.warlock, RSA.configData.warlock = RSA.PrepareDataTables(wrath)
+end

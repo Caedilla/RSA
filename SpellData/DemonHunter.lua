@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['blur'] = {
@@ -316,5 +317,6 @@ local defaults = {
 		},
 	},
 }
-
-RSA.monitorData.demonhunter, RSA.configData.demonhunter = RSA.PrepareDataTables(defaults)
+if RSA.IsRetail() then
+	RSA.monitorData.demonhunter, RSA.configData.demonhunter = RSA.PrepareDataTables(defaults)
+end

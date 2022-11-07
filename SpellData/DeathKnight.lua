@@ -298,4 +298,12 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.deathknight, RSA.configData.deathknight = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.deathknight, RSA.configData.deathknight = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.deathknight, RSA.configData.deathknight = RSA.PrepareDataTables(wrath)
+end

@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['ancestralGuidance'] = {
@@ -389,4 +390,12 @@ Wind Rush Totem
 	},
 }
 
-RSA.monitorData.shaman, RSA.configData.shaman = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.shaman, RSA.configData.shaman = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.shaman, RSA.configData.shaman = RSA.PrepareDataTables(wrath)
+end

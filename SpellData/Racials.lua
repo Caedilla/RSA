@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['ancestralCall'] = {
@@ -308,4 +309,12 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.racials, RSA.configData.racials = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.racials, RSA.configData.racials = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.racials, RSA.configData.racials = RSA.PrepareDataTables(wrath)
+end

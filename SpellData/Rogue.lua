@@ -1,4 +1,5 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
+local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['betweenTheEyes'] = {
@@ -226,4 +227,12 @@ local defaults = {
 	},
 }
 
-RSA.monitorData.rogue, RSA.configData.rogue = RSA.PrepareDataTables(defaults)
+local wrath = {
+
+}
+
+if RSA.IsRetail() then
+	RSA.monitorData.rogue, RSA.configData.rogue = RSA.PrepareDataTables(defaults)
+elseif RSA.IsWrath() then
+	RSA.monitorData.rogue, RSA.configData.rogue = RSA.PrepareDataTables(wrath)
+end
