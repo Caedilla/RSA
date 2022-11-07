@@ -371,12 +371,12 @@ local function HandleEvents()
 end
 
 function RSA.Monitor.Start()
-	local monitorFrame = _G['RSACombatLogMonitor'] or nil
-	if not monitorFrame then
+	local monitorFrame
+	if not _G['RSACombatLogMonitor'] then
 		monitorFrame = CreateFrame('Frame', 'RSACombatLogMonitor')
-		monitorFrame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
 	end
 
+	monitorFrame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
 	monitorFrame:SetScript('OnEvent', nil)
 	monitorFrame:SetScript('OnEvent', HandleEvents)
 end
