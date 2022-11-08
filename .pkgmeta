@@ -34,24 +34,11 @@ externals:
  Libs/LibDualSpec-1.0:
   url: git://git.wowace.com/wow/libdualspec-1-0/mainline.git
 
-move-folders:
-  RSA/RSA: RSA
-  RSA/RSA_Options: RSA_Options
-  RSA/RSA_Reminders: RSA_Reminders
-  RSA/RSA_DeathKnight: RSA_DeathKnight
-  RSA/RSA_DemonHunter: RSA_DemonHunter
-  RSA/RSA_Druid: RSA_Druid
-  RSA/RSA_Hunter: RSA_Hunter
-  RSA/RSA_Mage: RSA_Mage
-  RSA/RSA_Monk: RSA_Monk
-  RSA/RSA_Paladin: RSA_Paladin
-  RSA/RSA_Priest: RSA_Priest
-  RSA/RSA_Rogue: RSA_Rogue
-  RSA/RSA_Shaman: RSA_Shaman
-  RSA/RSA_Warlock: RSA_Warlock
-  RSA/RSA_Warrior: RSA_Warrior
-
 ignore:
+ - .gitattributes
+ - .gitignore
+ - .travis.yml
+ - .vscode
  - Release
  - .pkgmeta
  - README.md
