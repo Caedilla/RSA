@@ -310,7 +310,30 @@ local defaults = {
 }
 
 local wrath = {
-
+	['willOfTheForsaken'] = {
+		spellID = 7744,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['willToSurvive'] = {
+		spellID = 59752,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
 }
 
 if RSA.IsRetail() then
