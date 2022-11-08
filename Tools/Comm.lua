@@ -39,6 +39,8 @@ function RSA.OnVersionCheckReceived(addon, prefix, message, channel, sender)
 	else
 		local mineMajor, mineMinor, minePatch = strsplit('%.', RSA.db.global.version)
 		local messageMajor, messageMinor, messagePatch = strsplit('%.', message)
+		minePatch = string.gsub(minePatch, '%D', '')
+		messagePatch = string.gsub(minePatch, '%D', '')
 
 		if messageMajor > mineMajor then
 			outOfDate = true
