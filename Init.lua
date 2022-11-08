@@ -127,10 +127,6 @@ end
 
 function RSA:OnInitialize()
 
-	-- TEMP until implemented.
-	--RSA.monitorData.racials = {}
-	--RSA.monitorData.utilities = {}
-
 	RSA.configData.customCategories = {
 		['General'] = {
 
