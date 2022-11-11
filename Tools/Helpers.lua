@@ -25,9 +25,13 @@ function RSA.AnnouncementCheck() -- Checks against user settings to see if we ar
 	local profile = RSA.db.profile.general.globalAnnouncements
 
 	if not CombatState() then return false end
-
-	if profile.warModeWorld and C_PvP.IsWarModeDesired() and InstanceType == 'none' and not LFParty and not LFRaid then return true end -- Enable in World PvP.
-	if profile.nonWarWorld and InstanceType == 'none' and not LFParty and not LFRaid and not C_PvP.IsWarModeDesired() then return true end -- Enable in World PvE.
+	if RSA.IsRetail() then 
+		if profile.warModeWorld and C_PvP.IsWarModeDesired() and InstanceType == 'none' and not LFParty and not LFRaid then return true end -- Enable in World PvP.
+		if profile.nonWarWorld and InstanceType == 'none' and not LFParty and not LFRaid and not C_PvP.IsWarModeDesired() then return true end -- Enable in World PvE.
+	else
+		if profile.warModeWorld and GetPVPDesired() and InstanceType == 'none' and not LFParty and not LFRaid then return true end
+		if profile.nonWarWorld and InstanceType == 'none' and not LFParty and not LFRaid and not GetPVPDesired() then return true end
+	end
 	if profile.arenas and InstanceType == 'arena' then return true end
 	if profile.bgs and LFRaid and (InstanceType == 'pvp' or InstanceType == 'none') then return true end
 	if profile.dungeons and InstanceType == 'party' and not LFParty then return true end
