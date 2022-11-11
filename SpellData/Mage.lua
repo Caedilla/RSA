@@ -336,6 +336,9 @@ local wrath = {
 			[126819] = true, -- Porcupine
 			[277787] = true, -- Direhorn
 			[321395] = true, -- Mawrat
+			[12824] = true, -- Rank 2
+			[12825] = true, -- Rank 3
+			[12826] = true, -- Rank 4
 		},
 		configDisplay = {
 			isDefault = true,
