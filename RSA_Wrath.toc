@@ -31,12 +31,9 @@ Tools\SendMessage.lua
 Tools\Comm.lua
 
 SpellData\DeathKnight.lua
-SpellData\DemonHunter.lua
 SpellData\Druid.lua
-SpellData\Evoker.lua
 SpellData\Hunter.lua
 SpellData\Mage.lua
-SpellData\Monk.lua
 SpellData\Paladin.lua
 SpellData\Priest.lua
 SpellData\Rogue.lua
