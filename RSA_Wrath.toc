@@ -33,6 +33,7 @@ Tools\Comm.lua
 SpellData\DeathKnight.lua
 SpellData\DemonHunter.lua
 SpellData\Druid.lua
+SpellData\Evoker.lua
 SpellData\Hunter.lua
 SpellData\Mage.lua
 SpellData\Monk.lua
