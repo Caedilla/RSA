@@ -12,7 +12,7 @@ local function BuildDefaults()
 			deathknight = RSA.configData.deathknight or {},
 			demonhunter = RSA.configData.demonhunter or {},
 			druid = RSA.configData.druid or {},
-			evoker = RSA.configData.druid or {},
+			evoker = RSA.configData.evoker or {},
 			hunter = RSA.configData.hunter or {},
 			mage = RSA.configData.mage or {},
 			monk = RSA.configData.monk or {},
