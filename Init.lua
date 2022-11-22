@@ -9,13 +9,14 @@ RSA.monitorData = {}
 local function BuildDefaults()
 	local defaults = {
 		profile = {
-			deathknight = RSA.configData.deathknight,
-			demonhunter = RSA.configData.demonhunter,
+			deathknight = RSA.configData.deathknight or {},
+			demonhunter = RSA.configData.demonhunter or {},
 			druid = RSA.configData.druid or {},
+			evoker = RSA.configData.druid or {},
 			hunter = RSA.configData.hunter or {},
 			mage = RSA.configData.mage or {},
 			monk = RSA.configData.monk or {},
-			paladin = RSA.configData.paladin,
+			paladin = RSA.configData.paladin or {},
 			priest = RSA.configData.priest or {},
 			rogue = RSA.configData.rogue or {},
 			shaman = RSA.configData.shaman or {},
