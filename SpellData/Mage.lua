@@ -431,6 +431,21 @@ local wrath = {
 			},
 		},
 	},
+	['ritualOfRefreshment'] = {
+		spellID = 43987,
+		additionalSpellIDs = {
+			[58659] = true, -- Rank 2
+		},
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_START'] = {
+				messages = {'Casting [LINK]!',},
+			},
+		},
+	},
 	['slowFall'] = {
 		spellID = 130,
 		configDisplay = {

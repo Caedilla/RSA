@@ -310,6 +310,130 @@ local defaults = {
 }
 
 local wrath = {
+	['arcaneTorrent'] = {
+		spellID = 25046, -- Energy
+		throttle = 0.25,
+		additionalSpellIDs = {
+			[25046] = true, -- Rogue
+			[28730] = true, -- Mana
+			[50613] = true, -- Runic Power
+		},
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_DISPEL'] = {
+				messages = {"Purged [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
+	['berserking'] = {
+		spellID = 26297,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['bloodFury'] = {
+		spellID = 33702,
+		additionalSpellIDs = {
+			[20572] = true, -- Attack Power
+			[33697] = true, -- Intellect
+			[33702] = true, -- Both
+		},
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['escapeArtist'] = {
+		spellID = 20589,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['giftOfTheNaaru'] = {
+		spellID = 28880, -- Warrior
+		additionalSpellIDs = {
+			[59542] = true, -- Paladin
+			[59543] = true, -- Hunter
+			[59544] = true, -- Priest
+			[59545] = true, -- Death Knight
+			[59547] = true, -- Shaman
+			[59548] = true, -- Mage
+		},
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['shadowmeld'] = {
+		spellID = 58984,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['warStomp'] = {
+		spellID = 20549,
+		throttle = 0.5,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
 	['willOfTheForsaken'] = {
 		spellID = 7744,
 		configDisplay = {

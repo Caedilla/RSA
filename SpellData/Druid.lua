@@ -518,6 +518,15 @@ local wrath = {
 	},
 	['demoralizingRoar'] = {
 		spellID = 99,
+		additionalSpellIDs = {
+			[1735] = true, -- Rank 2
+			[9490] = true, -- Rank 3
+			[9747] = true, -- Rank 4
+			[9898] = true, -- Rank 5
+			[26998] = true, -- Rank 6
+			[48559] = true, -- Rank 7
+			[48560] = true, -- Rank 8
+		},
 		throttle = 2,
 		configDisplay = {
 			isDefault = true,
@@ -534,6 +543,15 @@ local wrath = {
 	},
 	['entanglingRoots'] = {
 		spellID = 339,
+		additionalSpellIDs = {
+			[1062] = true, -- Rank 2
+			[5195] = true, -- Rank 3
+			[5196] = true, -- Rank 4
+			[9852] = true, -- Rank 5
+			[9853] = true, -- Rank 6
+			[26989] = true, -- Rank 7
+			[53308] = true, -- Rank 8
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -618,6 +636,10 @@ local wrath = {
 	},
 	['hibernate'] = {
 		spellID = 2637,
+		additionalSpellIDs = {
+			[18657] = true, -- Rank 2
+			[18658] = true, -- Rank 3
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -672,7 +694,15 @@ local wrath = {
 		},
 	},
 	['rebirth'] = {
-		spellID = 61999,
+		spellID = 20484,
+		additionalSpellIDs = {
+			[20739] = true, -- Rank 2
+			[20742] = true, -- Rank 3
+			[20747] = true, -- Rank 4
+			[20748] = true, -- Rank 5
+			[26994] = true, -- Rank 6
+			[48477] = true, -- Rank 7
+		},
 		configDisplay = {
 			isDefault = true,
 		},
@@ -687,7 +717,7 @@ local wrath = {
 			},
 		},
 	},
-	['removeCorruption'] = {
+	['removeCurse'] = {
 		spellID = 2782,
 		throttle = 0.25,
 		additionalSpellIDs = {
@@ -708,6 +738,14 @@ local wrath = {
 	},
 	['revive'] = {
 		spellID = 50769,
+		additionalSpellIDs = {
+			[50768] = true, -- Rank 2
+			[50767] = true, -- Rank 3
+			[50766] = true, -- Rank 4
+			[50765] = true, -- Rank 5
+			[50764] = true, -- Rank 6
+			[50763] = true, -- Rank 7
+		},
 		configDisplay = {
 			isDefault = true,
 		},
@@ -722,8 +760,13 @@ local wrath = {
 			},
 		},
 	},
-	['soothe'] = {
+	['sootheAnimal'] = {
 		spellID = 2908,
+		additionalSpellIDs = {
+			[8955] = true, -- Rank 2
+			[9901] = true, -- Rank 3
+			[26995] = true, -- Rank 4
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -755,6 +798,14 @@ local wrath = {
 	},
 	['tranquility'] = {
 		spellID = 740,
+		additionalSpellIDs = {
+			[8918] = true, -- Rank 2
+			[9862] = true, -- Rank 3
+			[9863] = true, -- Rank 4
+			[26983] = true, -- Rank 5
+			[48446] = true, -- Rank 6
+			[48447] = true, -- Rank 7
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},

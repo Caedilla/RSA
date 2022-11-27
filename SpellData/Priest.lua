@@ -594,8 +594,35 @@ local defaults = {
 }
 
 local wrath = {
+	['abolishDisease'] = {
+		spellID = 552,
+		throttle = 0.5,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
 	['bodyAndSoul'] = {
 		spellID = 65081,
+		additionalSpellIDs = {
+			[64128] = true, -- Rank 1
+		},
 		configDisplay = {
 			isDefault = true,
 		},
@@ -610,8 +637,34 @@ local wrath = {
 			},
 		},
 	},
+	['cureDisease'] = {
+		spellID = 528,
+		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
 	['desperatePrayer'] = {
 		spellID = 19236,
+		additionalSpellIDs = {
+			[19238] = true, -- Rank 2
+			[19240] = true, -- Rank 3
+			[19241] = true, -- Rank 4
+			[19242] = true, -- Rank 5
+			[19243] = true, -- Rank 6
+			[25437] = true, -- Rank 7
+			[48172] = true, -- Rank 8
+			[48173] = true, -- Rank 9
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -627,8 +680,11 @@ local wrath = {
 		},
 	},
 	['dispelMagic'] = {
-		spellID = 528,
+		spellID = 527,
 		throttle = 0.25,
+		additionalSpellIDs = {
+			[988] = true, -- Rank 2
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -813,6 +869,11 @@ local wrath = {
 	},
 	['psychicScream'] = {
 		spellID = 8122,
+		additionalSpellIDs = {
+			[8124] = true, -- Rank 2
+			[10888] = true, -- Rank 3
+			[10890] = true, -- Rank 4
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -826,27 +887,12 @@ local wrath = {
 			},
 		},
 	},
-	['purify'] = {
-		spellID = 527,
-		throttle = 0.25,
-		additionalSpellIDs = {
-			[213634] = true, -- Purify Disease
-		},
-		configDisplay = {
-			isDefault = true,
-		},
-		events = {
-			['SPELL_DISPEL'] = {
-				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
-				tags = {
-					TARGET = true,
-					EXTRA = true,
-				},
-			},
-		},
-	},
 	['rapture'] = {
-		spellID = 47536,
+		spellID = 47535,
+		additionalSpellIDs = {
+			[47536] = true, -- Rank 2
+			[47537] = true, -- Rank 3
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -862,6 +908,14 @@ local wrath = {
 	},
 	['resurrection'] = {
 		spellID = 2006,
+		additionalSpellIDs = {
+			[2010] = true, -- Rank 2
+			[10880] = true, -- Rank 3
+			[10881] = true, -- Rank 4
+			[20770] = true, -- Rank 5
+			[25435] = true, -- Rank 6
+			[48171] = true, -- Rank 7
+		},
 		configDisplay = {
 			isDefault = true,
 		},
@@ -878,6 +932,10 @@ local wrath = {
 	},
 	['shackleUndead'] = {
 		spellID = 9484,
+		additionalSpellIDs = {
+			[9485] = true, -- Rank 2
+			[10955] = true, -- Rank 3
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},

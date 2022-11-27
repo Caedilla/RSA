@@ -368,6 +368,9 @@ local defaults = {
 local wrath = {
 	['banish'] = {
 		spellID = 710,
+		additionalSpellIDs = {
+			[18647] = true, -- Rank 2
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -397,8 +400,11 @@ local wrath = {
 			},
 		},
 	},
-	['createSoulwell'] = {
+	['ritualOfSouls'] = {
 		spellID = 29893,
+		additionalSpellIDs = {
+			[58887] = true, -- Rank 2
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -414,6 +420,11 @@ local wrath = {
 	},
 	['darkPact'] = {
 		spellID = 18220,
+		additionalSpellIDs = {
+			[18937] = true, -- Rank 2
+			[18938] = true, -- Rank 3
+			[27265] = true, -- Rank 4
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -430,6 +441,14 @@ local wrath = {
 	['devourMagic'] = {
 		spellID = 19505,
 		throttle = 0.25,
+		additionalSpellIDs = {
+			[19731] = true, -- Rank 2
+			[19734] = true, -- Rank 3
+			[19736] = true, -- Rank 4
+			[27276] = true, -- Rank 5
+			[27277] = true, -- Rank 6
+			[48011] = true, -- Rank 7
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -453,6 +472,10 @@ local wrath = {
 	},
 	['fear'] = {
 		spellID = 5782,
+		additionalSpellIDs = {
+			[6213] = true, -- Rank 2
+			[6215] = true, -- Rank 3
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -490,8 +513,15 @@ local wrath = {
 			},
 		},
 	},
-	['mortalCoil'] = {
+	['deathCoil'] = {
 		spellID = 6789,
+		additionalSpellIDs = {
+			[17925] = true, -- Rank 2
+			[17926] = true, -- Rank 3
+			[27223] = true, -- Rank 4
+			[47859] = true, -- Rank 5
+			[47860] = true, -- Rank 6
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -563,6 +593,12 @@ local wrath = {
 	},
 	['shadowfury'] = {
 		spellID = 30283,
+		additionalSpellIDs = {
+			[30413] = true, -- Rank 2
+			[30414] = true, -- Rank 3
+			[47846] = true, -- Rank 4
+			[47847] = true, -- Rank 5
+		},
 		throttle = 0.5,
 		configDisplay = {
 			isDefault = true,
@@ -579,6 +615,15 @@ local wrath = {
 	},
 	['soulstone'] = {
 		spellID = 20707,
+		additionalSpellIDs = {
+			[20762] = true, -- Rank 2
+			[20763] = true, -- Rank 3
+			[20764] = true, -- Rank 4
+			[20765] = true, -- Rank 5
+			[27239] = true, -- Rank 6
+			[47883] = true, -- Rank 7
+
+		},
 		configDisplay = {
 			isDefault = true,
 		},
@@ -598,10 +643,9 @@ local wrath = {
 		},
 	},
 	['spellLock'] = {
-		spellID = 19647,
+		spellID = 19244,
 		additionalSpellIDs = {
-			[115781] = true, -- Optical Blast (Glyph of Observer)
-			[132409] = true, -- Player variant from Grimoire of Sacrifice
+			[19647] = true,
 		},
 		configDisplay = {
 			isDefault = true,
@@ -633,6 +677,15 @@ local wrath = {
 	},
 	['suffering'] = {
 		spellID = 17735,
+		additionalSpellIDs = {
+			[17750] = true, -- Rank 2
+			[17751] = true, -- Rank 3
+			[17752] = true, -- Rank 4
+			[27271] = true, -- Rank 5
+			[33701] = true, -- Rank 6
+			[47989] = true, -- Rank 7
+			[47990] = true, -- Rank 8
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},

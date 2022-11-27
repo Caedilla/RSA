@@ -224,6 +224,15 @@ local wrath = {
 	['demoralizingShout'] = {
 		spellID = 1160,
 		throttle = 2,
+		additionalSpellIDs = {
+			[6190] = true, -- Rank 2
+			[11554] = true, -- Rank 3
+			[11555] = true, -- Rank 4
+			[11556] = true, -- Rank 5
+			[25202] = true, -- Rank 6
+			[25203] = true, -- Rank 7
+			[47437] = true, -- Rank 8
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -359,7 +368,6 @@ local wrath = {
 			},
 		},
 	},
-	--TODO: Spell Reflection
 	['taunt'] = {
 		spellID = 355,
 		configDisplay = {

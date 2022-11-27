@@ -348,6 +348,11 @@ local wrath = {
 	},
 	['sap'] = {
 		spellID = 6770,
+		additionalSpellIDs = {
+			[2070] = true, -- Rank 2
+			[11297] = true, -- Rank 3
+			[51724] = true, -- Rank 4
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -376,7 +381,6 @@ local wrath = {
 			},
 		},
 	},
-		--TODO: Support custom code to tally amount of threat transferred.
 	['tricks'] = {
 		spellID = 57934,
 		configDisplay = {

@@ -167,6 +167,21 @@ local defaults = {
 			},
 		},
 	},
+	['lichborne'] = {
+		spellID = 49039,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['mindFreeze'] = {
 		spellID = 47528,
 		configDisplay = {
@@ -419,6 +434,21 @@ local wrath = {
 	},
 	['iceboundFortitude'] = {
 		spellID = 48792,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['lichborne'] = {
+		spellID = 49039,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},

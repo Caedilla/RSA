@@ -393,6 +393,14 @@ Wind Rush Totem
 local wrath = {
 	['ancestralSpirit'] = {
 		spellID = 2008,
+		additionalSpellIDs = {
+			[20609] = true, -- Rank 2
+			[20610] = true, -- Rank 3
+			[20776] = true, -- Rank 4
+			[20777] = true, -- Rank 5
+			[25590] = true, -- Rank 6
+			[49277] = true, -- Rank 7
+		},
 		configDisplay = {
 			isDefault = true,
 		},
@@ -409,6 +417,10 @@ local wrath = {
 	},
 	['astralShift'] = {
 		spellID = 51474,
+		additionalSpellIDs = {
+			[51478] = true, -- Rank 2
+			[51479] = true, -- Rank 3
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -444,9 +456,22 @@ local wrath = {
 	['cleanseSpirit'] = {
 		spellID = 51886,
 		throttle = 0.25,
-		additionalSpellIDs = {
-			[77130] = true, -- Purify Spirit
+		configDisplay = {
+			isDefault = true,
 		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
+	['cureToxins'] = {
+		spellID = 526,
+		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,
 		},
@@ -477,6 +502,17 @@ local wrath = {
 	},
 	['stoneSkinTotem'] = {
 		spellID = 8071,
+		additionalSpellIDs = {
+			[8154] = true, -- Rank 2
+			[8155] = true, -- Rank 3
+			[10406] = true, -- Rank 4
+			[10407] = true, -- Rank 5
+			[10408] = true, -- Rank 6
+			[25508] = true, -- Rank 7
+			[25509] = true, -- Rank 8
+			[58751] = true, -- Rank 9
+			[58753] = true, -- Rank 10
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -521,19 +557,6 @@ local wrath = {
 			},
 		},
 	},
---[[
-Earthgrab Totem
------------------------Feral Spirit
------------------------Fire Elemental
-Grounding Totem
-Healing Tide Totem
------------------------Reincarnation
-Spirit Link Totem
------------------------Thunderstorm
-Tremor Totem
-Wind Rush Totem
-]]--
-
 	['hex'] = {
 		spellID = 51514, -- Frog (Default)
 		additionalSpellIDs = {
@@ -585,6 +608,9 @@ Wind Rush Totem
 	},
 	['purge'] = {
 		spellID = 370,
+		additionalSpellIDs = {
+			[8012] = true, -- Rank 2
+		},
 		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,
@@ -608,7 +634,10 @@ Wind Rush Totem
 		},
 	},
 	['reincarnation'] = {
-		spellID = 21169,
+		spellID = 20608,
+		additionalSpellIDs = {
+			[21169] = true, -- Spell that actually activates
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -621,6 +650,11 @@ Wind Rush Totem
 	},
 	['thunderstorm'] = {
 		spellID = 51490,
+		additionalSpellIDs = {
+			[59156] = true, -- Rank 2
+			[59158] = true, -- Rank 3
+			[59159] = true, -- Rank 4
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},

@@ -919,9 +919,6 @@ local wrath = {
 			},
 		},
 	},
-
-
-
 }
 
 if RSA.IsRetail() then

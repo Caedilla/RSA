@@ -275,9 +275,12 @@ local wrath = {
 			},
 		},
 	},
-	--TODO: Check IDs
 	['freezingTrap'] = {
 		spellID = 1499,
+		additionalSpellIDs = {
+			[14310] = true, -- Rank 2
+			[14311] = true, -- Rank 3
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
@@ -315,7 +318,6 @@ local wrath = {
 			},
 		},
 	},
-	--TODO: Check IDs.
 	['intimidation'] = {
 		spellID = 19577,
 		configDisplay = {
@@ -333,7 +335,6 @@ local wrath = {
 			},
 		},
 	},
-	--TODO: Support custom code to tally amount of threat transferred.
 	['misdirection'] = {
 		spellID = 34477,
 		configDisplay = {
