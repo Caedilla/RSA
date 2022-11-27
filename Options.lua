@@ -132,6 +132,12 @@ local configEventInfo = {
 		--desc = L["When a unit summoned by this spell has died. For example when a totem despawns at the end of its duration."],
 		order = 18,
 	},
+	['SPELL_STOLEN'] = {
+		localisedName = L["Spell Stolen"],
+		desc = L["When this spell captures a buff from the target."],
+		order = 19,
+	},
+
 }
 
 local channels = {
@@ -147,8 +153,8 @@ local channels = {
 }
 
 local channelStrings = {
-	['smartGroup'] = 'Smart Group',
-	['personal'] = 'Local Output',
+	['smartGroup'] = L['Smart Group'],
+	['personal'] = L['Local Output'],
 }
 
 local channelOrder = {
@@ -892,7 +898,7 @@ local function BaseOptions()
 						fontSize = 'large',
 					},
 					RevisionDescription = {
-						name = L["When reporting an issue, please also post the revision number above. Thanks!"],
+						name = L["When reporting an issue, please also post the version number above. Thanks!"],
 						type = 'description',
 						order = 0.6,
 					},
@@ -1364,7 +1370,7 @@ end
 
 local function ConfigSpellEventChannels(section, configDisplay, c, event, k)
 	local channel = {
-		name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
+		name = '|c' .. GetChannelColor(channels[c]) .. GetChannelName(channels[c]) .. '|r',
 		type = 'toggle',
 		width = 0.8,
 		order = 0.11 + channelOrder[channels[c]],
@@ -1838,7 +1844,7 @@ local function GenerateSpellOptions(section)
 								},
 								customDesc = {
 									name = L["Custom Description"],
-									desc = L["A custom name for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
+									desc = L["A custom description for this announcement in the options menu. Leave blank to use the spell name for the spell in the Spell ID field."],
 									order = 3.2,
 									width = 1.5,
 									type = 'input',
@@ -1887,7 +1893,7 @@ local function GenerateSpellOptions(section)
 
 		for c = 1, #channels do -- Spell Setup -> Disabled Channels
 			optionsTable.args[k].args.spellConfig.args.spellIDs.args.disabledChannels.args[channels[c]] = {
-				name = '|c' .. GetChannelColor(channels[c]) .. L[GetChannelName(channels[c])] .. '|r',
+				name = '|c' .. GetChannelColor(channels[c]) .. GetChannelName(channels[c]) .. '|r',
 				type = 'toggle',
 				width = 0.8,
 				order = 0.11 + channelOrder[channels[c]],
