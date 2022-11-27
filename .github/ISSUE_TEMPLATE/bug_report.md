@@ -6,8 +6,7 @@ labels: ['bug']
 body:
   - type: markdown
       attributes:
-      value: |
-          Please [search for existing issues](https://github.com/Caedilla/RSA/issues) before creating a new one.
+      value: Please [search for existing issues](https://github.com/Caedilla/RSA/issues) before creating a new one.
 
   - type: textarea
       attributes:
