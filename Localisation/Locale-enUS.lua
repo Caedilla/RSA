@@ -170,6 +170,7 @@ L["%s only while grouped"] = true
 L["Allow announcements in /%s only when you are in a group."] = true
 L["Cannot configure while in combat."] = true
 L["Enable in the non-instanced world area when playing with War Mode %s."] = true
+L["Enable in the non-instanced world area when playing with PvP %s."] = true
 L["turned off"] = true
 L["turned on"] = true
 L["Enable in Combat"] = true

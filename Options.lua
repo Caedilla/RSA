@@ -360,10 +360,22 @@ local function BaseOptions()
 								end,
 							},
 							warModeWorld = {
-								name = '|c' .. colors['orange'] .. L["Enable in War Mode"] .. '|r',
+								name = function()
+									if RSA.IsRetail() then
+										return '|c' .. colors['orange'] .. L["Enable in War Mode"] .. '|r'
+									else
+										return '|c' .. colors['orange'] .. L["Enable in the World"] .. '|r'
+									end
+								end,
 								type = 'toggle',
 								order = 1,
-								desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"]),
+								desc = function()
+									if RSA.IsRetail() then
+										return L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"])
+									else
+										return L["Enable in the non-instanced world area when playing with PvP %s."]:format(L["turned on"])
+									end
+								end,
 								descStyle = 'inline',
 								width = 'double',
 								get = function(info)
@@ -451,7 +463,13 @@ local function BaseOptions()
 								name = '|c' .. colors['green'] .. L["Enable in the World"] .. '|r',
 								type = 'toggle',
 								order = 2,
-								desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"]),
+								desc = function()
+									if RSA.IsRetail() then
+										return L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"])
+									else
+										return L["Enable in the non-instanced world area when playing with PvP %s."]:format(L["turned off"])
+									end
+								end,
 								descStyle = 'inline',
 								width = 'double',
 								get = function(info)
@@ -1120,11 +1138,21 @@ local function ConfigSpellEnvironments(section, k)
 					warModeWorld = {
 						name = function()
 							local curCol = GetDisabledColor('orange', not RSA.db.profile[section][k].environments.useGlobal)
-							return '|c' .. curCol .. L["Enable in War Mode"] .. '|r'
+							if RSA.IsRetail() then
+								return '|c' .. curCol .. L["Enable in War Mode"] .. '|r'
+							else
+								return '|c' .. curCol .. L["Enable in the World"] .. '|r'
+							end
 						end,
 						type = 'toggle',
 						order = 1,
-						desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"]),
+						desc = function()
+							if RSA.IsRetail() then
+								return L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned on"])
+							else
+								return L["Enable in the non-instanced world area when playing with PvP %s."]:format(L["turned on"])
+							end
+						end,
 						width = 1.1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.warModeWorld
@@ -1230,7 +1258,13 @@ local function ConfigSpellEnvironments(section, k)
 						end,
 						type = 'toggle',
 						order = 5,
-						desc = L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"]),
+						desc = function()
+							if RSA.IsRetail() then
+								return L["Enable in the non-instanced world area when playing with War Mode %s."]:format(L["turned off"])
+							else
+								return L["Enable in the non-instanced world area when playing with PvP %s."]:format(L["turned off"])
+							end
+						end,
 						width = 1,
 						get = function(info)
 							return RSA.db.profile[section][k].environments.enableIn.nonWarWorld
