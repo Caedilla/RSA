@@ -7,17 +7,15 @@ Easy spell announcements
 # About
 RSA is an addon that can announce spell casts in the chat. It comes with a selection of spells already setup for every class, and can announce racial abilities and various other utilities such as repair bots or feasts.
 
-## RSA Dragonflight & Classic support
-The new version of RSA that gives you finer control over your announcements. You can now announce each event in different channels and configure on a per spell basis which content you want to be able to announce it in.
+## Dragonflight & Classic support
+The new version of RSA gives you finer control over your announcements. You can now announce each event in different channels and configure on a per spell basis which content you want to be able to announce it in.
 
 Additionally, you will soon be able to add your own spell profiles to RSA, allowing you to easily announce any spell that is currently not included with RSA. You can see the groundwork of this in the Spell Setup when configuring a spell within RSA.
 
-As for Classic - This finally means that RSA will work in Classic. The default included spells will be initially limited, but you'll be able to add your own, so that should be ok!
-
-By default RSA's configuration panel will look largely similar to how it has looked for the past few years. In order to expose the more advanced settings, you will need to turn on the advanced mode option.
+As for Classic - This finally means that RSA will work in Classic. The default included spells will be initially limited, but you'll soon be able to add your own.
 
 ## What about my old settings?
-RSA5 stores its settings in the same file as your old settings, but it saves them seperately. Your settings are all stored inside the RSA.lua file in the following folder:
+The new version of RSA stores its settings in the same file as your old settings, but it saves them seperately. Your settings are all stored inside the RSA.lua file in the following folder:
 
     World of Warcraft\_retail_\WTF\Account\AccountID#\SavedVariables\
 
@@ -33,8 +31,6 @@ As an example, you can make sure that your interrupts can always announce, but y
 
 ## Announcements
 Every spell has it's own section where you can configure everything about it from what in-game channel RSA announces the spell in, to what RSA says when it does announce that spell.
-
-Advanced users can also configure which [CLEU](https://wow.gamepedia.com/COMBAT_LOG_EVENT) events a spell tracks and relevant data such as spell IDs or throttle the ammount of announcements in a given time-frame.
 
 ## Tags
 RSA allows you to completely customise the message sent to chat when you cas a spell. Tags are a way of replacing part of the message with relevant information such as who the spell was cast on, or what spell you interrupted.
@@ -65,16 +61,16 @@ Each spell can be announced in a variety of different channels:
 * **Raid** - Sends to /raid or /instance depending on what is most appropriate.
 * **Party** -Sends to /party or /instance depending on what is most appropriate.
 * **Smart Group Channel** - Sends to /instance, /raid, or /party depending on what is most appropriate.
-* **Say** - Can only be used inside instances since 8.2.5.
-* **Yell** - Can only be used inside instances since 8.2.5.
+* **Say** - Can only be used inside instances.
+* **Yell** - Can only be used inside instances.
 * **Emote**
-* **Whisper** - sends a whisper to the target of the spell. Obviously this only works when the target of the spell is a friendly player.
+* **Whisper** - sends a whisper to the target of the spell.
 
 Many of these are affected by other settings. For example, Say, Yell, Emote, and Whisper all have options to only allow them to work when you are in a group of some sort.
 
 # Feedback & Support
 
-You can [report issues on Curseforge](https://wow.curseforge.com/projects/rsa/issues) or contact me directly on [Discord](https://discord.gg/99QZ6sd).
+You can report issues on [Github](https://github.com/Caedilla/RSA/issues), [Curseforge](https://wow.curseforge.com/projects/rsa/issues), or on my [Discord](https://discord.gg/99QZ6sd) server.
 
 I've setup a Patreon to go toward my WoW subscription. If you'd like to throw me a dollar to keep my addons working, check out the link below. Cheers.
 
