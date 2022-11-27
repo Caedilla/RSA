@@ -18,14 +18,14 @@ local function CombatState()
 end
 
 function RSA.AnnouncementCheck() -- Checks against user settings to see if we are allowed to announce.
-	local InstanceType = select(2, IsInInstance())
+	local _, InstanceType = IsInInstance()
 	local LFParty = IsInGroup(LE_PARTY_CATEGORY_INSTANCE) -- party group found through group finder
 	local LFRaid = IsInRaid(LE_PARTY_CATEGORY_INSTANCE) -- raid grounp found through group finder
 
 	local profile = RSA.db.profile.general.globalAnnouncements
 
 	if not CombatState() then return false end
-	if RSA.IsRetail() then 
+	if RSA.IsRetail() then
 		if profile.warModeWorld and C_PvP.IsWarModeDesired() and InstanceType == 'none' and not LFParty and not LFRaid then return true end -- Enable in World PvP.
 		if profile.nonWarWorld and InstanceType == 'none' and not LFParty and not LFRaid and not C_PvP.IsWarModeDesired() then return true end -- Enable in World PvE.
 	else
