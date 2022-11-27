@@ -80,16 +80,6 @@ function RSA:WipeMessageCache()
 	wipe(messageCache)
 end
 
--- For quicker reference while testing in game.
-function RSA:ExposeTables()
-	_G.RSA_messageCache = messageCache
-	_G.RSA_curTracking = curTracking
-	_G.RSA_curThrottled = curThrottled
-	_G.cacheTagSpellName = cacheTagSpellName
-	_G.cacheTagSpellName = cacheTagSpellLink
-	_G.curTimers = curTimers
-end
-
 function RSA.Monitor.UpdateTimer()
 	for k in pairs(curTimers) do
 		if curTimers[k].startTime < GetTime() then
@@ -386,3 +376,16 @@ function RSA.Monitor.Stop()
 	if not monitorFrame then return end
 	monitorFrame:SetScript('OnEvent', nil)
 end
+
+
+--@do-not-package@
+-- For quicker reference while testing in game.
+function RSA:ExposeTables()
+	_G.RSA_messageCache = messageCache
+	_G.RSA_curTracking = curTracking
+	_G.RSA_curThrottled = curThrottled
+	_G.cacheTagSpellName = cacheTagSpellName
+	_G.cacheTagSpellName = cacheTagSpellLink
+	_G.curTimers = curTimers
+end
+--@end-do-not-package@
