@@ -197,6 +197,16 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 		CreateTimer(currentSpell, profileName, logData, 'RSA_END_TIMER')
 	end
 
+	if currentSpell.events['SPELL_CAST_START'] then
+		if UnitExists('mouseover') then
+			destName = UnitName('mouseover')
+			destGUID = UnitGUID('mouseover')
+		elseif UnitExists('target') then
+			destName = UnitName('target')
+			destGUID = UnitGUID('target')
+		end
+	end
+
 	local message = BuildMessageCache(currentSpell, profileName, event, fakeEvent)
 	if not message then return end
 
@@ -227,7 +237,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	local longName = destName
 	if RSA.db.profile.general.globalAnnouncements.removeServerNames == true then
 		if destName and destGUID then
-			local realmName = select(7,GetPlayerInfoByGUID(destGUID))
+			local _, _, _, _, _, _, _, realmName = GetPlayerInfoByGUID(destGUID)
 			if realmName then
 					destName = gsub(destName, '-'..realmName, '')
 			end
@@ -240,7 +250,9 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	replacements['[LINK]'] = tagSpellLink
 	local tagReplacements = currentSpell.events[event].tags or {}
 	-- TODO: Add fallbacks in case people try to enable tags where there is no appropriate replacement.
-	if tagReplacements.TARGET then replacements['[TARGET]'] = destName end
+	if destName then
+		if tagReplacements.TARGET then replacements['[TARGET]'] = destName end
+	end
 	if tagReplacements.SOURCE then replacements['[SOURCE]'] = sourceName end
 	if tagReplacements.AMOUNT then replacements['[AMOUNT]'] = ex1 end
 	if tagReplacements.EXTRA then
