@@ -1,7 +1,7 @@
 name: Bug Report
 description: Something isn't working
 title: "[Bug]: "
-labels: 'bug'
+labels: ['bug']
 body:
 - type: markdown
   attributes:
@@ -9,20 +9,20 @@ body:
       Please [search for existing issues](https://github.com/Caedilla/RSA/issues) before creating a new one.
 
 - type: textarea
-    attributes:
-        label: Description
-        description: What did you expect to happen and what happened instead?
-    validations:
-        required: true
+  attributes:
+      label: Description
+      description: What did you expect to happen and what happened instead?
+  validations:
+      required: true
 
 - type: input
-    attributes:
-        label: RSA Version
-        description: |
-        You can see the current version in the title bar of the options window, if the options do not open, check the CurseForge app or the `## Version:` field in the WeakAuras.toc file.
-        placeholder: "RSA 5.6.0"
-    validations:
-        required: true
+  attributes:
+      label: RSA Version
+      description: |
+      You can see the current version in the title bar of the options window, if the options do not open, check the CurseForge app or the `## Version:` field in the WeakAuras.toc file.
+      placeholder: "RSA 5.6.0"
+  validations:
+      required: true
 
 - type: dropdown
   id: flavor
