@@ -285,7 +285,7 @@ local defaults = {
 		},
 	},
 	['rebirth'] = {
-		spellID = 61999,
+		spellID = 20484,
 		configDisplay = {
 			isDefault = true,
 		},
