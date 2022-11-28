@@ -3,7 +3,10 @@ local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
 	['blur'] = {
-		spellID = 212800,
+		spellID = 198589,
+		additionalSpellIDs = {
+			[212800] = true, -- Actual Buff Applied
+		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
