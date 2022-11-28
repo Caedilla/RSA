@@ -1,3 +1,7 @@
+
+# RSA 5.6.2
+* Fixed incorrect spell ID for Druid Rebirth on Dragonflight
+* Fixed incorrect spell ID for Demon Hunter Blind
 # RSA 5.6.1
 * Fixed a Translation Issue with Traditional Chinese.
 
