@@ -1,4 +1,4 @@
-local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "zhTW")
+local L = LibStub("AceLocale-3.0"):NewLocale("RSA", "zhTW", false, true)
 if not L then return end
 L[" If you wish to add a message for this section, enter it above in the |cffFFD100Add New Message|r box. As no messages exist, nothing will be announced for this section."] = "如果你想要為此階段新增訊息，在|cffFFD100增加新訊息|r框中輸入。由於沒有訊息存在，此階段將不會有任何通告。"
 L[" RSA will choose a message from this section at random, if you wish to remove a message, delete the contents and press enter. If no messages exist, nothing will be announced for this section."] = "RSA將隨機選擇本階段中的訊息，如果你要刪除訊息，請刪除訊息內容並按下Enter。如果沒有任何訊息存在，本階段將不會有任何通告。"

@@ -153,8 +153,8 @@ local channels = {
 }
 
 local channelStrings = {
-	['smartGroup'] = L['Smart Group'],
-	['personal'] = L['Local Output'],
+	['smartGroup'] = L["Smart Group"],
+	['personal'] = L["Local Output"],
 }
 
 local channelOrder = {
