@@ -743,6 +743,22 @@ local wrath = {
 			},
 		},
 	},
+	['divineSacrifice'] = {
+		spellID = 64205,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				dest = {'player'},
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['divineShield'] = {
 		spellID = 642,
 		configDisplay = {
@@ -832,6 +848,22 @@ local wrath = {
 					TARGET = true,
 					MISSTYPE = true,
 				},
+			},
+		},
+	},
+	['handOfSalvation'] = {
+		spellID = 1038,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
 			},
 		},
 	},
