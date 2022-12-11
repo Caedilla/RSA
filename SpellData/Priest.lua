@@ -1030,6 +1030,22 @@ local wrath = {
 			},
 		},
 	},
+	['symbolOfHope'] = {
+		spellID = 64901,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				dest = {'player'},
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['vampiricEmbrace'] = {
 		spellID = 15286,
 		configDisplay = {
