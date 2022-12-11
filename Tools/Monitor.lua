@@ -155,12 +155,12 @@ local function MatchUnit(compareUnit, unitGUID, unitFlags, destRaidFlags)
 		end
 	end
 
-	--TODO support raid flags for target marks
-
-	local compareGUID = UnitGUID(compareUnit)
-	if compareGUID then
-		if unitGUID == compareGUID then
-			return true
+	--TODO support raid flags for target marks for additional dest units for custom spells
+	if type(compareUnit) == 'table' then
+		for i = 1, #compareUnit do
+			if unitGUID == UnitGUID(compareUnit[i]) then
+				return true
+			end
 		end
 	end
 
