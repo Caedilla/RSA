@@ -728,6 +728,21 @@ local wrath = {
 			},
 		},
 	},
+	['divinePlea'] = {
+		spellID = 54428,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['divineProtection'] = {
 		spellID = 498,
 		configDisplay = {

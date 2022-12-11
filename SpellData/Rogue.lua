@@ -137,18 +137,27 @@ local defaults = {
 			},
 		},
 	},
-	['sap'] = {
+	['sap_2'] = {
 		spellID = 6770,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
-			['SPELL_INTERRUPT'] = {
-				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
+					SOURCE = true,
+					EXTRA = true,
 				},
 			},
 			['SPELL_MISSED'] = {
@@ -158,7 +167,7 @@ local defaults = {
 					MISSTYPE = true,
 				},
 			},
-			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,
@@ -199,6 +208,22 @@ local defaults = {
 			},
 			['SPELL_AURA_REMOVED'] = {
 				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['shiv'] = {
+		spellID = 5938,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Dispelled [TARGET]'s! [EXTRALINK]",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
 			},
 		},
 	},
@@ -346,23 +371,27 @@ local wrath = {
 			},
 		},
 	},
-	['sap'] = {
+	['sap_2'] = {
 		spellID = 6770,
-		additionalSpellIDs = {
-			[2070] = true, -- Rank 2
-			[11297] = true, -- Rank 3
-			[51724] = true, -- Rank 4
-		},
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
 		},
 		events = {
-			['SPELL_INTERRUPT'] = {
-				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
 				tags = {
 					TARGET = true,
-					EXTRA = true, -- Replaces AURA and TARSPELL.
+					SOURCE = true,
+					EXTRA = true,
 				},
 			},
 			['SPELL_MISSED'] = {
@@ -372,7 +401,7 @@ local wrath = {
 					MISSTYPE = true,
 				},
 			},
-			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
 				tags = {
 					TARGET = true,

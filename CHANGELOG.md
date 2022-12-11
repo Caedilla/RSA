@@ -1,4 +1,11 @@
+# RSA 5.8.0
 
+### Paladin
+* Added Divine Plea in Wrath
+
+### Rogue
+* Added Shiv dispel in Dragonflight
+* Fixed Sap configuration being incorrectly setup as an interrupt instead of a CC
 # RSA 5.7.0
 * Fixed a reoccuring Lua error when using spells that trigger on an entire party or raid such as Aura Mastery.
 
