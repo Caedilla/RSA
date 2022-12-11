@@ -142,6 +142,7 @@ local defaults = {
 			[281400] = true, -- Boralus
 			[281402] = true, -- Dazar'alor
 			[344597] = true, -- Oribos
+			[395289] = true, -- Valdrakken
 		},
 		configDisplay = {
 			isDefault = true,
@@ -245,6 +246,7 @@ local defaults = {
 			[281403] = true, -- Boralus
 			[281404] = true, -- Dazar'alor
 			[344587] = true, -- Oribos
+			[395277] = true, -- Valdrakken
 		},
 		configDisplay = {
 			isDefault = true,
