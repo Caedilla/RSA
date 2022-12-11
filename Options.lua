@@ -212,7 +212,7 @@ end
 local function GetChannelName(channel)
 	local globalString = _G[string.upper(channel)] or nil
 	if channelStrings[channel] then
-		return L[channelStrings[channel]]
+		return channelStrings[channel]
 	elseif globalString then
 		return globalString
 	end

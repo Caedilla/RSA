@@ -1,5 +1,5 @@
 # RSA 5.8.0
-
+* Fixed an issue with zhTW localisation
 ### Paladin
 * Added Divine Plea in Wrath
 
