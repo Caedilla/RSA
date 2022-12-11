@@ -255,6 +255,22 @@ local defaults = {
 			},
 		},
 	},
+	['tranquilizingShot'] = {
+		spellID = 19801,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Dispelled [TARGET]'s! [EXTRALINK]",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
 }
 
 local wrath = {
@@ -384,6 +400,22 @@ local wrath = {
 				tags = {
 					TARGET = true,
 					AMOUNT = true,
+				},
+			},
+		},
+	},
+	['tranquilizingShot'] = {
+		spellID = 19801,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Dispelled [TARGET]'s! [EXTRALINK]",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
 				},
 			},
 		},
