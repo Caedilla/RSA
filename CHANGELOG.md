@@ -1,11 +1,20 @@
 # RSA 5.8.0
 * Fixed an issue with zhTW localisation
+
+### Druid
+* Fixed Barkskin and Ironbark configuration options. *I got the two spells mixed up and thought Barksin was the external, and Ironbark was the personal one!*
 ### Paladin
 * Added Divine Plea in Wrath
 
 ### Rogue
 * Added Shiv dispel in Dragonflight
 * Fixed Sap configuration being incorrectly setup as an interrupt instead of a CC
+
+## Known Issues
+* Per Spell environment settings are currently not functioning, despite the options showing in game.
+* UNIT_DIED events are not currently tracked.
+* Various announcements that existed in the prior release of RSA are not currently implemented. Examples such as Misdirection and Tricks of the Trade being able to announce how much threat they transferred.
+* Utility spells such as Cauldrons are not currently implemented, but will be returning shortly. The Utility options panel is supposed to be blank right now.
 # RSA 5.7.0
 * Fixed a reoccuring Lua error when using spells that trigger on an entire party or raid such as Aura Mastery.
 
@@ -19,12 +28,6 @@
 
 ### Priest
 * Added Hymn of Hope in Wrath
-
-## Known Issues
-* Per Spell environment settings are currently not functioning, despite the options showing in game.
-* UNIT_DIED events are not currently tracked.
-* Various announcements that existed in the prior release of RSA are not currently implemented. Examples such as Misdirection and Tricks of the Trade being able to announce how much threat they transferred.
-* Utility spells such as Cauldrons are not currently implemented, but will be returning shortly. The Utility options panel is supposed to be blank right now.
 
 # RSA 5.6.2
 * Fixed incorrect spell ID for Druid Rebirth on Dragonflight
