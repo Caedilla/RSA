@@ -3,6 +3,9 @@
 
 ### Druid
 * Fixed Barkskin and Ironbark configuration options. *I got the two spells mixed up and thought Barksin was the external, and Ironbark was the personal one!*
+
+### Evoker
+* Fixed Quell's spell ID.
 ### Paladin
 * Added Divine Plea in Wrath
 

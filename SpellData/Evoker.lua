@@ -112,7 +112,7 @@ local defaults = {
 		},
 	},
 	['quell'] = {
-		spellID = 351388,
+		spellID = 351338,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
