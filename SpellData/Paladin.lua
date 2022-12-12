@@ -407,6 +407,22 @@ local defaults = {
 			},
 		},
 	},
+	['intercession'] = {
+		spellID = 391054,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_RESURRECT'] = {
+				messages = {"Resurrected [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"Casting [LINK] on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
 	['layOnHands'] = {
 		spellID = 633,
 		configDisplay = {

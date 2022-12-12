@@ -1,3 +1,7 @@
+# RSA 5.9.0
+### Paladin
+* Added Intercession battle ress in Dragonflight
+
 # RSA 5.8.0
 * Fixed an issue with zhTW localisation
 
