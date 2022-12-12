@@ -6,15 +6,14 @@ local defaults = {
 		spellID = 22812,
 		configDisplay = {
 			isDefault = true,
+			disabledChannels = {whisper = true},
 		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
-				messages = {"[LINK] cast on [TARGET]!",},
-				tags = {TARGET = true,},
+				messages = {"[LINK] activated!",},
 			},
 			['SPELL_AURA_REMOVED'] = {
-				messages = {"[LINK] on [TARGET] finished!",},
-				tags = {TARGET = true,},
+				messages = {"[LINK] finished!",},
 			},
 		},
 	},
@@ -225,14 +224,15 @@ local defaults = {
 		spellID = 102342,
 		configDisplay = {
 			isDefault = true,
-			disabledChannels = {whisper = true},
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
-				messages = {"[LINK] activated!",},
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
 			},
 			['SPELL_AURA_REMOVED'] = {
-				messages = {"[LINK] finished!",},
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
 			},
 		},
 	},
@@ -487,15 +487,14 @@ local wrath = {
 		spellID = 22812,
 		configDisplay = {
 			isDefault = true,
+			disabledChannels = {whisper = true},
 		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
-				messages = {"[LINK] cast on [TARGET]!",},
-				tags = {TARGET = true,},
+				messages = {"[LINK] activated!",},
 			},
 			['SPELL_AURA_REMOVED'] = {
-				messages = {"[LINK] on [TARGET] finished!",},
-				tags = {TARGET = true,},
+				messages = {"[LINK] finished!",},
 			},
 		},
 	},
