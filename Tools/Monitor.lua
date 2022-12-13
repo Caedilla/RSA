@@ -188,8 +188,10 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	if Throttle(currentSpell, profileName) then return end
 
 	local fakeEvent
-	if ex1 == 'IMMUNE' and event == 'SPELL_MISSED' then
-		fakeEvent = 'RSA_SPELL_IMMUNE'
+	if event == 'SPELL_MISSED' then
+		if ex1 == 'IMMUNE' then
+			fakeEvent = 'RSA_SPELL_IMMUNE'
+		end
 	end
 
 	if currentSpell.events['RSA_END_TIMER'] and event ~= 'RSA_END_TIMER' then
@@ -324,15 +326,26 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 
 end
 
+local function FutureEventTracking()
+	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
+	for k, v in pairs(curTracking) do
+		if curTracking[k].futureEvent == event then
+			local profileName = RSA.db.profile[uClass][curTracking[k].profileName] or nil
+			local logData = curTracking[k].logData
+			if logData.ex1 ~= ex1 then return end -- Do for all args, change into table and do in pairs k,v comparison
+			if not profileName.events[event] then return end
+			if profileName.events[event] ~= curTracking[k].currentEvent then
+				print('processing')
+
+				RSA.Monitor.ProcessSpell(profileName, _, _, _, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+				curTracking[k] = nil
+			end
+		end
+	end
+end
+
 local function HandleEvents()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
-
---[[	if RSA.IsMe(sourceFlags) and type(spellName) == 'string' then
-		print(event .. ': ' .. tostring(spellID) .. ' - ' .. spellName)
-		if event == 'SPELL_AURA_BROKEN' then
-			print(event .. ': ' .. tostring(ex1) .. ' - ' .. ex2)
-		end
-	end]]--
 
 	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
 
@@ -361,6 +374,50 @@ local function HandleEvents()
 	end
 
 	if not monitorData then return end
+
+	local currentSpell = RSA.db.profile[uClass][monitorData[1]] or nil
+	for k,v in pairs(currentSpell.events) do
+		if currentSpell.events[k] then
+			if currentSpell.events[k].trackFutureEvent then -- loop through monitorData for multiple matching profiles
+				local futureEvent = currentSpell.events[k].trackFutureEvent --'SPELL_MISSED'
+				local logData = {
+					event = futureEvent.event or nil,
+					sourceGUID = futureEvent.sourceGUID or nil,
+					sourceName = futureEvent.sourceName or nil,
+					sourceFlags = futureEvent.sourceFlags or nil,
+					sourceRaidFlag = futureEvent.sourceRaidFlag or nil,
+					destGUID = futureEvent.destGUID or nil,
+					destName = futureEvent.destName or nil,
+					destFlags = futureEvent.destFlags or nil,
+					destRaidFlags = futureEvent.destRaidFlags or nil,
+					spellID = futureEvent.spellID or nil,
+					spellName = futureEvent.spellName or nil,
+					spellSchool = futureEvent.spellSchool or nil,
+					ex1 = futureEvent.ex1 or nil,
+					ex2 = futureEvent.ex2 or nil,
+					ex3 = futureEvent.ex3 or nil,
+					ex4 = futureEvent.ex4 or nil,
+					ex5 = futureEvent.ex5 or nil,
+					ex6 = futureEvent.ex6 or nil,
+					ex7 = futureEvent.ex7 or nil,
+					ex8 = futureEvent.ex8 or nil,
+				}
+				local profileName = monitorData[1]
+				if not curTracking[profileName] then
+					curTracking[profileName] = {
+						currentEvent = event,
+						futureEvent = futureEvent.event,
+						profileName = profileName,
+						logData = logData,
+					}
+				end
+
+				local trackingFrame = _G['RSACombatLogTracker'] or nil
+				if not trackingFrame then RSA.Monitor.Start() end
+				trackingFrame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
+			end
+		end
+	end
 	if #monitorData > 1 then
 		for i = 1, #monitorData do
 			local profileName = monitorData[i]
@@ -379,8 +436,14 @@ function RSA.Monitor.Start()
 	end
 
 	monitorFrame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
-	monitorFrame:SetScript('OnEvent', nil)
 	monitorFrame:SetScript('OnEvent', HandleEvents)
+
+	local trackingFrame
+	if not _G['RSACombatLogTracker'] then
+		trackingFrame = CreateFrame('Frame', 'RSACombatLogTracker')
+	end
+
+	trackingFrame:SetScript('OnEvent', FutureEventTracking)
 end
 
 function RSA.Monitor.Stop()

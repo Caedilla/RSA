@@ -171,7 +171,32 @@ local defaults = {
 			},
 		},
 	},
-	--TODO: Spell Reflection
+	['spellReflection'] = {
+		spellID = 23920,
+		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+				trackFutureEvent = {
+					event = 'SPELL_MISSED',
+					ex1 = 'REFLECT',
+					duration = 5,
+					targetIsMe = true,
+				}
+			},
+			['SPELL_MISSED'] = {
+				messages = {"Reflected [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
 	['stormBolt'] = {
 		spellID = 132169,
 		configDisplay = {
@@ -211,6 +236,7 @@ local defaults = {
 			},
 			['RSA_SPELL_IMMUNE'] = {
 				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				targetIsMe = true,
 				tags = {
 					TARGET = true,
 					MISSTYPE = true,
