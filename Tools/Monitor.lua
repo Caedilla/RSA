@@ -193,6 +193,9 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 		if ex1 == 'IMMUNE' then
 			fakeEvent = 'RSA_SPELL_IMMUNE'
 		end
+		if ex1 == 'REFLECT' then
+			fakeEvent = 'RSA_SPELL_REFLECT'
+		end
 	end
 
 	if currentSpell.events['RSA_END_TIMER'] and event ~= 'RSA_END_TIMER' then
@@ -329,20 +332,30 @@ end
 
 local function FutureEventTracking()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
-	for k, v in pairs(curTracking) do
+	for k in pairs(curTracking) do
 		if curTracking[k].futureEvent == event then
 			local profileName = curTracking[k].profileName
 			local fullProfile = RSA.db.profile[uClass][curTracking[k].profileName] or nil
 			local logData = curTracking[k].logData
+			local passedEvent
 			if logData.ex1 ~= ex1 then return end -- Do for all args, change into table and do in pairs k,v comparison
-			if not fullProfile.events[event] then return end
-			if fullProfile.events[event] ~= curTracking[k].currentEvent then
-				RSAprocessing = true
-
-				RSA.Monitor.ProcessSpell(profileName, spellID, spellName, spellSchool, timestamp, event, hideCaster, destGUID, destName, destFlags, destRaidFlags, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, logData.extraSpellID, logData.extraSpellName, logData.extraSpellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
-				curTracking[k] = nil
+			if not fullProfile.events[event] then
+				if not fullProfile.events[logData.fakeEvent] then
+					return
+				else
+					passedEvent = logData.fakeEvent
+				end
+			else
+				passedEvent = event
 			end
-			RSAprocessing = false
+			if fullProfile.events[event] == curTracking[k].currentEvent then return end
+			--if fullProfile.events[event] == logData.event then return end
+			RSA.Monitor.ProcessSpell(profileName, spellID, spellName, spellSchool, timestamp, passedEvent, hideCaster, destGUID, destName, destFlags, destRaidFlags, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, logData.extraSpellID, logData.extraSpellName, logData.extraSpellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+			curTracking[k] = nil
+			local trackingFrame = _G['RSACombatLogTracker'] or nil
+			if trackingFrame then
+				trackingFrame:UnregisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
+			end
 		end
 	end
 end
@@ -381,10 +394,12 @@ local function HandleEvents()
 	local currentSpell = RSA.db.profile[uClass][monitorData[1]] or nil
 	for k,v in pairs(currentSpell.events) do
 		if currentSpell.events[k] then
-			if currentSpell.events[k].trackFutureEvent then -- loop through monitorData for multiple matching profiles
-				local futureEvent = currentSpell.events[k].trackFutureEvent --'SPELL_MISSED'
+			--TODO: loop through monitorData for multiple matching profiles
+			if currentSpell.events[k].trackFutureEvent then
+				local futureEvent = currentSpell.events[k].trackFutureEvent
 				local logData = {
 					event = futureEvent.event or nil,
+					fakeEvent = futureEvent.fakeEvent or nil,
 					sourceGUID = futureEvent.sourceGUID or nil,
 					sourceName = futureEvent.sourceName or nil,
 					sourceFlags = futureEvent.sourceFlags or nil,

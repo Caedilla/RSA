@@ -183,13 +183,17 @@ local defaults = {
 				messages = {"[LINK] activated!",},
 				trackFutureEvent = {
 					event = 'SPELL_MISSED',
+					fakeEvent = 'RSA_SPELL_REFLECT',
 					ex1 = 'REFLECT',
 					duration = 5,
 					targetIsMe = true,
 				}
 			},
-			['SPELL_MISSED'] = {
+			['RSA_SPELL_REFLECT'] = {
 				messages = {"Reflected [TARGET]'s [EXTRALINK]!",},
+				customSourceUnit = {
+					['player'] = false,
+				},
 				tags = {
 					TARGET = true,
 					EXTRA = true,
@@ -391,6 +395,36 @@ local wrath = {
 			},
 			['SPELL_AURA_REMOVED'] = {
 				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['spellReflection'] = {
+		spellID = 23920,
+		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+				trackFutureEvent = {
+					event = 'SPELL_MISSED',
+					fakeEvent = 'RSA_SPELL_REFLECT',
+					ex1 = 'REFLECT',
+					duration = 5,
+					targetIsMe = true,
+				}
+			},
+			['RSA_SPELL_REFLECT'] = {
+				messages = {"Reflected [TARGET]'s [EXTRALINK]!",},
+				customSourceUnit = {
+					['player'] = false,
+				},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
 			},
 		},
 	},

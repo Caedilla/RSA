@@ -2,6 +2,9 @@
 ### Paladin
 * Added Intercession battle ress in Dragonflight
 
+### Warrior
+* Added Spell Reflection
+
 # RSA 5.8.0
 * Fixed an issue with zhTW localisation
 

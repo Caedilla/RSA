@@ -192,3 +192,5 @@ L["You must enter a number."] = true
 L["You must enter a valid Spell ID."] = true
 L["Your message must contain at least one number or letter!"] = true
 L["Your version of RSA is out of date. You may want to grab the latest version from https://www.curseforge.com/wow/addons/rsa"] = true
+L["When this spell reflects another spell."] = true
+L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Reflect."] = true

@@ -55,7 +55,13 @@ local configEventInfo = {
 	['SPELL_RESURRECT'] = {
 		localisedName = L["Resurrect"],
 		desc = L["When this resurrection spell finishes, giving the target the option to return to life."],
-		order = 5,
+		order = 5.0,
+	},
+	['RSA_UNIT_ACCEPTED_RESS'] = {
+		localisedName = L["Accepted Resurrect"],
+		desc = L["When the target of this spell accepts the resurrection."],
+		advDesc = L["A Fake event supplied by RSA to that occurs when a player accepts a ressurect."],
+		order = 5.1,
 	},
 	['SPELL_DISPEL'] = {
 		localisedName = L["Dispel"],
@@ -96,13 +102,13 @@ local configEventInfo = {
 		localisedName = IMMUNE,
 		desc = L["When the target is immune to your spell."],
 		advDesc = L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Immune."],
-		order = 13,
+		order = 13.0,
 	},
-	['RSA_UNIT_ACCEPTED_RESS'] = {
-		localisedName = L["Accepted Resurrect"],
-		desc = L["When the target of this spell accepts the resurrection."],
-		advDesc = L["A Fake event supplied by RSA to that occurs when a player accepts a ressurect."],
-		order = 14,
+	['RSA_SPELL_REFLECT'] = {
+		localisedName = REFLECT,
+		desc = L["When this spell reflects another spell."],
+		advDesc = L["A Fake event supplied by RSA to allow only announcing when a SPELL_MISSED event is Reflect."],
+		order = 13.1,
 	},
 	['SPELL_AURA_REMOVED'] = {
 		localisedName = L["Aura Removed"],
