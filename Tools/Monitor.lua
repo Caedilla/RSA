@@ -177,6 +177,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 	if currentSpell.events[event].targetNotMe and RSA.IsMe(destFlags) then return end
 	if currentSpell.events[event].sourceIsMe and not RSA.IsMe(sourceFlags) then return end
 
+	-- TODO: Iterate customSourceUnits, see spell Reflect setup
 	if not currentSpell.events[event].customSourceUnit and not RSA.IsMe(sourceFlags) then return end
 	if currentSpell.events[event].dest then
 		-- TODO currentSpell.events[event].dest is a table or valid units
@@ -330,16 +331,18 @@ local function FutureEventTracking()
 	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
 	for k, v in pairs(curTracking) do
 		if curTracking[k].futureEvent == event then
-			local profileName = RSA.db.profile[uClass][curTracking[k].profileName] or nil
+			local profileName = curTracking[k].profileName
+			local fullProfile = RSA.db.profile[uClass][curTracking[k].profileName] or nil
 			local logData = curTracking[k].logData
 			if logData.ex1 ~= ex1 then return end -- Do for all args, change into table and do in pairs k,v comparison
-			if not profileName.events[event] then return end
-			if profileName.events[event] ~= curTracking[k].currentEvent then
-				print('processing')
+			if not fullProfile.events[event] then return end
+			if fullProfile.events[event] ~= curTracking[k].currentEvent then
+				RSAprocessing = true
 
-				RSA.Monitor.ProcessSpell(profileName, _, _, _, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+				RSA.Monitor.ProcessSpell(profileName, spellID, spellName, spellSchool, timestamp, event, hideCaster, destGUID, destName, destFlags, destRaidFlags, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, logData.extraSpellID, logData.extraSpellName, logData.extraSpellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 				curTracking[k] = nil
 			end
+			RSAprocessing = false
 		end
 	end
 end
@@ -401,6 +404,9 @@ local function HandleEvents()
 					ex6 = futureEvent.ex6 or nil,
 					ex7 = futureEvent.ex7 or nil,
 					ex8 = futureEvent.ex8 or nil,
+					extraSpellID = spellID or nil,
+					extraSpellName = spellName or nil,
+					extraSchool = spellSchool or nil,
 				}
 				local profileName = monitorData[1]
 				if not curTracking[profileName] then
