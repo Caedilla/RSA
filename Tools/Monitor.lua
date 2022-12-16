@@ -392,7 +392,8 @@ local function HandleEvents()
 	if not monitorData then return end
 
 	local currentSpell = RSA.db.profile[uClass][monitorData[1]] or nil
-	for k,v in pairs(currentSpell.events) do
+	if not currentSpell then return end
+	for k in pairs(currentSpell.events) do
 		if currentSpell.events[k] then
 			--TODO: loop through monitorData for multiple matching profiles
 			if currentSpell.events[k].trackFutureEvent then
