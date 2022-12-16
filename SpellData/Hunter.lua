@@ -389,6 +389,36 @@ local wrath = {
 			},
 		},
 	},
+	['silencingShot'] = {
+		spellID = 34490,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_INTERRUPT'] = {
+				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
 	['spiritMend'] = {
 		spellID = 42025,
 		configDisplay = {
