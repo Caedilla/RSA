@@ -1,5 +1,5 @@
-# RSA 5.9.0
-
+# RSA 5.9.1
+* Fixed a bug referring to currentSpell
 ### Hunter
 * Added Silencing Shot for Wrath
 ### Paladin
