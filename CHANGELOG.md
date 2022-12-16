@@ -1,4 +1,7 @@
 # RSA 5.9.0
+
+### Hunter
+* Added Silencing Shot for Wrath
 ### Paladin
 * Added Intercession battle ress in Dragonflight
 
