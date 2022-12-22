@@ -1404,6 +1404,17 @@ local function ConfigSpellSetupEvents(section, event, k)
 		order = 100,
 		type = 'group',
 		args = {
+			remove = {
+				name = 'remove',
+				type = 'execute',
+				func = function(info, value)
+					RSA.db.profile[section][k].configDisplay.messageAreas[event] = nil
+					RSA.db.profile[section][k].events[event] = nil
+					RSA.RefreshMonitorData(section)
+					-- TODO update ConfigSpellSetupEvents to remove this from the list
+				end,
+
+			},
 			spellID = {
 				name = L["Event unique spell ID"],
 				desc = L["If this event uses a different spell ID to the primary one, enter it here."],
@@ -1567,10 +1578,10 @@ local function GenerateSpellOptions(section)
 	local order = 99
 	if uClass == section then
 		sectionName = localisedClass
-		RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass]) -- Refresh Monitor Data so that options displays correctly (i.e if we added or changed an event for a spell profile)
+		RSA.monitorData[uClass] = RSA.PrepareDataTables(RSA.db.profile[uClass], uClass) -- Refresh Monitor Data so that options displays correctly (i.e if we added or changed an event for a spell profile)
 		order = 0
 	else
-		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
+		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section], section)
 		sectionName = L[string.gsub(section, '%l', string.upper, 1)]
 	end
 	if not optionsData then return

@@ -144,9 +144,9 @@ function RSA:OnInitialize()
 	self.db = LibStub("AceDB-3.0"):New("RSA5", defaults, UnitClass('player')) -- Setup Saved Variables
 	self:SetSinkStorage(self.db.profile) -- Setup Saved Variables for LibSink
 
-	RSA.monitorData['racials'] = RSA.PrepareDataTables(self.db.profile['racials'])
-	RSA.monitorData['utilities'] = RSA.PrepareDataTables(self.db.profile['utilities'])
-	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass])
+	RSA.monitorData['racials'] = RSA.PrepareDataTables(self.db.profile['racials'], 'racials')
+	RSA.monitorData['utilities'] = RSA.PrepareDataTables(self.db.profile['utilities'], 'utilities')
+	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass], uClass)
 
 	-- project-revision
 	self.db.global.version = GetAddOnMetadata("RSA","Version")

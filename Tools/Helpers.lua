@@ -1,5 +1,6 @@
 local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
+local uClass = string.lower(select(2, UnitClass('player')))
 
 local function CombatState()
 	local profile = RSA.db.profile.general.globalAnnouncements.combatState
@@ -135,7 +136,7 @@ function RSA.GetSpellDescription(id)
 end
 
 local firstRun
-function RSA.PrepareDataTables(configData)
+function RSA.PrepareDataTables(configData, isSavedVariable)
 	-- Ensure barebones config data is properly populated and also reverse link all spellIDs used in a profile to that profile
 	-- so that the Monitor can easily check if a spellID is used in a profile, rather than having to iterate through each profile's event data.
 	-- Why not store the profile in this manner by default? It's more human readable to have everything needed for a spell to function within
@@ -145,7 +146,13 @@ function RSA.PrepareDataTables(configData)
 	--/dump LibStub('AceAddon-3.0'):GetAddon('RSA').monitorData
 	for profile in pairs(configData) do
 		if not profile then return end
+
+		if isSavedVariable and not configData[profile].spellID then -- When changing a default spell, update profile name, this removes old data.
+			RSA.db.profile[isSavedVariable][profile] = nil
+			return
+		end
 		if not monitorData[configData[profile].spellID] then
+
 			monitorData[configData[profile].spellID] = {[profile] = true,}
 		else
 			monitorData[configData[profile].spellID][profile] = true
@@ -288,7 +295,7 @@ end
 
 function RSA.RefreshMonitorData(section)
 	if RSA.monitorData[section] then
-		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section])
+		RSA.monitorData[section] = RSA.PrepareDataTables(RSA.db.profile[section], true)
 	else
 		RSA.SendMessage.ChatFrame(L['Unexpected Data Table'])
 	end
