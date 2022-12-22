@@ -2,6 +2,9 @@
 * Fixed a bug preventing proper randomisation of multiple messages
 * Fixed a bug when updating default spell data from a prior version (If you play a Rogue and changed setting related to Sap, this should fix RSA being broken in versions past 5.7.0)
 
+### Priest
+* Power Infusion with Twins of the Sun Priestess should now only announce once per event (In the future there will be more granular options to specify if it will only announce on targets and not yourself)
+
 ## Known Issues
 * Per Spell environment settings are currently not functioning, despite the options showing in game.
 * UNIT_DIED events are not currently tracked.
