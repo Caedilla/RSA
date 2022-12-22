@@ -322,7 +322,7 @@ local defaults = {
 			},
 		},
 	},
-	['powerInfusion'] = {
+	['powerInfusion_2'] = {
 		spellID = 10060,
 		throttle = 0.5,
 		configDisplay = {
