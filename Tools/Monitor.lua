@@ -57,12 +57,7 @@ local function BuildMessageCache(currentSpell, monitorData, event, fakeEvent)
 	local validMessages = messageCacheProfile[currentSpellData]
 	if not validMessages then
 		validMessages = {}
-
-		local numEvents = 0
-		for _ in pairs(currentSpell.events) do
-			numEvents = numEvents + 1
-		end
-		for i = 1, numEvents do
+		for i = 1, #currentSpellData.messages do
 			if currentSpellData.messages[i] ~= '' then
 				validMessages[i] = currentSpellData.messages[i]
 			end
