@@ -324,11 +324,12 @@ local defaults = {
 	},
 	['powerInfusion'] = {
 		spellID = 10060,
+		throttle = 0.5,
 		configDisplay = {
 			isDefault = true,
 		},
 		events = {
-			['SPELL_AURA_APPLIED'] = {
+			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
 				tags = {TARGET = true,},
 			},
