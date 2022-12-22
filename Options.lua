@@ -1035,6 +1035,13 @@ local function ConfigSpellEnvironments(section, k)
 		order = 90,
 		type = 'group',
 		args = {
+			TEMPDISABLED = {
+				name = '|cFF00CCFF Not Yet Implemented - Please use Environments settings in the top left tab.|r',
+				width = 'full',
+				fontSize = 'large',
+				order = 0,
+				type = 'description',
+			},
 			groupToggles = {
 				name = function()
 					local curCol = GetDisabledColor('deepRed', not RSA.db.profile[section][k].environments.useGlobal)

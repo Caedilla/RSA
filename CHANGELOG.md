@@ -1,6 +1,7 @@
 # RSA 5.9.2
 * Fixed a bug preventing proper randomisation of multiple messages
 * Fixed a bug when updating default spell data from a prior version (If you play a Rogue and changed setting related to Sap, this should fix RSA being broken in versions past 5.7.0)
+* Added clarification on per-spell Environment settings clarifying that they are not currently functional yet.
 
 ### Priest
 * Power Infusion with Twins of the Sun Priestess should now only announce once per event (In the future there will be more granular options to specify if it will only announce on targets and not yourself)
