@@ -19,12 +19,24 @@ local defaults = {
 		},
 	},
 	['dreamFlight'] = {
-		spellID = 355936,
+		spellID = 359816,
 		configDisplay = {
 			isDefault = true,
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['dreamBreath'] = {
+		spellID = 355936,
+		throttle = 0.5,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_HEAL'] = {
 				messages = {"[LINK] activated!",},
 			},
 		},
@@ -74,6 +86,20 @@ local defaults = {
 			},
 			['SPELL_AURA_REMOVED'] = {
 				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['massReturn'] = {
+		spellID = 361178,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_START'] = {
+				messages = {'Casting [LINK]!',},
+			},
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {'[LINK] finished, get up!',},
 			},
 		},
 	},
