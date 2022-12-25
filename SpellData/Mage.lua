@@ -61,6 +61,21 @@ local defaults = {
 			},
 		},
 	},
+	['iceBlock'] = {
+		spellID = 45438,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['polymorph'] = {
 		spellID = 118,
 		additionalSpellIDs = {
@@ -319,6 +334,21 @@ local wrath = {
 					TARGET = true,
 					MISSTYPE = true,
 				},
+			},
+		},
+	},
+	['iceBlock'] = {
+		spellID = 45438,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
 			},
 		},
 	},
