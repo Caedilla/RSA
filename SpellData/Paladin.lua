@@ -131,6 +131,22 @@ local defaults = {
 			},
 		},
 	},
+	['blessingOfAutumn'] = {
+		spellID = 388010,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
 	['blessingOfFreedom'] = {
 		spellID = 1044,
 		additionalSpellIDs = {
@@ -141,6 +157,27 @@ local defaults = {
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfProtection'] = {
+		spellID = 1022,
+		additionalSpellIDs = {
+			[204018] = true, -- Blessing of Spellwarding
+		},
+		configDisplay = {
+			isDefault = true,
+			defaultName = RSA.GetSpellInfo(1022) .. ' | ' .. RSA.GetSpellInfo(204018),
+			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. RSA.GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(204018) .. '|r',
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
 				tags = {TARGET = true,},
 			},
@@ -185,18 +222,45 @@ local defaults = {
 			},
 		},
 	},
-	['blessingOfProtection'] = {
-		spellID = 1022,
-		additionalSpellIDs = {
-			[204018] = true, -- Blessing of Spellwarding
-		},
+	['blessingOfSpring'] = {
+		spellID = 388013,
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(1022) .. ' | ' .. RSA.GetSpellInfo(204018),
-			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. RSA.GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(204018) .. '|r',
 		},
 		events = {
-			['SPELL_AURA_APPLIED'] = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfSummer'] = {
+		spellID = 388007,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfWinter'] = {
+		spellID = 388011,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
 				tags = {TARGET = true,},
 			},
