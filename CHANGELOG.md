@@ -1,6 +1,9 @@
 # RSA 5.12.0
 * Updated localisation strings.
 
+## Evoker
+* Added Source of Magic
+
 # RSA 5.10.0
 ## Evoker
 * Added Mass Return
