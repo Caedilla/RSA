@@ -355,38 +355,8 @@ local function FutureEventTracking()
 	end
 end
 
-local function HandleEvents()
-	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
-
-	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
-
-	local monitorData = RSA.monitorData[uClass][spellID]
-	if not monitorData then
-		if RSA.monitorData['utilities'][spellID] then
-			monitorData = RSA.monitorData['utilities'][spellID]
-		elseif RSA.monitorData['racials'][spellID] then
-			monitorData = RSA.monitorData['racials'][spellID]
-		else
-			for k in pairs(RSA.monitorData.customCategories) do
-				if RSA.monitorData.customCategories[k][spellID] then
-					monitorData = RSA.monitorData.customCategories[k][spellID]
-				end
-			end
-		end
-	end
-
-	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
-		if not monitorData then
-			spellID, extraSpellID = extraSpellID, spellID
-			spellName, extraSpellName = extraSpellName, spellName
-			spellSchool, extraSchool = extraSchool, spellSchool
-			monitorData = RSA.monitorData[uClass][spellID]
-		end
-	end
-
-	if not monitorData then return end
-
-	local currentSpell = RSA.db.profile[uClass][monitorData[1]] or nil
+local function SetupFutureEventData(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
+	local currentSpell = RSA.db.profile[uClass][profileName] or nil
 	if not currentSpell then return end
 	for k in pairs(currentSpell.events) do
 		if currentSpell.events[k] then
@@ -419,7 +389,6 @@ local function HandleEvents()
 					extraSpellName = spellName or nil,
 					extraSchool = spellSchool or nil,
 				}
-				local profileName = monitorData[1]
 				if not curTracking[profileName] then
 					curTracking[profileName] = {
 						currentEvent = event,
@@ -435,13 +404,47 @@ local function HandleEvents()
 			end
 		end
 	end
+end
+
+local function HandleEvents()
+	local timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8 = CombatLogGetCurrentEventInfo()
+
+	local extraSpellID, extraSpellName, extraSchool = ex1, ex2, ex3
+
+	local monitorData = RSA.monitorData[uClass][spellID]
+	if not monitorData then
+		if RSA.monitorData['utilities'][spellID] then
+			monitorData = RSA.monitorData['utilities'][spellID]
+		elseif RSA.monitorData['racials'][spellID] then
+			monitorData = RSA.monitorData['racials'][spellID]
+		else
+			for k in pairs(RSA.monitorData.customCategories) do
+				if RSA.monitorData.customCategories[k][spellID] then
+					monitorData = RSA.monitorData.customCategories[k][spellID]
+				end
+			end
+		end
+	end
+
+	if event == 'SPELL_DISPEL' or event == 'SPELL_STOLEN' then
+		if not monitorData then
+			spellID, extraSpellID = extraSpellID, spellID
+			spellName, extraSpellName = extraSpellName, spellName
+			spellSchool, extraSchool = extraSchool, spellSchool
+			monitorData = RSA.monitorData[uClass][spellID]
+		end
+	end
+
+	if not monitorData then return end
 	if #monitorData > 1 then
 		for i = 1, #monitorData do
 			local profileName = monitorData[i]
+			SetupFutureEventData(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 			RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 		end
 	else
 		local profileName = monitorData[1]
+		SetupFutureEventData(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 		RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 	end
 end
