@@ -1,10 +1,5 @@
-# RSA 5.11.0
-## Evoker
-* Added Naturalize to Expunge announcement.
-
-## Paladin
-* Added Turn Evil (Dragonflight & Wrath)
-* Fixed an issue with Blessing of Summer incorrectly announcing Blessing of Autumn.
+# RSA 5.12.0
+* Updated localisation strings.
 
 # RSA 5.10.0
 ## Evoker
