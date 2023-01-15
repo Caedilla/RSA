@@ -43,6 +43,9 @@ local defaults = {
 	},
 	['expunge'] = {
 		spellID = 365585,
+		additionalSpellIDs = {
+			[360823] = true, -- Naturalize
+		},
 		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,

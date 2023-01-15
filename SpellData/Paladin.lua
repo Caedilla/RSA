@@ -238,13 +238,13 @@ local defaults = {
 			},
 		},
 	},
-	['blessingOfSummer'] = {
+	['blessingOfSummer_2'] = {
 		spellID = 388007,
 		configDisplay = {
 			isDefault = true,
 		},
 		events = {
-			['SPELL_CAST_SUCCESS'] = {
+			['SPELL_AURA_APPLIED'] = {
 				messages = {"[LINK] cast on [TARGET]!",},
 				tags = {TARGET = true,},
 			},
@@ -599,6 +599,45 @@ local defaults = {
 			},
 			['SPELL_AURA_REMOVED'] = {
 				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['turnEvil'] = {
+		spellID = 10326,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
 			},
 		},
 	},
@@ -1009,6 +1048,45 @@ local wrath = {
 	},
 	['repentance'] = {
 		spellID = 20066,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['turnEvil'] = {
+		spellID = 10326,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
