@@ -1,3 +1,7 @@
+# RSA 5.12.1
+* Updated interface versions.
+* Updated Korean localisation.
+
 # RSA 5.12.0
 * Updated localisation strings.
 
