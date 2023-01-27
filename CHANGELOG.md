@@ -23,14 +23,3 @@
 ## Paladin
 * Added Turn Evil (Dragonflight & Wrath)
 * Fixed an issue with Blessing of Summer incorrectly announcing Blessing of Autumn.
-
-
-# RSA 5.10.0
-## Evoker
-* Added Mass Return
-* Added Dream Flight
-* Dream Breath should function correctly now
-## Mage
-* Added Ice Block (Dragonflight & Wrath)
-## Paladin
-* Added Blessing of the Seasons
