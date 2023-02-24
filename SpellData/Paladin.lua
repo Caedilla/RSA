@@ -1103,6 +1103,22 @@ local wrath = {
 			},
 		},
 	},
+	['sacredShield'] = {
+		spellID = 53601,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
 	['turnEvil'] = {
 		spellID = 10326,
 		configDisplay = {
