@@ -257,7 +257,22 @@ local defaults = {
 			},]]--
 		},
 	},
-
+	['zephyr'] = {
+		spellID = 374227,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+				targetIsMe = true,
+			},
+		},
+	},
 }
 
 if RSA.IsRetail() then
