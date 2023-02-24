@@ -280,6 +280,7 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
+			defaultName = RSA.GetSpellInfo(4987) .. ' | ' .. RSA.GetSpellInfo(213644),
 		},
 		events = {
 			['SPELL_DISPEL'] = {
@@ -854,6 +855,7 @@ local wrath = {
 		},
 		configDisplay = {
 			isDefault = true,
+			defaultName = RSA.GetSpellInfo(4987) .. ' | ' .. RSA.GetSpellInfo(1152),
 		},
 		events = {
 			['SPELL_DISPEL'] = {

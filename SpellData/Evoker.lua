@@ -49,6 +49,7 @@ local defaults = {
 		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,
+			defaultName = RSA.GetSpellInfo(365585) .. ' | ' .. RSA.GetSpellInfo(360823),
 		},
 		events = {
 			['SPELL_DISPEL'] = {
