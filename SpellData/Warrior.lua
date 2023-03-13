@@ -2,6 +2,25 @@ local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
+	['challengingShout'] = {
+		spellID = 1161,
+		additionalSpellIDs = {
+			[386071] = true, -- Disrupting Shout
+		},
+		throttle = 2,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['demoralizingShout'] = {
 		spellID = 1160,
 		throttle = 2,
