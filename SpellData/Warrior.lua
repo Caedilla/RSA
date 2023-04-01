@@ -2,6 +2,21 @@ local RSA = LibStub('AceAddon-3.0'):GetAddon('RSA')
 local L = LibStub('AceLocale-3.0'):GetLocale('RSA')
 
 local defaults = {
+	['avatar'] = {
+		spellID = 107574,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['challengingShout'] = {
 		spellID = 1161,
 		additionalSpellIDs = {
@@ -177,6 +192,36 @@ local defaults = {
 	},
 	['shieldWall'] = {
 		spellID = 871,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['spearOfBastion'] = {
+		spellID = 376079,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},	
+	['spellBlock'] = {
+		spellID = 392966,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
