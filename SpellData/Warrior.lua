@@ -222,7 +222,7 @@ local defaults = {
 				messages = {"[LINK] finished!",},
 			},
 		},
-	},	
+	},
 	['spellBlock'] = {
 		spellID = 392966,
 		configDisplay = {

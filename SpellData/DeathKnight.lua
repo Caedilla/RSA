@@ -85,6 +85,7 @@ local defaults = {
 	},
 	['blindingSleet'] = {
 		spellID = 207167,
+		throttle = 0.5,
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
