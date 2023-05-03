@@ -84,6 +84,9 @@ local defaults = {
 	},
 	['intervene'] = {
 		spellID = 3411,
+		additionalSpellIDs = {
+			[147833] = true, -- Intervene
+		},
 		configDisplay = {
 			isDefault = true,
 		},
