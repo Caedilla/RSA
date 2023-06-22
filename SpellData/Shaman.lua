@@ -184,6 +184,22 @@ local defaults = {
 			},
 		},
 	},
+	['earthbindTotem'] = {
+		spellID = 2484,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			-- TODO save GUID of SPELL_SUMMON, and match this to that.
+			['UNIT_DIED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['earthElemental'] = {
 		spellID = 198103,
 		configDisplay = {
@@ -249,19 +265,51 @@ local defaults = {
 			},
 		},
 	},
---[[
-Earthgrab Totem
------------------------Feral Spirit
------------------------Fire Elemental
-Grounding Totem
-Healing Tide Totem
------------------------Reincarnation
-Spirit Link Totem
------------------------Thunderstorm
-Tremor Totem
-Wind Rush Totem
-]]--
-
+	['earthGrabTotem'] = {
+		spellID = 51485,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['groundingTotem'] = {
+		spellID = 204336,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['healingTideTotem'] = {
+		spellID = 108280,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['hex'] = {
 		spellID = 51514, -- Frog (Default)
 		additionalSpellIDs = {
@@ -311,6 +359,28 @@ Wind Rush Totem
 			},
 		},
 	},
+	['poisonCleansingTotem'] = {
+		spellID = 383013,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
 	['purge'] = {
 		spellID = 370,
 		throttle = 0.25,
@@ -347,6 +417,36 @@ Wind Rush Totem
 			},
 		},
 	},
+	['spiritLinkTotem'] = {
+		spellID = 98008,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['stoneskinTotem'] = {
+		spellID = 383017,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
 	['thunderstorm'] = {
 		spellID = 51490,
 		configDisplay = {
@@ -356,6 +456,51 @@ Wind Rush Totem
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
 				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['tranquilAirTotem'] = {
+		spellID = 383019,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['tremorTotem'] = {
+		spellID = 8143,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['windRushTotem'] = {
+		spellID = 192077,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] placed!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
 			},
 		},
 	},
