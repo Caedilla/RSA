@@ -372,6 +372,13 @@ local defaults = {
 			['SPELL_AURA_REMOVED'] = {
 				messages = {"[LINK] finished!",},
 			},
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
 		},
 	},
 	['purge'] = {
