@@ -182,7 +182,7 @@ local defaults = {
 			disabledChannels = {whisper = true},
 		},
 		events = {
-			['SPELL_CAST_START'] = {
+			['SPELL_CAST_SUCCESS'] = {
 				messages = {'Casting [LINK], please assist!',},
 			},
 		},
