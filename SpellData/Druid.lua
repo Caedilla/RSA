@@ -818,8 +818,280 @@ local wrath = {
 	},
 }
 
+local cata = {
+	['barkskin'] = {
+		spellID = 22812,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['cyclone'] = {
+		spellID = 33786,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['demoralizingRoar'] = {
+		spellID = 99,
+		throttle = 2,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['entanglingRoots'] = {
+		spellID = 339,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			--TODO: Test that this event exists for Roots.
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['frenziedRegeneration'] = {
+		spellID = 22842,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['growl'] = {
+		spellID = 6795,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"Taunted [TARGET]!",},
+				tags = {
+					TARGET = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['hibernate'] = {
+		spellID = 2637,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['innervate'] = {
+		spellID = 29166,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['rebirth'] = {
+		spellID = 20484,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_START'] = {
+				messages = {"Casting [LINK] on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_RESURRECT'] = {
+				messages = {"Resurrected [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['removeCorruption'] = {
+		spellID = 2782,
+		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
+	['revive'] = {
+		spellID = 50769,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_RESURRECT'] = {
+				messages = {"Resurrected [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_CAST_START'] = {
+				messages = {"Casting [LINK] on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['survivalInstincts'] = {
+		spellID = 61336,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['tranquility'] = {
+		spellID = 740,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+}
+
 if RSA.IsRetail() then
 	RSA.monitorData.druid, RSA.configData.druid = RSA.PrepareDataTables(defaults)
-elseif RSA.IsWrath() then
+end
+if RSA.IsWrath() then
 	RSA.monitorData.druid, RSA.configData.druid = RSA.PrepareDataTables(wrath)
+end
+if RSA.IsCata() then
+	RSA.monitorData.druid, RSA.configData.druid = RSA.PrepareDataTables(cata)
 end

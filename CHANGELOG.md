@@ -1,3 +1,6 @@
+# RSA 5.2
+* Added support for Classic Cataclysm
+
 # RSA 5.15
 * Updated interface version
 

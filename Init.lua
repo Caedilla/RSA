@@ -113,6 +113,10 @@ function RSA.IsWrath()
 	return WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
 end
 
+function RSA.IsCata()
+	return WOW_PROJECT_ID == WOW_PROJECT_CATACLYSM_CLASSIC
+end
+
 function RSA:ChatCommand(input)
 	if not InCombatLockdown() then
 		self:EnableModule('Options')

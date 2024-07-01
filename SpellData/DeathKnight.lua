@@ -584,8 +584,237 @@ local wrath = {
 	},
 }
 
+local cata = {
+	['antiMagicShell'] = {
+		spellID = 48707,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['antiMagicZone'] = {
+		spellID = 51052,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['RSA_END_TIMER'] = {
+				duration = 10,
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['armyOfTheDead'] = {
+		spellID = 42650,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['dancingRuneWeapon'] = {
+		spellID = 49028,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				uniqueSpellID = 81256,
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['darkCommand'] = {
+		spellID = 56222,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"Taunted [TARGET]!",},
+				tags = {
+					TARGET = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['deathGrip'] = {
+		spellID = 49576,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['iceboundFortitude'] = {
+		spellID = 48792,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['lichborne'] = {
+		spellID = 49039,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['mindFreeze'] = {
+		spellID = 47528,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_INTERRUPT'] = {
+				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['raiseAlly'] = {
+		spellID = 61999,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_RESURRECT'] = {
+				messages = {"Resurrected [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['strangulate'] = {
+		spellID = 47476,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['vampiricBlood'] = {
+		spellID = 55233,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+}
+
 if RSA.IsRetail() then
 	RSA.monitorData.deathknight, RSA.configData.deathknight = RSA.PrepareDataTables(defaults)
-elseif RSA.IsWrath() then
+end
+if RSA.IsWrath() then
 	RSA.monitorData.deathknight, RSA.configData.deathknight = RSA.PrepareDataTables(wrath)
+end
+if RSA.IsCata() then
+	RSA.monitorData.deathknight, RSA.configData.deathknight = RSA.PrepareDataTables(cata)
 end

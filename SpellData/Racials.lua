@@ -460,8 +460,191 @@ local wrath = {
 	},
 }
 
+local cata = {
+	['arcaneTorrent'] = {
+		spellID = 25046, -- Energy
+		throttle = 0.25,
+		additionalSpellIDs = {
+			[28730] = true, -- Mana
+			[50613] = true, -- Runic Power
+			[69179] = true, -- Rage
+			[80483] = true, -- Focus
+		},
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_DISPEL'] = {
+				messages = {"Purged [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
+	['berserking'] = {
+		spellID = 26297,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['bloodFury'] = {
+		spellID = 33702,
+		additionalSpellIDs = {
+			[20572] = true, -- Attack Power
+			[33697] = true, -- Intellect
+			[33702] = true, -- Both
+		},
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['darkFlight'] = {
+		spellID = 68992,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['escapeArtist'] = {
+		spellID = 20589,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['giftOfTheNaaru'] = {
+		spellID = 28880, -- Warrior
+		additionalSpellIDs = {
+			[59542] = true, -- Paladin
+			[59543] = true, -- Hunter
+			[59544] = true, -- Priest
+			[59545] = true, -- Death Knight
+			[59547] = true, -- Shaman
+			[59548] = true, -- Mage
+		},
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['rocketJump'] = {
+		spellID = 69070,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['shadowmeld'] = {
+		spellID = 58984,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['warStomp'] = {
+		spellID = 20549,
+		throttle = 0.5,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['willOfTheForsaken'] = {
+		spellID = 7744,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+	['willToSurvive'] = {
+		spellID = 59752,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+		},
+	},
+}
+
 if RSA.IsRetail() then
 	RSA.monitorData.racials, RSA.configData.racials = RSA.PrepareDataTables(defaults)
-elseif RSA.IsWrath() then
+end
+if RSA.IsWrath() then
 	RSA.monitorData.racials, RSA.configData.racials = RSA.PrepareDataTables(wrath)
+end
+if RSA.IsCata() then
+	RSA.monitorData.racials, RSA.configData.racials = RSA.PrepareDataTables(cata)
 end

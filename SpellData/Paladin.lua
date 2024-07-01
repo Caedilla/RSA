@@ -1162,8 +1162,448 @@ local wrath = {
 	},
 }
 
+local cata = {
+	['ardentDefender'] = {
+		spellID = 31850,
+		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_HEAL'] = {
+				uniqueSpellID = 66235, -- Ardent Defender uses a different spell ID when the heal effect triggers.
+				tracker = 1, -- Tells the monitor to not announce any further messages for this spell, so that we don't also announce the finishing message.
+				messages = {"[LINK] saved my life and healed me for [AMOUNT]!",},
+				tags = {AMOUNT = true,},
+			},
+			['SPELL_CAST_SUCCESS'] = {
+				tracker = 2, -- Tells the monitor to start tracking this spell so that we can prevent both the Heal and Finish message from playing if the heal triggers.
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				tracker = 1,
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['auraMastery'] = {
+		spellID = 31821,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			--TODO: Implement source/dest options and code support for event based targets and sources.
+			['SPELL_AURA_REMOVED'] = {
+				dest = {'player'},
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['avengersShield'] = {
+		spellID = 31935,
+		throttle = 0.25,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_INTERRUPT'] = {
+				messages = {"Interrupted [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true, -- Replaces AURA and TARSPELL.
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = { -- Fake event to easily generate options for immune specific messages.
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['avengingWrath'] = {
+		spellID = 31884,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['beaconOfLight'] = {
+		spellID = 53563,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfFreedom'] = {
+		spellID = 1044,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfSacrifice'] = {
+		spellID = 6940,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['blessingOfProtection'] = {
+		spellID = 1022,
+		additionalSpellIDs = {
+			[5599] = true, -- Rank 2
+			[10278] = true, -- Rank 3
+		},
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['cleanse'] = {
+		spellID = 4987,
+		throttle = 0.25,
+		additionalSpellIDs = {
+			[1152] = true, -- Purify
+		},
+		configDisplay = {
+			isDefault = true,
+			defaultName = RSA.GetSpellInfo(4987) .. ' | ' .. RSA.GetSpellInfo(1152),
+		},
+		events = {
+			['SPELL_DISPEL'] = {
+				messages = {"Cleansed [TARGET]'s [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					EXTRA = true,
+				},
+			},
+		},
+	},
+	['divinePlea'] = {
+		spellID = 54428,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['divineProtection'] = {
+		spellID = 498,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['divineSacrifice'] = {
+		spellID = 64205,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				dest = {'player'},
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['divineShield'] = {
+		spellID = 642,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] activated!",},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] finished!",},
+			},
+		},
+	},
+	['forbearance'] = {
+		spellID = 25771,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {
+				say = true,
+				yell = true,
+				emote = true,
+				party = true,
+				raid = true,
+				instance = true,
+				smartGroup = true,
+				whisper = true,
+			},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[TARGET] afflicted with [LINK]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] ended!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['hammerOfJustice'] = {
+		spellID = 853,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['handOfReckoning'] = {
+		spellID = 62124,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"Taunted [TARGET]!",},
+				tags = {
+					TARGET = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['handOfSalvation'] = {
+		spellID = 1038,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_CAST_SUCCESS'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['layOnHands'] = {
+		spellID = 633,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_HEAL'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {
+					TARGET = true,
+					AMOUNT = true,
+				},
+			},
+		},
+	},
+	['redemption'] = {
+		spellID = 7328,
+		configDisplay = {
+			isDefault = true,
+		},
+		events = {
+			['SPELL_RESURRECT'] = {
+				messages = {"Resurrected [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_CAST_START'] = {
+				messages = {"Casting [LINK] on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+		},
+	},
+	['repentance'] = {
+		spellID = 20066,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+	['turnEvil'] = {
+		spellID = 10326,
+		configDisplay = {
+			isDefault = true,
+			disabledChannels = {whisper = true},
+		},
+		events = {
+			['SPELL_AURA_APPLIED'] = {
+				messages = {"[LINK] cast on [TARGET]!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_REMOVED'] = {
+				messages = {"[LINK] on [TARGET] finished!",},
+				tags = {TARGET = true,},
+			},
+			['SPELL_AURA_BROKEN_SPELL'] = {
+				messages = {"[SOURCE] removed [LINK] on [TARGET] with [EXTRALINK]!",},
+				tags = {
+					TARGET = true,
+					SOURCE = true,
+					EXTRA = true,
+				},
+			},
+			['SPELL_MISSED'] = {
+				messages = {"[LINK] [MISSTYPE] [TARGET]!",},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+			['RSA_SPELL_IMMUNE'] = {
+				messages = {"[TARGET] [MISSTYPE] [LINK]!"},
+				tags = {
+					TARGET = true,
+					MISSTYPE = true,
+				},
+			},
+		},
+	},
+}
+
 if RSA.IsRetail() then
 	RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(defaults)
-elseif RSA.IsWrath() then
+end
+if RSA.IsWrath() then
 	RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(wrath)
+end
+if RSA.IsCata() then
+	RSA.monitorData.paladin, RSA.configData.paladin = RSA.PrepareDataTables(cata)
 end
