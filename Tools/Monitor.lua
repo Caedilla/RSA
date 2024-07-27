@@ -220,7 +220,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 
 	local tagSpellLink = cacheTagSpellLink[spellID]
 	if not tagSpellLink then
-		tagSpellLink = GetSpellLink(spellID)
+		tagSpellLink = C_Spell.GetSpellLink(spellID)
 		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
@@ -230,7 +230,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 		tagSpellName = RSA.GetSpellInfo(parentSpell)
 		cacheTagSpellName[spellID] = tagSpellName
 
-		tagSpellLink = GetSpellLink(parentSpell)
+		tagSpellLink = C_Spell.GetSpellLink(parentSpell)
 		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
@@ -264,7 +264,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 		end
 		local link = cacheTagSpellLink[extraSpellID]
 		if not link then
-			link = GetSpellLink(extraSpellID)
+			link = C_Spell.GetSpellLink(extraSpellID)
 			cacheTagSpellLink[extraSpellID] = link
 		end
 		replacements['[EXTRA]'] = name
