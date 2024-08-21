@@ -5,6 +5,7 @@ local uClass = string.lower(select(2, UnitClass('player')))
 
 RSA.configData = {}
 RSA.monitorData = {}
+RSA.Helpers = {}
 
 local function BuildDefaults()
 	local defaults = {
@@ -153,6 +154,7 @@ function RSA:OnInitialize()
 	RSA.monitorData[uClass] = RSA.PrepareDataTables(self.db.profile[uClass], uClass)
 
 	-- project-revision
+	local GetAddOnMetadata = GetAddOnMetadata or (C_AddOns and C_AddOns.GetAddOnMetadata)
 	self.db.global.version = GetAddOnMetadata("RSA","Version")
 
 	if not RSA.db.global.personalID then

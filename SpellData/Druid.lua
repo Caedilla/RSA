@@ -308,7 +308,7 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(2782) .. ' | ' .. RSA.GetSpellInfo(88423),
+			defaultName = RSA.Helpers.GetSpellInfo(2782).name .. ' | ' .. RSA.Helpers.GetSpellInfo(88423).name,
 		},
 		events = {
 			['SPELL_DISPEL'] = {

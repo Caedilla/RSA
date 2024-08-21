@@ -100,7 +100,7 @@ local defaults = {
 		configDisplay = {
 			isDefault = true,
 			disabledChannels = {whisper = true},
-			defaultName = RSA.GetSpellInfo(31884) .. ' | ' .. RSA.GetSpellInfo(216331) .. ' | ' .. RSA.GetSpellInfo(231895)  .. ' | ' .. RSA.GetSpellInfo(389539),
+			defaultName = RSA.Helpers.GetSpellInfo(31884).name .. ' | ' .. RSA.Helpers.GetSpellInfo(216331).name .. ' | ' .. RSA.Helpers.GetSpellInfo(231895).name .. ' | ' .. RSA.Helpers.GetSpellInfo(389539).name,
 			defaultDesc = RSA.DescTableBuilder(31884),
 		},
 		events = {
@@ -119,8 +119,8 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(53563) .. ' | ' .. RSA.GetSpellInfo(156910),
-			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(53563) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(53563) .. '|r\n\n|cffFFCC00' .. RSA.GetSpellInfo(156910) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(156910) .. '|r',
+			defaultName = RSA.Helpers.GetSpellInfo(53563).name .. ' | ' .. RSA.Helpers.GetSpellInfo(156910).name,
+			defaultDesc = '|cffFFCC00'..RSA.Helpers.GetSpellInfo(53563).name .. ':|r |cffd1d1d1' .. RSA.Helpers.GetSpellDescription(53563) .. '|r\n\n|cffFFCC00' .. RSA.Helpers.GetSpellInfo(156910).name .. ':|r |cffd1d1d1' .. RSA.Helpers.GetSpellDescription(156910) .. '|r',
 		},
 		events = {
 			['SPELL_CAST_SUCCESS'] = {
@@ -175,8 +175,8 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(1022) .. ' | ' .. RSA.GetSpellInfo(204018),
-			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(1022) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. RSA.GetSpellInfo(204018) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(204018) .. '|r',
+			defaultName = RSA.Helpers.GetSpellInfo(1022).name .. ' | ' .. RSA.Helpers.GetSpellInfo(204018).name,
+			defaultDesc = '|cffFFCC00'..RSA.Helpers.GetSpellInfo(1022).name .. ':|r |cffd1d1d1' .. RSA.Helpers.GetSpellDescription(1022) .. '|r\n\n|cffFFCC00' .. RSA.Helpers.GetSpellInfo(204018).name .. ':|r |cffd1d1d1' .. RSA.Helpers.GetSpellDescription(204018) .. '|r',
 		},
 		events = {
 			['SPELL_AURA_APPLIED'] = {
@@ -280,7 +280,7 @@ local defaults = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(4987) .. ' | ' .. RSA.GetSpellInfo(213644),
+			defaultName = RSA.Helpers.GetSpellInfo(4987).name .. ' | ' .. RSA.Helpers.GetSpellInfo(213644).name,
 		},
 		events = {
 			['SPELL_DISPEL'] = {
@@ -855,7 +855,7 @@ local wrath = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(4987) .. ' | ' .. RSA.GetSpellInfo(1152),
+			defaultName = RSA.Helpers.GetSpellInfo(4987).name .. ' | ' .. RSA.Helpers.GetSpellInfo(1152).name,
 		},
 		events = {
 			['SPELL_DISPEL'] = {
@@ -1326,7 +1326,7 @@ local cata = {
 		},
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(4987) .. ' | ' .. RSA.GetSpellInfo(1152),
+			defaultName = RSA.Helpers.GetSpellInfo(4987).name .. ' | ' .. RSA.Helpers.GetSpellInfo(1152).name,
 		},
 		events = {
 			['SPELL_DISPEL'] = {

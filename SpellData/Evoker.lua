@@ -49,7 +49,7 @@ local defaults = {
 		throttle = 0.25,
 		configDisplay = {
 			isDefault = true,
-			defaultName = RSA.GetSpellInfo(365585) .. ' | ' .. RSA.GetSpellInfo(360823),
+			defaultName = RSA.Helpers.GetSpellInfo(365585).name .. ' | ' .. RSA.Helpers.GetSpellInfo(360823).name,
 		},
 		events = {
 			['SPELL_DISPEL'] = {

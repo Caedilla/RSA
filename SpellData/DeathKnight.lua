@@ -263,7 +263,7 @@ local defaults = {
 		configDisplay = {
 			isDefault = true,
 			defaultName = L["Purgatory Cooldown"],
-			defaultDesc = '|cffFFCC00'..RSA.GetSpellInfo(123981) .. ':|r |cffd1d1d1' .. RSA.GetSpellDescription(123981) .. '|r',
+			defaultDesc = '|cffFFCC00'..RSA.Helpers.GetSpellInfo(123981).name .. ':|r |cffd1d1d1' .. RSA.Helpers.GetSpellDescription(123981) .. '|r',
 			disabledChannels = {whisper = true},
 		},
 		events = {

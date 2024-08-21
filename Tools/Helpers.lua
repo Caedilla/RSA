@@ -105,28 +105,40 @@ function RSA.DescTableBuilder(...)
 	local iterator = 0
 	for i = 1, select('#',...) do
 		local id = select(i,...)
-		if GetSpellInfo(id) then
+		if RSA.Helpers.GetSpellInfo(id) ~= '' and RSA.Helpers.GetSpellInfo(id) ~= nil then
 			iterator = iterator + 1
-			argTable[iterator] = '|cffFFCC00' .. GetSpellInfo(id) .. ':|r '
+			argTable[iterator] = '|cffFFCC00' .. RSA.Helpers.GetSpellInfo(id).name .. ':|r '
 			iterator = iterator + 1
-			argTable[iterator] = '|cffd1d1d1' .. GetSpellDescription(id) .. '|r\n\n'
+			argTable[iterator] = '|cffd1d1d1' .. RSA.Helpers.GetSpellDescription(id) .. '|r\n\n'
 		end
 	end
 	--string.gsub(argTable[#argTable], '[\n]', '')
 	return table.concat(argTable)
 end
 
-function RSA.GetSpellInfo(id)
-	local spellInfo = GetSpellInfo(id)
+function RSA.Helpers.GetSpellInfo(id)
+	local spellInfo
+	if GetSpellInfo then
+		GetSpellInfo(id)
+	else
+		spellInfo = C_Spell and C_Spell.GetSpellInfo(id)
+	end
 	if spellInfo then
 		return spellInfo
 	else
-		return ''
+		return {name = '',
+	spellID = ''}
 	end
 end
 
-function RSA.GetSpellDescription(id)
-	local spellDescription = GetSpellDescription(id)
+function RSA.Helpers.GetSpellDescription(id)
+	local spellDescription
+	if GetSpellDescription then
+		spellDescription = GetSpellDescription(id)
+	else
+		spellDescription = C_Spell and C_Spell.GetSpellDescription(id)
+	end
+
 	if spellDescription then
 		return spellDescription
 	else

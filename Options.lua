@@ -266,6 +266,7 @@ local function GetEventOrder(event)
 end
 
 local function BaseOptions()
+	local GetAddOnMetadata = GetAddOnMetadata or (C_AddOns and C_AddOns.GetAddOnMetadata)
 	local optionsTable = {
 		type = 'group',
 		--name = "RSA [|c5500DBBDRaeli's Spell Announcer|r] r|c5500DBBD" .. RSA.db.global.revision .. '|r',
@@ -984,9 +985,14 @@ local function GetSpellConfigInfo(selected)
 		end
 		for i = 1,#spellTable do
 			if IsPlayerSpell(spellTable[i]) then
-				name = RSA.GetSpellInfo(spellTable[i])
-				description = '|c' .. colors['descriptions'] .. RSA.GetSpellDescription(spellTable[i]) .. '|r'
-				icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
+				name = RSA.Helpers.GetSpellInfo(spellTable[i]).name
+				description = '|c' .. colors['descriptions'] .. RSA.Helpers.GetSpellDescription(spellTable[i]) .. '|r'
+				--icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
+				if GetSpellTexture then
+					icon = select(select('#',GetSpellTexture(spellTable[i])),GetSpellTexture(spellTable[i]))
+				else
+					select(select('#',C_Spell.GetSpellTexture(spellTable[i])),C_Spell.GetSpellTexture(spellTable[i]))
+				end
 			end
 		end
 	end
@@ -1016,15 +1022,21 @@ local function GetSpellConfigInfo(selected)
 	end
 
 	if not name then
-		name = RSA.GetSpellInfo(selected.spellID)
+		name = RSA.Helpers.GetSpellInfo(selected.spellID).name
+	end
+	if not name then
+		name = selected.spellID
 	end
 	if not description then
-		description = '|c' .. colors['descriptions'] .. RSA.GetSpellDescription(selected.spellID) .. '|r'
+		description = '|c' .. colors['descriptions'] .. RSA.Helpers.GetSpellDescription(selected.spellID) .. '|r'
 	end
 	if not icon then
-		icon = GetSpellTexture(selected.spellID)
+		if GetSpellTexture then
+			icon = GetSpellTexture(selected.spellID)
+		else
+			C_Spell.GetSpellTexture(selected.spellID)
+		end
 	end
-
 	return name,description,icon
 end
 
@@ -1433,7 +1445,7 @@ local function ConfigSpellSetupEvents(section, event, k)
 					if not string.match(value, '%d') then
 						return L["You must enter a valid Spell ID."]
 					end
-					if not RSA.GetSpellInfo(value) then
+					if not RSA.Helpers.GetSpellInfo(value) then
 						return L["You must enter a valid Spell ID."]
 					end
 					return true
@@ -1617,6 +1629,13 @@ local function GenerateSpellOptions(section)
 	for k in pairs(optionsData) do
 		local selected = optionsData[k]
 		local configDisplay = selected.configDisplay
+		if not GetSpellConfigInfo(selected) then
+			optionsTable.args[k] = {
+				name = 'Missing Spell ID: ' .. selected.spellID,
+				desc = "Profile Name: " .. selected,
+			}
+			return
+		end
 		local spellName,spellDesc,spellIcon = GetSpellConfigInfo(selected)
 		optionsTable.args[k] = {
 			name = function()
@@ -1720,7 +1739,7 @@ local function GenerateSpellOptions(section)
 										if not string.match(value, '%d') then
 											return L["You must enter a valid Spell ID."]
 										end
-										if not RSA.GetSpellInfo(value) then
+										if not RSA.Helpers.GetSpellInfo(value) then
 											return L["You must enter a valid Spell ID."]
 										end
 										return true
@@ -1787,7 +1806,7 @@ local function GenerateSpellOptions(section)
 										if not string.match(value, '%d') then
 											return L["You must enter a valid Spell ID."]
 										end
-										if not RSA.GetSpellInfo(value) then
+										if not RSA.Helpers.GetSpellInfo(value) then
 											return L["You must enter a valid Spell ID."]
 										end
 										return true
@@ -1835,7 +1854,7 @@ local function GenerateSpellOptions(section)
 										local val = {}
 										for k2 in pairs(RSA.db.profile[section][k].additionalSpellIDs) do
 											if RSA.db.profile[section][k].additionalSpellIDs[k2] then
-												val[k2] = "(" .. k2 .. ") " .. RSA.GetSpellInfo(k2)
+												val[k2] = "(" .. k2 .. ") " .. RSA.Helpers.GetSpellInfo(k2)
 											end
 										end
 										return val
@@ -2146,7 +2165,7 @@ local function GenerateCustomSpellSetupOptions()
 									if not string.match(value, '%d') then
 										return L["You must enter a valid Spell ID."]
 									end
-									if not RSA.GetSpellInfo(value) then
+									if not RSA.Helpers.GetSpellInfo(value) then
 										return L["You must enter a valid Spell ID."]
 									end
 									return true
