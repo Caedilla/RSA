@@ -119,7 +119,11 @@ end
 function RSA.Helpers.GetSpellInfo(id)
 	local spellInfo
 	if GetSpellInfo then
-		GetSpellInfo(id)
+		local spell = {GetSpellInfo(id)}
+		spellInfo = {
+			name = spell[1],
+			spellID = id,
+		}
 	else
 		spellInfo = C_Spell and C_Spell.GetSpellInfo(id)
 	end

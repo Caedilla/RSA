@@ -1034,7 +1034,7 @@ local function GetSpellConfigInfo(selected)
 		if GetSpellTexture then
 			icon = GetSpellTexture(selected.spellID)
 		else
-			C_Spell.GetSpellTexture(selected.spellID)
+			icon = C_Spell.GetSpellTexture(selected.spellID)
 		end
 	end
 	return name,description,icon
