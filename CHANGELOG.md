@@ -1,3 +1,6 @@
+# RSA 5.3
+* Added support for War Within
+
 # RSA 5.2
 * Added support for Classic Cataclysm
 
