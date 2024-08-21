@@ -1,4 +1,4 @@
-## Interface: 100207
+## Interface: 110002
 ## Title: RSA
 ## Notes: Easy Spell Announcements!
 ## Author: Raeli
