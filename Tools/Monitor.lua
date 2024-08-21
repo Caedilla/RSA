@@ -220,7 +220,11 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 
 	local tagSpellLink = cacheTagSpellLink[spellID]
 	if not tagSpellLink then
-		tagSpellLink = GetSpellLink(spellID)
+		if GetSpellLink then
+			tagSpellLink = GetSpellLink(spellID)
+		else
+			tagSpellLink = C_Spell.GetSpellLink(spellID)
+		end
 		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
