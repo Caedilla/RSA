@@ -31,8 +31,8 @@ body:
       label: World of Warcraft Flavor
       description: What version of World of Warcraft are are you running?
       options:
-          - Dragonflight
-          - Wrath of the Lich King Classic
+          - War Within
+          - Cataclysm Classic
   validations:
       required: true
 
