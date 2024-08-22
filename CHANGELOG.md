@@ -1,3 +1,6 @@
+# RSA 5.3.2
+* Remove Server Names option should function correctly now
+
 # RSA 5.3.1
 * Fixed broken spell link code
 
