@@ -20,8 +20,8 @@ body:
   attributes:
       label: RSA Version
       description: |
-        You can see the current version in the title bar of the options window, if the options do not open, check the CurseForge app or the `## Version:` field in the WeakAuras.toc file.
-      placeholder: "RSA 5.6.0"
+        You can see the current version in the title bar of the options window, if the options do not open, check the CurseForge app or the `## Version:` field in the RSA.toc file.
+      placeholder: "RSA 5.3.1"
   validations:
       required: true
 
