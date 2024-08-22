@@ -162,6 +162,16 @@ local function MatchUnit(compareUnit, unitGUID, unitFlags, destRaidFlags)
 	return false
 end
 
+local function SpellLink(spellID)
+	local link
+	if GetSpellLink then
+		link = GetSpellLink(spellID)
+	else
+		link = C_Spell.GetSpellLink(spellID)
+	end
+	return link
+end
+
 function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, extraSchool, timestamp, event, hideCaster, sourceGUID, sourceName, sourceFlags, sourceRaidFlag, destGUID, destName, destFlags, destRaidFlags, spellID, spellName, spellSchool, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8)
 
 	local currentSpell = RSA.db.profile[uClass][profileName] or nil
@@ -220,11 +230,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 
 	local tagSpellLink = cacheTagSpellLink[spellID]
 	if not tagSpellLink then
-		if GetSpellLink then
-			tagSpellLink = GetSpellLink(spellID)
-		else
-			tagSpellLink = C_Spell.GetSpellLink(spellID)
-		end
+		tagSpellLink = SpellLink(spellID)
 		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
@@ -234,7 +240,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 		tagSpellName = RSA.Helpers.GetSpellInfo(parentSpell).name
 		cacheTagSpellName[spellID] = tagSpellName
 
-		tagSpellLink = GetSpellLink(parentSpell)
+		tagSpellLink = SpellLink(parentSpell)
 		cacheTagSpellLink[spellID] = tagSpellLink
 	end
 
@@ -268,7 +274,7 @@ function RSA.Monitor.ProcessSpell(profileName, extraSpellID, extraSpellName, ext
 		end
 		local link = cacheTagSpellLink[extraSpellID]
 		if not link then
-			link = GetSpellLink(extraSpellID)
+			link = SpellLink(extraSpellID)
 			cacheTagSpellLink[extraSpellID] = link
 		end
 		replacements['[EXTRA]'] = name
