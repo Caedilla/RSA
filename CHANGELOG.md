@@ -1,3 +1,6 @@
+# RSA 5.3.1
+* Fixed broken spell link code
+
 # RSA 5.3
 * Added support for War Within
 
