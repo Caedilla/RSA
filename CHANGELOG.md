@@ -1,4 +1,4 @@
-# RSA 5.4
+# RSA 5.31
 
 ## Mage
 * Portal and Teleport announcements now support Dornogal in War Within
