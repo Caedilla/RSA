@@ -11,9 +11,7 @@
 ## X-WoWI-ID: 25709
 ## X-Wago-ID: 25NR4EK3
 
-#@no-lib-strip@
 embeds.xml
-#@end-no-lib-strip@
 
 Localisation\Locale-deDE.lua
 Localisation\Locale-enUS.lua
