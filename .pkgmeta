@@ -27,5 +27,3 @@ externals:
         url: https://github.com/wowuidev/ace3/AceLocale-3.0
     Libs/LibDualSpec-1.0:
         url: https://git.wowace.com/wow/libdualspec-1-0/mainline.git
-    Libs/LibSink-2.0:
-        url: https://repos.wowace.com/wow/libsink-2-0/trunk/LibSink-2.0
