@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - name: Checkout addon
-        uses: actions/checkout@v4
+        uses: actions/checkout@v1
         with:
           fetch-depth: 0
 
       - name: Package Addon
-        uses: BigWigsMods/packager@master
+        uses: BigWigsMods/packager@v2
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
